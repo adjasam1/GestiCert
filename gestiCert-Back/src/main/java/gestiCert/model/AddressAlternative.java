@@ -2,7 +2,6 @@ package gestiCert.model;
 
 import java.io.Serializable;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -52,7 +51,7 @@ public class AddressAlternative implements Serializable
 	 * @see Certificate
 	 */
 	
-	//@JsonIgnore
+	@JsonIgnore
 	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_certificat")
 	private Certificate certificate;

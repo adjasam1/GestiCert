@@ -101,14 +101,16 @@ public class Plateform implements Serializable
 		this.namePlateform = namePlateform;
 	}
 
-	public List<Certificate> getCertificate()
-	{
+	
+
+	public List<Certificate> getCertificates() {
 		return certificates;
 	}
 
-	public void setCertificate(List<Certificate> certificates)
-	{
+	public void setCertificates(List<Certificate> certificates) {
 		this.certificates = certificates;
 	}
+	
+	
 
 }

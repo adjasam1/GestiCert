@@ -1,7 +1,5 @@
 package gestiCert.service;
 
-import java.util.Optional;
-
 import org.springframework.http.ResponseEntity;
 
 import gestiCert.exception.BusinessResourceException;

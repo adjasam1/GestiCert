@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -81,7 +80,7 @@ public class Certificate implements Serializable
 	 * @see addresseAlternative
 	 */
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_application")
 	private Application application;
@@ -91,12 +90,12 @@ public class Certificate implements Serializable
 	@JoinColumn(name = "id_environnement")
 	private Environment environment;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_plateforme")
 	private Plateform plateform;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_racine")
 	private Root root;

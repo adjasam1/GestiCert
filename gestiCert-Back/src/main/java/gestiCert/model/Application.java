@@ -83,7 +83,7 @@ public class Application implements Serializable
 	@ManyToMany(mappedBy = "applications")
 	private List<User> users;
 	
-	//@JsonIgnore
+	@JsonIgnore
 	@OneToMany(mappedBy = "application")
 	private List<Certificate> certificates;
 	

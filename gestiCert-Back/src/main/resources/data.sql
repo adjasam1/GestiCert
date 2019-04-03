@@ -100,7 +100,7 @@ insert into certificat (`fin_validite`, `date_emission`, `adresse_principale`, `
 ('2019-07-18', '2017-07-18', 'www.elections-int.rh.intra.laposte.fr', 'telechargements/te_2', 'MDP13', 3, 1, 2, 1, 'TE_-20170718-dev');
 
 --TABLE DE JOINTURE CERTIFICATE_SERVER
-insert into certificat_serveur (`id_certificat`, `id_serveur`) values
+insert into serveur_certificat (`id_certificat`, `id_serveur`) values
 (1, 1), (1, 2),
 (2, 8),
 (3, 1), (3, 2), (3, 9),

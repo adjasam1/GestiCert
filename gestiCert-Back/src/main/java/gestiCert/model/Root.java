@@ -99,12 +99,12 @@ public class Root implements Serializable
 		this.nameRoot = nameRoot;
 	}
 
-	public List<Certificate> getCertificate()
+	public List<Certificate> getCertificates()
 	{
 		return certificates;
 	}
 
-	public void setCertificate(List<Certificate> certificates)
+	public void setCertificates(List<Certificate> certificates)
 	{
 		this.certificates = certificates;
 	}
