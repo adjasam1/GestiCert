@@ -1,0 +1,79 @@
+<section id="entete">
+  <div id="user">
+    <p>
+      <mat-icon aria-hidden="false" aria-label="Example home icon">perm_identity</mat-icon>
+      {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}
+    </p>
+  </div>
+  <div id="deconnexion">
+    <span *ngIf="deconnect">
+      <span>Êtes-vous sûr de vouloir vous déconnecter ?</span>
+      <button routerLink="">Oui</button>
+      <button (click)="deconnect=false">Non</button>
+    </span>
+    <a *ngIf="!deconnect" role="button" (click)="deconnect=true">Déconnexion</a>
+  </div>
+</section>
+
+<section id="formulaire">
+  <h1>Mon Profil</h1>
+  <h2>* Champs obligatoires</h2>
+  <form>
+    <div>
+      <div class="form-control">
+        <label for="idRH">Identifiant RH * : </label>
+        <input type="text" id="idRH" [(ngModel)]="editedUser.idRHUser" name="idRH" placeholder="Entrez l'identifiant RH"
+               required>
+      </div>
+      <br>
+      <div class="form-control">
+        <label for="mdp">Mot de passe * : </label>
+        <input type="text" id="mdp" [(ngModel)]="editedUser.passwordUser" name="mdp"
+               placeholder="Entrez le mot de passe" required>
+      </div>
+      <br>
+      <div class="form-control">
+        <label for="idProfile">Profil * : </label>
+        <input type="number" id="idProfile" [(ngModel)]="editedUser.profile.idProfile" name="idProfile"
+               placeholder="Entrez le profil" required>
+      </div>
+      <br>
+    </div>
+    <div class="form-control">
+      <label for="nom">Nom * : </label>
+      <input type="text" id="nom" [(ngModel)]="editedUser.nameUser" name="nom" placeholder="Entrez le nom" required>
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="prenom">Prénom * : </label>
+      <input type="text" id="prenom" [(ngModel)]="editedUser.firstNameUser" name="prenom" placeholder="Entrez le prénom"
+             required>
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="service">Service * : </label>
+      <input type="number" id="service" [(ngModel)]="editedUser.department.idDepartment" name="service"
+             placeholder="Entrez le prénom" required>
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="fonction">Fonction * : </label>
+      <input type="text" id="fonction" [(ngModel)]="editedUser.roleUser" name="fonction"
+             placeholder="Entrez la fonction" required>
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="tel">Téléphone : </label>
+      <input type="text" id="tel" [(ngModel)]="editedUser.phoneUser" name="tel" placeholder="Entrez le téléphone">
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="email">E-mail * : </label>
+      <input type="text" id="email" [(ngModel)]="editedUser.eMailUser" name="email" placeholder="Entrez le mail">
+    </div>
+  </form>
+  <br>
+  <div id="modification">
+    <a role="button" (click)="onSave()">sauvegarder</a>
+  </div>
+</section>
