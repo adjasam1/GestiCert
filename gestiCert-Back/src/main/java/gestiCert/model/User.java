@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 /**
  * Utilisateur est la classe representant un utilisateur de l'application gesticert
  * 
@@ -92,6 +94,7 @@ public class User implements Serializable
 	@JoinColumn(name = "id_service")
 	private Department department;
 	
+	@JsonIgnore
 	@ManyToMany//(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name = "utilisateur_application", joinColumns = @JoinColumn(name = "id_utilisateur"), inverseJoinColumns = @JoinColumn(name = "id_application"))
 	private List<Application> applications;
