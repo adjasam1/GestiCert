@@ -27,6 +27,7 @@ import {
 } from '@angular/material';
 import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { CertificateComponent } from './certificate/certificate.component';
 
 @NgModule({
   declarations: [
@@ -38,7 +39,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
     SiteComponent,
     AccessibiliteComponent,
     AccueilComponent,
-    ProfileComponent
+    ProfileComponent,
+    CertificateComponent
   ],
   imports: [
     BrowserModule,

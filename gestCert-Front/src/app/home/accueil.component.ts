@@ -61,7 +61,13 @@ export class AccueilComponent implements OnInit {
     this.getEnvironment();
 
     this.rootsList = this.rootDataService.availableRoots$;
-    this.getRoot()
+    this.getRoot();
+  }
+
+  deconnexion(): void {
+      if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
+        this.router.navigate(['']);
+      }
   }
 
   getCertificate(): void {

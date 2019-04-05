@@ -6,10 +6,12 @@ import {SiteComponent} from './header-footer/site/site.component';
 import {AccessibiliteComponent} from './header-footer/accessibilite/accessibilite.component';
 import {AccueilComponent} from './home/accueil.component';
 import {ProfileComponent} from './profile/profile.component';
+import {CertificateComponent} from './certificate/certificate.component';
 
 const routes: Routes = [
   { path: '', component: AuthentificationComponent },
   { path: 'accueil/:id', component: AccueilComponent},
+  { path: 'certificat/:id', component: CertificateComponent},
   { path: 'contact', component: ContactComponent},
   { path: 'site', component: SiteComponent},
   { path: 'accessibilite', component: AccessibiliteComponent},

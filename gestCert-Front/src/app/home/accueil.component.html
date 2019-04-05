@@ -1,8 +1,9 @@
 <section id="entete">
+
   <div id="user">
     <div id="name">
       <p>
-        <mat-icon aria-hidden="false" aria-label="Example home icon">perm_identity</mat-icon>
+        <mat-icon aria-hidden="false">person</mat-icon>
         {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}
       </p>
     </div>
@@ -10,50 +11,53 @@
       <a role="button" routerLink="/profil/{{ editedUser.idUser }}">Mon Profil</a>
     </div>
   </div>
+
   <div id="deconnexion">
-    <span *ngIf="deconnect">
-      <span>Êtes-vous sûr de vouloir vous déconnecter ?</span>
-      <button routerLink="">Oui</button>
-      <button (click)="deconnect=false">Non</button>
-    </span>
-    <a *ngIf="!deconnect" role="button" (click)="deconnect=true">Déconnexion</a>
+    <a role="button" (click)="deconnexion()">Déconnexion</a>
   </div>
+
 </section>
 
-<section class="addUser">
+<section class="addUser" *ngIf="editedUser.profile.idProfile === 3">
   <a role="button" routerLink="/profil/ajout">Ajout utilisateur</a>
 </section>
 
-<!--<section id="certif">
-  <h5>Liste des certificats :</h5>
-  <div id="brut">
-    <table id="table1">
-      <div>
-        <thead>
-        <tr>
-          <th>Code CCX</th>
-          <th>Nom Application</th>
-          <th>Environnement</th>
-          <th>Type Certificat</th>
-          <th>Date Emission</th>
-          <th>Validité</th>
-        </tr>
-        </thead>
+<section id="certif">
 
-        <tbody *ngFor="let certificate of certificatesList | async">
-        <tr>
-          <td>{{ certificate.application.codeCCX }}</td>
-          <td>{{ certificate.application.nameApplication }}</td>
-          <td>{{ certificate.environment.nameEnvironment }}</td>
-          <td>{{ certificate.root.nameRoot }}</td>
-          <td>{{ certificate.dateIssue }}</td>
-          <td>1</td>
-        </tr>
-        </tbody>
-      </div>
+  <div id="titre">
+    <h1>Liste des Certificats</h1>
+  </div>
+
+  <div id="cadre">
+    <table id="table1">
+      <thead>
+      <tr>
+        <th id="th1">CCX</th>
+        <th class="th2">Application</th>
+        <th class="th2">Environnement</th>
+        <th class="th2">Type</th>
+        <th id="th3">Emission</th>
+        <th id="th4">Validité</th>
+      </tr>
+      </thead>
+
+      <tbody>
+      <!--*ngIf="certificate.application.users[0].idUser === editedUser.idUser"-->
+      <tr *ngFor="let certificate of certificatesList | async" routerLink="/certificat/{{ certificate.idCertificate }}">
+        <td>{{ certificate.application.codeCCX }}</td>
+        <td>{{ certificate.application.nameApplication }}</td>
+        <td>{{ certificate.environment.nameEnvironment }}</td>
+        <td>{{ certificate.root.nameRoot }}</td>
+        <td>{{ certificate.dateIssue | date: 'dd/MM/yyyy' }}</td>
+        <td></td>
+      </tr>
+      </tbody>
     </table>
   </div>
-</section>-->
+</section>
+
+
+
 
 <!--
 <div>
