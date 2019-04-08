@@ -1,34 +1,69 @@
-header
-{
-  border-bottom: 2px solid #80b7ed;
+header {
+  border-bottom: 2px solid #003DA5;
 }
 
-#container
-{
+#container {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #D9EAF4;
-  border: 1px solid black;
+  background-color: #9CC6DA;
+  border: 1px solid #706F6F;
   border-bottom: none;
   border-radius: 25px 25px 0 0;
   margin: 2% 5% 0 5%;
   padding-right: 2%;
   position: relative;
-  box-shadow: -2px -2px 20px black;
+  box-shadow: -2px -2px 20px #706F6F;
   outline: none;
 }
 
-#logoappli
-{
+#logoappli {
   border-radius: 25px 0 0 0;
   width: 50%;
+  min-width: 400px;
 }
 
-#logoposte
-{
-  width: 40%;
-  min-width: 70px;
+#logoposte {
+  width: 50%;
+  min-width: 200px;
   float: right;
 }
 
+#logoposte2, #logoappli2, #logoappli3 {
+  display: none;
+}
+
+@media (max-width: 700px) {
+  #logoposte, #logoappli {
+    display: none;
+  }
+
+  #logoposte2, #logoappli2 {
+    display: flex;
+    width: 30%;
+  }
+
+  #logoposte2 {
+    min-width: 100px;
+    float: right;
+  }
+
+  #logoappli2 {
+    border-radius: 25px 0 0 0;
+    width: 30%;
+    min-width: 300px;
+  }
+}
+
+@media (max-width: 500px) {
+  #logoappli2 {
+    display: none;
+  }
+
+  #logoappli3 {
+    display: flex;
+    border-radius: 25px 0 0 0;
+    width: 30%;
+    min-width: 150px;
+  }
+}
