@@ -2,6 +2,7 @@ package gestiCert.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +27,8 @@ import gestiCert.service.DemandService;
  */
 
 @RestController
-@RequestMapping("/demande")
-@CrossOrigin("http://localhost:4200")
+@RequestMapping("/api/demande")
+//@CrossOrigin("http://localhost:4200")
 public class DemandController
 {
 	
@@ -63,30 +64,35 @@ public class DemandController
 	 */
 	
 	@GetMapping()
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getAllDemands()
 	{
 		return demandServ.getAllDemands();
 	}
 	
 	@GetMapping("/id={idDemand}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getDemandById(@PathVariable Integer idDemand)
 	{
 		return demandServ.getDemandById(idDemand);
 	}
 	
 	@PostMapping("/ajout")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> postDemand(@RequestBody Demand demand)
 	{
 		return demandServ.createDemand(demand);
 	}
 	
 	@PutMapping("/modifid={idDemand}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> putDemand(@RequestBody Demand demand, @PathVariable Integer idDemand)
 	{
 		return demandServ.updateDemand(demand, idDemand);
 	}
 	
 	@DeleteMapping("/supprid={idDemand}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<String> deleteDemand(@PathVariable Integer idDemand)
 	{
 		return demandServ.deleteDemand(idDemand);

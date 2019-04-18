@@ -1,7 +1,5 @@
 package gestiCert.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -23,9 +21,11 @@ public interface DepartmentRepository extends JpaRepository<Department, Integer>
 	 * utilise la methode findById du CrudRepository en utilisant le nom du service comme parametre
 	 * 
 	 * @param nameDepartment
-	 * @return une liste de services
+	 * @return une service
 	 */
 	
-	public List<Department> findByNameDepartment(String nameDepartment);
+	public Department findByNameDepartment(String nameDepartment);
+
+	public Department findByIdDepartment(Integer idDepartment);
 	
 }

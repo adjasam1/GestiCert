@@ -27,7 +27,7 @@ export class AddressAlternativeDataService {
    */
 
   public getAddressAlternative(): Observable<AddressAlternative[]> {
-    return this.httpClient.get<AddressAlternative[]>('http://localhost:8080/adressealternative');
+    return this.httpClient.get<AddressAlternative[]>('http://localhost:8080/api/adressealternative');
   }
 
   /**

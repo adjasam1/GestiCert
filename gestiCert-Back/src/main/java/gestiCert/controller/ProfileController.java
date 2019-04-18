@@ -26,8 +26,8 @@ import gestiCert.service.ProfileService;
  */
 
 @RestController
-@RequestMapping("/profil")
-@CrossOrigin("http://localhost:4200")
+@RequestMapping("/api/profil")
+//@CrossOrigin("http://localhost:4200")
 public class ProfileController
 {
 	

@@ -2,6 +2,7 @@ package gestiCert.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +27,8 @@ import gestiCert.service.AddressAlternativeService;
  */
 
 @RestController
-@RequestMapping("/adressealternative")
-@CrossOrigin("http://localhost:4200")
+@RequestMapping("/api/adressealternative")
+//@CrossOrigin("http://localhost:4200")
 public class AddressAlternativeController
 {
 	
@@ -63,36 +64,42 @@ public class AddressAlternativeController
 	 */
 	
 	@GetMapping()
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getAllAddressAlternatives()
 	{
 		return addressAlternativeServ.getAllAddressAlternative();
 	}
 	
 	@GetMapping("/id={idAddressAlternative}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getAddressAlternativeById(@PathVariable Integer idAddressAlternative)
 	{
 		return addressAlternativeServ.getAddressAlternativeById(idAddressAlternative);
 	}
 	
 	@GetMapping("/lien={word}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getAddressAlternativeByLink(@PathVariable String word)
 	{
 		return addressAlternativeServ.getAddressAlternativeByLink(word);
 	}
 	
 	@PostMapping("/ajout")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> postAddressAlternative(@RequestBody AddressAlternative addressAlternative)
 	{
 		return addressAlternativeServ.createAddressAlternative(addressAlternative);
 	}
 	
 	@PutMapping("/modifid={idAddressAlternative}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> putAddressAlternative(@RequestBody AddressAlternative addressAlternative, @PathVariable Integer idAddressAlternative)
 	{
 		return addressAlternativeServ.updateAddressAlternative(addressAlternative, idAddressAlternative);
 	}
 	
 	@DeleteMapping("/supprid={idAddressAlternative}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<String> deleteEnvironment(@PathVariable Integer idAddressAlternative)
 	{
 		return addressAlternativeServ.deleteAddressAlternative(idAddressAlternative);

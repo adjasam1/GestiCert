@@ -1,8 +1,13 @@
 package gestiCert.service;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.http.ResponseEntity;
 
 import gestiCert.exception.BusinessResourceException;
+import gestiCert.exception.ExistingUsernameException;
+import gestiCert.exception.InvalidCredentialsException;
 import gestiCert.model.User;
 
 /**
@@ -17,24 +22,31 @@ import gestiCert.model.User;
 public interface UserService
 {
 	
-	public ResponseEntity<?> getAllUsers() throws BusinessResourceException;
+	public List<User> getAllUsers() throws BusinessResourceException;
 	
-	public ResponseEntity<?> getUserById(Integer idUser) throws BusinessResourceException;
+	public Optional<User> getUserById(Integer idUser) throws BusinessResourceException;
 	
 	public ResponseEntity<?> getUserByIdRH(String idRHUser) throws BusinessResourceException;
 	
 //	public ResponseEntity<?> getUserByName(String nameUser);
 	
-	public ResponseEntity<?> getUserByName(String word) throws BusinessResourceException;
+	public Iterable<User> getUserByName(String word) throws BusinessResourceException;
 	
-	public ResponseEntity<?> getUserByFirstName(String firstNameUser) throws BusinessResourceException;
+	public Iterable<User> getUserByFirstName(String firstNameUser) throws BusinessResourceException;
 	
-	public ResponseEntity<?> getUserByNameAndFirstName(String nameUser, String firstNameUser) throws BusinessResourceException;
+	public Iterable<User> getUserByNameAndFirstName(String nameUser, String firstNameUser) throws BusinessResourceException;
 	
-	public ResponseEntity<?> createUser(User user) throws BusinessResourceException;
+	public User createUser(User user) throws BusinessResourceException;
 
-	public ResponseEntity<?> updateUser(User user)throws BusinessResourceException;
+	public User updateUser(User user)throws BusinessResourceException;
 
-	public ResponseEntity<String> deleteUser(Integer idUser) throws BusinessResourceException;
+	public void deleteUser(Integer idUser) throws BusinessResourceException;
+
+
+//	// Authentification
+//	String signin(String idRHUser, String passwordUser) throws InvalidCredentialsException, InvalidCredentialsException;
+//	String signup(User user) throws ExistingIdRHException, ExistingIdRHException;
+//	List<User> findAllUsers();
+//	Optional<User> findUserByIdRHUser(String idRHUser);
 
 }

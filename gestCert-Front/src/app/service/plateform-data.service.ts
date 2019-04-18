@@ -27,7 +27,7 @@ export class PlateformDataService {
    */
 
   public getPlateform(): Observable<Plateform[]> {
-    return this.httpClient.get<Plateform[]>('http://localhost:8080/plateforme');
+    return this.httpClient.get<Plateform[]>('http://localhost:8080/api/plateforme');
   }
 
   /**

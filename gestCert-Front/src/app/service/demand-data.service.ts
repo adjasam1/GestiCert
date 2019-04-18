@@ -27,7 +27,7 @@ export class DemandDataService {
    */
 
   public getDemand(): Observable<Demand[]> {
-    return this.httpClient.get<Demand[]>('http://localhost:8080/demande');
+    return this.httpClient.get<Demand[]>('http://localhost:8080/api/demande');
   }
 
   /**

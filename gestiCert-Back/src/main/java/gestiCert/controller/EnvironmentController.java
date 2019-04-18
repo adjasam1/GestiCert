@@ -2,6 +2,7 @@ package gestiCert.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +27,8 @@ import gestiCert.service.EnvironmentService;
  */
 
 @RestController
-@RequestMapping("/environnement")
-@CrossOrigin("http://localhost:4200")
+@RequestMapping("/api/environnement")
+//@CrossOrigin("http://localhost:4200")
 public class EnvironmentController
 {
 	
@@ -63,36 +64,42 @@ public class EnvironmentController
 	 */
 	
 	@GetMapping()
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getAllEnvironments()
 	{
 		return environmentServ.getAllEnvironments();
 	}
 	
 	@GetMapping("/id={idEnvironment}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getEnvironmentById(@PathVariable Integer idEnvironment)
 	{
 		return environmentServ.getEnvironmentById(idEnvironment);
 	}
 	
 	@GetMapping("/nom={word}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getEnvironmentByName(@PathVariable String word)
 	{
 		return environmentServ.getEnvironmentByName(word);
 	}
 	
 	@PostMapping("/ajout")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> postEnvironment(@RequestBody Environment environment)
 	{
 		return environmentServ.createEnvironment(environment);
 	}
 	
 	@PutMapping("/modifid={idEnvironment}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> putEnvironment(@RequestBody Environment environment, @PathVariable Integer idEnvironment)
 	{
 		return environmentServ.updateEnvironment(environment, idEnvironment);
 	}
 	
 	@DeleteMapping("/supprid={idEnvironment}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<String> deleteEnvironment(@PathVariable Integer idEnvironment)
 	{
 		return environmentServ.deleteEnvironment(idEnvironment);

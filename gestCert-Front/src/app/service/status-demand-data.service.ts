@@ -27,7 +27,7 @@ export class StatusDemandDataService {
    */
 
   public getStatusDemand(): Observable<StatusDemand[]> {
-    return this.httpClient.get<StatusDemand[]>('http://localhost:8080/statutdemande');
+    return this.httpClient.get<StatusDemand[]>('http://localhost:8080/api/statutdemande');
   }
 
   /**

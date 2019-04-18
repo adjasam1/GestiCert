@@ -3,7 +3,9 @@ package gestiCert.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +30,8 @@ import gestiCert.service.DepartmentService;
  */
 
 @RestController
-@RequestMapping("/service")
-@CrossOrigin("http://localhost:4200")
+@RequestMapping("/api/service")
+//@CrossOrigin("http://localhost:4200")
 public class DepartmentController
 {
 
@@ -65,39 +67,135 @@ public class DepartmentController
 	 */
 	
 	@GetMapping()
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<List<Department>> getAllDepartments()
 	{
-		return departmentServ.getAllDepartments();
+		List<Department> listDepartments = null;
+		
+		try
+		{
+			listDepartments = departmentServ.getAllDepartments();
+		} catch (Exception e)
+		{
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+		
+		if (listDepartments == null)
+		{
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(listDepartments);
 	}
 	
 	@GetMapping("/id={idDepartment}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getDepartmentById(@PathVariable Integer idDepartment)
 	{
-		return departmentServ.getDepartmentById(idDepartment);
+		Department department = null;
+		
+		try
+		{
+			department = departmentServ.getDepartmentById(idDepartment);
+			System.out.println("1 " + department.getIdDepartment());
+		} catch (Exception e)
+		{
+			System.out.println("2 " + department);
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+		
+		if (department.getIdDepartment() == null)
+		{
+			System.out.println("3 " + department);
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		
+		System.out.println("4 " + department);
+		return ResponseEntity.status(HttpStatus.OK).body(department);
 	}
 	
 	@GetMapping("/nom={nameDepartment}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getDepartmentByName(@PathVariable String nameDepartment)
 	{
-		return departmentServ.getDepartmentByName(nameDepartment);
+		Department department = null;
+		
+		try
+		{
+			department = departmentServ.getDepartmentByName(nameDepartment);
+		} catch (Exception e)
+		{
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+		}
+		
+		if (department == null)
+		{
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(department);
 	}
 	
 	@PostMapping("/ajout")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> postDepartment(@RequestBody Department department)
 	{
-		return departmentServ.createDepartment(department);
+		Department newDepartment = null;
+		
+		String nameDepartment = department.getNameDepartment();
+		if ((nameDepartment == null) || (nameDepartment.isEmpty()))
+		{
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le nom du service doit être renseigné");
+		}
+		
+		try
+		{
+			newDepartment = departmentServ.createDepartment(department);
+		} catch (Exception e)
+		{
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(newDepartment);
 	}
 	
 	@PutMapping("/modifid={idDepartment}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> putDepartment(@RequestBody Department department, @PathVariable Integer idDepartment)
 	{
-		return departmentServ.updateDepartment(department, idDepartment);
+		Department modifyDepartment = null;
+		getDepartmentById(idDepartment);
+		
+		String nameDepartment = department.getNameDepartment();
+		if ((nameDepartment == null) || (nameDepartment.isEmpty()))
+		{
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le nom du service doit être renseigné");
+		}
+		
+		try
+		{
+			modifyDepartment = departmentServ.updateDepartment(department, idDepartment);
+		} catch (Exception e)
+		{
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body(modifyDepartment);
 	}
 	
 	@DeleteMapping("/supprid={idDepartment}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> deleteDepartment(@PathVariable Integer idDepartment)
 	{
-		return departmentServ.deleteDepartment(idDepartment);
+		try
+		{
+			departmentServ.deleteDepartment(idDepartment);
+		} catch (Exception e)
+		{
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+		}
+		
+		return ResponseEntity.status(HttpStatus.OK).body("Suppression : OK");
 	}
 	
 }

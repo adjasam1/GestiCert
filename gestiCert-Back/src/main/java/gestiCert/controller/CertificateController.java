@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,8 +29,8 @@ import gestiCert.service.CertificateService;
  */
 
 @RestController
-@RequestMapping("/certificat")
-@CrossOrigin("http://localhost:4200")
+@RequestMapping("/api/certificat")
+//@CrossOrigin("http://localhost:4200")
 public class CertificateController
 {
 	
@@ -70,37 +71,55 @@ public class CertificateController
 		return certificateServ.getAllCertificates();
 	}
 	
+//	@GetMapping("/idUser={idUser}")
+//	public ResponseEntity<?> getCertificateByIdUser(@PathVariable Integer idUser)
+//	{
+//		return certificateServ.getCertificateByIdUser(idUser);
+//	}
+//	
+//	@GetMapping("/idUs={idUser}")
+//	public ResponseEntity<?> getCertifByIdUser(@PathVariable Integer idUser)
+//	{
+//		return certificateServ.getCertificateByIdUser(idUser);
+//	}
+	
 	@GetMapping("/id={idCertificate}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getCertificateById(@PathVariable Integer idCertificate)
 	{
 		return certificateServ.getCertificateById(idCertificate);
 	}
 	
 	@GetMapping("/nom={word}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getCertificateByName(@PathVariable String word)
 	{
 		return certificateServ.getCertificateByName(word);
 	}
 	
 	@GetMapping("/dateemission={number}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getCertificateByDateIssue(@PathVariable Date number)
 	{
 		return certificateServ.getCertificateByDateIssue(number);
 	}
 	
 	@PostMapping("/ajout")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> postCertificate(@RequestBody Certificate certificate)
 	{
 		return certificateServ.createCertificate(certificate);
 	}
 	
 	@PutMapping("/modifid={idCertificate}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> putCertificate(@RequestBody Certificate certificate, @PathVariable Integer idCertificate)
 	{
 		return certificateServ.updateCertificate(certificate, idCertificate);
 	}
 	
 	@DeleteMapping("/supprid={idCertificate}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<String> deleteCertificate(@PathVariable Integer idCertificate)
 	{
 		return certificateServ.deleteCertificate(idCertificate);

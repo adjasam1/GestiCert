@@ -4,8 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -53,7 +55,7 @@ public class Certificate implements Serializable
 	private String nameCertificate;
 	
 	@Column(name = "adresse_principale")
-	private String linkAdressPrincipal;
+	private String linkAddressPrincipal;
 	
 	@Column(name = "lien_installation")
 	private String linkInstallation;
@@ -81,27 +83,27 @@ public class Certificate implements Serializable
 	 */
 	
 	//@JsonIgnore
-	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_application")
 	private Application application;
 	
 	//@JsonIgnore
-	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_environnement")
 	private Environment environment;
 	
 	//@JsonIgnore
-	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_plateforme")
 	private Plateform plateform;
 	
 	//@JsonIgnore
-	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_racine")
 	private Root root;
 	
 	@JsonIgnore
-	@ManyToMany//(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name ="certificat_serveur", joinColumns = @JoinColumn(name = "id_certificat"), inverseJoinColumns = @JoinColumn(name = "id_serveur"))
 	private List<Server> servers;
 	
@@ -119,14 +121,14 @@ public class Certificate implements Serializable
 	}
 
 	public Certificate(Integer idCertificate, @Size(min = 16, max = 17) String nameCertificate,
-			String linkAdressPrincipal, String linkInstallation, String passwordCertificate, Date dateIssue,
+			String linkAddressPrincipal, String linkInstallation, String passwordCertificate, Date dateIssue,
 			Date dateEndValidity, Application application, Environment environment, Plateform plateform, Root root,
 			List<Server> servers, List<AddressAlternative> addressAlternatives)
 	{
 		super();
 		this.idCertificate = idCertificate;
 		this.nameCertificate = nameCertificate;
-		this.linkAdressPrincipal = linkAdressPrincipal;
+		this.linkAddressPrincipal = linkAddressPrincipal;
 		this.linkInstallation = linkInstallation;
 		this.passwordCertificate = passwordCertificate;
 		this.dateIssue = dateIssue;
@@ -165,14 +167,14 @@ public class Certificate implements Serializable
 		this.nameCertificate = nameCertificate;
 	}
 
-	public String getLinkAdressPrincipal()
+	public String getLinkAddressPrincipal()
 	{
-		return linkAdressPrincipal;
+		return linkAddressPrincipal;
 	}
 
-	public void setLinkAdressPrincipal(String linkAdressPrincipal)
+	public void setLinkAddressPrincipal(String linkAddressPrincipal)
 	{
-		this.linkAdressPrincipal = linkAdressPrincipal;
+		this.linkAddressPrincipal = linkAddressPrincipal;
 	}
 
 	public String getLinkInstallation()

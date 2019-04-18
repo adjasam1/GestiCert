@@ -27,7 +27,7 @@ export class ApplicationDataService {
    */
 
   public getApplication(): Observable<Application[]> {
-    return this.httpClient.get<Application[]>('http://localhost:8080/application');
+    return this.httpClient.get<Application[]>('http://localhost:8080/api/application');
   }
 
   /**

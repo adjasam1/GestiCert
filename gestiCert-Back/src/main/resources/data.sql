@@ -1,6 +1,3 @@
---CREATION SCHEMA
-create schema `gesticert-eclipse`;
-
 --INITIALISATION TABLE PROFILE
 insert into profil (`type`) values
 ('Développeur'),
@@ -25,8 +22,22 @@ insert into utilisateur (`email`, `prenom`, `idrh`, `nom`, `mdp`, `telephone`, `
 ('gustave.tuvalu@laposte.fr', 'Gustave', 'pggg777', 'Tuvalu', 'ggg', '0603528677', 'chef de projet SIGP3', '2', '3'),
 ('helene.suriname@laposte.fr', 'Hélène', 'xhhh999', 'Suriname', 'hhh', '0602352963', 'développeuse php symphony', '1', '1'),
 ('irene.rwanda@laposte.fr', 'Irène', 'piii010', 'Rwanda', 'iii', '0620954826', 'cheffe de projet Dev Web', '1', '2'),
-('julie.tuvalu@laposte.fr', 'Julie', 'xjjj011', 'Tuvalu', 'jjj', '0762327490', 'développeur drupal', '1', 1),
-('françois.quatar@laposte.fr', 'François', 'pkkk012', 'Quatar', 'kkk', '0644623978', 'Chef de service SIGP3', '2', 3);
+('julie.tuvalu@laposte.fr', 'Julie', 'xjjj011', 'Tuvalu', 'jjj', '0762327490', 'développeur drupal', '1', '1'),
+('françois.quatar@laposte.fr', 'François', 'pkkk012', 'Quatar', 'kkk', '0644623978', 'Chef de service SIGP3', '2', '3');
+
+--TABLE ID_USER_ROLE
+--insert into user_role_list (`user_id_utilisateur`, `role_list`) values
+--(1, 'ROLE_DEV'),
+--(2, 'ROLE_SERVICE'), (2, 'ROLE_DEV'),
+--(3, 'ROLE_DEV'),
+--(4, 'ROLE_ADMIN'), (4, 'ROLE_SERVICE'), (4, 'ROLE_DEV'),
+--(5, 'ROLE_DEV'),
+--(6, 'ROLE_DEV'),
+--(7, 'ROLE_ADMIN'), (7, 'ROLE_SERVICE'), (7, 'ROLE_DEV'),
+--(8, 'ROLE_DEV'),
+--(9, 'ROLE_SERVICE'), (2, 'ROLE_DEV'),
+--(10, 'ROLE_DEV'),
+--(11, 'ROLE_ADMIN'), (11, 'ROLE_SERVICE'), (11, 'ROLE_DEV');
 
 --INITIALISATION TABLE APPLICATION
 insert into application (`ccx`, `email_client`, `prenom_client`, `direction_client`, `nom`, `nom_client`, `telephone_client`) values
@@ -100,7 +111,7 @@ insert into certificat (`fin_validite`, `date_emission`, `adresse_principale`, `
 ('2019-07-18', '2017-07-18', 'www.elections-int.rh.intra.laposte.fr', 'telechargements/te_2', 'MDP13', 3, 1, 2, 1, 'TE_-20170718-dev');
 
 --TABLE DE JOINTURE CERTIFICATE_SERVER
-insert into serveur_certificat (`id_certificat`, `id_serveur`) values
+insert into certificat_serveur (`id_certificat`, `id_serveur`) values
 (1, 1), (1, 2),
 (2, 8),
 (3, 1), (3, 2), (3, 9),

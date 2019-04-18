@@ -28,7 +28,7 @@ export class ProfileDataService {
    */
 
   public getProfile(): Observable<Profile[]> {
-    return this.httpClient.get<Profile[]>('http://localhost:8080/profil');
+    return this.httpClient.get<Profile[]>('http://localhost:8080/api/profil');
   }
 
   /**

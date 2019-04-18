@@ -2,6 +2,7 @@ package gestiCert.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +27,8 @@ import gestiCert.service.StatusDemandService;
  */
 
 @RestController
-@RequestMapping("/statutdemande")
-@CrossOrigin("http://localhost:4200")
+@RequestMapping("/api/statutdemande")
+//@CrossOrigin("http://localhost:4200")
 public class StatusDemandController
 {
 	
@@ -63,36 +64,42 @@ public class StatusDemandController
 	 */
 	
 	@GetMapping()
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getAllStatusDemands()
 	{
 		return statusDemandServ.getAllStatusDemand();
 	}
 	
 	@GetMapping("/id={idStatusDemand}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getStatusDemandById(@PathVariable Integer idStatusDemand)
 	{
 		return statusDemandServ.getStatusDemandById(idStatusDemand);
 	}
 	
 	@GetMapping("/nom={word}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getStatusDemandByName(@PathVariable String word)
 	{
 		return statusDemandServ.getStatusDemandByName(word);
 	}
 	
 	@PostMapping("/ajout")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> postStatusDemand(@RequestBody StatusDemand statusDemand)
 	{
 		return statusDemandServ.createStatusDemand(statusDemand);
 	}
 	
 	@PutMapping("/modifid={idStatusDemand}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> putStatusDemand(@RequestBody StatusDemand statusDemand, @PathVariable Integer idStatusDemand)
 	{
 		return statusDemandServ.updateStatusDemand(statusDemand, idStatusDemand);
 	}
 	
 	@DeleteMapping("/supprid={idStatusDemand}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<String> deleteStatusDemand(@PathVariable Integer idStatusDemand)
 	{
 		return statusDemandServ.deleteStatusDemand(idStatusDemand);

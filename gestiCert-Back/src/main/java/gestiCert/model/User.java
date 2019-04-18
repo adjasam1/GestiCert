@@ -3,8 +3,15 @@ package gestiCert.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ConstraintMode;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
+import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -76,6 +83,11 @@ public class User implements Serializable
 	@NotNull
 	private String passwordUser;
 	
+//	// authentification
+//	@ElementCollection(fetch = FetchType.EAGER)
+//	@Enumerated(EnumType.STRING)
+//	private List<Role> roleList;
+	
 	/**
 	 * relation entre l'entite utilisateur et les entites profil, service et application
 	 * 
@@ -90,13 +102,16 @@ public class User implements Serializable
 	private Profile profile;
 	
 	//@JsonIgnore
-	@ManyToOne//(cascade = CascadeType.ALL)
+	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_service")
 	private Department department;
 	
 	@JsonIgnore
-	@ManyToMany//(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
-	@JoinTable(name = "utilisateur_application", joinColumns = @JoinColumn(name = "id_utilisateur"), inverseJoinColumns = @JoinColumn(name = "id_application"))
+	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+	@JoinTable(name = "utilisateur_application", joinColumns = @JoinColumn(name = "id_utilisateur"),
+		inverseJoinColumns = @JoinColumn(name = "id_application"),
+		foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
+        inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
 	private List<Application> applications;
 	
 	/**
@@ -108,12 +123,129 @@ public class User implements Serializable
 		
 	}
 	
+	
+
+//	public User(Integer idUser, @Size(max = 50) @NotNull String nameUser, @Size(max = 50) @NotNull String firstNameUser,
+//			@Size(max = 50) String roleUser, @NotNull String eMailUser, @Size(min = 10, max = 10) String phoneUser,
+//			@Size(min = 7, max = 7) @NotNull String idRHUser, @NotNull String passwordUser, List<Role> roleList,
+//			Profile profile, Department department, List<Application> applications) {
+//		super();
+//		this.idUser = idUser;
+//		this.nameUser = nameUser;
+//		this.firstNameUser = firstNameUser;
+//		this.roleUser = roleUser;
+//		this.eMailUser = eMailUser;
+//		this.phoneUser = phoneUser;
+//		this.idRHUser = idRHUser;
+//		this.passwordUser = passwordUser;
+//		this.roleList = roleList;
+//		this.profile = profile;
+//		this.department = department;
+//		this.applications = applications;
+//	}
+
+
+
+//	public User(@Size(max = 50) @NotNull String nameUser, @Size(max = 50) @NotNull String firstNameUser,
+//			@NotNull String eMailUser, @Size(min = 7, max = 7) @NotNull String idRHUser, @NotNull String passwordUser,
+//			List<Role> roleList) {
+//		super();
+//		this.nameUser = nameUser;
+//		this.firstNameUser = firstNameUser;
+//		this.eMailUser = eMailUser;
+//		this.idRHUser = idRHUser;
+//		this.passwordUser = passwordUser;
+//		this.roleList = roleList;
+//	}
+
+//	// authentification
+//	public User(Integer idUser, @Size(max = 50) @NotNull String nameUser, @Size(max = 50) @NotNull String firstNameUser,
+//			@Size(max = 50) String roleUser, @NotNull String eMailUser, @Size(min = 10, max = 10) String phoneUser,
+//			@Size(min = 7, max = 7) @NotNull String idRHUser, @NotNull String passwordUser, List<Role> roleList,
+//			Department department, List<Application> applications) {
+//		super();
+//		this.idUser = idUser;
+//		this.nameUser = nameUser;
+//		this.firstNameUser = firstNameUser;
+//		this.roleUser = roleUser;
+//		this.eMailUser = eMailUser;
+//		this.phoneUser = phoneUser;
+//		this.idRHUser = idRHUser;
+//		this.passwordUser = passwordUser;
+//		this.roleList = roleList;
+//		this.department = department;
+//		this.applications = applications;
+//	}
+//	public User(@Size(min = 7, max = 7) @NotNull String idRHUser, @NotNull String passwordUser) {
+//		super();
+//		this.idRHUser = idRHUser;
+//		this.passwordUser = passwordUser;
+//	}
+//	public User(@Size(min = 7, max = 7) @NotNull String idRHUser, @NotNull String passwordUser, List<Role> roleList) {
+//		super();
+//		this.idRHUser = idRHUser;
+//		this.passwordUser = passwordUser;
+//		this.roleList = roleList;
+//	}
+
 	public User(Integer idUser, @Size(max = 50) @NotNull String nameUser, @Size(max = 50) @NotNull String firstNameUser,
 			@Size(max = 50) @NotNull String roleUser, @NotNull String eMailUser,
 			@Size(min = 10, max = 10) String phoneUser, @Size(min = 7, max = 7) @NotNull String idRHUser,
-			@NotNull String passwordUser, Profile profile, Department department,
+			@NotNull String passwordUser, Department department,
 			List<Application> applications)
 	{
+		super();
+		this.idUser = idUser;
+		this.nameUser = nameUser;
+		this.firstNameUser = firstNameUser;
+		this.roleUser = roleUser;
+		this.eMailUser = eMailUser;
+		this.phoneUser = phoneUser;
+		this.idRHUser = idRHUser;
+		this.passwordUser = passwordUser;
+		this.department = department;
+		this.applications = applications;
+	}
+	
+	
+
+	public User(Integer idUser, @Size(max = 50) @NotNull String nameUser, @Size(max = 50) @NotNull String firstNameUser,
+			@Size(max = 50) String roleUser, @NotNull String eMailUser, @Size(min = 10, max = 10) String phoneUser,
+			@Size(min = 7, max = 7) @NotNull String idRHUser, @NotNull String passwordUser) {
+		super();
+		this.idUser = idUser;
+		this.nameUser = nameUser;
+		this.firstNameUser = firstNameUser;
+		this.roleUser = roleUser;
+		this.eMailUser = eMailUser;
+		this.phoneUser = phoneUser;
+		this.idRHUser = idRHUser;
+		this.passwordUser = passwordUser;
+	}
+	
+	
+
+	public User(Integer idUser, @Size(max = 50) @NotNull String nameUser, @Size(max = 50) @NotNull String firstNameUser,
+			@Size(max = 50) String roleUser, @NotNull String eMailUser, @Size(min = 10, max = 10) String phoneUser,
+			@Size(min = 7, max = 7) @NotNull String idRHUser, @NotNull String passwordUser, Department department) {
+		super();
+		this.idUser = idUser;
+		this.nameUser = nameUser;
+		this.firstNameUser = firstNameUser;
+		this.roleUser = roleUser;
+		this.eMailUser = eMailUser;
+		this.phoneUser = phoneUser;
+		this.idRHUser = idRHUser;
+		this.passwordUser = passwordUser;
+		this.department = department;
+	}
+	
+	
+
+	public User(Integer idUser, @Size(max = 50) @NotNull String nameUser, @Size(max = 50) @NotNull String firstNameUser,
+			@Size(max = 50) String roleUser, @NotNull String eMailUser, @Size(min = 10, max = 10) String phoneUser,
+			@Size(min = 7, max = 7) @NotNull String idRHUser, @NotNull String passwordUser, Profile profile,
+			Department department, List<Application> applications) {
 		super();
 		this.idUser = idUser;
 		this.nameUser = nameUser;
@@ -128,11 +260,22 @@ public class User implements Serializable
 		this.applications = applications;
 	}
 
+
+
 	/**
 	 * getter et setter de la classe
 	 * 
 	 * @return valeur correspondant au get ou set
 	 */
+	
+//	// authentification
+//	public List<Role> getRoleList() {
+//		return roleList;
+//	}
+//
+//	public void setRoleList(List<Role> roleList) {
+//		this.roleList = roleList;
+//	}
 	
 	public Integer getIdUser()
 	{
@@ -243,14 +386,17 @@ public class User implements Serializable
 		this.applications = applications;
 	}
 
+
+
 	@Override
-	public String toString()
-	{
+	public String toString() {
 		return "User [idUser=" + idUser + ", nameUser=" + nameUser + ", firstNameUser=" + firstNameUser + ", roleUser="
 				+ roleUser + ", eMailUser=" + eMailUser + ", phoneUser=" + phoneUser + ", idRHUser=" + idRHUser
 				+ ", passwordUser=" + passwordUser + ", profile=" + profile + ", department=" + department
 				+ ", applications=" + applications + "]";
 	}
+
+	
 	
 	
 

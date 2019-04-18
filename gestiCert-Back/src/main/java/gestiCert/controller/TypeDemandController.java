@@ -2,6 +2,7 @@ package gestiCert.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,8 +27,8 @@ import gestiCert.service.TypeDemandService;
  */
 
 @RestController
-@RequestMapping("/typedemande")
-@CrossOrigin("http://localhost:4200")
+@RequestMapping("/api/typedemande")
+//@CrossOrigin("http://localhost:4200")
 public class TypeDemandController
 {
 	
@@ -63,36 +64,42 @@ public class TypeDemandController
 	 */
 	
 	@GetMapping()
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getAllTypeDemands()
 	{
 		return typeDemandServ.getAllTypeDemands();
 	}
 	
 	@GetMapping("/id={idTypeDemand}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getTypeDemandById(@PathVariable Integer idTypeDemand)
 	{
 		return typeDemandServ.getTypeDemandById(idTypeDemand);
 	}
 	
 	@GetMapping("/type={word}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getTypeDemandByType(@PathVariable String word)
 	{
 		return typeDemandServ.getTypeDemandByType(word);
 	}
 	
 	@PostMapping("/ajout")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> postTypeDemand(@RequestBody TypeDemand typeDemand)
 	{
 		return typeDemandServ.createTypeDemand(typeDemand);
 	}
 	
 	@PutMapping("/modifid={idTypeDemand}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> putTypeDemand(@RequestBody TypeDemand typeDemand, @PathVariable Integer idTypeDemand)
 	{
 		return typeDemandServ.updateTypeDemand(typeDemand, idTypeDemand);
 	}
 	
 	@DeleteMapping("/supprid={idTypeDemand}")
+//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<String> deleteTypeDemand(@PathVariable Integer idTypeDemand)
 	{
 		return typeDemandServ.deleteTypeDemand(idTypeDemand);

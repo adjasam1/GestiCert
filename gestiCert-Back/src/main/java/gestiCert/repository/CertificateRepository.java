@@ -22,6 +22,16 @@ import gestiCert.model.Certificate;
 public interface CertificateRepository extends JpaRepository<Certificate, Integer>
 {
 	
+//	@Query("FROM Certificate certificate INNER JOIN utilisateur_application ON certificate.id_application = utilisateur_application.id_application WHERE utilisateur_application.id_utilisateur = ?1")
+//	public List<Certificate> findCertificateByIdUser(Integer idUser);
+//	
+//	@Query("FROM Certificate certificate INNER JOIN User user ON certificate.application.idApplication = user.application.idApplication WHERE user.idUser =?1")
+//	public List<Certificate> findCertifByIdUser(Integer idUser);
+//	
+//	@Query(value = "from certificat inner join utilisateur_application on certificat.id_application = utilisateur_application.id_application where utilisateur_application.id_utilisateur = ?1", nativeQuery = true)
+//	public List<Certificate> findCertifByIdUser(Integer idUser);
+	
+	
 	/**
 	 * utilise la methode findById du CrudRepository en utilisant le nom du certificat comme parametre
 	 * 

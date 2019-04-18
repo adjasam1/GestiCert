@@ -1,10 +1,9 @@
 package gestiCert.service;
 
 import java.util.List;
-import java.util.Optional;
 
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+//import org.springframework.http.HttpStatus;
+//import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import gestiCert.model.Department;
@@ -51,24 +50,9 @@ public class DepartmentServiceImpl implements DepartmentService
 	 */
 	
 	@Override
-	public ResponseEntity<List<Department>> getAllDepartments()
+	public List<Department>getAllDepartments()
 	{
-		List<Department> listDepartments = null;
-		
-		try
-		{
-			listDepartments = departmentRepo.findAll();
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
-		
-		if (listDepartments == null)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(listDepartments);
+		return departmentRepo.findAll();
 	}
 	
 	/**
@@ -79,24 +63,9 @@ public class DepartmentServiceImpl implements DepartmentService
 	 */
 	
 	@Override
-	public ResponseEntity<?> getDepartmentById(Integer idDepartment)
+	public Department getDepartmentById(Integer idDepartment)
 	{
-		Optional<Department> listDepartments = null;
-		
-		try
-		{
-			listDepartments = departmentRepo.findById(idDepartment);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
-		
-		if (listDepartments == null)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(listDepartments);
+		return departmentRepo.findByIdDepartment(idDepartment);
 	}
 
 	/**
@@ -107,24 +76,9 @@ public class DepartmentServiceImpl implements DepartmentService
 	 */
 	
 	@Override
-	public ResponseEntity<?> getDepartmentByName(String nameDepartment)
+	public Department getDepartmentByName(String nameDepartment)
 	{
-		List<Department> listDepartments = null;
-		
-		try
-		{
-			listDepartments = departmentRepo.findByNameDepartment(nameDepartment);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
-		
-		if (listDepartments == null)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(listDepartments);
+		return departmentRepo.findByNameDepartment(nameDepartment);
 	}
 	
 	/**
@@ -135,25 +89,9 @@ public class DepartmentServiceImpl implements DepartmentService
 	 */
 	
 	@Override
-	public ResponseEntity<?> createDepartment(Department department)
+	public Department createDepartment(Department department)
 	{
-		Department newDepartment = null;
-		
-		String nameDepartment = department.getNameDepartment();
-		if ((nameDepartment == null) || (nameDepartment.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le nom du service doit être renseigné");
-		}
-		
-		try
-		{
-			newDepartment = departmentRepo.saveAndFlush(department);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(newDepartment);
+		return departmentRepo.saveAndFlush(department);
 	}
 	
 	/**
@@ -165,26 +103,9 @@ public class DepartmentServiceImpl implements DepartmentService
 	 */
 	
 	@Override
-	public ResponseEntity<?> updateDepartment(Department department, Integer idDepartment)
+	public Department updateDepartment(Department department, Integer idDepartment)
 	{
-		Department modifyDepartment = null;
-		getDepartmentById(idDepartment);
-		
-		String nameDepartment = department.getNameDepartment();
-		if ((nameDepartment == null) || (nameDepartment.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le nom du service doit être renseigné");
-		}
-		
-		try
-		{
-			modifyDepartment = departmentRepo.saveAndFlush(department);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(modifyDepartment);
+		return departmentRepo.saveAndFlush(department);
 	}
 	
 	
@@ -196,17 +117,9 @@ public class DepartmentServiceImpl implements DepartmentService
 	 */
 	
 	@Override
-	public ResponseEntity<?> deleteDepartment(Integer idDepartment)
+	public void deleteDepartment(Integer idDepartment)
 	{
-		try
-		{
-			departmentRepo.deleteById(idDepartment);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body("Suppression : OK");
+		departmentRepo.deleteById(idDepartment);
 	}
 	
 }

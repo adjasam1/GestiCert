@@ -28,7 +28,7 @@ export class CertificateDataService {
    */
 
   public getCertificate(): Observable<Certificate[]> {
-    return this.httpClient.get<Certificate[]>('http://localhost:8080/certificat');
+    return this.httpClient.get<Certificate[]>('http://localhost:8080/api/certificat');
   }
 
   /**

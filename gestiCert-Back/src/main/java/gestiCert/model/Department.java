@@ -65,6 +65,17 @@ public class Department implements Serializable
 	{
 		
 	}
+	
+	public Department(@Size(max = 50) @NotNull String nameDepartment) {
+		super();
+		this.nameDepartment = nameDepartment;
+	}
+
+	public Department(Integer idDepartment, @Size(max = 50) @NotNull String nameDepartment) {
+		super();
+		this.idDepartment = idDepartment;
+		this.nameDepartment = nameDepartment;
+	}
 
 	public Department(Integer idDepartment, @Size(max = 50) @NotNull String nameDepartment, List<User> users)
 	{

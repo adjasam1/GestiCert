@@ -5,11 +5,19 @@ import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 //import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import gestiCert.exception.BusinessResourceException;
+import gestiCert.exception.ExistingUsernameException;
+import gestiCert.exception.InvalidCredentialsException;
 import gestiCert.model.User;
 import gestiCert.repository.UserRepository;
+import gestiCert.security.JwtTokenProvider;
 
 /**
  * UserServiceImpl contient les methodes CRUD de l'application pour l'entite User
@@ -32,9 +40,23 @@ public class UserServiceImpl implements UserService
 	 */
 
 	private UserRepository userRepo;
+//	// authentification
+//	private BCryptPasswordEncoder passwordEncoder;
+//	private JwtTokenProvider jwtTokenProvider;
+//	private AuthenticationManager authenticationManager;
+//	public UserServiceImpl(UserRepository userRepo, BCryptPasswordEncoder passwordEncoder,
+//			JwtTokenProvider jwtTokenProvider, AuthenticationManager authenticationManager) {
+//		super();
+//		this.userRepo = userRepo;
+//		this.passwordEncoder = passwordEncoder;
+//		this.jwtTokenProvider = jwtTokenProvider;
+//		this.authenticationManager = authenticationManager;
+//	}
 	
 	// private BCryptPasswordEncoder bCryptPasswordEncoder;
 	
+	
+
 	/**
 	 * constructeur
 	 * 
@@ -47,6 +69,8 @@ public class UserServiceImpl implements UserService
 		this.userRepo = userRepo;
 	}
 
+	
+
 	/**
 	 * methode qui cherche tous les utilisateurs
 	 * 
@@ -54,24 +78,9 @@ public class UserServiceImpl implements UserService
 	 */
 
 	@Override
-	public ResponseEntity<?> getAllUsers()
+	public List<User> getAllUsers()
 	{
-		List<User> listUsers = null;
-
-		try
-		{
-			listUsers = userRepo.findAll();
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
-		}
-			
-		if (listUsers == null)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-			
-		return ResponseEntity.status(HttpStatus.OK).body(listUsers);
+		return userRepo.findAll();
 	}
 	
 	/**
@@ -82,24 +91,9 @@ public class UserServiceImpl implements UserService
 	 */
 	
 	@Override
-	public ResponseEntity<?> getUserById(Integer idUser)
+	public Optional<User> getUserById(Integer idUser)
 	{
-		Optional<User> listUsers = null;
-		
-		try
-		{
-			listUsers = userRepo.findById(idUser);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-		
-		if (listUsers == null)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pas d'utilisateur pour cet identifiant");
-		}
-		System.out.println(listUsers);
-		return ResponseEntity.status(HttpStatus.OK).body(listUsers);
+		return userRepo.findById(idUser);
 	}
 	
 	@Override
@@ -158,23 +152,9 @@ public class UserServiceImpl implements UserService
 	 */
 	
 	@Override
-	public ResponseEntity<?> getUserByName(String word)
+	public Iterable<User> getUserByName(String word)
 	{
-		List<User> listUsers = null;
-		
-		try
-		{
-			listUsers = userRepo.findByNameUser(word);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-		
-		if (listUsers == null)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(listUsers);
+		return userRepo.findByNameUser(word);
 	}
 	
 	/**
@@ -185,24 +165,9 @@ public class UserServiceImpl implements UserService
 	 */
 
 	@Override
-	public ResponseEntity<?> getUserByFirstName(String firstNameUser)
+	public Iterable<User> getUserByFirstName(String firstNameUser)
 	{
-		List<User> listUsers = null;
-		
-		try
-		{
-			listUsers = userRepo.findByFirstNameUser(firstNameUser);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-		
-		if (listUsers == null)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(listUsers);
+		return userRepo.findByFirstNameUser(firstNameUser);
 	}
 	
 	/**
@@ -214,24 +179,9 @@ public class UserServiceImpl implements UserService
 	 */
 
 	@Override
-	public ResponseEntity<?> getUserByNameAndFirstName(String nameUser, String firstNameUser)
+	public Iterable<User> getUserByNameAndFirstName(String nameUser, String firstNameUser)
 	{
-		User user = null;
-		
-		try
-		{
-			user = userRepo.findByNameUserAndFirstNameUser(nameUser, firstNameUser);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-		
-		if (user == null)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pas d'utilisateur corespondant à ce nom et à ce prénom");
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(user);
+		return userRepo.findByNameUserAndFirstNameUser(nameUser, firstNameUser);
 	}
 	
 //	{
@@ -281,50 +231,9 @@ public class UserServiceImpl implements UserService
 	 */
 
 	@Override
-	public ResponseEntity<?> createUser(User user)
+	public User createUser(User user)
 	{
-		User newUser = null;
-		
-		String nameUser = user.getNameUser();
-		if ((nameUser == null) || (nameUser.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le nom de l'utilisateur doit être renseigné");
-		}
-		
-		String firstNameUser = user.getFirstNameUser();
-		if ((firstNameUser == null) || (firstNameUser.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le prénom de l'utilisateur doit être renseigné");
-		}
-		
-		String eMailUser = user.geteMailUser();
-		if ((eMailUser == null) || (eMailUser.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'eMail de l'utilisateur doit être renseigné");
-		}
-		
-		String idRHUser = user.getIdRHUser();
-		if ((idRHUser == null) || (idRHUser.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'idRH de l'utilisateur doit être renseigné");
-		}
-		
-		String passwordUser = user.getPasswordUser();
-		if ((passwordUser == null) || (passwordUser.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le mot de passe de l'utilisateur doit être renseigné");
-		}
-		
-		try
-		{
-			// user.setPasswordUser(bCryptPasswordEncoder.encode(user.getPasswordUser()));
-			newUser = userRepo.saveAndFlush(user);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
-		
-		return ResponseEntity.status(HttpStatus.CREATED).body(newUser);
+		return  userRepo.saveAndFlush(user);
 	}
 	
 	/**
@@ -335,50 +244,9 @@ public class UserServiceImpl implements UserService
 	 */
 
 	@Override
-	public ResponseEntity<?> updateUser(User user)
+	public User updateUser(User user)
 	{
-		User modifyUser = null;
-		
-		String nameUser = user.getNameUser();
-		if ((nameUser == null) || (nameUser.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Nom de l'utilisateur doit être renseigné");
-		}
-		
-		String firstNameUser = user.getFirstNameUser();
-		if ((firstNameUser == null) || (firstNameUser.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le prénom de l'utilisateur doit être renseigné");
-		}
-		
-		String eMailUser = user.geteMailUser();
-		if ((eMailUser == null) || (eMailUser.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'eMail de l'utilisateur doit être renseigné");
-		}
-		
-		String idRHUser = user.getIdRHUser();
-		if ((idRHUser == null) || (idRHUser.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'idRH de l'utilisateur doit être renseigné");
-		}
-		
-		String passwordUser = user.getPasswordUser();
-		if ((passwordUser == null) || (passwordUser.isEmpty()))
-		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le mot de passe de l'utilisateur doit être renseigné");
-		}
-		
-		try
-		{
-			// user.setPasswordUser(bCryptPasswordEncoder.encode(user.getPasswordUser()));
-			modifyUser = userRepo.save(user);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body(modifyUser);
+		return userRepo.save(user);
 	}
 
 	/**
@@ -388,17 +256,9 @@ public class UserServiceImpl implements UserService
 	 */
 	
 	@Override
-	public ResponseEntity<String> deleteUser(Integer idUser)
+	public void deleteUser(Integer idUser)
 	{
-		try
-		{
-			userRepo.deleteById(idUser);
-		} catch (Exception e)
-		{
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
-		}
-		
-		return ResponseEntity.status(HttpStatus.OK).body("Suppression : OK");
+		userRepo.deleteById(idUser);
 	}
 	
 //	@Override
@@ -411,4 +271,96 @@ public class UserServiceImpl implements UserService
 //		}
 //	}
 	
+//	// authentification
+//	// permet de verifier coherence entre utilisateur et mot de passe
+//	@Override
+//	public String signin(String idRHUser, String passwordUser) throws InvalidCredentialsException {
+//		try {
+//			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(idRHUser, passwordUser));
+//			return jwtTokenProvider.createToken(idRHUser, userRepo.findByIdRHUser(idRHUser).get().getRoleList());
+//		} catch (AuthenticationException e) {
+//			throw new InvalidCredentialsException();
+//		}	
+//	}
+//	@Override
+//	public String signup(User user) throws ExistingIdRHException {
+//		if (!userRepo.existsByIdRHUser(user.getIdRHUser())) {
+//			User userToSave = new User(user.getIdRHUser(), passwordEncoder.encode(user.getPasswordUser()), user.getRoleList());
+//			userRepo.save(userToSave);
+//			return jwtTokenProvider.createToken(user.getIdRHUser(), user.getRoleList());
+//		} else {
+//			throw new ExistingIdRHException();
+//		}
+//	}
+//	@Override
+//	public List<User> findAllUsers() {
+//		return userRepo.findAll();
+//	}
+//	@Override
+//	public Optional<User> findUserByIdRHUser(String idRHUser) {
+//		return userRepo.findByIdRHUser(idRHUser);
+//	}
+
+//	@Override
+//	public ResponseEntity<?> getUserByIdRHUser(String idRHUser) throws BusinessResourceException {
+//		return ResponseEntity.status(HttpStatus.OK).body(userRepo.findByIdRHUser(idRHUser));
+//		// TODO
+//	}
+
+	
+	
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

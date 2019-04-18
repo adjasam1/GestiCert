@@ -3,8 +3,10 @@ package gestiCert.model;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -84,7 +86,7 @@ public class Application implements Serializable
 	private List<User> users;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "application")
+	@OneToMany(mappedBy = "application", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
 	private List<Certificate> certificates;
 	
 	/**

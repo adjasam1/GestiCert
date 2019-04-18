@@ -27,7 +27,7 @@ export class EnvironmentDataService {
    */
 
   public getEnvironment(): Observable<Environment[]> {
-    return this.httpClient.get<Environment[]>('http://localhost:8080/environnement');
+    return this.httpClient.get<Environment[]>('http://localhost:8080/api/environnement');
   }
 
   /**

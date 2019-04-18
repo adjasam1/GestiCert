@@ -28,7 +28,7 @@ export class DepartmentDataService {
      */
 
   public getDepartment(): Observable < Department[] > {
-      return this.httpClient.get<Department[]>('http://localhost:8080/service');
+      return this.httpClient.get<Department[]>('http://localhost:8080/api/service');
   }
 
   /**

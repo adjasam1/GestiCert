@@ -27,7 +27,7 @@ export class TypeDemandDataService {
    */
 
   public getTypeDemand(): Observable<TypeDemand[]> {
-    return this.httpClient.get<TypeDemand[]>('http://localhost:8080/typedemande');
+    return this.httpClient.get<TypeDemand[]>('http://localhost:8080/api/typedemande');
   }
 
   /**

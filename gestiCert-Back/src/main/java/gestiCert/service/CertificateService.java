@@ -31,4 +31,10 @@ public interface CertificateService {
 
 	ResponseEntity<String> deleteCertificate(Integer idCertificate);
 
+//	ResponseEntity<?> getCertificateByIdUser(Integer idUser);
+
+//	ResponseEntity<?> getCertifByIdUser(Integer idUser);
+
+//	ResponseEntity<?> getCertificateByIdUser(Integer idUser);
+
 }

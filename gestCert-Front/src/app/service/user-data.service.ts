@@ -28,7 +28,7 @@ export class UserDataService {
    */
 
   public getUser(): Observable<User[]> {
-    return this.httpClient.get<User[]>('http://localhost:8080/utilisateur');
+    return this.httpClient.get<User[]>('http://localhost:8080/api/utilisateur');
   }
 
   /**

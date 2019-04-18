@@ -1,0 +1,24 @@
+<head>
+  <title>Gestion application - GestiCert</title>
+</head>
+
+<section id="entete">
+  <div id="user" title="{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
+    <p *ngIf="editedUser.idUser">
+      <mat-icon>person</mat-icon>
+      {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}
+    </p>
+  </div>
+  <div id="bouton">
+    <div id="deconnexion" title="Déconnexion de l'application">
+      <a role="button" (click)="deconnexion()">Déconnexion</a>
+    </div>
+    <div title="Retour à l'accueil">
+      <a role="button" (click)="comeBack()">Retour</a>
+    </div>
+  </div>
+</section>
+
+<section id="menu">
+
+</section>

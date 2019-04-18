@@ -27,7 +27,7 @@ export class ServerDataService {
    */
 
   public getServer(): Observable<Server[]> {
-    return this.httpClient.get<Server[]>('http://localhost:8080/serveur');
+    return this.httpClient.get<Server[]>('http://localhost:8080/api/serveur');
   }
 
   /**

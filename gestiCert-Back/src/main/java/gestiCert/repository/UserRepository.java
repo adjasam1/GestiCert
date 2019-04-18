@@ -1,6 +1,7 @@
 package gestiCert.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -37,7 +38,7 @@ public interface UserRepository extends JpaRepository<User, Integer>
 	 * @return une liste d'utilisateurs
 	 */
 	
-	public List<User> findByFirstNameUser(String firstNameUser);
+	public Iterable<User> findByFirstNameUser(String firstNameUser);
 	
 	/**
 	 * utilise la methode findById du CrudRepository en utilisant la requete sql recherchant un utilisateur avec un nom et un prenom
@@ -48,7 +49,7 @@ public interface UserRepository extends JpaRepository<User, Integer>
 	 */
 	
 	@Query("FROM User user WHERE user.nameUser = ?1 AND user.firstNameUser = ?2")
-	public User findByNameUserAndFirstNameUser(String nameUser, String firstNameUser);
+	public Iterable<User> findByNameUserAndFirstNameUser(String nameUser, String firstNameUser);
 	
 	/**
 	 * utilise la methode findById du CrudRepository en utilisant la requete sql recherchant un utilisateur avec une partie d'un nom
@@ -58,7 +59,7 @@ public interface UserRepository extends JpaRepository<User, Integer>
 	 */
 	
 	@Query("FROM User user WHERE user.nameUser LIKE %?1%")
-	public List<User> findByNameUser(String word);
+	public Iterable<User> findByNameUser(String word);
 	
 //	/**
 //	 * utilise la methode delete du CrudRepository en utilisant l'identifiant de l'utilisateur comme parametre
@@ -77,5 +78,10 @@ public interface UserRepository extends JpaRepository<User, Integer>
 	
 	@Query("FROM User user WHERE user.idRHUser LIKE %?1%")
 	public List<User> findByIdRHUser(String idRHUser);
+	
+//	// authentification
+//	Optional<User> findByIdRHUser(String idRHUser);
+//	boolean existsByIdRHUser(String idRHUser);
+//	void deleteByIdRHUser(String idRHUser);
 
 }

@@ -2,8 +2,6 @@ package gestiCert.service;
 
 import java.util.List;
 
-import org.springframework.http.ResponseEntity;
-
 import gestiCert.model.Department;
 
 /**
@@ -17,16 +15,16 @@ import gestiCert.model.Department;
 public interface DepartmentService
 {
 
-	public ResponseEntity<List<Department>> getAllDepartments();
+	public List<Department> getAllDepartments();
 	
-	public ResponseEntity<?> getDepartmentById(Integer idDepartment);
+	public Department getDepartmentById(Integer idDepartment);
 
-	public ResponseEntity<?> getDepartmentByName(String nameDepartment);
+	public Department getDepartmentByName(String nameDepartment);
 
-	public ResponseEntity<?> createDepartment(Department department);
+	public Department createDepartment(Department department);
 
-	public ResponseEntity<?> updateDepartment(Department department, Integer idDepartment);
+	public Department updateDepartment(Department department, Integer idDepartment);
 
-	public ResponseEntity<?> deleteDepartment(Integer idDepartment);
+	public void deleteDepartment(Integer idDepartment);
 
 }

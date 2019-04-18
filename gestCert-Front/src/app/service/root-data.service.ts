@@ -27,7 +27,7 @@ export class RootDataService {
    */
 
   public getRoot(): Observable<Root[]> {
-    return this.httpClient.get<Root[]>('http://localhost:8080/racine');
+    return this.httpClient.get<Root[]>('http://localhost:8080/api/racine');
   }
 
   /**

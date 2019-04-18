@@ -1,0 +1,105 @@
+<head>
+  <title>Certificat {{ editedCertificate.environment.nameEnvironment }} {{ editedCertificate.application.nameApplication }} - GestiCert</title>
+</head>
+
+
+<section id="entete" *ngIf="editedCertificate">
+
+  <div id="user">
+    <div id="name">
+      <p>
+        <mat-icon aria-hidden="false">card_membership</mat-icon>
+        Certificat {{ editedCertificate.environment.nameEnvironment }} de l'application {{ editedCertificate.application.nameApplication }}
+      </p>
+    </div>
+  </div>
+
+  <div id="deconnexion">
+    <div>
+      <a role="button" (click)="deconnexion()">Déconnexion</a>
+    </div>
+    <div>
+      <a role="button" (click)="comeBack()">Retour</a>
+    </div>
+  </div>
+
+</section>
+
+<section id="certif">
+
+  <div id="titre">
+    <h1>Certificat</h1>
+  </div>
+
+  <div id="cadre1">
+    <div>
+      <table id="table1">
+        <thead>
+        <tr>
+          <th id="th1">Nom<br>
+            <small>(CCX-YYYMMDD-environnement)</small>
+          </th>
+          <th class="th2">Type</th>
+          <th class="th2">Plateforme</th>
+          <th id="th2">Serveur(s)</th>
+          <th id="th3">
+            <mat-icon>open_in_browser</mat-icon>
+          </th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+          <td>{{ editedCertificate.nameCertificate }}</td>
+          <td>{{ editedCertificate.root.nameRoot }}</td>
+          <td>{{ editedCertificate.plateform.namePlateform }}</td>
+          <td>{{ editedCertificate.server }}</td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="cadre2">
+      <table id="table2">
+        <thead>
+        <tr>
+          <th id="th4">Adresse Principale</th>
+          <th id="th5">Adresse(s) Alternative(s)</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+          <td>{{ editedCertificate.linkAddressPrincipal }}</td>
+          <td></td>
+          <!--{{ editedCertificate.addressAlternative[0].linkAddressAlternative }}-->
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div id="cadre3">
+      <table id="table3">
+        <thead>
+        <tr>
+          <th class="th6">Mot de Passe</th>
+          <th class="th6">Date Emission</th>
+          <th id="th7">Fin Validité</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+          <td>{{ editedCertificate.passwordCertificate }}</td>
+          <td>{{ editedCertificate.dateIssue }}</td>
+          <td></td>
+        </tr>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+</section>
+
+
