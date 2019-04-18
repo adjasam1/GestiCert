@@ -17,13 +17,15 @@ footer
 
 a
 {
-  color: #003DA5;
+  color: black;
   margin: 15px;
+  text-decoration: none;
 }
 
 a:hover
 {
-  color: black;
+  color: #003DA5;
+  text-decoration: underline;
 }
 
 p{
