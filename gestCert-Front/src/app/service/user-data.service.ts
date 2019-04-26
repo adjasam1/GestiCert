@@ -1,8 +1,8 @@
 import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {User} from '../model/user';
 import {map} from 'rxjs/operators';
+import {AppUser} from '../model/appUser';
 
 @Injectable({
   providedIn: 'root'
@@ -13,13 +13,13 @@ export class UserDataService {
    * liste des utilisateurs de l'application
    */
 
-  private availableUsers: User[];
+  private availableUsers: AppUser[];
 
   /**
    * liste observable rendu visible partout dans application
    */
 
-  availableUsers$: BehaviorSubject<User[]> = new BehaviorSubject(this.availableUsers);
+  availableUsers$: BehaviorSubject<AppUser[]> = new BehaviorSubject(this.availableUsers);
 
   constructor(private httpClient: HttpClient) {}
 
@@ -27,8 +27,8 @@ export class UserDataService {
    * cherche tous les utilisateurs grâce à la methode CRUD
    */
 
-  public getUser(): Observable<User[]> {
-    return this.httpClient.get<User[]>('http://localhost:8080/api/utilisateur');
+  public getUser(): Observable<AppUser[]> {
+    return this.httpClient.get<AppUser[]>('http://localhost:8080/api/utilisateur');
   }
 
   /**
@@ -50,19 +50,19 @@ export class UserDataService {
    * @param userId
    */
 
-  public findUser(userId: number): Observable<User> {
+  public findUser(userId: number): Observable<AppUser> {
     if (userId) {
       if (!this.availableUsers) {
         return this.getUser().pipe(map(users => users.find(user => user.idUser === userId)));
       }
       return of(this.availableUsers.find(user => user.idUser === userId));
     } else {
-      return of(new User(0, '', '', '', '', '', '', '', null, null, null));
+      return of(new AppUser(0, '', '', '', '', '', '', '', null, null, null));
     }
   }
 
-  public createUser(newUser: User) {
-    this.httpClient.post<User>('http://localhost:8080/utilisateur/ajout', newUser).subscribe(
+  public createUser(newUser: AppUser) {
+    this.httpClient.post<AppUser>('http://localhost:8080/api/utilisateur/ajout', newUser).subscribe(
       createUser => {
         this.availableUsers.push(createUser);
         this.availableUsers$.next(this.availableUsers);
@@ -70,8 +70,8 @@ export class UserDataService {
     );
   }
 
-  public updateUser(user: User) {
-    this.httpClient.put<User>(`http://localhost:8080/utilisateur/modifid=${user.idUser}`, user).subscribe(
+  public updateUser(user: AppUser) {
+    this.httpClient.put<AppUser>(`http://localhost:8080/api/utilisateur/modifid=${user.idUser}`, user).subscribe(
       updateUser => {
         this.availableUsers$.next(this.availableUsers);
       }

@@ -1,11 +1,13 @@
 package gestiCert.service;
 
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import gestiCert.model.Certificate;
@@ -32,6 +34,8 @@ public class CertificateServiceImpl implements CertificateService
 	 */
 
 	private CertificateRepository certificateRepo;
+	
+//	private BCryptPasswordEncoder passwordEncoder;
 
 	/**
 	 * constructeur
@@ -39,12 +43,29 @@ public class CertificateServiceImpl implements CertificateService
 	 * @param certificateRepo
 	 */
 	
+	
+	
 	public CertificateServiceImpl(CertificateRepository certificateRepo)
 	{
 		super();
 		this.certificateRepo = certificateRepo;
 	}
-	
+
+
+
+//	public CertificateServiceImpl() {
+//	}
+
+
+
+//	public CertificateServiceImpl(CertificateRepository certificateRepo, BCryptPasswordEncoder passwordEncoder) {
+//		super();
+//		this.certificateRepo = certificateRepo;
+//		this.passwordEncoder = passwordEncoder;
+//	}
+
+
+
 	/**
 	 * methode qui cherche tous les certificats
 	 * 
@@ -214,13 +235,42 @@ public class CertificateServiceImpl implements CertificateService
 		
 		try
 		{
+//			newCertificate = new Certificate(certificate.getNameCertificate(), certificate.getLinkAddressPrincipal(), certificate.getLinkInstallation(), passwordEncoder.encode(certificate.getPasswordCertificate()), certificate.getDateIssue(), certificate.getDateEndValidity(), certificate.getApplication(), certificate.getEnvironment(), certificate.getPlateform(), certificate.getRoot());
 			newCertificate = certificateRepo.saveAndFlush(certificate);
+//			newCertificate.setPasswordCertificate(passwordEncoder.encode(newCertificate.getPasswordCertificate()));
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
 		}
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(newCertificate);
 	}
+	
+//	@Override
+//	public Certificate createCertificate(Certificate certificate) {
+//		return certificateRepo.saveAndFlush(newCertificate);
+//	}
+	
+//	 @Override
+//	    public String signup(AppUser user) throws ExistingIdRHUserException {
+//	        if (!appUserRepo.existsByIdRHUser(user.getIdRHUser())) {
+//	            AppUser userToSave = new AppUser(user.getIdRHUser(), passwordEncoder.encode(user.getPasswordUser()), user.getNameUser(), user.getFirstNameUser(), user.geteMailUser(), user.getPhoneUser(), user.getDepartment(), user.getFunction(), user.getRoleList());
+//	            appUserRepo.save(userToSave);
+//	            return jwtTokenProvider.createToken(user.getIdRHUser(), user.getRoleList());
+//	        } else {
+//	            throw new ExistingIdRHUserException();
+//	        }
+//	    }
+	
+//	this.nameCertificate = nameCertificate;
+//	this.linkAddressPrincipal = linkAddressPrincipal;
+//	this.linkInstallation = linkInstallation;
+//	this.passwordCertificate = passwordCertificate;
+//	this.dateIssue = dateIssue;
+//	this.dateEndValidity = dateEndValidity;
+//	this.application = application;
+//	this.environment = environment;
+//	this.plateform = plateform;
+//	this.root = root;
 	
 	/**
 	 * methode qui modifie un certificat

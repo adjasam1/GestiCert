@@ -140,6 +140,44 @@ public class Certificate implements Serializable
 		this.servers = servers;
 		this.addressAlternatives = addressAlternatives;
 	}
+	
+	
+
+	public Certificate(@Size(min = 16, max = 17) String nameCertificate, String linkAddressPrincipal,
+			String linkInstallation, String passwordCertificate) {
+		super();
+		this.nameCertificate = nameCertificate;
+		this.linkAddressPrincipal = linkAddressPrincipal;
+		this.linkInstallation = linkInstallation;
+		this.passwordCertificate = passwordCertificate;
+	}
+
+	public Certificate(@Size(min = 16, max = 17) String nameCertificate, String linkAddressPrincipal,
+			String linkInstallation, String passwordCertificate, Date dateIssue, Date dateEndValidity) {
+		super();
+		this.nameCertificate = nameCertificate;
+		this.linkAddressPrincipal = linkAddressPrincipal;
+		this.linkInstallation = linkInstallation;
+		this.passwordCertificate = passwordCertificate;
+		this.dateIssue = dateIssue;
+		this.dateEndValidity = dateEndValidity;
+	}
+
+	public Certificate(@Size(min = 16, max = 17) String nameCertificate, String linkAddressPrincipal,
+			String linkInstallation, String passwordCertificate, Date dateIssue, Date dateEndValidity,
+			Application application, Environment environment, Plateform plateform, Root root) {
+		super();
+		this.nameCertificate = nameCertificate;
+		this.linkAddressPrincipal = linkAddressPrincipal;
+		this.linkInstallation = linkInstallation;
+		this.passwordCertificate = passwordCertificate;
+		this.dateIssue = dateIssue;
+		this.dateEndValidity = dateEndValidity;
+		this.application = application;
+		this.environment = environment;
+		this.plateform = plateform;
+		this.root = root;
+	}
 
 	/**
 	 * getter et setter de la classe

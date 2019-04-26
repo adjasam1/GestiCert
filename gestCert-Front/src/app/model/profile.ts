@@ -1,9 +1,10 @@
-import {User} from './user';
+import {AppUser} from './appUser';
+
 
 export class Profile {
 
   constructor(public idProfile: number,
               public typeProfile: string,
-              public users: User[]) {}
+              public users: AppUser[]) {}
 
 }

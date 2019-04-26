@@ -31,8 +31,8 @@ public class JwtTokenProvider {
 	@Value("${security.jwt.token.secret-key:secret-key}")
 	private String secretKey;
 	
-	@Value("${security.jwt.token.expire-length:3600000}")
-    private long validityInMilliseconds = 3600000; // 1h avant de devoir se reconnecter
+	@Value("${security.jwt.token.expire-length:86400000}")
+    private long validityInMilliseconds = 86400000; // 24h avant de devoir se reconnecter
 	
 	@Autowired
 	private UserDetailsService userDetailsServ;
@@ -66,9 +66,9 @@ public class JwtTokenProvider {
      * @param roles the user roles.
      * @return the created JWT as String.
      */
-    public String createToken(String username, List<Role> roles) {
+    public String createToken(String idRHUser, List<Role> roles) {
 
-        Claims claims = Jwts.claims().setSubject(username);
+        Claims claims = Jwts.claims().setSubject(idRHUser);
         claims.put("auth", roles.stream().map(s -> new SimpleGrantedAuthority(s.getAuthority())).filter(Objects::nonNull).collect(Collectors.toList()));
 
         Date now = new Date();

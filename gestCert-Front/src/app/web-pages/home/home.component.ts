@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
-import {User} from '../../model/user';
 import {Certificate} from '../../model/certificate';
 import {Application} from '../../model/application';
 import {Environment} from '../../model/environment';
@@ -12,6 +11,7 @@ import {CertificateDataService} from '../../service/certificate-data.service';
 import {ApplicationDataService} from '../../service/application-data.service';
 import {EnvironmentDataService} from '../../service/environment-data.service';
 import {RootDataService} from '../../service/root-data.service';
+import {AppUser} from '../../model/appUser';
 
 @Component({
   selector: 'app-accueil',
@@ -20,9 +20,9 @@ import {RootDataService} from '../../service/root-data.service';
 })
 export class HomeComponent implements OnInit {
 
-  usersList: BehaviorSubject<User[]>;
+  usersList: BehaviorSubject<AppUser[]>;
   idUser: number;
-  editedUser: User;
+  editedUser: AppUser;
 
   certificatesList: BehaviorSubject<Certificate[]>;
   editedCertificate: Certificate[];

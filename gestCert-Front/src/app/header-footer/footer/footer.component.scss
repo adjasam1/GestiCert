@@ -32,18 +32,35 @@ p{
   font-size: 12px;
 }
 
+#gestion2
+{
+  display: none;
+}
+
 @media (max-width: 600px)
 {
-  #container
+  a
   {
-    display: block;
+    margin: 5px;
+  }
+
+  #gestion1
+  {
+    display: none;
+  }
+
+  #gestion2
+  {
+    display: flex;
   }
 }
 
 @media (max-width: 400px)
 {
-  a
+  #gestion2
   {
-    display: block;
+    display: none;
   }
+
+
 }

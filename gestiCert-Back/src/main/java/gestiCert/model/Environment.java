@@ -66,6 +66,23 @@ public class Environment implements Serializable
 		
 	}
 	
+	
+	
+	public Environment(@Size(max = 50) @NotNull String nameEnvironment) {
+		super();
+		this.nameEnvironment = nameEnvironment;
+	}
+
+
+
+	public Environment(Integer idEnvironment, @Size(max = 50) @NotNull String nameEnvironment) {
+		super();
+		this.idEnvironment = idEnvironment;
+		this.nameEnvironment = nameEnvironment;
+	}
+
+
+
 	public Environment(Integer idEnvironment, @Size(max = 50) @NotNull String nameEnvironment,
 			List<Certificate> certificates)
 	{

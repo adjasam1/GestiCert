@@ -1,6 +1,6 @@
 package gestiCert.exception;
 
-public class ExistingUsernameException extends Exception {
+public class ExistingIdRHUserException extends Exception {
 
 	/**
 	 * 

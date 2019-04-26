@@ -1,5 +1,5 @@
-import {User} from './user';
 import {Certificate} from './certificate';
+import {AppUser} from './appUser';
 
 export class Application {
 
@@ -11,7 +11,7 @@ export class Application {
               public managementClient: string,
               public phoneClient: string,
               public eMailClient: string,
-              public users: User[],
+              public users: AppUser[],
               public certificates: Certificate[]) {}
 
 }

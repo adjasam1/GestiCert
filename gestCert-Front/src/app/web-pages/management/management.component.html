@@ -3,10 +3,10 @@
 </head>
 
 <section id="entete">
-  <div id="user" title="{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
-    <p *ngIf="editedUser.idUser">
-      <mat-icon>person</mat-icon>
-      {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}
+  <div id="user" title="Gestion de GestiCert">
+    <p>
+      <img src="assets/icons/gestion-24px.svg">
+      Administration de GestiCert
     </p>
   </div>
   <div id="bouton">
@@ -19,6 +19,362 @@
   </div>
 </section>
 
-<section id="menu">
+<section>
+  <div id="menu1">
+    <a role="button" [matMenuTriggerFor]="utilisateur" title="Gestion des utilisateurs">Utilisateur</a>
+    <a role="button" routerLink="/gestion/app" title="Gestion des applications">Application</a>
+    <a role="button" [matMenuTriggerFor]="certificat" title="Gestion des certificats">Certificat</a>
+  </div>
 
+  <div id="menu2">
+    <mat-menu #utilisateur="matMenu">
+      <a class="select" role="button" routerLink="/gestion/uti" title="Gestion des utilisateurs">Utilisateur</a>
+      <a class="select" role="button" routerLink="/gestion/pro" title="Gestion des profils">Profil</a>
+      <a class="select" role="button" routerLink="/gestion/sce" title="Gestion des services">Service</a>
+    </mat-menu>
+    <mat-menu #certificat="matMenu">
+      <a class="select" role="button" routerLink="/gestion/cer" title="Gestion des certificats">Certificat</a>
+      <a class="select" role="button" routerLink="/gestion/env" title="Gestion des environnements">Environnement</a>
+      <a class="select" role="button" routerLink="/gestion/pla" title="Gestion des plateformes">Plateforme</a>
+      <a class="select" role="button" routerLink="/gestion/rac" title="Gestion des racines">Racine</a>
+      <a class="select" role="button" routerLink="/gestion/sur" title="Gestion des serveurs">Serveur</a>
+    </mat-menu>
+  </div>
+</section>
+
+<section class="gest" title="Gestion des utilisateurs">
+  <input type="hidden" [routerLink]="'/gestion/uti'" routerLinkActive #guti="routerLinkActive"/>
+  <section *ngIf="guti.isActive">
+    <div>
+      <a role="button" title="Ajouter un utilisateur">Ajouter un utilisateur</a>
+    </div>
+    <div class="titre" title="Liste des utilisateurs">
+      <h1>Liste des Utilisateurs</h1>
+    </div>
+
+    <div class="cadre">
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="th2">IdRH</th>
+          <th class="th1">Nom</th>
+          <th class="th2">Prénom</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let user of usersList | async"
+               title="{{ user.idRHUser }} {{ user.nameUser }} {{ user.firstNameUser }}">
+        <tr>
+          <td>{{ user.idRHUser }}</td>
+          <td>{{ user.nameUser }}</td>
+          <td>{{ user.firstNameUser }}</td>
+          <td>
+            <a role="button"
+               title="Modification du compte de {{ user.idRHUser }} {{ user.nameUser }} {{ user.firstNameUser }}">Modifier</a>
+            <a role="button"
+               title="Suppression du compte de {{ user.idRHUser }} {{ user.nameUser }} {{ user.firstNameUser }}">Supprimer</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+
+<section class="gest" title="Gestion des profils">
+  <input type="hidden" [routerLink]="'/gestion/pro'" routerLinkActive #gpro="routerLinkActive"/>
+  <section *ngIf="gpro.isActive">
+    <div>
+      <a role="button" title="Ajouter un profil">Ajouter un profil</a>
+    </div>
+    <div class="titre" title="Liste des profils">
+      <h1>Liste des Profils</h1>
+    </div>
+
+    <div class="cadre">
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="th2">Type</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let profile of profilesList | async" title="{{ profile.typeProfile }}">
+        <tr>
+          <td>{{ profile.typeProfile }}</td>
+          <td>
+            <a role="button" title="Modification du profil {{ profile.typeProfile }}">Modifier</a>
+            <a role="button" title="Suppression du profil {{ profile.typeProfile }}">Supprimer</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+
+<input type="hidden" [routerLink]="'/gestion/sce'" routerLinkActive #gsce="routerLinkActive"/>
+<section class="gest" title="Gestion des services" *ngIf="gsce.isActive">
+
+  <div class="titre" title="Administration des services">
+      <h1>Administration des Services</h1>
+    </div>
+
+    <div class="cadre">
+      <div class="titre" title="Liste des services">
+        <h1>Liste des Services</h1>
+      </div>
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="th2">Nom</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let department of departmentsList | async" title="{{ department.nameDepartment }}">
+        <tr>
+          <td>{{ department.nameDepartment }}</td>
+          <td>
+            <a role="button" routerLink="/gestion/sce/{{department.idDepartment}}"
+               title="Modification du service {{ department.nameDepartment }}">Modifier</a>
+            <a role="button" title="Suppression du service {{ department.nameDepartment }}">Supprimer</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+  <div class="cadre">
+      <h1 *ngIf="editedDepartment.idDepartment; else elseBlock1"
+          title="Formulaire pour modifier le service {{ editedDepartment.nameDepartment }}">Modification du service {{ editedDepartment.nameDepartment }}</h1>
+      <ng-template #elseBlock1 title="Formulaire pour ajouter un service"><h1>Ajout d'un service</h1></ng-template>
+      <h2>* Champs obligatoires</h2>
+      <form>
+        <div>
+          <div class="form-control">
+            <label for="nomsce">Nom du service * : </label>
+            <input type="search" id="nomsce" [(ngModel)]="editedDepartment.nameDepartment" name="nomsce"
+                   placeholder="Entrez le nom du service"
+                   required title="Champ pour le nom du service">
+          </div>
+          <br>
+        </div>
+      </form>
+      <br>
+      <div id="modification" title="Sauvegarder ce service">
+          <a id="sauvegarde" role="button" (click)="onSave()">Sauvegarder</a>
+
+      </div>
+  </div>
+</section>
+
+<section class="gest" title="Gestion des applications">
+  <input type="hidden" [routerLink]="'/gestion/app'" routerLinkActive #gapp="routerLinkActive"/>
+  <section *ngIf="gapp.isActive">
+    <div>
+      <a role="button" title="Ajouter une application">Ajouter une application</a>
+    </div>
+    <div class="titre" title="Liste des applications">
+      <h1>Liste des Applications</h1>
+    </div>
+
+    <div class="cadre">
+      <table class="table">
+        <thead>
+        <tr>
+          <th>CCX</th>
+          <th class="th2">Nom</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let application of applicationsList | async"
+               title="Application {{ application.nameApplication }}">
+        <tr>
+          <td>{{ application.codeCCX }}</td>
+          <td>{{ application.nameApplication }}</td>
+          <td>
+            <a role="button" title="Attribution de l'application {{ application.nameApplication }}">Attribuer</a>
+            <a role="button" title="Modification de l'application {{ application.nameApplication }}">Modifier</a>
+            <a role="button" title="Suppression de l'application {{ application.nameApplication }}">Supprimer</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+
+<section class="gest" title="Gestion des certificats">
+  <input type="hidden" [routerLink]="'/gestion/cer'" routerLinkActive #gcer="routerLinkActive"/>
+  <section *ngIf="gcer.isActive">
+    <div>
+      <a role="button" title="Ajouter un certificat">Ajouter un certificat</a>
+    </div>
+    <div class="titre" title="Liste des certificats">
+      <h1>Liste des Certificats</h1>
+    </div>
+
+    <div class="cadre">
+      <table class="table1">
+        <thead>
+        <tr>
+          <th class="th1">Nom Certificat</th>
+          <th class="th2">Nom Application</th>
+          <th class="th2"></th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let certificate of certificatesList | async"
+               title="Certificat {{ certificate.environment.nameEnvironment }} de l'application {{ certificate.application.nameApplication }}">
+        <tr>
+          <td>{{ certificate.nameCertificate }}</td>
+          <td>{{ certificate.application.nameApplication }}</td>
+          <td>
+            <a role="button"
+               title="Modification du  certificat {{ certificate.environment.nameEnvironment }} de l'application {{ certificate.application.nameApplication }}">Modifier</a>
+            <a role="button"
+               title="Modification du  certificat {{ certificate.environment.nameEnvironment }} de l'application {{ certificate.application.nameApplication }}">Supprimer</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+
+<section class="gest" title="Gestion des environnements">
+  <input type="hidden" [routerLink]="'/gestion/env'" routerLinkActive #genv="routerLinkActive"/>
+  <section *ngIf="genv.isActive">
+    <div>
+      <a role="button" title="Ajouter un environnement">Ajouter un environnement</a>
+    </div>
+    <div class="titre" title="Liste des environnements">
+      <h1>Liste des Environnements</h1>
+    </div>
+
+    <div class="cadre">
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="th2">Nom</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let environment of environmentsList | async"
+               title="Environnement {{ environment.nameEnvironment }}">
+        <tr>
+          <td>{{ environment.nameEnvironment }}</td>
+          <td>
+            <a role="button" title="Modification de l'environnement {{ environment.nameEnvironment }}">Modifier</a>
+            <a role="button" title="Suppression de l'environnement {{ environment.nameEnvironment }}">Supprimer</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+
+<section class="gest" title="Gestion des plateformes">
+  <input type="hidden" [routerLink]="'/gestion/pla'" routerLinkActive #gpla="routerLinkActive"/>
+  <section *ngIf="gpla.isActive">
+    <div>
+      <a role="button" title="Ajouter une plateforme">Ajouter une plateforme</a>
+    </div>
+    <div class="titre" title="Liste des plateformes">
+      <h1>Liste des Plateformes</h1>
+    </div>
+
+    <div class="cadre">
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="th2">Nom</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let plateform of plateformsList | async" title="Plateforme {{ plateform.namePlateform }}">
+        <tr>
+          <td>{{ plateform.namePlateform }}</td>
+          <td>
+            <a role="button" title="Modification de la plateforme {{ plateform.namePlateform }}">Modifier</a>
+            <a role="button" title="Suppression de la plateforme {{ plateform.namePlateform }}">Supprimer</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+
+<section class="gest" title="Gestion des racines">
+  <input type="hidden" [routerLink]="'/gestion/rac'" routerLinkActive #grac="routerLinkActive"/>
+  <section *ngIf="grac.isActive">
+    <div>
+      <a role="button" title="Ajouter une racine">Ajouter une racine</a>
+    </div>
+    <div class="titre" title="Liste des racines">
+      <h1>Liste des Racines</h1>
+    </div>
+
+    <div class="cadre">
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="th2">Nom</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let root of rootsList | async" title="Racine {{ root.nameRoot }}">
+        <tr>
+          <td>{{ root.nameRoot }}</td>
+          <td>
+            <a role="button" title="Modification de la racine {{ root.nameRoot }}">Modifier</a>
+            <a role="button" title="Suppression de la racine {{ root.nameRoot }}">Supprimer</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+</section>
+
+<section class="gest" title="Gestion des serveurs">
+  <input type="hidden" [routerLink]="'/gestion/sur'" routerLinkActive #gsur="routerLinkActive"/>
+  <section *ngIf="gsur.isActive">
+    <div>
+      <a role="button" title="Ajouter un serveur">Ajouter un serveur</a>
+    </div>
+    <div class="titre" title="Liste des serveurs">
+      <h1>Liste des Serveurs</h1>
+    </div>
+
+    <div class="cadre">
+      <table class="table">
+        <thead>
+        <tr>
+          <th class="th2">Nom</th>
+          <th></th>
+        </tr>
+        </thead>
+
+        <tbody *ngFor="let server of serversList | async" title="Serveur {{ server.nameServer }}">
+        <tr>
+          <td>{{ server.nameServer }}</td>
+          <td>
+            <a role="button" title="Modification du serveur {{ server.nameServer }}">Modifier</a>
+            <a role="button" title="Suppression du serveur {{ server.nameServer }}">Supprimer</a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
 </section>

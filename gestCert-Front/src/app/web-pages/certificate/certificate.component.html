@@ -25,6 +25,10 @@
 
 </section>
 
+
+
+
+
 <section id="certif">
 
   <div id="titre">
@@ -91,7 +95,13 @@
 
         <tbody>
         <tr>
-          <td>{{ editedCertificate.passwordCertificate }}</td>
+          <td>
+            <p-dialog [(visible)]="display" [contentStyle]="{'background-color': '#D9EAF4'}">
+              <p-header>Mot de Passe du certificat {{ editedCertificate.nameCertificate }} :</p-header>
+              {{ editedCertificate.passwordCertificate }}
+            </p-dialog>
+            <a role="button" (click)="showDialog()">Afficher</a>
+          </td>
           <td>{{ editedCertificate.dateIssue }}</td>
           <td></td>
         </tr>

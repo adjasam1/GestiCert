@@ -1,4 +1,4 @@
-import {Profile} from './profile';
+/*import {Profile} from './profile';
 import {Department} from './department';
 import {Application} from './application';
 
@@ -15,4 +15,4 @@ export class User {
               public profile: Profile,
               public department: Department,
               public applications: Application[]) {}
-}
+}*/

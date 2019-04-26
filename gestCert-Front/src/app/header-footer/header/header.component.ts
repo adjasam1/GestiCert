@@ -4,7 +4,7 @@ import {UserDataService} from '../../service/user-data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import {Profile} from '../../model/profile';
-import {User} from '../../model/user';
+import {AppUser} from '../../model/appUser';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +15,7 @@ export class HeaderComponent implements OnInit {
 
   profilesList: BehaviorSubject<Profile[]>;
   idProfile: number;
-  editedUser: User[];
+  editedUser: AppUser[];
 
   constructor(private profileDataService: ProfileDataService,
               private userDataService: UserDataService,

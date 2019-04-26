@@ -63,9 +63,17 @@ public class Server implements Serializable
 
 	public Server()
 	{
-		
 	}
 	
+	
+	
+	public Server(@Size(max = 50) @NotNull String nameServer) {
+		super();
+		this.nameServer = nameServer;
+	}
+
+
+
 	public Server(Integer idServer, @Size(max = 50) @NotNull String nameServer, List<Certificate> certificates)
 	{
 		super();

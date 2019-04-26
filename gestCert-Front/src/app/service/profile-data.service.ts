@@ -10,7 +10,7 @@ import {map} from 'rxjs/operators';
 export class ProfileDataService {
 
   /**
-   * liste des profils de l'application
+   * liste des profils des utilisateurs de l'application
    */
 
   private availableProfiles: Profile[];

@@ -83,11 +83,12 @@ public class Application implements Serializable
 
 	//@JsonIgnore
 	@ManyToMany(mappedBy = "applications")
-	private List<User> users;
+	private List<AppUser> users;
 	
 	@JsonIgnore
-	@OneToMany(mappedBy = "application", fetch = FetchType.EAGER, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+	@OneToMany(mappedBy = "application", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
 	private List<Certificate> certificates;
+	// fetch = FetchType.EAGER
 	
 	/**
 	 * constructeurs de la classe dont un vide par defaut
@@ -96,11 +97,28 @@ public class Application implements Serializable
 	public Application() {
 		
 	}
+	
+	
+
+	public Application(Integer idApplication) {
+		super();
+		this.idApplication = idApplication;
+	}
+
+
+
+	public Application(Integer idApplication, @Size(min = 3, max = 3) @NotNull String codeCCX) {
+		super();
+		this.idApplication = idApplication;
+		this.codeCCX = codeCCX;
+	}
+
+
 
 	public Application(Integer idApplication, @Size(min = 3, max = 3) @NotNull String codeCCX,
 			@Size(max = 50) @NotNull String nameApplication, @Size(max = 50) String nameClient,
 			@Size(max = 50) String firstNameClient, @Size(max = 50) String managementClient,
-			@Size(min = 10, max = 10) String phoneClient, String eMailClient, List<User> users,
+			@Size(min = 10, max = 10) String phoneClient, String eMailClient, List<AppUser> users,
 			List<Certificate> certificates)
 	{
 		super();
@@ -114,6 +132,36 @@ public class Application implements Serializable
 		this.eMailClient = eMailClient;
 		this.users = users;
 		this.certificates = certificates;
+	}
+
+	public Application(@Size(min = 3, max = 3) @NotNull String codeCCX, @Size(max = 50) @NotNull String nameApplication,
+			@Size(max = 50) String nameClient, @Size(max = 50) String firstNameClient,
+			@Size(max = 50) String managementClient, @Size(min = 10, max = 10) String phoneClient, String eMailClient) {
+		super();
+		this.codeCCX = codeCCX;
+		this.nameApplication = nameApplication;
+		this.nameClient = nameClient;
+		this.firstNameClient = firstNameClient;
+		this.managementClient = managementClient;
+		this.phoneClient = phoneClient;
+		this.eMailClient = eMailClient;
+	}
+	
+	
+
+	public Application(Integer idApplication, @Size(min = 3, max = 3) @NotNull String codeCCX,
+			@Size(max = 50) @NotNull String nameApplication, @Size(max = 50) String nameClient,
+			@Size(max = 50) String firstNameClient, @Size(max = 50) String managementClient,
+			@Size(min = 10, max = 10) String phoneClient, String eMailClient) {
+		super();
+		this.idApplication = idApplication;
+		this.codeCCX = codeCCX;
+		this.nameApplication = nameApplication;
+		this.nameClient = nameClient;
+		this.firstNameClient = firstNameClient;
+		this.managementClient = managementClient;
+		this.phoneClient = phoneClient;
+		this.eMailClient = eMailClient;
 	}
 
 	/**
@@ -202,12 +250,12 @@ public class Application implements Serializable
 		this.eMailClient = eMailClient;
 	}
 
-	public List<User> getUsers()
+	public List<AppUser> getUsers()
 	{
 		return users;
 	}
 
-	public void setUsers(List<User> users)
+	public void setUsers(List<AppUser> users)
 	{
 		this.users = users;
 	}

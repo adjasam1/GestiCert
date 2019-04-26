@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
-import {User} from '../../model/user';
 import {Profile} from '../../model/profile';
 import {Department} from '../../model/department';
 import {Application} from '../../model/application';
@@ -9,6 +8,7 @@ import {UserDataService} from '../../service/user-data.service';
 import {DepartmentDataService} from '../../service/department-data.service';
 import {ApplicationDataService} from '../../service/application-data.service';
 import {ActivatedRoute, Router} from '@angular/router';
+import {AppUser} from '../../model/appUser';
 
 @Component({
   selector: 'app-profile',
@@ -18,9 +18,9 @@ import {ActivatedRoute, Router} from '@angular/router';
 
 export class ProfileComponent implements OnInit {
 
-  usersList: BehaviorSubject<User[]>;
+  usersList: BehaviorSubject<AppUser[]>;
   idUser: number;
-  editedUser: User = new User(null, '', '', '', '', '', '', '', null, null, null);
+  editedUser: AppUser = new AppUser(null, '', '', '', '', '', '', '', null, null, null);
 
   profilesList: BehaviorSubject<Profile[]>;
   departmentsList: BehaviorSubject<Department[]>;

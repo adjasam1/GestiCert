@@ -1,8 +1,8 @@
 import {StatusDemand} from './statusDemand';
 import {TypeDemand} from './typeDemand';
-import {User} from './user';
 import {Application} from './application';
 import {Certificate} from './certificate';
+import {AppUser} from './appUser';
 
 export class Demand {
 
@@ -15,7 +15,7 @@ export class Demand {
               public remarkRoot: string,
               public statusDemand: StatusDemand,
               public typeDemand: TypeDemand,
-              public user: User,
+              public user: AppUser,
               public application: Application,
               public certificate: Certificate) {}
 

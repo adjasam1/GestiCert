@@ -14,7 +14,8 @@ export class LoginService {
 
   userRoles: BehaviorSubject<string[]> = new BehaviorSubject([]);
 
-  constructor(private httpClient: HttpClient, private router: Router) {
+  constructor(private httpClient: HttpClient,
+              private router: Router) {
     this.getUserRoles();
   }
 
@@ -23,16 +24,15 @@ export class LoginService {
   }
 
   signIn(user: AppUser) {
-    this.httpClient.post<JsonWebToken>(environment.apiUrl + 'user/sign-in', user).subscribe(
+    this.httpClient.post<JsonWebToken>(environment.apiUrl + 'utilisateur/sign-in', user).subscribe(
       token => {
         sessionStorage.setItem(environment.accessToken, token.token);
 
         this.getUserRoles();
 
-        this.router.navigate(['authe']);
+/*        this.router.navigate(['/accueil/1']); */
       },
-      error => alert('Username et/ou Mot de passe incorrecte(s)'));
-        // console.log('Error while login'));
+ /*     error => alert('Identifiant RH et/ou Mot de passe manquant(s) ou incorrecte(s)')); */)
   }
 
   signOut() {

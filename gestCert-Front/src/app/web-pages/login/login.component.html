@@ -2,35 +2,39 @@
   <title>Login - GestiCert</title>
 </head>
 
-<form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
-  <mat-card class="login-card">
-    <mat-card-header>
-      <mat-card-title>Login</mat-card-title>
-    </mat-card-header>
-    <mat-card-content>
-      <div class="row">
-        <div class="col">
-          <mat-form-field>
-            <input matInput placeholder="Username" formControlName="username">
-            <mat-error *ngIf="loginForm.controls['username'].hasError('required')">
-              Le username est <strong>obligatoire</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
+<section id="authentification" title="Formulaire d'authentification">
+  <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+  <div>
+    <h1>Authentification requise</h1>
+    <h2>* Champs obligatoire</h2>
+  </div>
+
+
+      <div class="example-container" title="Champ pour l'identifiant RH">
+              <mat-form-field>
+                <input matInput placeholder="Identifiant RH *" formControlName="idRHUser">
+                <mat-error *ngIf="loginForm.controls['idRHUser'].hasError('required')">
+                  L'identifiant RH est <strong>obligatoire</strong>
+                </mat-error>
+              </mat-form-field>
       </div>
-      <div class="row">
-        <div class="col">
-          <mat-form-field>
-            <input matInput type="password" placeholder="Mot de passe" formControlName="password">
-            <mat-error *ngIf="loginForm.controls['password'].hasError('required')">
-              Le mot de passe est <strong>obligatoire</strong>
-            </mat-error>
-          </mat-form-field>
-        </div>
+        <div class="example-container" title="Champ pour le mot de passe">
+              <mat-form-field>
+                <input matInput type="password" placeholder="Mot de passe *" [type]="hide ? 'password' : 'text'" formControlName="passwordUser">
+                <button mat-icon-button matSuffix (click)="hide = !hide">
+                  <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+                <mat-error *ngIf="loginForm.controls['passwordUser'].hasError('required')">
+                  Le mot de passe est <strong>obligatoire</strong>
+                </mat-error>
+              </mat-form-field>
+            </div>
+      <div id="connexion" title="Bouton pour se connecter">
+        <a role="button" value="connexion" (click)="onSubmit()">connexion</a>
       </div>
-    </mat-card-content>
-    <mat-card-actions>
-      <button mat-raised-button color="primary" type="submit">Se connecter</button>
-    </mat-card-actions>
-  </mat-card>
-</form>
+
+    </form>
+
+</section>
+
+

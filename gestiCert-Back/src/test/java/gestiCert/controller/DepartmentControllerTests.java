@@ -24,6 +24,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
 import gestiCert.service.AddressAlternativeService;
+import gestiCert.service.AppUserService;
 import gestiCert.service.ApplicationService;
 import gestiCert.service.CertificateService;
 import gestiCert.service.DemandService;
@@ -34,7 +35,6 @@ import gestiCert.service.RootService;
 import gestiCert.service.ServerService;
 import gestiCert.service.StatusDemandService;
 import gestiCert.service.TypeDemandService;
-import gestiCert.service.UserService;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -47,7 +47,7 @@ public class DepartmentControllerTests {
 	MockMvc mockMvc;
 	
 	@MockBean
-	private UserService userServ;
+	private AppUserService userServ;
 	
 	@MockBean
 	private AddressAlternativeService addressAlternativeServ;

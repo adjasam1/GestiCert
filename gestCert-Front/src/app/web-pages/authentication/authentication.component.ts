@@ -3,9 +3,9 @@ import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material';
 import {Profile} from '../../model/profile';
-import {User} from '../../model/user';
 import {ProfileDataService} from '../../service/profile-data.service';
 import {UserDataService} from '../../service/user-data.service';
+import {AppUser} from '../../model/appUser';
 
 
 @Component({
@@ -25,8 +25,8 @@ export class AuthenticationComponent implements OnInit {
   profilesList: BehaviorSubject<Profile[]>;
   idProfile: number;
   editedProfile: Profile;
-  usersList: BehaviorSubject<User[]>;
-  editedUser: User[];
+  usersList: BehaviorSubject<AppUser[]>;
+  editedUser: AppUser[];
 
 //  displayedColumns: string[] = ['profileId', 'profileType', 'detail'];
 //  dataSource = new MatTableDataSource<Profile>();
@@ -43,6 +43,8 @@ export class AuthenticationComponent implements OnInit {
   ngOnInit() {
     this.profilesList = this.profileDataService.availableProfiles$;
 
+    this.usersList = this.userDataService.availableUsers$;
+
     this.idProfile = +this.route.snapshot.params.id;
     this.getUser();
 
@@ -51,9 +53,6 @@ export class AuthenticationComponent implements OnInit {
 //    this.profileDataService.getProfile().subscribe(Profiles => {
 //      this.dataSource = new MatTableDataSource<Profile>(Profiles);
 //    });
-
-    this.usersList = this.userDataService.availableUsers$;
-
 //    this.userDataService.getUser().subscribe(Users => {
 //      this.dataSource2 = new MatTableDataSource<User>(Users);
 //    });
@@ -61,16 +60,17 @@ export class AuthenticationComponent implements OnInit {
 
   connexion(): void {
     for (const user of this.editedUser) {
-      if ((this.userIdRH === user.idRHUser) && (this.userPassword === user.passwordUser)) {
+      if ((this.userIdRH === user.idRHUser) && (this.userPassword === user.idRHUser)) {
         console.log(user);
         this.userIdUrl = user.idUser;
-        this.userIdProfileUrl = user.profile.idProfile;
       }
-    }
-    if ((this.userIdUrl === undefined) || (this.userIdProfileUrl === undefined)) {
-      alert('Identifiant RH et/ou Mot de passe incorrecte(s) ou manquants');
-    } else {
-      this.router.navigate(['/accueil/' + this.userIdUrl]);
+      if ((this.userIdUrl === undefined)) {
+        alert('Identifiant RH et/ou Mot de passe manquant(s)');
+      } else if ((this.userIdRH !== user.idRHUser) || (this.userPassword !== user.idRHUser)) {
+        alert('Identifiant RH et/ou Mot de passe incorrecte(s)');
+      } else {
+        this.router.navigate(['/accueil/' + this.userIdUrl]);
+      }
     }
   }
 
@@ -81,7 +81,7 @@ export class AuthenticationComponent implements OnInit {
 
 // getProfile(): void {}
 
-  /*getUserByProfile(): void {
+/*  getUserByProfile(): void {
     this.userDataService.getUser().subscribe(users => this.userDataService = users.filter(({  })))
   }*/
 

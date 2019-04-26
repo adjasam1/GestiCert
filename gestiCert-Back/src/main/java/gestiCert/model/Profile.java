@@ -56,7 +56,7 @@ public class Profile implements Serializable
 
 	@JsonIgnore
 	@OneToMany(mappedBy = "profile")
-	private List<User> users;
+	private List<AppUser> users;
 	
 	/**
 	 * constructeurs de la classe dont un vide par defaut
@@ -66,9 +66,28 @@ public class Profile implements Serializable
 	{
 		
 	}
+	
 
-	public Profile(Integer idProfile, @Size(max = 50) @NotNull String typeProfile, List<User> users)
-	{
+	
+	
+	public Profile(@Size(max = 50) @NotNull String typeProfile) {
+		super();
+		this.typeProfile = typeProfile;
+	}
+
+
+
+
+	public Profile(Integer idProfile, @Size(max = 50) @NotNull String typeProfile) {
+		super();
+		this.idProfile = idProfile;
+		this.typeProfile = typeProfile;
+	}
+
+
+
+
+	public Profile(Integer idProfile, @Size(max = 50) @NotNull String typeProfile, List<AppUser> users) {
 		super();
 		this.idProfile = idProfile;
 		this.typeProfile = typeProfile;
@@ -80,35 +99,57 @@ public class Profile implements Serializable
 	 * 
 	 * @return valeur correspondant au get ou set
 	 */
-	
-	public Integer getIdProfile()
-	{
+
+
+
+	public Integer getIdProfile() {
 		return idProfile;
 	}
 
-	public void setIdProfile(Integer idProfile)
-	{
+
+
+
+	public void setIdProfile(Integer idProfile) {
 		this.idProfile = idProfile;
 	}
 
-	public String getTypeProfile()
-	{
+
+
+
+	public String getTypeProfile() {
 		return typeProfile;
 	}
 
-	public void setTypeProfile(String typeProfile)
-	{
+
+
+
+	public void setTypeProfile(String typeProfile) {
 		this.typeProfile = typeProfile;
 	}
 
-	public List<User> getUsers()
-	{
+
+
+
+	public List<AppUser> getUsers() {
 		return users;
 	}
 
-	public void setUsers(List<User> users)
-	{
+
+
+
+	public void setUsers(List<AppUser> users) {
 		this.users = users;
 	}
+
+
+
+
+	
+
+	
+
+
+	
+	
 
 }

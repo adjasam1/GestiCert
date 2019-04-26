@@ -88,7 +88,7 @@ public class Demand implements Serializable
 	
 	@OneToOne
 	@JoinColumn(name = "id_utilisateur", referencedColumnName = "id_utilisateur")
-	private User user;
+	private AppUser user;
 	
 	@OneToOne
 	@JoinColumn(name = "id_application", referencedColumnName = "id_application")
@@ -109,7 +109,7 @@ public class Demand implements Serializable
 
 	public Demand(Integer idDemand, @NotNull Date dateDemand, Date dateCreationDesired,
 			Date dateTransmission, String eMailReferent, String descriptionContext, String remarkRoot,
-			StatusDemand statusDemand, TypeDemand typeDemand, User user, Application application,
+			StatusDemand statusDemand, TypeDemand typeDemand, AppUser user, Application application,
 			Certificate certificate)
 	{
 		super();
@@ -223,12 +223,12 @@ public class Demand implements Serializable
 		this.typeDemand = typeDemand;
 	}
 
-	public User getUser()
+	public AppUser getUser()
 	{
 		return user;
 	}
 
-	public void setUser(User user)
+	public void setUser(AppUser user)
 	{
 		this.user = user;
 	}

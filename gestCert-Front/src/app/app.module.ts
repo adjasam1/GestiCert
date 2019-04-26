@@ -32,19 +32,20 @@ import {DevGuard} from './jwt-security/guards/dev.guard';
 import {ServiceGuard} from './jwt-security/guards/service.guard';
 import {AdminGuard} from './jwt-security/guards/admin.guard';
 import {JwtInterceptor} from './jwt-security/http-interceptor/jwt.interceptor';
-import {AuthenticationComponent} from './web-pages/authentication/authentication.component';
 import {HomeComponent} from './web-pages/home/home.component';
 import {ProfileComponent} from './web-pages/profile/profile.component';
+import {AuthenticationComponent} from './web-pages/authentication/authentication.component';
+import {DialogModule} from 'primeng/dialog';
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     FooterComponent,
-    AuthenticationComponent,
     ContactComponent,
     SiteComponent,
     AccessibiliteComponent,
+    AuthenticationComponent,
     HomeComponent,
     ProfileComponent,
     CertificateComponent,
@@ -74,7 +75,8 @@ import {ProfileComponent} from './web-pages/profile/profile.component';
     MatListModule,
     MatSelectModule,
     MatRadioModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    DialogModule
   ],
   providers: [DevGuard, ServiceGuard, AdminGuard,
     {

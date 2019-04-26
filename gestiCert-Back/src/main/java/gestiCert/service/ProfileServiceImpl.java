@@ -53,22 +53,22 @@ public class ProfileServiceImpl implements ProfileService
 	public ResponseEntity<?> getAllProfiles()
 	{
 		
-		List<Profile> listProfils = null;
+		List<Profile> listProfiles = null;
 		
 		try
 		{
-			listProfils = profileRepo.findAll();
+			listProfiles = profileRepo.findAll();
 		} catch (Exception e)
 		{
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
 		}
 		
-		if (listProfils == null)
+		if (listProfiles == null)
 		{
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		
-		return ResponseEntity.status(HttpStatus.OK).body(listProfils);
+		return ResponseEntity.status(HttpStatus.OK).body(listProfiles);
 	}
 
 	/**
@@ -143,7 +143,7 @@ public class ProfileServiceImpl implements ProfileService
 		String typeProfile = profile.getTypeProfile();
 		if ((typeProfile == null) || typeProfile.isEmpty())
 		{
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Type du profil non renseigné");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Type de profil non renseigné");
 		}
 		
 		try {

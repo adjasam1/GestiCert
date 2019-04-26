@@ -46,8 +46,7 @@ public class ProfileController
 	 * @param profileServ
 	 */
 	
-	public ProfileController(ProfileService profileServ)
-	{
+	public ProfileController(ProfileService profileServ) {
 		super();
 		this.profileServ = profileServ;
 	}
@@ -68,6 +67,8 @@ public class ProfileController
 		return profileServ.getAllProfiles();
 	}
 	
+
+
 	@GetMapping("/id={idProfile}")
 	public ResponseEntity<?> getProfileById(@PathVariable Integer idProfile)
 	{

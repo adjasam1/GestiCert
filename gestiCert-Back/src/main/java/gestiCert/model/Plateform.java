@@ -65,6 +65,23 @@ public class Plateform implements Serializable
 	{
 		
 	}
+	
+	
+
+	public Plateform(@Size(max = 50) @NotNull String namePlateform) {
+		super();
+		this.namePlateform = namePlateform;
+	}
+
+
+
+	public Plateform(Integer idPlateform, @Size(max = 50) @NotNull String namePlateform) {
+		super();
+		this.idPlateform = idPlateform;
+		this.namePlateform = namePlateform;
+	}
+
+
 
 	public Plateform(Integer idPlateform, @Size(max = 50) @NotNull String namePlateform,
 			List<Certificate> certificates)

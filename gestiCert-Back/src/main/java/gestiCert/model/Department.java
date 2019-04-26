@@ -55,7 +55,7 @@ public class Department implements Serializable
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "department")
-	private List<User> users;
+	private List<AppUser> users;
 
 	/**
 	 * constructeurs de la classe dont un vide par defaut
@@ -77,7 +77,7 @@ public class Department implements Serializable
 		this.nameDepartment = nameDepartment;
 	}
 
-	public Department(Integer idDepartment, @Size(max = 50) @NotNull String nameDepartment, List<User> users)
+	public Department(Integer idDepartment, @Size(max = 50) @NotNull String nameDepartment, List<AppUser> users)
 	{
 		super();
 		this.idDepartment = idDepartment;
@@ -110,14 +110,16 @@ public class Department implements Serializable
 		this.nameDepartment = nameDepartment;
 	}
 
-	public List<User> getUsers()
+	public List<AppUser> getUsers()
 	{
 		return users;
 	}
 
-	public void setUsers(List<User> users)
+	public void setUsers(List<AppUser> users)
 	{
 		this.users = users;
 	}
+	
+	
 
 }

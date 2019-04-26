@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, TemplateRef} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Certificate} from '../../model/certificate';
@@ -14,6 +14,8 @@ export class CertificateComponent implements OnInit {
   certificatesList: BehaviorSubject<Certificate[]>;
   idCertificate: number;
   editedCertificate: Certificate;
+
+  display: boolean = false;
 
   constructor(private certificateDataService: CertificateDataService,
               private route: ActivatedRoute,
@@ -41,5 +43,13 @@ export class CertificateComponent implements OnInit {
   comeBack(): void {
     this.router.navigate([history.go(-1)]);
   }
+
+
+
+  showDialog() {
+    this.display = true;
+  }
+
+
 
 }
