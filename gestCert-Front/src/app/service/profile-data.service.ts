@@ -61,4 +61,31 @@ export class ProfileDataService {
     }
   }
 
+  public createProfile(newProfile: Profile) {
+    this.httpClient.post<Profile>('http://localhost:8080/api/profil/ajout', newProfile).subscribe(
+      createProfile => {
+        this.availableProfiles.push(createProfile);
+        this.availableProfiles$.next(this.availableProfiles);
+      }
+    );
+  }
+
+  public updateProfile(profile: Profile) {
+    this.httpClient.put<Profile>(`http://localhost:8080/api/profil/modifid=${profile.idProfile}`, profile).subscribe(
+      updateProfile => {
+        this.availableProfiles$.next(this.availableProfiles);
+      }
+    );
+  }
+
+  public deleteProfile(profile: Profile) {
+    this.httpClient.delete<Profile>(`http://localhost:8080/api/profil/supprid=${profile.idProfile}`).subscribe(
+      deleteProfile => {
+        const index1 = this.availableProfiles.indexOf(profile);
+        this.availableProfiles.splice(index1, 1);
+        this.availableProfiles$.next(this.availableProfiles);
+      }
+    );
+  }
+
 }

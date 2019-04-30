@@ -20,6 +20,9 @@ import {AppUser} from '../../model/appUser';
 })
 export class HomeComponent implements OnInit {
 
+  dateNow: Date = new Date();
+  alertDate: Date = new Date();
+
   usersList: BehaviorSubject<AppUser[]>;
   idUser: number;
   editedUser: AppUser;
@@ -62,6 +65,8 @@ export class HomeComponent implements OnInit {
 
     this.rootsList = this.rootDataService.availableRoots$;
     this.getRoot();
+
+    this.dateAlert();
   }
 
   deconnexion(): void {
@@ -84,5 +89,11 @@ export class HomeComponent implements OnInit {
 
   getRoot(): void {
     this.rootDataService.getRoot().subscribe(roots => this.editedRoot = roots);
+  }
+
+  dateAlert(): void {
+    const thisMonth = this.dateNow.getMonth();
+    const oneMonth = 1;
+    this.alertDate.setUTCMonth(thisMonth + oneMonth);
   }
 }

@@ -30,9 +30,9 @@ export class LoginService {
 
         this.getUserRoles();
 
-/*        this.router.navigate(['/accueil/1']); */
+/*        this.router.navigate(['/accueil/1']);*/
       },
- /*     error => alert('Identifiant RH et/ou Mot de passe manquant(s) ou incorrecte(s)')); */)
+/*      error => alert('Identifiant RH et/ou Mot de passe manquant(s) ou incorrecte(s)'));*/);
   }
 
   signOut() {

@@ -38,21 +38,34 @@
       <tr>
         <th id="th1">CCX</th>
         <th class="th2">Application</th>
-        <th class="th2">Environnement</th>
-        <th class="th2">Type</th>
+        <th class="th2" id="thEnv">Environnement</th>
+        <th class="th2" id="thType">Type</th>
         <th id="th3">Emission</th>
         <th id="th4">Validité</th>
       </tr>
       </thead>
 
       <tbody *ngFor="let certificate of certificatesList | async" title="Certificat {{ certificate.environment.nameEnvironment }} de l'application {{ certificate.application.nameApplication }}">
-      <tr *ngIf="certificate.application.users[0].idUser === editedUser.idUser" routerLink="/certificat/{{ certificate.idCertificate }}">
-        <td>{{ certificate.application.codeCCX }}</td>
+      <tr routerLink="/certificat/{{ certificate.idCertificate }}">
+        <!--  *ngIf="certificate.application.users[0].idUser === editedUser.idUser" -->
+        <td id="tdCCX">{{ certificate.application.codeCCX }}</td>
         <td>{{ certificate.application.nameApplication }}</td>
-        <td>{{ certificate.environment.nameEnvironment }}</td>
-        <td>{{ certificate.root.nameRoot }}</td>
-        <td>{{ certificate.dateIssue | date: 'dd/MM/yyyy' }}</td>
-        <td></td>
+        <td id="tdEnv">{{ certificate.environment.nameEnvironment }}</td>
+        <td id="tdType">{{ certificate.root.nameRoot }}</td>
+        <td id="tdDate">{{ certificate.dateIssue | date: 'dd/MM/yyyy' }}</td>
+        <td>
+          <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') > (alertDate | date: 'yyyy-MM-dd'))">
+            <img src="assets/icons/ok.svg">
+          </div>
+          <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
+            <img src="assets/icons/not_ok.svg">
+            <a role="button" routerLink="demande/{{certificate.idCertificate}}">Demander</a>
+          </div>
+          <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) && ((certificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
+            <img src="assets/icons/warning.svg">
+            <a role="button" routerLink="demande/{{certificate.idCertificate}}">Renouveller</a>
+          </div>
+        </td>
       </tr>
       </tbody>
     </table>

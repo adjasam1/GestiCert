@@ -1,0 +1,56 @@
+<div title="Administration des profils">
+   <h1>Administration des Profils</h1>
+ </div>
+
+ <div class="cadre">
+
+   <div>
+     <h1 *ngIf="editedProfile.idProfile; else elseBlock1"
+         title="Formulaire pour modifier le profil {{ editedProfile.typeProfile }}">Modification du profil <br>{{ editedProfile.typeProfile }}</h1>
+     <ng-template #elseBlock1 title="Formulaire pour ajouter un profil"><h1>Ajout d'un profil<br></h1></ng-template>
+     <h2>* Champs obligatoires</h2>
+     <form>
+       <div>
+         <div class="form-control">
+           <label for="typPro">Type de profil * : </label>
+           <input type="search" id="typPro" [(ngModel)]="editedProfile.typeProfile" name="typPro"
+                  placeholder="Entrez le type de profil"
+                  required title="Champ pour le type de profil">
+         </div>
+         <br>
+       </div>
+     </form>
+     <br>
+     <div id="modification">
+       <a *ngIf="editedProfile.idProfile" id="supprime" role="button" (click)="onDelete()" title="Supprimer le profil {{editedProfile.typeProfile}}">Supprimer</a>
+       <a id="sauvegarde" role="button" (click)="onSave()" title="Sauvegarder le profil {{editedProfile.typeProfile}}">Sauvegarder</a>
+     </div>
+   </div>
+
+
+   <div title="Liste des profils">
+     <h1>Liste des Profils</h1>
+
+   <table class="table">
+     <thead>
+     <tr>
+       <th>Type</th>
+       <th></th>
+     </tr>
+     </thead>
+
+     <tbody *ngFor="let profile of profilesList | async" title="{{ profile.typeProfile }}">
+     <tr>
+       <td>{{ profile.typeProfile }}</td>
+       <td>
+         <a role="button" routerLink="/gestion/pro/{{profile.idProfile}}"
+            title="Modification du profil {{ profile.typeProfile }}">Modifier/Supprimer</a>
+     <!--    <a role="button" (click)="onDelete()"
+            title="Suppression du profil {{ profile.typeProfile }}">Supprimer</a> -->
+       </td>
+     </tr>
+     </tbody>
+   </table>
+   </div>
+
+ </div>

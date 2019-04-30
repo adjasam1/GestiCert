@@ -1,26 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute, Router} from '@angular/router';
-import {ProfileDataService} from '../../service/profile-data.service';
-import {UserDataService} from '../../service/user-data.service';
-import {CertificateDataService} from '../../service/certificate-data.service';
-import {ApplicationDataService} from '../../service/application-data.service';
-import {EnvironmentDataService} from '../../service/environment-data.service';
-import {RootDataService} from '../../service/root-data.service';
 import {BehaviorSubject} from 'rxjs';
-import {Certificate} from '../../model/certificate';
-import {Application} from '../../model/application';
-import {Environment} from '../../model/environment';
-import {Root} from '../../model/root';
-import {Profile} from '../../model/profile';
-import {DepartmentDataService} from '../../service/department-data.service';
-import {Department} from '../../model/department';
-import {PlateformDataService} from '../../service/plateform-data.service';
-import {Plateform} from '../../model/plateform';
-import {ServerDataService} from '../../service/server-data.service';
-import {Server} from '../../model/server';
-import {AppUser} from '../../model/appUser';
+import {AppUser} from '../../../model/appUser';
+import {Profile} from '../../../model/profile';
+import {Department} from '../../../model/department';
+import {Application} from '../../../model/application';
+import {Certificate} from '../../../model/certificate';
+import {Environment} from '../../../model/environment';
+import {Root} from '../../../model/root';
+import {Plateform} from '../../../model/plateform';
+import {Server} from '../../../model/server';
+import {UserDataService} from '../../../service/user-data.service';
+import {ProfileDataService} from '../../../service/profile-data.service';
+import {DepartmentDataService} from '../../../service/department-data.service';
+import {EnvironmentDataService} from '../../../service/environment-data.service';
+import {PlateformDataService} from '../../../service/plateform-data.service';
+import {RootDataService} from '../../../service/root-data.service';
+import {ServerDataService} from '../../../service/server-data.service';
+import {CertificateDataService} from '../../../service/certificate-data.service';
+import {ApplicationDataService} from '../../../service/application-data.service';
 
-@Component({
+@Component ({
   selector: 'app-management',
   templateUrl: './management.component.html',
   styleUrls: ['./management.component.scss']

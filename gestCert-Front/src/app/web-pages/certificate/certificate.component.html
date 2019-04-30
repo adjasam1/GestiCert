@@ -1,5 +1,7 @@
 <head>
-  <title>Certificat {{ editedCertificate.environment.nameEnvironment }} {{ editedCertificate.application.nameApplication }} - GestiCert</title>
+  <title>
+    Certificat {{ editedCertificate.environment.nameEnvironment }} {{ editedCertificate.application.nameApplication }} -
+    GestiCert</title>
 </head>
 
 
@@ -9,12 +11,13 @@
     <div id="name">
       <p>
         <img src="assets/icons/certificat.svg">
-        Certificat {{ editedCertificate.environment.nameEnvironment }} de l'application {{ editedCertificate.application.nameApplication }}
+        Certificat {{ editedCertificate.environment.nameEnvironment }} de
+        l'application {{ editedCertificate.application.nameApplication }}
       </p>
     </div>
   </div>
 
-  <div id="deconnexion">
+  <div id="deconnex">
     <div>
       <a role="button" (click)="deconnexion()">Déconnexion</a>
     </div>
@@ -24,9 +27,6 @@
   </div>
 
 </section>
-
-
-
 
 
 <section id="certif">
@@ -46,9 +46,7 @@
           <th class="th2">Type</th>
           <th class="th2">Plateforme</th>
           <th id="th2">Serveur(s)</th>
-          <th id="th3">
-            <mat-icon>open_in_browser</mat-icon>
-          </th>
+          <th id="th3"><img src="assets/icons/download.svg"></th>
         </tr>
         </thead>
 
@@ -57,8 +55,12 @@
           <td>{{ editedCertificate.nameCertificate }}</td>
           <td>{{ editedCertificate.root.nameRoot }}</td>
           <td>{{ editedCertificate.plateform.namePlateform }}</td>
-          <td>{{ editedCertificate.server }}</td>
-          <td></td>
+          <td>{{ editedCertificate.server[0].nameServer }}</td>
+          <td>
+            <a>
+              <img src="assets/icons/certificat.svg">
+            </a>
+          </td>
         </tr>
         </tbody>
       </table>
@@ -75,8 +77,15 @@
 
         <tbody>
         <tr>
-          <td>{{ editedCertificate.linkAddressPrincipal }}</td>
-          <td></td>
+          <td><a role="link" href="https://{{editedCertificate.linkAddressPrincipal}}"
+                 target="_blank">{{ editedCertificate.linkAddressPrincipal }}</a></td>
+          <td>
+            <a *ngFor="let addr of editedAddressAlternative" role="link" href="https://{{addr.linkAddressAlternative}}" target="_blank">
+       <!--       <span *ngIf="editedCertificate.idCertificate === addr.certificate.idCertificate"> -->
+                {{addr.linkAddressAlternative}}<br>
+       <!--       </span> -->
+            </a>
+          </td>
           <!--{{ editedCertificate.addressAlternative[0].linkAddressAlternative }}-->
         </tr>
         </tbody>
@@ -102,7 +111,7 @@
             </p-dialog>
             <a role="button" (click)="showDialog()">Afficher</a>
           </td>
-          <td>{{ editedCertificate.dateIssue }}</td>
+          <td>{{ editedCertificate.dateIssue | date: 'dd/MM/yyyy'}}</td>
           <td></td>
         </tr>
         </tbody>

@@ -9,7 +9,7 @@
   margin-left: 10px;
 }
 
-#deconnexion
+#deconnex
 {
   margin: 20px;
 }
@@ -45,34 +45,38 @@ h1
 {
   text-align: center;
   font-size: 20px;
-  padding: 10px;
 }
 
 #cadre1
 {
-  border: 2px solid #706F6F;
+  border: 2px solid black;
   border-radius: 5px;
   margin: 0 auto 80px auto;
   background-color: #9CC6DA;
-  width: 70%;
+  width: 80%;
 }
 
 #cadreA
 {
-  width: 98%;
+  width: 99%;
 }
 
 table
 {
   border-collapse: collapse;
-  border: 2px solid #706F6F;
-  margin: 1%;
+  border: 2px solid black;
+  margin: 0.5%;
   text-align: left;
+}
+
+#table1
+{
+  width: 99%;
 }
 
 #table2, #table3
 {
-  width: 98%;
+  width: 99%;
   margin-top: 2%;
 }
 
@@ -125,14 +129,14 @@ thead
 */
 
 th, td {
-  border: 1px solid #003DA5;
+  border: 1px solid black;
   padding: 5px;
-  height: 20px;
 }
 
 td
 {
   background-color: white;
+  padding: 10px;
 }
 
 td a[role="button"]
@@ -147,4 +151,10 @@ td a[role="button"]:hover
   background-color: #003DA5;
   border: 1px solid #FFCB05;
   margin: 2px;
+}
+
+a[role="link"]:hover
+{
+  color: #003DA5;
+  text-decoration: underline;
 }

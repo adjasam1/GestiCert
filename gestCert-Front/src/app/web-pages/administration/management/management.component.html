@@ -5,7 +5,7 @@
 <section id="entete">
   <div id="user" title="Gestion de GestiCert">
     <p>
-      <img src="assets/icons/gestion-24px.svg">
+      <img src="assets/icons/gestion.svg">
       Administration de GestiCert
     </p>
   </div>
@@ -44,7 +44,7 @@
 
 <section class="gest" title="Gestion des utilisateurs">
   <input type="hidden" [routerLink]="'/gestion/uti'" routerLinkActive #guti="routerLinkActive"/>
-  <section *ngIf="guti.isActive">
+  <div *ngIf="guti.isActive">
     <div>
       <a role="button" title="Ajouter un utilisateur">Ajouter un utilisateur</a>
     </div>
@@ -79,95 +79,21 @@
         </tbody>
       </table>
     </div>
-  </section>
+  </div>
 </section>
 
 <section class="gest" title="Gestion des profils">
   <input type="hidden" [routerLink]="'/gestion/pro'" routerLinkActive #gpro="routerLinkActive"/>
-  <section *ngIf="gpro.isActive">
-    <div>
-      <a role="button" title="Ajouter un profil">Ajouter un profil</a>
-    </div>
-    <div class="titre" title="Liste des profils">
-      <h1>Liste des Profils</h1>
-    </div>
-
-    <div class="cadre">
-      <table class="table">
-        <thead>
-        <tr>
-          <th class="th2">Type</th>
-          <th></th>
-        </tr>
-        </thead>
-
-        <tbody *ngFor="let profile of profilesList | async" title="{{ profile.typeProfile }}">
-        <tr>
-          <td>{{ profile.typeProfile }}</td>
-          <td>
-            <a role="button" title="Modification du profil {{ profile.typeProfile }}">Modifier</a>
-            <a role="button" title="Suppression du profil {{ profile.typeProfile }}">Supprimer</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-  </section>
+  <div *ngIf="gpro.isActive">
+    <app-management-profile></app-management-profile>
+  </div>
 </section>
 
-<input type="hidden" [routerLink]="'/gestion/sce'" routerLinkActive #gsce="routerLinkActive"/>
-<section class="gest" title="Gestion des services" *ngIf="gsce.isActive">
 
-  <div class="titre" title="Administration des services">
-      <h1>Administration des Services</h1>
-    </div>
-
-    <div class="cadre">
-      <div class="titre" title="Liste des services">
-        <h1>Liste des Services</h1>
-      </div>
-      <table class="table">
-        <thead>
-        <tr>
-          <th class="th2">Nom</th>
-          <th></th>
-        </tr>
-        </thead>
-
-        <tbody *ngFor="let department of departmentsList | async" title="{{ department.nameDepartment }}">
-        <tr>
-          <td>{{ department.nameDepartment }}</td>
-          <td>
-            <a role="button" routerLink="/gestion/sce/{{department.idDepartment}}"
-               title="Modification du service {{ department.nameDepartment }}">Modifier</a>
-            <a role="button" title="Suppression du service {{ department.nameDepartment }}">Supprimer</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
-
-  <div class="cadre">
-      <h1 *ngIf="editedDepartment.idDepartment; else elseBlock1"
-          title="Formulaire pour modifier le service {{ editedDepartment.nameDepartment }}">Modification du service {{ editedDepartment.nameDepartment }}</h1>
-      <ng-template #elseBlock1 title="Formulaire pour ajouter un service"><h1>Ajout d'un service</h1></ng-template>
-      <h2>* Champs obligatoires</h2>
-      <form>
-        <div>
-          <div class="form-control">
-            <label for="nomsce">Nom du service * : </label>
-            <input type="search" id="nomsce" [(ngModel)]="editedDepartment.nameDepartment" name="nomsce"
-                   placeholder="Entrez le nom du service"
-                   required title="Champ pour le nom du service">
-          </div>
-          <br>
-        </div>
-      </form>
-      <br>
-      <div id="modification" title="Sauvegarder ce service">
-          <a id="sauvegarde" role="button" (click)="onSave()">Sauvegarder</a>
-
-      </div>
+<section class="gest" title="Gestion des services">
+  <input type="hidden" [routerLink]="'/gestion/sce'" routerLinkActive #gsce="routerLinkActive"/>
+  <div *ngIf="gsce.isActive">
+    <app-management-department></app-management-department>
   </div>
 </section>
 

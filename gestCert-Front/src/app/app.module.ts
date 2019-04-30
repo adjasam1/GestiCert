@@ -26,7 +26,6 @@ import {CommonModule} from '@angular/common';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {CertificateComponent} from './web-pages/certificate/certificate.component';
 import {LoginComponent} from './web-pages/login/login.component';
-import {ManagementComponent} from './web-pages/management/management.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import {DevGuard} from './jwt-security/guards/dev.guard';
 import {ServiceGuard} from './jwt-security/guards/service.guard';
@@ -36,6 +35,10 @@ import {HomeComponent} from './web-pages/home/home.component';
 import {ProfileComponent} from './web-pages/profile/profile.component';
 import {AuthenticationComponent} from './web-pages/authentication/authentication.component';
 import {DialogModule} from 'primeng/dialog';
+import { DemandComponent } from './web-pages/demand/demand.component';
+import {ManagementComponent} from './web-pages/administration/management/management.component';
+import {ManagementProfileComponent} from './web-pages/administration/management-profile/management-profile.component';
+import {ManagementDepartmentComponent} from './web-pages/administration/management-department/management-department.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +53,10 @@ import {DialogModule} from 'primeng/dialog';
     ProfileComponent,
     CertificateComponent,
     LoginComponent,
-    ManagementComponent
+    ManagementComponent,
+    DemandComponent,
+    ManagementProfileComponent,
+    ManagementDepartmentComponent
   ],
   imports: [
     BrowserModule,

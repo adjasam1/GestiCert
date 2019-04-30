@@ -1,0 +1,142 @@
+<head>
+  <title>
+    Certificat {{ editedCertificate.environment.nameEnvironment }} {{ editedCertificate.application.nameApplication }} -
+    GestiCert</title>
+</head>
+
+
+<section id="entete" *ngIf="editedCertificate">
+
+  <div id="user">
+    <div id="name">
+      <p>
+        <img src="assets/icons/certificat.svg">
+        Certificat {{ editedCertificate.environment.nameEnvironment }} de
+        l'application {{ editedCertificate.application.nameApplication }}
+      </p>
+    </div>
+  </div>
+
+  <div id="deconnex">
+    <div>
+      <a role="button" (click)="deconnexion()">Déconnexion</a>
+    </div>
+    <div>
+      <a role="button" (click)="comeBack()">Retour</a>
+    </div>
+  </div>
+
+</section>
+
+<section id="formulaire">
+  <h1 *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseBlock1">Demande du certificat SSL</h1>
+  <ng-template #elseBlock1><h1>Renouvellement du certificat SSL</h1></ng-template>
+  <h2>* Champs obligatoires</h2>
+  <form>
+    <h3>1. Identification de la demande</h3>
+    <div>
+      <div class="form-control">
+        <label for="department">Service du demandeur * : </label>
+        <select
+          name="department"
+          id="department"
+          class="form-control"
+          [(ngModel)]="editedUser.department.idDepartment" title="Champ pour le service du demandeur">
+          <option *ngFor="let department of departmentsList | async"
+                  [value]="department.idDepartment">{{ department.nameDepartment }}</option>
+        </select>
+      </div>
+      <br>
+      <div class="form-control">
+        <label for="nameUser">Nom du demandeur * : </label>
+        <input type="search" id="nameUser" [(ngModel)]="editedUser.nameUser" name="nameUser"
+               placeholder="Entrez le nom du demandeur" required title="Champ pour le nom du demandeur">
+      </div>
+      <br>
+      <div class="form-control">
+        <label for="firstNameUser">Prénom du demandeur * : </label>
+        <input type="search" id="firstNameUser" [(ngModel)]="editedUser.firstNameUser" name="firstNameUser" placeholder="Entrez le prénom du demandeur"
+                 required title="Champ pour le prénom du demandeur">
+      </div>
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="profile">Fonction du demandeur * : </label>
+      <select
+        name="profile"
+        id="profile"
+        class="form-control"
+        [(ngModel)]="editedUser.profile.idProfile" title="Champ pour la fonction du demandeur">
+        <option *ngFor="let profile of profilesList | async"
+                [value]="profile.idProfile">{{ profile.typeProfile }}</option>
+      </select>
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="phoneUser">Téléphone du demandeur : </label>
+      <input type="search" id="phoneUser" [(ngModel)]="editedUser.phoneUser" name="phoneUser" placeholder="Entrez le téléphone du demandeur"
+             required title="Champ pour le téléphone du demandeur">
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="emailUser">E-mail du demandeur * : </label>
+      <input type="search" id="emailUser" [(ngModel)]="editedUser.eMailUser" name="emailUser" placeholder="Entrez l'e-mail du demandeur"
+             required title="Champ pour l'e-mail du demandeur">
+    </div>
+    <br>
+    <div class="form-control">
+      <h4>Si le demandeur est un prestataire, le postier référent recevra les notifications d'expirations</h4>
+      <label for="emailReferent">E-mail du postier référent : </label>
+      <input type="search" id="emailReferent" name="emailReferent" placeholder="Entrez l'e-mail du référent"
+             required title="Champ pour l'e-mail du postier référent si le demandeur est un prestataire">
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="nameClient">Nom du client * : </label>
+      <input type="search" id="nameClient" [(ngModel)]="editedCertificate.application.nameClient" name="nameClient"
+             placeholder="Entrez le nom du client" required title="Champ pour le nom du client">
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="firstNameClient">Prénom du client * : </label>
+      <input type="search" id="firstNameClient" [(ngModel)]="editedCertificate.application.firstNameClient" name="firstNameClient"
+             placeholder="Entrez le prénom du client" required title="Champ pour le prénom du client">
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="managementClient">Direction du client * : </label>
+      <input type="search" id="managementClient" [(ngModel)]="editedCertificate.application.managementClient" name="managementClient"
+             placeholder="Entrez la direction du client" required title="Champ pour la direction du client">
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="phoneClient">Téléphone du client * : </label>
+      <input type="search" id="phoneClient" [(ngModel)]="editedCertificate.application.phoneClient" name="phoneClient"
+             placeholder="Entrez le téléphone du client" required title="Champ pour le téléphone du client">
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="eMailClient">E-mail du client * : </label>
+      <input type="search" id="eMailClient" [(ngModel)]="editedCertificate.application.eMailClient" name="eMailClient"
+             placeholder="Entrez l'e-mail du client" required title="Champ pour l'e-mail du client">
+    </div>
+    <br>
+    <div class="form-control">
+      <label for="desiredDate">Date de réalisation souhaitée * : </label>
+      <input type="date" id="desiredDate" name="desiredDate" required title="Champ pour la date de réalisation souhaitée">
+    </div>
+    <br>
+    <div id="conte" class="form-control">
+    <label for="context">Description du contexte : <br></label>
+      <textarea id="context" name="context" rows="2" cols="48" placeholder="Entrez la description du contexte de la demande" required title="Champ pour la description du contexte"></textarea>
+    </div>
+    <br>
+    <h3>2. Information sur la demande</h3>
+
+    <br>
+  </form>
+  <br>
+  <div id="modification" title="Transmettre la demande">
+    <a role="button" href="mailto:samuel.sabot@laposte.fr">Transmettre</a>
+  </div>
+</section>

@@ -46,11 +46,11 @@ export class LoginComponent implements OnInit {
     console.log('a : ' + appUser.idRHUser);
     console.log('b : ' + appUser.passwordUser);
     for (const user of this.editedUser) {
-/*      console.log('aa : ' + user.idRHUser);
+      console.log('aa : ' + user.idRHUser);
       console.log('bb : ' + user.passwordUser);
-      const ccc = jwt_decode(sessionStorage.getItem(user.passwordUser));
+ /*     const ccc = jwt_decode(sessionStorage.getItem(user.passwordUser));
       console.log('cc : ' + ccc);*/
-      if ((appUser.idRHUser === user.idRHUser)) {
+      if ((appUser.idRHUser === user.idRHUser) && (appUser.passwordUser === user.passwordUser)) {
         this.userIdRHUrl = user.idRHUser;
         this.userIdUrl = user.idUser;
       }

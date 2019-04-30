@@ -7,8 +7,9 @@ import {ContactComponent} from './header-footer/contact/contact.component';
 import {SiteComponent} from './header-footer/site/site.component';
 import {AccessibiliteComponent} from './header-footer/accessibilite/accessibilite.component';
 import {ProfileComponent} from './web-pages/profile/profile.component';
-import {ManagementComponent} from './web-pages/management/management.component';
 import {AuthenticationComponent} from './web-pages/authentication/authentication.component';
+import {DemandComponent} from './web-pages/demand/demand.component';
+import {ManagementComponent} from './web-pages/administration/management/management.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -17,6 +18,8 @@ const routes: Routes = [
   { path: 'gestion', component: ManagementComponent },
   { path: 'gestion/uti', component: ManagementComponent },
   { path: 'gestion/pro', component: ManagementComponent },
+  { path: 'gestion/pro/:id', component: ManagementComponent },
+  { path: 'gestion/pro/ajout', component: ManagementComponent },
   { path: 'gestion/sce', component: ManagementComponent },
   { path: 'gestion/sce/:id', component: ManagementComponent },
   { path: 'gestion/sce/ajout', component: ManagementComponent },
@@ -32,6 +35,7 @@ const routes: Routes = [
   { path: 'accessibilite', component: AccessibiliteComponent },
   { path: 'profil/:id', component: ProfileComponent },
   { path: 'profil/ajout', component: ProfileComponent },
+  { path: 'accueil/:id1/demande/:id2', component: DemandComponent },
   { path: '**', component: LoginComponent }
 ];
 

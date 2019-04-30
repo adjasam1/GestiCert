@@ -45,7 +45,6 @@ public class Profile implements Serializable
 	
 	@Column(name = "type", unique = true)
 	@Size(max = 50)
-	@NotNull
 	private String typeProfile;
 	
 	/**
@@ -70,6 +69,14 @@ public class Profile implements Serializable
 
 	
 	
+	public Profile(Integer idProfile) {
+		super();
+		this.idProfile = idProfile;
+	}
+
+
+
+
 	public Profile(@Size(max = 50) @NotNull String typeProfile) {
 		super();
 		this.typeProfile = typeProfile;

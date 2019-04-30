@@ -1,0 +1,53 @@
+<div class="titre" title="Administration des services">
+  <h1>Administration des Services</h1>
+</div>
+
+<div class="cadre">
+
+  <div>
+    <h1 *ngIf="editedDepartment.idDepartment; else elseBlock1"
+        title="Formulaire pour modifier le service {{ editedDepartment.nameDepartment }}">Modification du service <br>{{ editedDepartment.nameDepartment }}</h1>
+    <ng-template #elseBlock1 title="Formulaire pour ajouter un service"><h1>Ajout d'un service <br></h1></ng-template>
+    <h2>* Champs obligatoires</h2>
+    <form>
+      <div>
+        <div class="form-control">
+          <label for="nomsce">Nom du service * : </label>
+          <input type="search" id="nomsce" [(ngModel)]="editedDepartment.nameDepartment" name="nomsce"
+                 placeholder="Entrez le nom du service"
+                 required title="Champ pour le nom du service">
+        </div>
+        <br>
+      </div>
+    </form>
+    <br>
+    <div id="modification">
+      <a *ngIf="editedDepartment.idDepartment" id="supprime" role="button" (click)="onDelete()" title="Supprimer le service {{editedDepartment.nameDepartment}}">Supprimer</a>
+      <a id="sauvegarde" role="button" (click)="onSave()" title="Sauvegarder le service {{editedDepartment.nameDepartment}}">Sauvegarder</a>
+    </div>
+  </div>
+
+  <div title="Liste des services">
+    <h1>Liste des Services</h1>
+
+    <table class="table">
+      <thead>
+      <tr>
+        <th>Nom</th>
+        <th></th>
+      </tr>
+      </thead>
+
+      <tbody *ngFor="let department of departmentsList | async" title="{{ department.nameDepartment }}">
+      <tr>
+        <td>{{ department.nameDepartment }}</td>
+        <td>
+          <a role="button" routerLink="/gestion/sce/{{department.idDepartment}}"
+             title="Modification du service {{ department.nameDepartment }}">Modifier/Supprimer</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
