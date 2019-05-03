@@ -105,14 +105,14 @@
         <tbody>
         <tr>
           <td>
-            <p-dialog [(visible)]="display" [contentStyle]="{'background-color': '#D9EAF4'}">
+          <p-dialog [(visible)]="display" [contentStyle]="{'background-color': '#D9EAF4'}">
               <p-header>Mot de Passe du certificat {{ editedCertificate.nameCertificate }} :</p-header>
               {{ editedCertificate.passwordCertificate }}
             </p-dialog>
             <a role="button" (click)="showDialog()">Afficher</a>
           </td>
-          <td>{{ editedCertificate.dateIssue | date: 'dd/MM/yyyy'}}</td>
-          <td></td>
+          <td>{{ editedCertificate.dateIssue | date: 'dd/MM/yyyy' }}</td>
+          <td>{{ editedCertificate.dateEndValidity | date: 'dd/MM/yyyy' }}</td>
         </tr>
         </tbody>
       </table>

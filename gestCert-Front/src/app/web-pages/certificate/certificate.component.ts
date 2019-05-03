@@ -5,6 +5,7 @@ import {Certificate} from '../../model/certificate';
 import {CertificateDataService} from '../../service/certificate-data.service';
 import {AddressAlternativeDataService} from '../../service/address-alternative-data.service';
 import {AddressAlternative} from '../../model/addressAlternative';
+import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-certificate',
@@ -53,12 +54,8 @@ export class CertificateComponent implements OnInit {
     this.router.navigate([history.go(-1)]);
   }
 
-
-
   showDialog() {
     this.display = true;
   }
-
-
 
 }
