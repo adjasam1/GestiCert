@@ -20,7 +20,7 @@ export class ProfileComponent implements OnInit {
 
   usersList: BehaviorSubject<AppUser[]>;
   idUser: number;
-  editedUser: AppUser = new AppUser(null, '', '', '', '', '', '', '', null, null, null);
+  editedUser: AppUser = new AppUser(null, '', '', '', '', '', '', null, null, null, null);
 
   profilesList: BehaviorSubject<Profile[]>;
   departmentsList: BehaviorSubject<Department[]>;

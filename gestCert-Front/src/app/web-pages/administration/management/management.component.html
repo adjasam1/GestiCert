@@ -45,40 +45,7 @@
 <section class="gest" title="Gestion des utilisateurs">
   <input type="hidden" [routerLink]="'/gestion/uti'" routerLinkActive #guti="routerLinkActive"/>
   <div *ngIf="guti.isActive">
-    <div>
-      <a role="button" title="Ajouter un utilisateur">Ajouter un utilisateur</a>
-    </div>
-    <div class="titre" title="Liste des utilisateurs">
-      <h1>Liste des Utilisateurs</h1>
-    </div>
-
-    <div class="cadre">
-      <table class="table">
-        <thead>
-        <tr>
-          <th class="th2">IdRH</th>
-          <th class="th1">Nom</th>
-          <th class="th2">Prénom</th>
-          <th></th>
-        </tr>
-        </thead>
-
-        <tbody *ngFor="let user of usersList | async"
-               title="{{ user.idRHUser }} {{ user.nameUser }} {{ user.firstNameUser }}">
-        <tr>
-          <td>{{ user.idRHUser }}</td>
-          <td>{{ user.nameUser }}</td>
-          <td>{{ user.firstNameUser }}</td>
-          <td>
-            <a role="button"
-               title="Modification du compte de {{ user.idRHUser }} {{ user.nameUser }} {{ user.firstNameUser }}">Modifier</a>
-            <a role="button"
-               title="Suppression du compte de {{ user.idRHUser }} {{ user.nameUser }} {{ user.firstNameUser }}">Supprimer</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-management-user></app-management-user>
   </div>
 </section>
 
@@ -100,37 +67,7 @@
 <section class="gest" title="Gestion des applications">
   <input type="hidden" [routerLink]="'/gestion/app'" routerLinkActive #gapp="routerLinkActive"/>
   <section *ngIf="gapp.isActive">
-    <div>
-      <a role="button" title="Ajouter une application">Ajouter une application</a>
-    </div>
-    <div class="titre" title="Liste des applications">
-      <h1>Liste des Applications</h1>
-    </div>
-
-    <div class="cadre">
-      <table class="table">
-        <thead>
-        <tr>
-          <th>CCX</th>
-          <th class="th2">Nom</th>
-          <th></th>
-        </tr>
-        </thead>
-
-        <tbody *ngFor="let application of applicationsList | async"
-               title="Application {{ application.nameApplication }}">
-        <tr>
-          <td>{{ application.codeCCX }}</td>
-          <td>{{ application.nameApplication }}</td>
-          <td>
-            <a role="button" title="Attribution de l'application {{ application.nameApplication }}">Attribuer</a>
-            <a role="button" title="Modification de l'application {{ application.nameApplication }}">Modifier</a>
-            <a role="button" title="Suppression de l'application {{ application.nameApplication }}">Supprimer</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-management-application></app-management-application>
   </section>
 </section>
 

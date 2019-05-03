@@ -11,6 +11,7 @@ import {DepartmentDataService} from '../../service/department-data.service';
 import {ProfileDataService} from '../../service/profile-data.service';
 import {Demand} from '../../model/demand';
 import {DemandDataService} from '../../service/demand-data.service';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-demand',
@@ -73,6 +74,10 @@ export class DemandComponent implements OnInit {
     const thisMonth = this.dateNow.getMonth();
     const oneMonth = 1;
     this.alertDate.setUTCMonth(thisMonth + oneMonth);
+  }
+
+  valeur(form: NgForm) {
+    console.log(form.value);
   }
 
 }

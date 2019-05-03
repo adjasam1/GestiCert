@@ -47,7 +47,7 @@ export class UserDataService {
   /**
    * fonction qui permet de trouver un utilisateur grace a son id dans la liste des utilisateurs charges par l'application
    *
-   * @param userId
+   *  userId
    */
 
   public findUser(userId: number): Observable<AppUser> {
@@ -57,7 +57,7 @@ export class UserDataService {
       }
       return of(this.availableUsers.find(user => user.idUser === userId));
     } else {
-      return of(new AppUser(0, '', '', '', '', '', '', '', null, null, null));
+      return of(new AppUser(0, '', '', '', '', '', '', null, null, null, null));
     }
   }
 
@@ -73,6 +73,16 @@ export class UserDataService {
   public updateUser(user: AppUser) {
     this.httpClient.put<AppUser>(`http://localhost:8080/api/utilisateur/modifid=${user.idUser}`, user).subscribe(
       updateUser => {
+        this.availableUsers$.next(this.availableUsers);
+      }
+    );
+  }
+
+  public deleteUser(user: AppUser) {
+    this.httpClient.delete<AppUser>(`http://localhost:8080/api/utilisateur/supprid=${user.idUser}`).subscribe(
+      deleteUser => {
+        const index1 = this.availableUsers.indexOf(user);
+        this.availableUsers.splice(index1, 1);
         this.availableUsers$.next(this.availableUsers);
       }
     );

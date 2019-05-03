@@ -62,14 +62,14 @@ th, td {
   padding: 5px;
 }
 
-td a[role="button"], #sauvegarde[role="button"]
+td a[role="button"], #sauvegarde[role="button"], #supprime[role="button"]
 {
   background-color: #9CC6DA;
   border: 1px solid #003DA5;
   margin: 2px;
 }
 
-td a[role="button"]:hover, #sauvegarde[role="button"]:hover
+td a[role="button"]:hover, #sauvegarde[role="button"]:hover, #supprime[role="button"]:hover
 {
   background-color: #003DA5;
   border: 1px solid #FFCB05;

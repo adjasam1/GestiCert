@@ -48,7 +48,7 @@ export class DepartmentDataService {
   /**
    * fonction qui permet de trouver un service grace a son id dans la liste des services charges par l'application
    *
-   * @param departmentId
+   *  departmentId
    */
 
   public findDepartment(departmentId: number): Observable<Department> {

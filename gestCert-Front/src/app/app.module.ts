@@ -39,6 +39,12 @@ import { DemandComponent } from './web-pages/demand/demand.component';
 import {ManagementComponent} from './web-pages/administration/management/management.component';
 import {ManagementProfileComponent} from './web-pages/administration/management-profile/management-profile.component';
 import {ManagementDepartmentComponent} from './web-pages/administration/management-department/management-department.component';
+import { ManagementUserComponent } from './web-pages/administration/management-user/management-user.component';
+import { AdministrationEnvironmentComponent } from './web-pages/administration/management-environment/administration-environment.component';
+import { AdministrationCertificateComponent } from './web-pages/administration/management-certificate/administration-certificate.component';
+import { ManagementApplicationComponent } from './web-pages/administration/management-application/management-application.component';
+import {TableModule} from 'primeng/table';
+import {MessageModule, MessagesModule} from 'primeng/primeng';
 
 @NgModule({
   declarations: [
@@ -56,7 +62,11 @@ import {ManagementDepartmentComponent} from './web-pages/administration/manageme
     ManagementComponent,
     DemandComponent,
     ManagementProfileComponent,
-    ManagementDepartmentComponent
+    ManagementDepartmentComponent,
+    ManagementUserComponent,
+    ManagementApplicationComponent,
+    AdministrationEnvironmentComponent,
+    AdministrationCertificateComponent
   ],
   imports: [
     BrowserModule,
@@ -82,7 +92,10 @@ import {ManagementDepartmentComponent} from './web-pages/administration/manageme
     MatSelectModule,
     MatRadioModule,
     ReactiveFormsModule,
-    DialogModule
+    DialogModule,
+    TableModule,
+    MessagesModule,
+    MessageModule
   ],
   providers: [DevGuard, ServiceGuard, AdminGuard,
     {
