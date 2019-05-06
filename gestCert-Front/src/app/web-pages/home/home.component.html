@@ -2,24 +2,12 @@
   <title>Acceuil - GestiCert</title>
 </head>
 
-<section id="entete">
+<app-info-user></app-info-user>
 
-  <div id="user" title="{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
-    <div id="name">
-      <p>
-        <img src="assets/icons/personne.svg">
-        {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}
-      </p>
-    </div>
+<section id="entete">
     <div id="profile" title="Accès à mon profil">
       <a role="button" routerLink="/profil/{{ editedUser.idUser }}">Mon Profil</a>
     </div>
-  </div>
-
-  <div id="deconnexion" title="Déconnexion de l'application">
-    <a role="button" (click)="deconnexion()">Déconnexion</a>
-  </div>
-
 </section>
 
 <section id="management" *ngIf="editedUser.profile.idProfile === 3" title="Accès à la gestion de l'application">
@@ -63,7 +51,7 @@
           </div>
           <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) && ((certificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
             <img src="assets/icons/warning.svg">
-            <a role="button" routerLink="demande/{{certificate.idCertificate}}">Renouveller</a>
+            <a role="button" routerLink="demande/{{certificate.idCertificate}}">Renouveler</a>
           </div>
         </td>
       </tr>

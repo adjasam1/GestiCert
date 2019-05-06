@@ -6,6 +6,17 @@ h1
 
 h2
 {
+  text-align: left;
+  font-size: 15px;
+}
+
+#espace
+{
+  margin-top: 40px;
+}
+
+h3
+{
   font-size: 10px;
   color: brown;
   text-align: center;
@@ -25,20 +36,37 @@ h2
 #table
 {
   border-collapse: collapse;
-  border: 2px solid black;
-  margin: 0 5% 5% 10%;
-  width: 85%;
+  border: 1px solid black;
+  border-radius: 5px;
+  width: 100%;
   text-align: left;
 }
 
-.filtre
+#autour
+{
+  margin: 2.5%;
+}
+
+.cadre2
+{
+  border: 1px solid black;
+  border-radius: 5px;
+  margin-bottom: 2.5%;
+}
+
+#liste .cadre2
 {
   width: 100%;
 }
 
-#bouton
+#filtre1, #filtre2
 {
-  width: 42%;
+  margin: 2.5%;
+}
+
+#filtre1 input, #filtre2 input
+{
+  width: 100%;
 }
 
 thead
@@ -72,14 +100,14 @@ th, td {
   padding: 5px;
 }
 
-td a[role="button"], #sauvegarde[role="button"], #supprime[role="button"]
+td a[role="button"], .choix[role="button"]
 {
   background-color: #9CC6DA;
   border: 1px solid #003DA5;
   margin: 2px;
 }
 
-td a[role="button"]:hover, #sauvegarde[role="button"]:hover, #supprime[role="button"]:hover
+td a[role="button"]:hover, #choix[role="button"]:hover
 {
   background-color: #003DA5;
   border: 1px solid #FFCB05;
@@ -88,19 +116,26 @@ td a[role="button"]:hover, #sauvegarde[role="button"]:hover, #supprime[role="but
 
 #modification
 {
-  margin: 0 20px 20px 0;
   text-align: right;
+  margin: 0 2.5% 2.5% 0;
 }
 
 form
 {
-  text-align: left;
-  padding: 0 20px;
+  text-align: right;
+  margin: 2.5% 5% 0 2.5%;
+}
+
+#liste
+{
+  width: 100%;
+  padding: 0 20px 20px 20px;
 }
 
 #formulaire
 {
-  margin-left: 2%;
+  width: 100%;
+  padding: 0 10px;
 }
 
 a

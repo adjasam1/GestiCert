@@ -1,0 +1,22 @@
+<section id="entete">
+
+  <div title="{{ editedCertificate.environment.nameEnvironment }} {{ editedCertificate.application.nameApplication }}">
+    <div id="name">
+      <p>
+        <img src="assets/icons/certificate.svg">&nbsp;
+        Certificat <strong>{{ editedCertificate.environment.nameEnvironment }}</strong>
+        de l'application <strong>{{ editedCertificate.application.nameApplication }}</strong>
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <div id="deconnexion" title="Déconnexion de l'application">
+      <a role="button" (click)="deconnect()">Déconnexion</a>
+    </div>
+    <div id="retour" title="Retour à l'accueil">
+      <a role="button" (click)="comeBack()">Retour</a>
+    </div>
+  </div>
+
+</section>

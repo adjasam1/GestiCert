@@ -74,72 +74,14 @@
 <section class="gest" title="Gestion des certificats">
   <input type="hidden" [routerLink]="'/gestion/cer'" routerLinkActive #gcer="routerLinkActive"/>
   <section *ngIf="gcer.isActive">
-    <div>
-      <a role="button" title="Ajouter un certificat">Ajouter un certificat</a>
-    </div>
-    <div class="titre" title="Liste des certificats">
-      <h1>Liste des Certificats</h1>
-    </div>
-
-    <div class="cadre">
-      <table class="table1">
-        <thead>
-        <tr>
-          <th class="th1">Nom Certificat</th>
-          <th class="th2">Nom Application</th>
-          <th class="th2"></th>
-        </tr>
-        </thead>
-
-        <tbody *ngFor="let certificate of certificatesList | async"
-               title="Certificat {{ certificate.environment.nameEnvironment }} de l'application {{ certificate.application.nameApplication }}">
-        <tr>
-          <td>{{ certificate.nameCertificate }}</td>
-          <td>{{ certificate.application.nameApplication }}</td>
-          <td>
-            <a role="button"
-               title="Modification du  certificat {{ certificate.environment.nameEnvironment }} de l'application {{ certificate.application.nameApplication }}">Modifier</a>
-            <a role="button"
-               title="Modification du  certificat {{ certificate.environment.nameEnvironment }} de l'application {{ certificate.application.nameApplication }}">Supprimer</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-management-certificate></app-management-certificate>
   </section>
 </section>
 
 <section class="gest" title="Gestion des environnements">
   <input type="hidden" [routerLink]="'/gestion/env'" routerLinkActive #genv="routerLinkActive"/>
   <section *ngIf="genv.isActive">
-    <div>
-      <a role="button" title="Ajouter un environnement">Ajouter un environnement</a>
-    </div>
-    <div class="titre" title="Liste des environnements">
-      <h1>Liste des Environnements</h1>
-    </div>
-
-    <div class="cadre">
-      <table class="table">
-        <thead>
-        <tr>
-          <th class="th2">Nom</th>
-          <th></th>
-        </tr>
-        </thead>
-
-        <tbody *ngFor="let environment of environmentsList | async"
-               title="Environnement {{ environment.nameEnvironment }}">
-        <tr>
-          <td>{{ environment.nameEnvironment }}</td>
-          <td>
-            <a role="button" title="Modification de l'environnement {{ environment.nameEnvironment }}">Modifier</a>
-            <a role="button" title="Suppression de l'environnement {{ environment.nameEnvironment }}">Supprimer</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-management-environment></app-management-environment>
   </section>
 </section>
 

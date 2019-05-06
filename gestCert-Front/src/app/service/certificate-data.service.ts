@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Certificate} from '../model/certificate';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {Application} from '../model/application';
 
 @Injectable({
   providedIn: 'root'
@@ -47,7 +48,7 @@ export class CertificateDataService {
   /**
    * fonction qui permet de trouver un certificat grace a son id dans la liste des utilisateurs charges par l'application
    *
-   * @param certificateId
+   * certificateId
    */
 
   public findCertificate(certificateId: number): Observable<Certificate> {
@@ -61,5 +62,39 @@ export class CertificateDataService {
       return of(new Certificate(0, '', '', '', '',
         null, null, null, null, null, null, null, null));
     }
+  }
+
+
+
+  public createCertificate(newCertificate: Certificate) {
+    this.httpClient.post<Certificate>('http://localhost:8080/api/certificate/ajout', newCertificate).subscribe(
+      createCertificate => {
+        this.availableCertificates.push(createCertificate);
+        this.availableCertificates$.next(this.availableCertificates);
+      }
+    );
+  }
+
+  public updateCertificate(certificate: Certificate) {
+    this.httpClient.put<Certificate>(`http://localhost:8080/api/certificate/modifid=${certificate.idCertificate}`, certificate).subscribe(
+      updateCertificate => {
+        this.availableCertificates$.next(this.availableCertificates);
+      }
+    );
+  }
+
+  public deleteCertificate(certificate: Certificate) {
+    this.httpClient.delete<Certificate>(`http://localhost:8080/api/certificate/supprid=${certificate.idCertificate}`).subscribe(
+      deleteCertificate => {
+        const index1 = this.availableCertificates.indexOf(certificate);
+        this.availableCertificates.splice(index1, 1);
+        this.availableCertificates$.next(this.availableCertificates);
+      }
+    );
+  }
+
+  /* TEST PRIMENG */
+  public getCertificatePrimeNg() {
+    return this.httpClient.get('http://localhost:8080/api/certificat').toPromise().then(data =>  {return data;} );
   }
 }

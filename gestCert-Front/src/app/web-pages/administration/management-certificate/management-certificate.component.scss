@@ -16,19 +16,29 @@ h2
 {
   border: 2px solid black;
   border-radius: 5px;
-  margin: 0 18% 10% 18%;
+  margin: 0 10% 10% 10%;
   background-color: #D9EAF4;
   display: inline-flex;
-  width: 64%;
+  width: 80%;
 }
 
-table
+#table
 {
   border-collapse: collapse;
   border: 2px solid black;
-  margin: 0 5% 5% 5%;
-  width: 100%;
+  margin: 0 5% 5% 10%;
+  width: 85%;
   text-align: left;
+}
+
+.filtre
+{
+  width: 100%;
+}
+
+#bouton
+{
+  width: 42%;
 }
 
 thead
@@ -84,13 +94,13 @@ td a[role="button"]:hover, #sauvegarde[role="button"]:hover, #supprime[role="but
 
 form
 {
-  text-align: right;
+  text-align: left;
   padding: 0 20px;
 }
 
-select, input
+#formulaire
 {
-  width: 60%;
+  margin-left: 2%;
 }
 
 a
@@ -110,9 +120,4 @@ a[role="button"]:hover {
   color: #FFCB05;
   background-color: #003DA5;
   text-decoration: none;
-}
-
-#2
-{
-  margin-left: 500px;
 }

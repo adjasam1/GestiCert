@@ -4,7 +4,7 @@
 
 <div class="cadre">
 
-  <div>
+  <div id="1">
     <h1 *ngIf="editedUser.idUser; else elseBlock1"
         title="Formulaire pour modifier l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Modification de l'utilisateur <br>{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}</h1>
     <ng-template #elseBlock1 title="Formulaire pour ajouter un utilisateur"><h1>Ajout d'un utilisateur <br></h1></ng-template>
@@ -12,15 +12,26 @@
     <form>
       <div>
         <div class="form-control">
-          <label for="idRH">Identifiant RH * : </label>
+          <label for="idRH">Identifiant * : </label>
           <input type="search" id="idRH" [(ngModel)]="editedUser.idRHUser" name="idRH" placeholder="Entrez l'identifiant RH"
                  required title="Champ pour l'identifiant RH">
         </div>
         <br>
-        <div class="form-control">
+        <div class="form-control" *ngIf="editedUser.idUser === 0">
           <label for="mdp">Mot de passe * : </label>
           <input type="search" id="mdp" [(ngModel)]="editedUser.passwordUser" name="mdp"
                  placeholder="Entrez le mot de passe" required title="Champ pour le mot de passe">
+        </div>
+        <br *ngIf="editedUser.idUser === 0">
+        <div class="form-control">
+          <label for="nom">Nom * : </label>
+          <input type="search" id="nom" [(ngModel)]="editedUser.nameUser" name="nom" placeholder="Entrez le nom" required title="Champ pour le nom">
+        </div>
+        <br>
+        <div class="form-control">
+          <label for="prenom">Prénom * : </label>
+          <input type="search" id="prenom" [(ngModel)]="editedUser.firstNameUser" name="prenom" placeholder="Entrez le prénom"
+                 required title="Champ pour le prénom">
         </div>
         <br>
         <div class="form-control" *ngIf="editedUser.idUser">
@@ -36,17 +47,6 @@
         </div>
         <br *ngIf="editedUser.idUser">
       </div>
-      <div class="form-control">
-        <label for="nom">Nom * : </label>
-        <input type="search" id="nom" [(ngModel)]="editedUser.nameUser" name="nom" placeholder="Entrez le nom" required title="Champ pour le nom">
-      </div>
-      <br>
-      <div class="form-control">
-        <label for="prenom">Prénom * : </label>
-        <input type="search" id="prenom" [(ngModel)]="editedUser.firstNameUser" name="prenom" placeholder="Entrez le prénom"
-               required title="Champ pour le prénom">
-      </div>
-      <br>
       <div class="form-control" *ngIf="editedUser.idUser">
         <label for="userService">Service * : </label>
         <select
@@ -77,12 +77,8 @@
     </div>
   </div>
 
-  <div title="Liste des utilisateurs">
+  <div id="2" title="Liste des utilisateurs">
     <h1>Liste des Utilisateurs</h1>
-
-    <form>
-      <input type="text" name="search" [(ngModel)]="searchText" autocomplete="off" placeholder="Filtrer">
-    </form>
 
     <table class="table">
       <thead>

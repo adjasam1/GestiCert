@@ -5,7 +5,6 @@ import {Certificate} from '../../model/certificate';
 import {CertificateDataService} from '../../service/certificate-data.service';
 import {AddressAlternativeDataService} from '../../service/address-alternative-data.service';
 import {AddressAlternative} from '../../model/addressAlternative';
-import {MessageService} from 'primeng/api';
 
 @Component({
   selector: 'app-certificate',
@@ -21,7 +20,7 @@ export class CertificateComponent implements OnInit {
   addressAlternativesList: BehaviorSubject<AddressAlternative[]>;
   editedAddressAlternative: AddressAlternative[];
 
-  display: boolean = false;
+  display = false;
 
   constructor(private certificateDataService: CertificateDataService,
               private addressAlternativeDataService: AddressAlternativeDataService,
@@ -34,7 +33,7 @@ export class CertificateComponent implements OnInit {
 
     this.idCertificate = +this.route.snapshot.params.id;
 
-    this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificat => this.editedCertificate = certificat);
+    this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificate => this.editedCertificate = certificate);
 
     console.log('certificatesList : ' + this.certificatesList);
     console.log('editedCertificate : ' + this.editedCertificate);
@@ -44,18 +43,9 @@ export class CertificateComponent implements OnInit {
       this.editedAddressAlternative = addressAlternatives);
   }
 
-  deconnexion(): void {
-    if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
-      this.router.navigate(['']);
-    }
-  }
-
-  comeBack(): void {
-    this.router.navigate([history.go(-1)]);
-  }
-
   showDialog() {
     this.display = true;
+    alert('Mot de passe du certificat ' + this.editedCertificate.nameCertificate + ' :\n' + this.editedCertificate.passwordCertificate);
   }
 
 }

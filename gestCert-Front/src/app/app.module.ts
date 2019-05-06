@@ -40,11 +40,13 @@ import {ManagementComponent} from './web-pages/administration/management/managem
 import {ManagementProfileComponent} from './web-pages/administration/management-profile/management-profile.component';
 import {ManagementDepartmentComponent} from './web-pages/administration/management-department/management-department.component';
 import { ManagementUserComponent } from './web-pages/administration/management-user/management-user.component';
-import { AdministrationEnvironmentComponent } from './web-pages/administration/management-environment/administration-environment.component';
-import { AdministrationCertificateComponent } from './web-pages/administration/management-certificate/administration-certificate.component';
+import { ManagementEnvironmentComponent } from './web-pages/administration/management-environment/management-environment.component';
+import { ManagementCertificateComponent } from './web-pages/administration/management-certificate/management-certificate.component';
 import { ManagementApplicationComponent } from './web-pages/administration/management-application/management-application.component';
 import {TableModule} from 'primeng/table';
 import {MessageModule, MessagesModule} from 'primeng/primeng';
+import { InfoCertificateComponent } from './web-pages/header-page/info-certificate/info-certificate.component';
+import {InfoUserComponent} from './web-pages/header-page/info-user/info-user.component';
 
 @NgModule({
   declarations: [
@@ -65,8 +67,10 @@ import {MessageModule, MessagesModule} from 'primeng/primeng';
     ManagementDepartmentComponent,
     ManagementUserComponent,
     ManagementApplicationComponent,
-    AdministrationEnvironmentComponent,
-    AdministrationCertificateComponent
+    ManagementEnvironmentComponent,
+    ManagementCertificateComponent,
+    InfoUserComponent,
+    InfoCertificateComponent
   ],
   imports: [
     BrowserModule,

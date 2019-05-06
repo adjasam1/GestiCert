@@ -7,56 +7,67 @@
 <div class="cadre">
 
   <div id="formulaire">
-    <h1 *ngIf="editedApplication.idApplication; else elseBlock1"
-        title="Formulaire pour modifier l'application {{ editedApplication.nameApplication }}">Modification de l'application <br>{{ editedApplication.nameApplication }}</h1>
-    <ng-template #elseBlock1 title="Formulaire pour ajouter une application"><h1>Ajout d'une application <br></h1></ng-template>
-    <h2>* Champs obligatoires</h2>
+    <h2 *ngIf="editedApplication.idApplication; else elseBlock1"
+        title="Formulaire pour modifier l'application {{ editedApplication.nameApplication }}">
+      Application {{ editedApplication.nameApplication }}
+    </h2>
+    <ng-template #elseBlock1 title="Formulaire pour ajouter une application">
+      <h2>Ajout d'une application <br></h2>
+    </ng-template>
+    <div class="cadre2">
+    <h3>* Champs obligatoires</h3>
     <form>
       <div>
         <div class="form-control">
           <label for="ccx">Code CCX * : </label>
-          <input type="search" id="ccx" [(ngModel)]="editedApplication.codeCCX" name="ccx"
-                 placeholder="Entrez le code CCX"
-                 required title="Champ pour le code CCX de l'application">
+            <span *ngFor="let col of cols" [ngSwitch]="col.field">
+              <input *ngSwitchCase="'codeCCX'" placeholder="Entrez le code CCX"
+                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     type="search" id="ccx" [(ngModel)]="editedApplication.codeCCX" name="ccx"
+                     title="Champ pour le code CCX de l'application" required>
+            </span>
         </div>
         <br>
         <div class="form-control">
-          <label for="nameApp">Nom de l'application * : </label>
-          <input type="search" id="nameApp" [(ngModel)]="editedApplication.nameApplication" name="nameApp"
-                 placeholder="Entrez nom d'application"
-                 required title="Champ pour le nom de l'application">
+          <label for="nameApp">Nom Application * : </label>
+          <span *ngFor="let col of cols" [ngSwitch]="col.field">
+              <input *ngSwitchCase="'nameApplication'" placeholder="Entrez nom d'application"
+                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     type="search" id="nameApp" [(ngModel)]="editedApplication.nameApplication" name="nameApp"
+                     title="Champ pour le nom de l'application" required>
+            </span>
         </div>
         <br>
         <div class="form-control">
-          <label for="nameClient">Nom du client * : </label>
+          <label for="nameClient">Nom Client * : </label>
           <input type="search" id="nameClient" [(ngModel)]="editedApplication.nameClient" name="nameClient"
                  placeholder="Entrez le nom du client"
                  required title="Champ pour le nom du client de l'application">
         </div>
         <br>
         <div class="form-control">
-          <label for="firstNameClient">Nom du client * : </label>
+          <label for="firstNameClient">Prénom Client * : </label>
           <input type="search" id="firstNameClient" [(ngModel)]="editedApplication.firstNameClient" name="firstNameClient"
                  placeholder="Entrez le prénom du client"
                  required title="Champ pour le prénom du client de l'application">
         </div>
         <br>
         <div class="form-control">
-          <label for="managementClient">Direction du client * : </label>
+          <label for="managementClient">Direction Client * : </label>
           <input type="search" id="managementClient" [(ngModel)]="editedApplication.managementClient" name="managementClient"
                  placeholder="Entrez direction du client"
                  required title="Champ pour la direction du client de l'application">
         </div>
         <br>
         <div class="form-control">
-          <label for="phoneClient">Téléphone du client * : </label>
+          <label for="phoneClient">Téléphone Client * : </label>
           <input type="search" id="phoneClient" [(ngModel)]="editedApplication.phoneClient" name="phoneClient"
                  placeholder="Entrez téléphone du client"
                  required title="Champ pour le téléphone du client de l'application">
         </div>
         <br>
         <div class="form-control">
-          <label for="mailClient">E-Mail du client * : </label>
+          <label for="mailClient">E-Mail Client * : </label>
           <input type="search" id="mailClient" [(ngModel)]="editedApplication.eMailClient" name="mailClient"
                  placeholder="Entrez le e-mail du client"
                  required title="Champ pour le e-mail du client de l'application">
@@ -66,46 +77,49 @@
     </form>
     <br>
     <div id="modification">
-      <a *ngIf="editedApplication.idApplication" id="supprime" role="button" (click)="onDelete()" title="Supprimer le service {{editedApplication.nameApplication}}">Supprimer</a>
-      <a id="sauvegarde" role="button" (click)="onSave()" title="Sauvegarder le service {{editedApplication.nameApplication}}">Sauvegarder</a>
+      <a *ngIf="editedApplication.idApplication" class="choix" role="button" routerLink="/gestion/app" title="Annuler les modifications sur l'application {{editedApplication.nameApplication}}">Annuler</a>
+      <a *ngIf="editedApplication.idApplication" class="choix" role="button" (click)="onDelete()" title="Supprimer l'application {{editedApplication.nameApplication}}">Supprimer</a>
+      <a class="choix" role="button" (click)="onSave()" title="Sauvegarder l'application {{editedApplication.nameApplication}}">Sauvegarder</a>
+    </div>
     </div>
   </div>
 
-  <div title="Liste des applications">
-    <h1>Liste des Applications</h1>
+  <div id="liste" title="Liste des applications">
+
+    <h2>Recherche</h2>
+
+    <div class="cadre2">
+      <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
+        <div id="filtre1">
+          <input *ngSwitchCase="'codeCCX'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le code CCX de l'application">
+        </div>
+        <div id="filtre2">
+          <input *ngSwitchCase="'nameApplication'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom de l'application">
+        </div>
+      </div>
+    </div>
+
+    <h2 id="espace">Liste des Applications</h2>
 
     <div id="table">
-      <p-table #dt [columns]="cols" [value]="applications" [paginator]="true" [rows]="3" dataKey="codeCCX" [resizableColumns]="true" [reorderableColumns]="true"
+      <div id="autour">
+      <p-table #dt [columns]="cols" [value]="applications" [paginator]="true" [rows]="4" dataKey="codeCCX" [resizableColumns]="true" [reorderableColumns]="true"
         selectionMode="single" [(selection)]="selectedApplication" stateStorage="session" stateKey="statedemo-session">
-        <ng-template ptemplate="caption">
-          <div style="text-align: right">
-            <i class="fa fa-search" style="margin: 4px 4px 0 0"></i>
-            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width: auto">
-          </div>
-        </ng-template>
         <ng-template pTemplate="header" let-columns>
           <tr>
-            <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+            <th id="th1" *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
               {{col.header}}
               <p-sortIcon [field]="col.field"></p-sortIcon>
-            </th>
-            <th id="bouton"></th>
-          </tr>
-          <tr>
-            <th *ngFor="let col of columns" [ngSwitch]="col.field">
-              <input class="filtre" *ngSwitchCase="'codeCCX'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Entrez CCX">
-              <input class="filtre" *ngSwitchCase="'nameApplication'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Entrez Nom">
             </th>
           </tr>
         </ng-template>
         <ng-template pTemplate="body" let-application let-columns="columns">
-          <tr [pSelectableRow]="application">
+          <tr routerLink="/gestion/app/{{application.idApplication}}" [pSelectableRow]="application">
             <td *ngFor="let col of columns">{{ application[col.field] }}</td>
-            <td><a role="button" routerLink="/gestion/app/{{application.idApplication}}"
-                   title="Modification du service {{ application.idApplication }}">Modifier/Supprimer</a></td>
           </tr>
         </ng-template>
       </p-table>
+      </div>
     </div>
   </div>
 

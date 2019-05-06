@@ -1,70 +1,41 @@
-#entete
-{
-  display: flex;
-  justify-content: space-between;
-}
-
-#name
-{
-  margin-left: 10px;
-}
-
+// BOUTONS
 #profile, #management
 {
-  margin-left: 10px;
   margin-bottom: 5px;
 }
-
-#deconnexion
-{
-  margin: 20px;
-}
-
-button
-{
-  margin-left: 5px;
-}
-
 a
 {
   padding: 2px 5px;
+  color: black;
+  border-radius: 4px;
+  margin-left: 15px;
 }
 
 a[role="button"] {
   color: black;
   text-decoration: none;
+}
+
+a[role="button"]:hover {
+  color: #FFCB05;
+  background-color: #3071a9;
   border-radius: 4px;
-}
-
-a[role="button"]:hover, [role="button"].bouton:focus {
-  color: yellow;
-  background-color: #3071a9;
   text-decoration: none;
-}
-
-a[role="button"]:active {
-  color: #fff;
-  background-color: #3071a9;
 }
 
 td a[role="button"], #sauvegarde[role="button"]
 {
   background-color: #9CC6DA;
   border: 1px solid #003DA5;
-  margin: 2px;
 }
 
 td a[role="button"]:hover, #sauvegarde[role="button"]:hover
 {
+  color: #FFCB05;
   background-color: #003DA5;
   border: 1px solid #FFCB05;
-  margin: 2px;
 }
 
-img
-{
-  padding-right: 5px;
-}
 
 h1
 {

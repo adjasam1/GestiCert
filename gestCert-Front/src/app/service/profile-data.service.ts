@@ -47,7 +47,7 @@ export class ProfileDataService {
   /**
    * fonction qui permet de trouver un profil grace a son id dans la liste des profils charges par l'application
    *
-   * @param profileId
+   * profileId
    */
 
   public findProfile(profileId: number): Observable<Profile> {

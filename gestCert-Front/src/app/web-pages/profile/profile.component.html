@@ -2,22 +2,7 @@
   <title>Mon profil - GestiCert</title>
 </head>
 
-<section id="entete">
-  <div id="user" title="{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
-    <p *ngIf="editedUser.idUser">
-      <img src="assets/icons/personne.svg">
-      {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}
-    </p>
-  </div>
-  <div id="bouton">
-    <div id="deconnexion" title="Déconnexion de l'application">
-      <a role="button" (click)="deconnexion()">Déconnexion</a>
-    </div>
-    <div title="Retour à l'accueil">
-      <a role="button" (click)="comeBack()">Retour</a>
-    </div>
-  </div>
-</section>
+<app-info-user></app-info-user>
 
 <section id="formulaire">
   <h1 *ngIf="editedUser.idUser; else elseBlock1">Mon Profil</h1>
@@ -33,7 +18,7 @@
       <br>
       <div class="form-control">
         <label for="mdp">Mot de passe * : </label>
-        <input type="search" id="mdp" [(ngModel)]="editedUser.passwordUser" name="mdp"
+        <input type="password" id="mdp" [(ngModel)]="editedUser.passwordUser" name="mdp"
                placeholder="Entrez le mot de passe" required title="Champ pour le mot de passe">
       </div>
       <br>
@@ -85,35 +70,6 @@
       <input type="search" id="email" [(ngModel)]="editedUser.eMailUser" name="email" placeholder="Entrez le mail" title="Champ pour le mail">
     </div>
     <br>
-    <!--   <div class="form-control">
-         <label for="userApplication">Application(s) : </label>
-         <input type="text" id="userApplication" [(ngModel)]="editedUser.eMailUser" name="userApplication" placeholder="Entrez le mail">
-       </div>
-       <br>-->
- <!--   <div class="form-control">
-      <table>
-        <thead>
-        <tr>
-          <th>Application(s) :</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr *ngFor="let application of applicationsList | async">
-          <td *ngIf="editedUser.applications[0].idApplication === application.idApplication">{{ application.nameApplication }}</td>
-        </tr>
-        </tbody>
-      </table>
-      <label for="applic">Application(s) :</label>
-      <input id="plus" type="image" src="assets\icons\plus.png" (click)="addField()">
-      <select
-        name="applic"
-        id="applic"
-        class="form-control">-->
-        <!-- [(ngModel)]="editedUser.applications[0].idApplication" -->
- <!--       <option *ngFor="let application of applicationsList | async"
-                [value]="application.idApplication">{{ application.nameApplication }}</option>
-      </select>
-    </div>-->
   </form>
   <br>
   <div id="modification" title="Sauvegarder les modifications sur mon profil">

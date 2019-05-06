@@ -51,6 +51,7 @@ export class HomeComponent implements OnInit {
     this.usersList = this.userDataService.availableUsers$;
 
     this.idUser = +this.route.snapshot.params.id;
+    console.log('idUser : ' + this.idUser);
 
     this.userDataService.findUser(this.idUser).subscribe(user => this.editedUser = user);
 
@@ -67,12 +68,6 @@ export class HomeComponent implements OnInit {
     this.getRoot();
 
     this.dateAlert();
-  }
-
-  deconnexion(): void {
-      if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
-        this.router.navigate(['']);
-      }
   }
 
   getCertificate(): void {

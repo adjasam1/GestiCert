@@ -13,13 +13,13 @@ export class ApplicationDataService {
    * liste des applications de l'application
    */
 
-  private availableapplications: Application[];
+  private availableApplications: Application[];
 
   /**
    * liste observable rendu visible partout dans application
    */
 
-  availableApplications$: BehaviorSubject<Application[]> = new BehaviorSubject(this.availableapplications);
+  availableApplications$: BehaviorSubject<Application[]> = new BehaviorSubject(this.availableApplications);
 
   constructor(private httpClient: HttpClient) {}
 
@@ -39,17 +39,18 @@ export class ApplicationDataService {
   public publishApplication() {
     this.getApplication().subscribe(
       applicationList => {
-        this.availableapplications = applicationList;
-        this.availableApplications$.next(this.availableapplications);
+        this.availableApplications = applicationList;
+        this.availableApplications$.next(this.availableApplications);
       });
   }
 
   public findApplication(applicationId: number): Observable<Application> {
     if (applicationId) {
-      if (!this.availableapplications) {
-        return this.getApplication().pipe(map(applications => applications.find(application => application.idApplication === applicationId)));
+      if (!this.availableApplications) {
+        return this.getApplication().pipe(map(applications => applications.find(application =>
+          application.idApplication === applicationId)));
       }
-      return of(this.availableapplications.find(application => application.idApplication === applicationId));
+      return of(this.availableApplications.find(application => application.idApplication === applicationId));
     } else {
       return of(new Application(0, '', '', '', '', '', '', '', null, null));
     }
@@ -58,8 +59,8 @@ export class ApplicationDataService {
   public createApplication(newApplication: Application) {
     this.httpClient.post<Application>('http://localhost:8080/api/application/ajout', newApplication).subscribe(
       createApplication => {
-        this.availableapplications.push(createApplication);
-        this.availableApplications$.next(this.availableapplications);
+        this.availableApplications.push(createApplication);
+        this.availableApplications$.next(this.availableApplications);
       }
     );
   }
@@ -67,7 +68,7 @@ export class ApplicationDataService {
   public updateApplication(application: Application) {
     this.httpClient.put<Application>(`http://localhost:8080/api/application/modifid=${application.idApplication}`, application).subscribe(
       updateApplication => {
-        this.availableApplications$.next(this.availableapplications);
+        this.availableApplications$.next(this.availableApplications);
       }
     );
   }
@@ -75,15 +76,17 @@ export class ApplicationDataService {
   public deleteApplication(application: Application) {
     this.httpClient.delete<Application>(`http://localhost:8080/api/application/supprid=${application.idApplication}`).subscribe(
       deleteApplication => {
-        const index1 = this.availableapplications.indexOf(application);
-        this.availableapplications.splice(index1, 1);
-        this.availableApplications$.next(this.availableapplications);
+        const index1 = this.availableApplications.indexOf(application);
+        this.availableApplications.splice(index1, 1);
+        this.availableApplications$.next(this.availableApplications);
       }
     );
   }
 
   /* TEST PRIMENG */
   public getApplicationPrimeNg() {
-    return this.httpClient.get('http://localhost:8080/api/application').toPromise().then(data =>  {return data;} );
+    return this.httpClient.get('http://localhost:8080/api/application').toPromise().then(data => {
+      return data;
+    });
   }
 }

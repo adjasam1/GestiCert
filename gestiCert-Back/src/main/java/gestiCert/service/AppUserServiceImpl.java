@@ -12,7 +12,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import gestiCert.dto.AppUserDto;
-import gestiCert.exception.BusinessResourceException;
 import gestiCert.exception.ExistingIdRHUserException;
 import gestiCert.exception.InvalidCredentialsException;
 import gestiCert.model.AppUser;

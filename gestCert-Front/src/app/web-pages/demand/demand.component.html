@@ -4,29 +4,7 @@
     GestiCert</title>
 </head>
 
-
-<section id="entete" *ngIf="editedCertificate">
-
-  <div id="user">
-    <div id="name">
-      <p>
-        <img src="assets/icons/certificat.svg">
-        Certificat {{ editedCertificate.environment.nameEnvironment }} de
-        l'application {{ editedCertificate.application.nameApplication }}
-      </p>
-    </div>
-  </div>
-
-  <div id="deconnex">
-    <div>
-      <a role="button" (click)="deconnexion()">Déconnexion</a>
-    </div>
-    <div>
-      <a role="button" (click)="comeBack()">Retour</a>
-    </div>
-  </div>
-
-</section>
+<app-info-certificate></app-info-certificate>
 
 <section id="formulaire">
   <h1 *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseBlock1">Demande du certificat SSL</h1>

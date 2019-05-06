@@ -3,7 +3,7 @@
 </head>
 
 <section id="authentification" title="Formulaire d'authentification">
-  <form [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
+  <form #logForm="ngForm" [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
   <div>
     <h1>Authentification requise</h1>
     <h2>* Champs obligatoire</h2>
@@ -30,7 +30,7 @@
               </mat-form-field>
             </div>
       <div id="connexion" title="Bouton pour se connecter">
-        <a role="button" value="connexion" (click)="onSubmit()">connexion</a>
+        <a role="button" value="connexion" (click)="onSubmit(logForm)">connexion</a>
       </div>
 
     </form>

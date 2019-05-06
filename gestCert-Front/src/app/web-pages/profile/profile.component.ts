@@ -49,16 +49,6 @@ export class ProfileComponent implements OnInit {
     this.applicationsList = this.applicationDataService.availableApplications$;
   }
 
-  deconnexion(): void {
-    if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
-      this.router.navigate(['']);
-    }
-  }
-
-  comeBack(): void {
-    this.router.navigate([history.go(-1)]);
-  }
-
   onSave() {
     console.log('aaa : ' + this.editedUser);
     if (!this.idUser) {

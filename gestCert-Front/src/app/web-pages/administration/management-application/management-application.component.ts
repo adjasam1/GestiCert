@@ -3,7 +3,6 @@ import {BehaviorSubject} from 'rxjs';
 import {Application} from '../../../model/application';
 import {ActivatedRoute, Router} from '@angular/router';
 import {ApplicationDataService} from '../../../service/application-data.service';
-import {SelectItem} from 'primeng/api';
 
 @Component({
   selector: 'app-management-application',
@@ -34,7 +33,7 @@ export class ManagementApplicationComponent implements OnInit {
     this.applicationDataService.getApplicationPrimeNg().then(applications => this.applications = applications);
 
     this.cols = [
-      { field: 'codeCCX', header: 'Code CCX' },
+      { field: 'codeCCX', header: 'CCX' },
       { field: 'nameApplication', header: 'Nom' }
     ];
   }
