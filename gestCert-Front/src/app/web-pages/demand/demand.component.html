@@ -11,6 +11,87 @@
   <ng-template #elseBlock1><h1>Renouvellement du certificat SSL</h1></ng-template>
   <h2>* Champs obligatoires</h2>
   <form>
+    <h3>1. Identification de la demande :</h3>
+    <section id="demandeur">
+      <h4>
+        Information sur le demandeur :
+        <a role="button" routerLink="/profil/{{editedUser.idUser}}">Modifier</a>
+      </h4>
+      <p><strong>Service du demandeur :</strong> {{editedUser.department.nameDepartment}}<br>
+        <strong>Nom du demandeur :</strong> {{editedUser.nameUser}}<br>
+        <strong>Prénom du demandeur :</strong> {{editedUser.firstNameUser}}<br>
+        <strong>Fonction du demandeur :</strong> {{editedUser.profile.typeProfile}}<br>
+        <strong>Téléphone du demandeur :</strong> {{editedUser.phoneUser}}<br>
+        <strong>E-mail du demandeur :</strong> {{editedUser.eMailUser}}<br>
+      </p>
+    </section>
+    <section id="referent">
+      <h4>Si le demandeur est un prestataire, le postier référent recevra les notifications d'expirations</h4>
+      <div class="form-control">
+        <label for="emailRef">E-mail du postier référent : </label>
+        <input type="search" id="emailRef" name="emailRef" placeholder="Entrez l'e-mail du référent"
+               required title="Champ pour l'e-mail du postier référent si le demandeur est un prestataire">
+      </div>
+      <br>
+    </section>
+    <section>
+      <h4>Information sur le client :</h4>
+      <p><strong>Nom du client :</strong> {{editedCertificate.application.nameClient}}<br>
+        <strong>Prénom du client :</strong> {{editedCertificate.application.firstNameClient}}<br>
+        <strong>Direction du client :</strong> {{editedCertificate.application.managementClient}}<br>
+        <strong>Téléphone du client :</strong> {{editedCertificate.application.phoneClient}}<br>
+        <strong>E-mail du client :</strong> {{editedCertificate.application.eMailClient}}<br>
+      </p>
+    </section>
+    <section>
+    <h4>Information compléméntaire :</h4>
+    <div class="form-control">
+      <label for="desirDate">Date de réalisation souhaitée * : </label>
+      <input type="date" id="desirDate" name="desirDate" required title="Champ pour la date de réalisation souhaitée">
+    </div>
+    <br>
+    <div id="contexte" class="form-control">
+      <label for="contxt">Description du contexte : </label>
+      <textarea id="contxt" name="contxt" rows="2" cols="48" placeholder="Entrez la description du contexte de la demande" required title="Champ pour la description du contexte"></textarea>
+    </div>
+    <br>
+    </section>
+    <section>
+      <h3>2. Information sur la demande :</h3>
+      <p><strong>Type de la demande :</strong>
+        <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') > (dateNow | date: 'yyyy-MM-dd'))"> Renouvellement</span>
+        <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))"> Création</span>
+        <!-- <div class="form-control">
+                <label for="typeDem">Type de demande * : </label>
+                <select
+                  name="typeDem"
+                  id="typeDem"
+                  class="form-control"
+                  title="Champ pour le type de la demande">
+                  <option *ngFor="let typeDemand of typeDemandsList | async"
+                          [value]="typeDemand.idTypeDemand">{{ typeDemand.typeTypeDemand }}</option>
+                </select>
+              </div>  -->
+        <br>
+        <strong>Code CCX de l'application :</strong> {{editedCertificate.application.codeCCX}}<br>
+        <strong>Nom commun</strong> "URL principale du site" <strong>:</strong> {{editedCertificate.linkAddressPrincipal}}<br>
+        <strong>Adresses alternatives :</strong> {{editedCertificate.addressAlternative[0].linkAddressAlternative}}<br>
+        <strong>Plateforme :</strong> {{editedCertificate.plateform.namePlateform}}<br>
+        <strong>Serveur :</strong> {{editedCertificate.server[0].nameServer}}<br>
+      </p>
+    </section>
+  </form>
+  <br>
+  <div class="modification" title="Transmettre la demande">
+    <a role="button">Transmettre</a>
+  </div>
+
+
+
+<!--
+  <br><br>
+  <h2>* Champs obligatoires</h2>
+  <form>
     <h3>1. Identification de la demande</h3>
     <div>
       <div class="form-control">
@@ -114,7 +195,7 @@
     <br>
   </form>
   <br>
-  <div id="modification" title="Transmettre la demande">
-    <a role="button" href="mailto:samuel.sabot@laposte.net">Transmettre</a>
-  </div>
+  <div class="modification" title="Transmettre la demande">
+    <a role="button">Transmettre</a>
+  </div> -->
 </section>

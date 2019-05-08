@@ -9,6 +9,7 @@ export class AppUser {
               public password?: string,
               public roleList?: string[]) {}*/
 
+
   constructor(public idUser?: number,
               public nameUser?: string,
               public firstNameUser?: string,
@@ -19,5 +20,6 @@ export class AppUser {
               public profile?: Profile,
               public department?: Department,
               public applications?: Application[],
-              public roleList?: string[]) {}
+              public roleList?: string[]) {
+}
 }

@@ -7,7 +7,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
-import gestiCert.dto.AppUserDto;
+//import gestiCert.dto.AppUserDto;
 import gestiCert.model.AppUser;
 
 @Repository
@@ -30,7 +30,7 @@ public interface AppUserRepository extends JpaRepository<AppUser, Integer>{
 	 */
 	
 	@Query("FROM AppUser user WHERE user.nameUser LIKE %?1%")
-	public List<AppUser> findByNameUser(String word);
+	public Optional<AppUser> findByNameUser(String word);
 	
 	/**
 	 * utilise la methode findById du CrudRepository en utilisant en utilisant la requete sql recherchant un utilisateur avec une partie d'un prenom
@@ -40,7 +40,7 @@ public interface AppUserRepository extends JpaRepository<AppUser, Integer>{
 	 */
 	
 	@Query("FROM AppUser user WHERE user.firstNameUser LIKE %?1%")
-	public List<AppUser> findByFirstNameUser(String word);
+	public Optional<AppUser> findByFirstNameUser(String word);
     
 	/**
 	 * utilise la methode findById du CrudRepository en utilisant la requete sql recherchant un utilisateur avec un nom et un prenom
@@ -51,7 +51,7 @@ public interface AppUserRepository extends JpaRepository<AppUser, Integer>{
 	 */
 	
 	@Query("FROM AppUser user WHERE user.nameUser = ?1 AND user.firstNameUser = ?2")
-	public Iterable<AppUser> findByNameUserAndFirstNameUser(String nameUser, String firstNameUser);
+	public Optional<AppUser> findByNameUserAndFirstNameUser(String nameUser, String firstNameUser);
 	
-
+	
 }

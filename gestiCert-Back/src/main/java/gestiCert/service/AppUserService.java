@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import gestiCert.dto.AppUserDto;
+//import gestiCert.dto.AppUserDto;
 import gestiCert.exception.BusinessResourceException;
 import gestiCert.exception.ExistingIdRHUserException;
 import gestiCert.exception.InvalidCredentialsException;
@@ -51,11 +51,11 @@ public interface AppUserService {
     
     public ResponseEntity<?> getUserByIdRH(String idRHUser) throws BusinessResourceException;
     
-    public List<AppUser> getUserByName(String word) throws BusinessResourceException;
+    public Optional<AppUser> getUserByName(String word) throws BusinessResourceException;
     
-    public List<AppUser> getUserByFirstName(String word) throws BusinessResourceException;
+    public Optional<AppUser> getUserByFirstName(String word) throws BusinessResourceException;
     
-    public Iterable<AppUser> getUserByNameAndFirstName(String nameUser, String firstNameUser) throws BusinessResourceException;
+    public Optional<AppUser> getUserByNameAndFirstName(String nameUser, String firstNameUser) throws BusinessResourceException;
     
     public AppUser createUser(AppUser user) throws BusinessResourceException;
     

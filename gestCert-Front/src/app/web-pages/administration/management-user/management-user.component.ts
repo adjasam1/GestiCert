@@ -17,7 +17,7 @@ export class ManagementUserComponent implements OnInit {
 
   usersList: BehaviorSubject<AppUser[]>;
   idUser: number;
-  editedUser: AppUser = new AppUser(0, '', '', '', '', '', '', null, null, null, null);
+  editedUser: AppUser = new AppUser();
 
   profilesList: BehaviorSubject<Profile[]>;
   departmentsList: BehaviorSubject<Department[]>;
@@ -42,9 +42,13 @@ export class ManagementUserComponent implements OnInit {
 
   onSave() {
     if (!this.idUser) {
-      if (confirm('Êtes-vous certain de vouloir ajouter un nouvel utilisateur ?')) {
-        this.userDataService.createUser(this.editedUser);
-      }
+      console.log('bbb');
+      console.log(this.editedUser);
+      this.userDataService.createUser(this.editedUser);
+      console.log('aaaa');
+      //if (confirm('Êtes-vous certain de vouloir ajouter un nouvel utilisateur ?')) {
+      //  this.userDataService.createUser(this.editedUser);
+    //  }
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier cet utilisateur ?')) {
         this.userDataService.updateUser(this.editedUser);

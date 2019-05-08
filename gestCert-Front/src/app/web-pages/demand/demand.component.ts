@@ -12,6 +12,10 @@ import {ProfileDataService} from '../../service/profile-data.service';
 import {Demand} from '../../model/demand';
 import {DemandDataService} from '../../service/demand-data.service';
 import {NgForm} from '@angular/forms';
+import {TypeDemandDataService} from '../../service/type-demand-data.service';
+import {TypeDemand} from '../../model/typeDemand';
+import {AddressAlternativeDataService} from '../../service/address-alternative-data.service';
+import {AddressAlternative} from '../../model/addressAlternative';
 
 @Component({
   selector: 'app-demand',
@@ -30,7 +34,13 @@ export class DemandComponent implements OnInit {
 
   departmentsList: BehaviorSubject<Department[]>;
   profilesList: BehaviorSubject<Profile[]>;
+  addressAlternativesList: BehaviorSubject<AddressAlternative[]>;
+
   demandsList: BehaviorSubject<Demand[]>;
+  idDemand: number;
+  editedDemand: Demand;
+
+  typeDemandsList: BehaviorSubject<TypeDemand[]>;
 
   dateNow: Date = new Date();
   alertDate: Date = new Date();
@@ -39,7 +49,9 @@ export class DemandComponent implements OnInit {
               private departmentDataService: DepartmentDataService,
               private profileDataService: ProfileDataService,
               private certificateDataService: CertificateDataService,
+              private addressAlternativeDataService: AddressAlternativeDataService,
               private demandDataService: DemandDataService,
+              private typeDemandDataService: TypeDemandDataService,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -51,11 +63,16 @@ export class DemandComponent implements OnInit {
 
     this.certificatesList = this.certificateDataService.availableCertificates$;
     this.idCertificate = +this.route.snapshot.params.id2;
-    this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificat => this.editedCertificate = certificat);
+    this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificate => this.editedCertificate = certificate);
 
     this.departmentsList = this.departmentDataService.availableDepartments$;
     this.profilesList = this.profileDataService.availableProfiles$;
+    this.addressAlternativesList = this.addressAlternativeDataService.availableAddressAlternatives$;
+
     this.demandsList = this.demandDataService.availableDemands$;
+    this.demandDataService.findDemand(this.idDemand).subscribe(demand => this.editedDemand = demand);
+
+    this.typeDemandsList = this.typeDemandDataService.availableTypeDemands$;
 
     this.dateAlert();
   }

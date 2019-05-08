@@ -112,20 +112,52 @@ public class AppUser implements Serializable {
     
     
 
-	public AppUser(Integer idUser, @NotNull String idRHUser, @NotNull String passwordUser, @Size(max = 50) String nameUser,
-			@Size(max = 50) String firstNameUser, String eMailUser, @Size(min = 10, max = 10) String phoneUser,
-			Department department, Profile profile, List<Role> roleList) {
+	public AppUser(Integer idUser, @NotNull String idRHUser, @NotNull String passwordUser,
+			@Size(max = 50) String nameUser, @Size(max = 50) String firstNameUser, String eMailUser,
+			@Size(min = 10, max = 10) String phoneUser, Department department, Profile profile,
+			List<Application> applications) {
 		super();
 		this.idUser = idUser;
 		this.idRHUser = idRHUser;
-        this.passwordUser = passwordUser;
+		this.passwordUser = passwordUser;
 		this.nameUser = nameUser;
 		this.firstNameUser = firstNameUser;
 		this.eMailUser = eMailUser;
 		this.phoneUser = phoneUser;
 		this.department = department;
 		this.profile = profile;
-		this.roleList = roleList;
+		this.applications = applications;
+	}
+
+	
+
+	public AppUser(@NotNull String idRHUser, @NotNull String passwordUser, @Size(max = 50) String nameUser,
+			@Size(max = 50) String firstNameUser, String eMailUser, @Size(min = 10, max = 10) String phoneUser,
+			Department department, Profile profile) {
+		super();
+		this.idRHUser = idRHUser;
+		this.passwordUser = passwordUser;
+		this.nameUser = nameUser;
+		this.firstNameUser = firstNameUser;
+		this.eMailUser = eMailUser;
+		this.phoneUser = phoneUser;
+		this.department = department;
+		this.profile = profile;
+	}
+
+	public AppUser(Integer idUser, @NotNull String idRHUser, @NotNull String passwordUser,
+			@Size(max = 50) String nameUser, @Size(max = 50) String firstNameUser, String eMailUser,
+			@Size(min = 10, max = 10) String phoneUser, Department department, Profile profile) {
+		super();
+		this.idUser = idUser;
+		this.idRHUser = idRHUser;
+		this.passwordUser = passwordUser;
+		this.nameUser = nameUser;
+		this.firstNameUser = firstNameUser;
+		this.eMailUser = eMailUser;
+		this.phoneUser = phoneUser;
+		this.department = department;
+		this.profile = profile;
 	}
 
 	public AppUser(@NotNull String idRHUser, @NotNull String passwordUser, @Size(max = 50) String nameUser,

@@ -53,8 +53,14 @@ public class GestiCertApplication implements CommandLineRunner
 	@Autowired
 	CertificateService certificateServ;
 	
-	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+//	@Autowired
+//	private BCryptPasswordEncoder passwordEncoder;
+	
+	// Authentification
+		@Bean
+		public BCryptPasswordEncoder bCryptPasswordEncoder() {
+			return new BCryptPasswordEncoder();
+		}
 
 	/**
 	 * methode principale
@@ -65,12 +71,6 @@ public class GestiCertApplication implements CommandLineRunner
 	{
 		// demarre et lance l'application en application Spring a partir de la methode principale
 		SpringApplication.run(GestiCertApplication.class, args);
-	}
-
-	// Authentification
-	@Bean
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
 	}
 
     /**

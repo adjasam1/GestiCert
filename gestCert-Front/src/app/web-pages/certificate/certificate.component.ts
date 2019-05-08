@@ -13,14 +13,14 @@ import {AddressAlternative} from '../../model/addressAlternative';
 })
 export class CertificateComponent implements OnInit {
 
-  certificatesList: BehaviorSubject<Certificate[]>;
-  idCertificate: number;
-  editedCertificate: Certificate;
+  private certificatesList: BehaviorSubject<Certificate[]>;
+  private idCertificate: number;
+  private editedCertificate: Certificate;
 
-  addressAlternativesList: BehaviorSubject<AddressAlternative[]>;
-  editedAddressAlternative: AddressAlternative[];
+  private addressAlternativesList: BehaviorSubject<AddressAlternative[]>;
+  private editedAddressAlternative: AddressAlternative[];
 
-  display = false;
+  private display = false;
 
   constructor(private certificateDataService: CertificateDataService,
               private addressAlternativeDataService: AddressAlternativeDataService,
@@ -41,6 +41,7 @@ export class CertificateComponent implements OnInit {
     this.addressAlternativesList = this.addressAlternativeDataService.availableAddressAlternatives$;
     this.addressAlternativeDataService.getAddressAlternative().subscribe(addressAlternatives =>
       this.editedAddressAlternative = addressAlternatives);
+    // console.log('aaa' + this.editedCertificate.linkAddressPrincipal);
   }
 
   showDialog() {

@@ -11,7 +11,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import gestiCert.dto.AppUserDto;
+//import gestiCert.dto.AppUserDto;
 import gestiCert.exception.ExistingIdRHUserException;
 import gestiCert.exception.InvalidCredentialsException;
 import gestiCert.model.AppUser;
@@ -118,7 +118,7 @@ public class AppUserServiceImpl implements AppUserService {
 	 */
 	
 	@Override
-	public List<AppUser> getUserByName(String word)
+	public Optional<AppUser> getUserByName(String word)
 	{
 		return appUserRepo.findByNameUser(word);
 	}
@@ -131,7 +131,7 @@ public class AppUserServiceImpl implements AppUserService {
 	 */
 
 	@Override
-	public List<AppUser> getUserByFirstName(String word)
+	public Optional<AppUser> getUserByFirstName(String word)
 	{
 		return appUserRepo.findByFirstNameUser(word);
 	}
@@ -145,7 +145,7 @@ public class AppUserServiceImpl implements AppUserService {
 	 */
 
 	@Override
-	public Iterable<AppUser> getUserByNameAndFirstName(String nameUser, String firstNameUser)
+	public Optional<AppUser> getUserByNameAndFirstName(String nameUser, String firstNameUser)
 	{
 		return appUserRepo.findByNameUserAndFirstNameUser(nameUser, firstNameUser);
 	}

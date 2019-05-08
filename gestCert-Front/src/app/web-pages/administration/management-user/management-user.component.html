@@ -6,7 +6,8 @@
 
   <div id="1">
     <h1 *ngIf="editedUser.idUser; else elseBlock1"
-        title="Formulaire pour modifier l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Modification de l'utilisateur <br>{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}</h1>
+        title="Formulaire pour modifier l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Modification de l'utilisateur
+        <br>{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}</h1>
     <ng-template #elseBlock1 title="Formulaire pour ajouter un utilisateur"><h1>Ajout d'un utilisateur <br></h1></ng-template>
     <h2>* Champs obligatoires</h2>
     <form>
@@ -34,26 +35,26 @@
                  required title="Champ pour le prénom">
         </div>
         <br>
-        <div class="form-control" *ngIf="editedUser.idUser">
-          <label for="userProfile">Profil * : </label>
+        <div class="form-control">
+          <label for="profile">Profil * : </label>
           <select
-            name="userProfile"
-            id="userProfile"
+            name="profile"
+            id="profile"
             class="form-control"
-            [(ngModel)]="editedUser.profile.idProfile" title="Champ pour le profil">
+            [(ngModel)]="editedUser.profile" title="Champ pour le profil">
             <option *ngFor="let profile of profilesList | async"
                     [value]="profile.idProfile">{{ profile.typeProfile }}</option>
           </select>
         </div>
-        <br *ngIf="editedUser.idUser">
+        <br>
       </div>
-      <div class="form-control" *ngIf="editedUser.idUser">
-        <label for="userService">Service * : </label>
+      <div class="form-control">
+        <label for="department">Service * : </label>
         <select
-          name="userService"
-          id="userService"
+          name="department"
+          id="department"
           class="form-control"
-          [(ngModel)]="editedUser.department.idDepartment" title="Champ pour le service">
+          [(ngModel)]="editedUser.department" title="Champ pour le service">
           <option *ngFor="let department of departmentsList | async"
                   [value]="department.idDepartment">{{ department.nameDepartment }}</option>
         </select>

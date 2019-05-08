@@ -164,7 +164,7 @@ public class AppUserController {
 	@GetMapping("/nom={word}")
 //	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getUserByName(@PathVariable String word) {
-		List<AppUser> listUsers = null;
+		Optional<AppUser> listUsers = null;
 
 		try {
 			listUsers = appUserServ.getUserByName(word);
@@ -182,7 +182,7 @@ public class AppUserController {
 	@GetMapping("/prenom={word}")
 //	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getUserByFirstName(@PathVariable String word) {
-		List<AppUser> listUsers = null;
+		Optional<AppUser> listUsers = null;
 
 		try {
 			listUsers = appUserServ.getUserByFirstName(word);
@@ -202,7 +202,7 @@ public class AppUserController {
 //	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getUserByNameAndFirstName(@PathVariable("nameUser") String nameUser,
 			@PathVariable("firstNameUser") String firstNameUser) {
-		Iterable<AppUser> user = null;
+		Optional<AppUser> user = null;
 
 		try {
 			user = appUserServ.getUserByNameAndFirstName(nameUser, firstNameUser);

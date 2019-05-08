@@ -8,7 +8,9 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 
+//import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -82,12 +84,17 @@ public class DepartmentControllerTests {
 	@MockBean
 	private TypeDemandService typeDemandServ;
 	
+//	@Before
+//	public void setUp() throws Exception {
+//		departmentController = new DepartmentController(departmentServ);
+//	}
+	
 	@Test
 //	@WithMockUser(roles = { "ADMIN" })
 	public void getAllDepartments() throws Exception {
 		System.out.println(departmentServ);
 //		when(this.departmentServ.getAllDepartments()).thenReturn(new ArrayList<Department>());
-		this.mockMvc.perform(get("/api/service")).andExpect(status().isOk());
+		this.mockMvc.perform(get("/api/service")).andExpect(status().isOk()).andDo(print());
 	}
 	
 	@Test
@@ -97,54 +104,50 @@ public class DepartmentControllerTests {
 //		when(this.departmentServ.getDepartmentById(2)).thenReturn(Optional.of(departmentToReturn));
 		this.mockMvc.perform(get("/api/service/id=2")).andExpect(status().isOk())
 			.andExpect(jsonPath("idDepartment").value(2))
-			.andExpect(jsonPath("nameDepartment").value("SIGP3"));
+			.andExpect(jsonPath("nameDepartment").value("SIGP3"))
+			.andDo(print());
 	}
 	
 	@Test
 	@WithMockUser(roles = { "ADMIN" })
 	public void getDepartmentByIdServerError() throws Exception {
 //		when(this.departmentServ.getDepartmentById(any())).thenReturn(null);
-		this.mockMvc.perform(get("/api/service/id=9")).andExpect(status().isInternalServerError());
+		this.mockMvc.perform(get("/api/service/id=9")).andExpect(status().isInternalServerError()).andDo(print());
 	}
 	
-//	@Test
-//	@WithMockUser(roles = { "ADMIN" })
-//	public void getDepartmentByIdNotFound() throws Exception {
-////		when(this.departmentServ.getDepartmentById(any())).thenReturn(Optional.of(null));
-//		this.mockMvc.perform(get("/service/id=6")).andExpect(status().isNotFound());
-//	}
+	@Test
+	@WithMockUser(roles = { "ADMIN" })
+	public void getDepartmentByIdNotFound() throws Exception {
+//		when(this.departmentServ.getDepartmentById(any())).thenReturn(Optional.of(null));
+		this.mockMvc.perform(get("/service/id=6")).andExpect(status().isNotFound());
+	}
 	
 	@Test
 	@WithMockUser(roles = { "ADMIN" })
 	public void getDepartmentByName() throws Exception {
 //		when(this.departmentServ.getDepartmentByName("test42")).thenReturn(new Department(16, "test42"));
-		this.mockMvc.perform(get("/api/service/nom=Appli HR")).andExpect(status().isOk())
+		this.mockMvc.perform(get("/api/service/nom=Appli")).andExpect(status().isOk())
 			.andExpect(jsonPath("idDepartment").value(3))
-			.andExpect(jsonPath("nameDepartment").value("Appli HR"));
+			.andExpect(jsonPath("nameDepartment").value("Appli"))
+			.andDo(print());
 	}
 	
 	@Test
 	@WithMockUser(roles = { "ADMIN" })
 	public void getDepartmentByNameNotFound() throws Exception {
 //		when(this.departmentServ.getDepartmentByName(any())).thenReturn(null);
-		this.mockMvc.perform(get("/api/service/nom=absent")).andExpect(status().isNotFound());
+		this.mockMvc.perform(get("/api/service/nom=absent")).andExpect(status().isNotFound()).andDo(print());
 	}
-	
-//	@Test
-//	@WithMockUser(roles = { "ADMIN" })
-//	public void getDepartmentByNameServerError() throws Exception {
-////		when(this.departmentServ.getDepartmentByName(any())).thenReturn(null);
-//		this.mockMvc.perform(get("/service/nom=")).andExpect(status().isInternalServerError());
-//	}
 	
 	@Test
 	@WithMockUser(roles = { "ADMIN" })
 	public void addDepartment() throws Exception {
 //		when(this.departmentServ.createDepartment(any())).thenReturn(new Department(5, "Test42"));
 		this.mockMvc.perform(post("/api/service/ajout").contentType(MediaType.APPLICATION_JSON_UTF8)
-				.content("{\"nameDepartment\": \"Test42\"}"))
+				.content("{\"nameDepartment\": \"Ajout23\"}"))
 		.andExpect(status().isCreated())
-		.andExpect(jsonPath("nameDepartment").value("Test42"));
+		.andExpect(jsonPath("nameDepartment").value("Ajout23"))
+		.andDo(print());
 	}
 	
 	@Test
@@ -152,17 +155,18 @@ public class DepartmentControllerTests {
 	public void modifyDepartment() throws Exception {
 //		when(this.departmentServ.createDepartment(any())).thenReturn(new Department(4, "SIGP3"));
 //		when(this.departmentServ.updateDepartment(any(), any())).thenReturn(new Department(4, "TEST42"));
-		this.mockMvc.perform(put("/api/service//modifid=4").contentType(MediaType.APPLICATION_JSON_UTF8)
-				.content("{\"idDepartment\": \"4\", \"nameDepartment\": \"Dev_HR\"}"))
+		this.mockMvc.perform(put("/api/service//modifid=14").contentType(MediaType.APPLICATION_JSON_UTF8)
+				.content("{\"idDepartment\": \"14\", \"nameDepartment\": \"HR\"}"))
 		.andExpect(status().isOk())
-		.andExpect(jsonPath("idDepartment").value(4))
-		.andExpect(jsonPath("nameDepartment").value("Dev_HR"));
+		.andExpect(jsonPath("idDepartment").value(14))
+		.andExpect(jsonPath("nameDepartment").value("HR"))
+		.andDo(print());
 	}
 	
 	@Test
 	@WithMockUser(roles = { "ADMIN" })
 	public void deleteDepartment() throws Exception {
-		this.mockMvc.perform(delete("/api/service/supprid=8")).andExpect(status().isOk());
+		this.mockMvc.perform(delete("/api/service/supprid=22")).andExpect(status().isOk()).andDo(print());
 	}
 	
 	

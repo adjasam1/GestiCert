@@ -107,7 +107,7 @@ public class Certificate implements Serializable
 	@JoinTable(name ="certificat_serveur", joinColumns = @JoinColumn(name = "id_certificat"), inverseJoinColumns = @JoinColumn(name = "id_serveur"))
 	private List<Server> servers;
 	
-	@JsonIgnore
+	//@JsonIgnore
 	@OneToMany(mappedBy = "certificate")
 	private List<AddressAlternative> addressAlternatives;
 	
