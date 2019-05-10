@@ -16,7 +16,7 @@ export class LoginService {
 
   constructor(private httpClient: HttpClient,
               private router: Router) {
-    this.getUserRoles();
+  //  this.getUserRoles();
   }
 
   public get loggedIn(): boolean {
@@ -26,13 +26,15 @@ export class LoginService {
   signIn(user: AppUser) {
     this.httpClient.post<JsonWebToken>(environment.apiUrl + 'utilisateur/sign-in', user).subscribe(
       token => {
+        console.log(token);
         sessionStorage.setItem(environment.accessToken, token.token);
+        alert('ok : ' + token.token);
 
         this.getUserRoles();
 
-/*        this.router.navigate(['/accueil/1']);*/
+      //  this.router.navigate(['/accueil/']);
       },
-/*      error => alert('Identifiant RH et/ou Mot de passe manquant(s) ou incorrecte(s)'));*/);
+   /* error => alert('Identifiant RH et/ou Mot de passe manquant(s) ou incorrecte(s)')*/);
   }
 
   signOut() {
@@ -44,6 +46,8 @@ export class LoginService {
       const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
       const authorities: Array<any> = decodedToken.auth;
       this.userRoles.next(authorities.map(authority => authority.authority));
+      alert('auth : ' + authorities);
+      console.log('auth : ' + authorities);
     }
   }
 }

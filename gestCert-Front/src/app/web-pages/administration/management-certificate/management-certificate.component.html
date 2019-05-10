@@ -2,126 +2,186 @@
   <h1>Administration des Certificats</h1>
 </div>
 
-
-
 <div class="cadre">
 
-<!--  <div id="formulaire">
-    <h1 *ngIf="editedCertificat.idCertificat; else elseBlock1"
-        title="Formulaire pour modifier l'application {{ editedCertificat.nameCertificat }}">Modification du certificat <br>{{ editedCertificat.nameCertificat }}</h1>
-    <ng-template #elseBlock1 title="Formulaire pour ajouter un certificat"><h1>Ajout d'un certificat <br></h1></ng-template>
-    <h2>* Champs obligatoires</h2>
-    <form>
-      <div>
-        <div class="form-control">
-          <label for="ccx">Code CCX * : </label>
-          <input type="search" id="ccx" [(ngModel)]="editedApplication.codeCCX" name="ccx"
-                 placeholder="Entrez le code CCX"
-                 required title="Champ pour le code CCX de l'application">
+  <div id="formulaire">
+    <h2 *ngIf="editedCertificate.idCertificate; else elseBlock1"
+        title="Formulaire pour modifier le certificat {{ editedCertificate.idCertificate }}">
+      Certificat {{ editedCertificate.nameCertificate }}
+    </h2>
+    <ng-template #elseBlock1 title="Formulaire pour ajouter un certificat">
+      <h2>Ajout d'un certificat<br></h2>
+    </ng-template>
+    <div class="cadre2">
+      <h3>* Champs obligatoires</h3>
+      <form>
+        <div>
+          <div class="form-control">
+            <label for="name">Nom Certificat * : </label>
+            <span *ngFor="let col of cols" [ngSwitch]="col.field">
+              <input *ngSwitchCase="'nameCertificate'" placeholder="Entrez le nom"
+                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     type="search" id="name" [(ngModel)]="editedCertificate.nameCertificate" name="name"
+                     title="Champ pour le nom du certificat" required>
+            </span>
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="password">Mot de passe * : </label>
+            <input type="password" id="password" [(ngModel)]="editedCertificate.passwordCertificate" name="password"
+                   placeholder="Entrez le mot de passe"
+                   required title="Champ pour le mot de passe du certificat">
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="dateIssue">Date Emission * : </label>
+            <input type="date" id="dateIssue" [(ngModel)]="editedCertificate.dateIssue" name="dateIssue"
+                   placeholder="Entrez la date d'émission"
+                   required title="Champ pour la date d'émission du certificat">
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="validity">Fin de Validité * : </label>
+            <input type="date" id="validity" [(ngModel)]="editedCertificate.dateEndValidity" name="validity"
+                   placeholder="Entrez la date de fin de validité"
+                   required title="Champ pour la date de fin de validité du certificat">
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="application">Nom Application * : </label>
+            <select
+              name="application"
+              id="application"
+              class="form-control"
+              [(ngModel)]="editedCertificate.application" title="Champ pour le nom de l'application">
+              <option *ngFor="let application of applicationsList | async"
+                      [value]="application.idApplication">{{ application.nameApplication }}</option>
+            </select>
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="environment">Nom Environnement * : </label>
+            <select
+              name="environment"
+              id="environment"
+              class="form-control"
+              [(ngModel)]="editedCertificate.environment" title="Champ pour le nom de l'environnement">
+              <option *ngFor="let environment of environmentsList | async"
+                      [value]="environment.idEnvironment">{{ environment.nameEnvironment }}</option>
+            </select>
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="plateform">Nom Plateforme * : </label>
+            <select
+              name="plateform"
+              id="plateform"
+              class="form-control"
+              [(ngModel)]="editedCertificate.plateform" title="Champ pour le nom de la plateforme">
+              <option *ngFor="let plateform of plateformsList | async"
+                      [value]="plateform.idPlateform">{{ plateform.namePlateform }}</option>
+            </select>
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="root">Nom Racine * : </label>
+            <select
+              name="root"
+              id="root"
+              class="form-control"
+              [(ngModel)]="editedCertificate.root" title="Champ pour le nom de la racine">
+              <option *ngFor="let root of rootsList | async"
+                      [value]="root.idRoot">{{ root.nameRoot }}</option>
+            </select>
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="server">Nom(s) Serveur(s) * : </label>
+            <select
+              name="server"
+              id="server"
+              class="form-control"
+              [(ngModel)]="editedCertificate.server" title="Champ pour le nom du ou des serveur(s)">
+              <option *ngFor="let server of serversList | async"
+                      [value]="server.idServer">{{ server.nameServer }}</option>
+            </select>
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="linkInst">Lien Téléchargement * : </label>
+            <input type="search" id="linkInst" [(ngModel)]="editedCertificate.linkInstallation" name="linkInst"
+                   placeholder="Entrez le lien de téléchargement"
+                   required title="Champ pour le lien du fichier de téléchargement du certificat">
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="linkPrin">Adresse Principale * : </label>
+            <input type="search" id="linkPrin" [(ngModel)]="editedCertificate.linkAddressPrincipal" name="linkPrin"
+                   placeholder="Entrez le lien de l'adresse principale"
+                   required title="Champ pour le lien de l'adresse principale du certificat">
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="linkAlt">Adresse(s) Alternative(s) : </label>
+            <input type="search" id="linkAlt" [(ngModel)]="editedCertificate.addressAlternative" name="linkAlt"
+                   placeholder="Entrez lien(s) adresse(s) alternative(s)"
+                   required title="Champ pour le ou les liens des adresses alternantives">
+          </div>
+          <br>
         </div>
-        <br>
-        <div class="form-control">
-          <label for="nameApp">Nom de l'application * : </label>
-          <input type="search" id="nameApp" [(ngModel)]="editedApplication.nameApplication" name="nameApp"
-                 placeholder="Entrez nom d'application"
-                 required title="Champ pour le nom de l'application">
-        </div>
-        <br>
-        <div class="form-control">
-          <label for="nameClient">Nom du client * : </label>
-          <input type="search" id="nameClient" [(ngModel)]="editedApplication.nameClient" name="nameClient"
-                 placeholder="Entrez le nom du client"
-                 required title="Champ pour le nom du client de l'application">
-        </div>
-        <br>
-        <div class="form-control">
-          <label for="firstNameClient">Nom du client * : </label>
-          <input type="search" id="firstNameClient" [(ngModel)]="editedApplication.firstNameClient" name="firstNameClient"
-                 placeholder="Entrez le prénom du client"
-                 required title="Champ pour le prénom du client de l'application">
-        </div>
-        <br>
-        <div class="form-control">
-          <label for="managementClient">Direction du client * : </label>
-          <input type="search" id="managementClient" [(ngModel)]="editedApplication.managementClient" name="managementClient"
-                 placeholder="Entrez direction du client"
-                 required title="Champ pour la direction du client de l'application">
-        </div>
-        <br>
-        <div class="form-control">
-          <label for="phoneClient">Téléphone du client * : </label>
-          <input type="search" id="phoneClient" [(ngModel)]="editedApplication.phoneClient" name="phoneClient"
-                 placeholder="Entrez téléphone du client"
-                 required title="Champ pour le téléphone du client de l'application">
-        </div>
-        <br>
-        <div class="form-control">
-          <label for="mailClient">E-Mail du client * : </label>
-          <input type="search" id="mailClient" [(ngModel)]="editedApplication.eMailClient" name="mailClient"
-                 placeholder="Entrez le e-mail du client"
-                 required title="Champ pour le e-mail du client de l'application">
-        </div>
-        <br>
+      </form>
+      <br>
+      <div id="modification">
+        <a *ngIf="editedCertificate.idCertificate" class="choix" role="button" routerLink="/gestion/cer" title="Annuler les modifications sur le certificat {{ editedCertificate.nameCertificate }}">Annuler</a>
+        <a *ngIf="editedCertificate.idCertificate" class="choix" role="button" (click)="onDelete()" title="Supprimer le certificat {{ editedCertificate.nameCertificate }}">Supprimer</a>
+        <a class="choix" role="button" (click)="onSave()" title="Sauvegarder le certificat {{ editedCertificate.nameCertificate }}">Sauvegarder</a>
       </div>
-    </form>
-    <br>
-    <div id="modification">
-      <a *ngIf="editedApplication.idApplication" id="supprime" role="button" (click)="onDelete()" title="Supprimer le service {{editedApplication.nameApplication}}">Supprimer</a>
-      <a id="sauvegarde" role="button" (click)="onSave()" title="Sauvegarder le service {{editedApplication.nameApplication}}">Sauvegarder</a>
     </div>
-  </div>-->
+  </div>
 
-  <div title="Liste des certificats">
-    <h1>Liste des Certificats</h1>
+  <div id="liste" title="Liste des applications">
+
+    <h2>Recherche</h2>
+
+    <div class="cadre2">
+      <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
+        <div id="filtre1">
+          <input *ngSwitchCase="'codeCCX'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le code CCX de l'application">
+        </div>
+        <div id="filtre2">
+          <input *ngSwitchCase="'nameCertificate'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom du certificat">
+        </div>
+      </div>
+    </div>
+
+    <h2 id="espace">Liste des Certificats</h2>
 
     <div id="table">
-      <p-table #dt [columns]="cols" [value]="certificates" [paginator]="true" [rows]="10" dataKey="nameCertificate" [resizableColumns]="true" [reorderableColumns]="true"
-               selectionMode="single" [(selection)]="selectedCertificate" stateStorage="session" stateKey="statedemo-session">
-        <ng-template ptemplate="caption">
-          <div style="text-align: right">
-            <i class="fa fa-search" style="margin: 4px 4px 0 0"></i>
-            <input type="text" pInputText size="50" placeholder="Global Filter" (input)="dt.filterGlobal($event.target.value, 'contains')" style="width: auto">
-          </div>
-        </ng-template>
-        <ng-template pTemplate="header" let-columns>
-          <tr>
-            <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
-              {{col.header}}
-              <p-sortIcon [field]="col.field"></p-sortIcon>
-            </th>
-            <th id="bouton"></th>
-          </tr>
-          <tr>
-            <th *ngFor="let col of columns" [ngSwitch]="col.field">
-              <input class="filtre" *ngSwitchCase="'nameCertificate'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Nom Certificat">
-    <!--          <input class="filtre" *ngSwitchCase="'applications.nameApplication'" pInputText type="text" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Nom Application">-->
-    <!--          <div *ngSwitchCase="'dateEndValidity'">
-                Value < {{ yearFilter }}
-                <i class="fa fa-close" (click)="yearFilter=null;dt.filter(null, col.field, col.filterMatchMode)" style="cursor: pointer" *ngIf="yearFilter"></i>
-                <p-slider [style]="{'width': '100%', 'margin-top': '8px'}" [(ngModel)]="yearFilter" [min]="2015" [max]="2021" (onChange)="onYearChange($event, dt)"></p-slider>
-              </div>-->
-            </th>
-          </tr>
-        </ng-template>
-        <ng-template pTemplate="body" let-certificates let-columns="columns">
-          <tr [pSelectableRow]="certificates">
-            <td *ngFor="let col of columns">{{ certificates[col.field] }}</td>
-            <td><a role="button" routerLink="/gestion/cer/{{certificates.idCertificate}}"
-                   title="Modification du certificat {{ certificates.idCertificate }}">Modifier/Supprimer</a></td>
-          </tr>
-        </ng-template>
-      </p-table>
+      <div id="autour">
+        <p-table #dt [columns]="cols" [value]="certificates" [paginator]="true" [rows]="12" dataKey="nameCertificate" [resizableColumns]="true" [reorderableColumns]="true"
+                 selectionMode="single" [(selection)]="selectedCertificate" stateStorage="session" stateKey="statedemo-session">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th id="th1" *ngFor="let col of cols" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-certificate let-columns="columns">
+            <tr routerLink="/gestion/cer/{{certificate.idCertificate}}" [pSelectableRow]="certificate">
+              <td *ngFor="let col of cols">{{ certificate[col.field] }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
     </div>
   </div>
 
 </div>
 
 
-
-
-
-
-<div>
+<!--<div>
   <a role="button" title="Ajouter un certificat">Ajouter un certificat</a>
 </div>
 <div class="titre" title="Liste des certificats">
@@ -152,4 +212,4 @@
     </tr>
     </tbody>
   </table>
-</div>
+</div>-->

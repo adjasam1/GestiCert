@@ -88,5 +88,23 @@ export class UserDataService {
     );
   }
 
+  /* TEST PRIMENG */
+  public getUserPrimeNg() {
+    return this.httpClient.get('http://localhost:8080/api/utilisateur').toPromise().then(data =>  {
+      return data;
+    });
+  }
+
+  /* auth proc stockee */
+  public  getUserByIdUser(idRHUser: string) {
+   // alert(idRHUser);
+    return this.httpClient.get('http://localhost:8080/api/utilisateur/getIdUser/paaa001');
+  }
+
+  public getRoleUser(idUser: number) {
+  //  alert('getRole');
+    return this.httpClient.get<string[]>('http://localhost:8080/api/utilisateur/role/' + idUser);
+  }
+
 }
 

@@ -88,33 +88,7 @@
 <section class="gest" title="Gestion des plateformes">
   <input type="hidden" [routerLink]="'/gestion/pla'" routerLinkActive #gpla="routerLinkActive"/>
   <section *ngIf="gpla.isActive">
-    <div>
-      <a role="button" title="Ajouter une plateforme">Ajouter une plateforme</a>
-    </div>
-    <div class="titre" title="Liste des plateformes">
-      <h1>Liste des Plateformes</h1>
-    </div>
-
-    <div class="cadre">
-      <table class="table">
-        <thead>
-        <tr>
-          <th class="th2">Nom</th>
-          <th></th>
-        </tr>
-        </thead>
-
-        <tbody *ngFor="let plateform of plateformsList | async" title="Plateforme {{ plateform.namePlateform }}">
-        <tr>
-          <td>{{ plateform.namePlateform }}</td>
-          <td>
-            <a role="button" title="Modification de la plateforme {{ plateform.namePlateform }}">Modifier</a>
-            <a role="button" title="Suppression de la plateforme {{ plateform.namePlateform }}">Supprimer</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-management-plateform></app-management-plateform>
   </section>
 </section>
 

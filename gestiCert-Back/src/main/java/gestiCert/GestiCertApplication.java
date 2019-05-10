@@ -1,5 +1,10 @@
 package gestiCert;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
+import javax.persistence.EntityManager;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -7,6 +12,15 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import gestiCert.model.AppUser;
+import gestiCert.model.Application;
+import gestiCert.model.Department;
+import gestiCert.model.Environment;
+import gestiCert.model.Plateform;
+import gestiCert.model.Profile;
+import gestiCert.model.Role;
+import gestiCert.model.Root;
+import gestiCert.model.Server;
 import gestiCert.service.AppUserService;
 import gestiCert.service.ApplicationService;
 import gestiCert.service.CertificateService;
@@ -16,6 +30,7 @@ import gestiCert.service.ProfileService;
 import gestiCert.service.PlateformService;
 import gestiCert.service.RootService;
 import gestiCert.service.ServerService;
+
 /**
  * 
  * GestiertApplication est la classe contenant la methode principale de l'application
@@ -26,6 +41,10 @@ import gestiCert.service.ServerService;
 @SpringBootApplication
 public class GestiCertApplication implements CommandLineRunner
 {	
+	// authent procedure stockée
+	@Autowired
+	private EntityManager entityManager;
+	
 	@Autowired
 	ProfileService profileServ;
 	
@@ -116,25 +135,25 @@ public class GestiCertApplication implements CommandLineRunner
 //    	Profile pro3 = new Profile("Chef(fe) de Service");
 //    	profileServ.createProfile(pro3);
 //        
-//        AppUser ala = new AppUser("paaa001", "aaa", "Zanzibar", "Alain", "alain.zanzibar@laposte.fr", "0678564321", new Department(1, "Dev Web"), new Profile(3, "Chef(fe) de Service"), new ArrayList<>(Arrays.asList(Role.ROLE_DEV)));
+//        AppUser ala = new AppUser("paaa001", "aaa", "Zanzibar", "Alain", "alain.zanzibar@laposte.fr", "0678564321", new Department(1, "Dev Web"), new Profile(3, "Chef(fe) de Service"), new ArrayList<>(Arrays.asList(Role.ROLE_ADMIN)));
 //        appUserServ.signup(ala);
-//        AppUser bea = new AppUser("pbbb002", "bbb", "Yemen", "Béatrice", "beatrice.yemen@laposte.fr", "0659527564", new Department(1, "Dev Web"), new Profile(2, "Chef(fe) de Projet"), new ArrayList<>(Arrays.asList(Role.ROLE_SERVICE, Role.ROLE_DEV)));
+//        AppUser bea = new AppUser("pbbb002", "bbb", "Yemen", "Béatrice", "beatrice.yemen@laposte.fr", "0659527564", new Department(1, "Dev Web"), new Profile(2, "Chef(fe) de Projet"), new ArrayList<>(Arrays.asList(Role.ROLE_DEV)));
 //        appUserServ.signup(bea);
 //        AppUser cla = new AppUser("xccc003", "ccc", "Xéres", "Claude", "claude.xeres@laposte.fr", "0765098765", new Department(2, "SIGP3"), new Profile(1, "Développeur(se)"), new ArrayList<>(Arrays.asList(Role.ROLE_DEV)));
 //        appUserServ.signup(cla);
-//        AppUser den = new AppUser("pddd004", "ddd", "Wapiti", "Denise", "denise.wapiti@laposte.fr", "0664598765", new Department(1, "Dev Web"), new Profile(3, "Chef(fe) de Service"), new ArrayList<>(Arrays.asList(Role.ROLE_ADMIN, Role.ROLE_SERVICE, Role.ROLE_DEV)));
+//        AppUser den = new AppUser("pddd004", "ddd", "Wapiti", "Denise", "denise.wapiti@laposte.fr", "0664598765", new Department(1, "Dev Web"), new Profile(3, "Chef(fe) de Service"), new ArrayList<>(Arrays.asList(Role.ROLE_ADMIN)));
 //        appUserServ.signup(den);
 //        AppUser eti = new AppUser("xeee005", "eee", "Vanuatu", "Etienne", "etienne.vanuatu@laposte.fr", "0743867290", new Department(1, "Dev Web"), new Profile(1, "Développeur(se)"), new ArrayList<>(Arrays.asList(Role.ROLE_DEV)));
 //        appUserServ.signup(eti);
 //        AppUser fra = new AppUser("pfff006", "fff", "Uruguay", "François", "francois.uruguay@laposte.fr", "0749715064", new Department(3, "Appli HR"), new Profile(1, "Développeur(se)"), new ArrayList<>(Arrays.asList(Role.ROLE_DEV)));
 //        appUserServ.signup(fra);
-//        AppUser gus = new AppUser("pggg007", "ggg", "Tuvalu", "Gustave", "gustave.tuvalu@laposte.fr", "0603528677", new Department(2, "SIGP3"), new Profile(3, "Chef(fe) de Service"), new ArrayList<>(Arrays.asList(Role.ROLE_ADMIN, Role.ROLE_SERVICE, Role.ROLE_DEV)));
+//        AppUser gus = new AppUser("pggg007", "ggg", "Tuvalu", "Gustave", "gustave.tuvalu@laposte.fr", "0603528677", new Department(2, "SIGP3"), new Profile(3, "Chef(fe) de Service"), new ArrayList<>(Arrays.asList(Role.ROLE_ADMIN)));
 //        appUserServ.signup(gus);
 //        AppUser hel = new AppUser("xhhh008", "hhh", "Suriname", "Hélène", "helene.suriname@laposte.fr", "0602352963", new Department(1, "Dev Web"), new Profile(1, "Développeur(se)"), new ArrayList<>(Arrays.asList(Role.ROLE_DEV)));
 //        appUserServ.signup(hel);
-//        AppUser ire = new AppUser("piii009", "iii", "Rwanda", "Irène", "irene.rwanda@laposte.fr", "0620954826", new Department(1, "Dev Web"), new Profile(2, "Chef(fe) de Projet"), new ArrayList<>(Arrays.asList(Role.ROLE_SERVICE, Role.ROLE_DEV)));
+//        AppUser ire = new AppUser("piii009", "iii", "Rwanda", "Irène", "irene.rwanda@laposte.fr", "0620954826", new Department(1, "Dev Web"), new Profile(2, "Chef(fe) de Projet"), new ArrayList<>(Arrays.asList(Role.ROLE_DEV)));
 //        appUserServ.signup(ire);
-//        AppUser qua = new AppUser("pjjj010", "jjj", "Quatar", "François", "francois.quatar@laposte.fr", "0644623978", new Department(2, "SIGP3"), new Profile(3, "Chef(fe) de Service"), new ArrayList<>(Arrays.asList(Role.ROLE_ADMIN, Role.ROLE_SERVICE, Role.ROLE_DEV)));
+//        AppUser qua = new AppUser("pjjj010", "jjj", "Quatar", "François", "francois.quatar@laposte.fr", "0644623978", new Department(2, "SIGP3"), new Profile(3, "Chef(fe) de Service"), new ArrayList<>(Arrays.asList(Role.ROLE_ADMIN)));
 //        appUserServ.signup(qua);
 //        AppUser jul = new AppUser("xkkk011", "kkk", "Tuvalu", "Julie", "julie.tuvalu@laposte.fr", "0762327490", new Department(1, "Dev Web"), new Profile(1, "Développeur(se)"), new ArrayList<>(Arrays.asList(Role.ROLE_DEV)));
 //        appUserServ.signup(jul);

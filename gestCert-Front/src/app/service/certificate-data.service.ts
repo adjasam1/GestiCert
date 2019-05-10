@@ -95,6 +95,8 @@ export class CertificateDataService {
 
   /* TEST PRIMENG */
   public getCertificatePrimeNg() {
-    return this.httpClient.get('http://localhost:8080/api/certificat').toPromise().then(data =>  {return data;} );
+    return this.httpClient.get('http://localhost:8080/api/certificat').toPromise().then(data =>  {
+      return data;
+    });
   }
 }

@@ -35,6 +35,8 @@ const routes: Routes = [
   { path: 'gestion/env/:id', component: ManagementComponent },
   { path: 'gestion/env/ajout', component: ManagementComponent },
   { path: 'gestion/pla', component: ManagementComponent },
+  { path: 'gestion/pla/:id', component: ManagementComponent },
+  { path: 'gestion/pla/ajout', component: ManagementComponent },
   { path: 'gestion/rac', component: ManagementComponent },
   { path: 'gestion/sur', component: ManagementComponent },
   { path: 'certificat/:id', component: CertificateComponent },

@@ -6,6 +6,14 @@ import {CertificateDataService} from '../../../service/certificate-data.service'
 import {SelectItem} from 'primeng/api';
 import {Application} from '../../../model/application';
 import {ApplicationDataService} from '../../../service/application-data.service';
+import {EnvironmentDataService} from '../../../service/environment-data.service';
+import {Environment} from '../../../model/environment';
+import {PlateformDataService} from '../../../service/plateform-data.service';
+import {Plateform} from '../../../model/plateform';
+import {RootDataService} from '../../../service/root-data.service';
+import {Root} from '../../../model/root';
+import {ServerDataService} from '../../../service/server-data.service';
+import {Server} from '../../../model/server';
 
 @Component({
   selector: 'app-management-certificate',
@@ -21,6 +29,11 @@ export class ManagementCertificateComponent implements OnInit {
   applicationsList: BehaviorSubject<Application[]>;
   editedApplication: Application[];
 
+  environmentsList: BehaviorSubject<Environment[]>;
+  plateformsList: BehaviorSubject<Plateform[]>;
+  rootsList: BehaviorSubject<Root[]>;
+  serversList: BehaviorSubject<Server[]>;
+
   /* TEST PRIMENG */
   certificates: Certificate;
   cols: any[];
@@ -31,6 +44,10 @@ export class ManagementCertificateComponent implements OnInit {
 
   constructor(private certificateDataService: CertificateDataService,
               private applicationDataService: ApplicationDataService,
+              private environmentDataService: EnvironmentDataService,
+              private plateformDataService: PlateformDataService,
+              private rootDataService: RootDataService,
+              private serverDataService: ServerDataService,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -38,17 +55,21 @@ export class ManagementCertificateComponent implements OnInit {
 
     this.certificatesList = this.certificateDataService.availableCertificates$;
     this.idCertificate = +this.route.snapshot.params.id;
-    this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificat => { this.editedCertificate = certificat; });
+    this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificate => { this.editedCertificate = certificate; });
 
     this.certificateDataService.getCertificatePrimeNg().then(certificates => this.certificates = certificates);
 
     this.applicationsList = this.applicationDataService.availableApplications$;
-    this.applicationDataService.getApplication().subscribe(applications => this.editedApplication = applications);
     this.applicationDataService.getApplicationPrimeNg().then(applications => this.applications = applications);
+
+    this.environmentsList = this.environmentDataService.availableEnvironments$;
+    this.plateformsList = this.plateformDataService.availablePlateforms$;
+    this.rootsList = this.rootDataService.availableRoots$;
+    this.serversList = this.serverDataService.availableServers$;
 
     this.cols = [
       { field: 'nameCertificate', header: 'Nom Certificat' },
-      { field: 'applications.nameApplication', header: 'Nom Application' },
+  //    { field: 'application.nameApplication', header: 'Nom Application' },
       { field: 'dateEndValidity', header: 'Fin Validité' }
     ];
   }
@@ -63,7 +84,7 @@ export class ManagementCertificateComponent implements OnInit {
         this.certificateDataService.updateCertificate(this.editedCertificate);
       }
     }
-    this.router.navigate(['/gestion/app']);
+    this.router.navigate(['/gestion/cer']);
   }
 
   onDelete() {

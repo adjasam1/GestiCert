@@ -17,7 +17,12 @@ export class ManagementUserComponent implements OnInit {
 
   usersList: BehaviorSubject<AppUser[]>;
   idUser: number;
-  editedUser: AppUser = new AppUser();
+  editedUser: AppUser = new AppUser(0, '', '', '', '', '', '', null, null);
+
+  /* TEST PRIMENG */
+  users: AppUser;
+  cols: any[];
+  selectedUser: AppUser;
 
   profilesList: BehaviorSubject<Profile[]>;
   departmentsList: BehaviorSubject<Department[]>;
@@ -35,23 +40,31 @@ export class ManagementUserComponent implements OnInit {
     this.idUser = +this.route.snapshot.params.id;
     this.userDataService.findUser(this.idUser).subscribe(user => { this.editedUser = user; });
 
+    this.userDataService.getUserPrimeNg().then(users => this.users = users);
+
     this.profilesList = this.profileDataService.availableProfiles$;
     this.departmentsList = this.departmentDataService.availableDepartments$;
+
+    this.cols = [
+      { field: 'idRHUser', header: 'idRH' },
+      { field: 'nameUser', header: 'Nom' },
+      { field: 'firstNameUser', header: 'Prénom' }
+    ];
 
   }
 
   onSave() {
     if (!this.idUser) {
-      console.log('bbb');
-      console.log(this.editedUser);
-      this.userDataService.createUser(this.editedUser);
-      console.log('aaaa');
-      //if (confirm('Êtes-vous certain de vouloir ajouter un nouvel utilisateur ?')) {
-      //  this.userDataService.createUser(this.editedUser);
-    //  }
+      if (confirm('Êtes-vous certain de vouloir ajouter un nouvel utilisateur ?')) {
+        console.log('create : ' + this.editedUser);
+        this.userDataService.createUser(this.editedUser);
+        console.log('create : ' + this.editedUser);
+      }
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier cet utilisateur ?')) {
+        console.log('update : ' + this.editedUser);
         this.userDataService.updateUser(this.editedUser);
+        console.log('update : ' + this.editedUser);
       }
     }
     this.router.navigate(['/gestion/uti']);

@@ -18,7 +18,7 @@ public class UserDetailServiceImpl implements UserDetailsService {
 	
 //	@Autowired
 //	private UserRepository userRepo;
-//	
+	
 //	@Override
 //	public UserDetails loadUserByUsername(String idRHUser) throws UsernameNotFoundException {
 //		final Optional<gestiCert.model.User> user = userRepo.findByIdRHUser(idRHUser);

@@ -28,7 +28,6 @@ import {CertificateComponent} from './web-pages/certificate/certificate.componen
 import {LoginComponent} from './web-pages/login/login.component';
 import {LayoutModule} from '@angular/cdk/layout';
 import {DevGuard} from './jwt-security/guards/dev.guard';
-import {ServiceGuard} from './jwt-security/guards/service.guard';
 import {AdminGuard} from './jwt-security/guards/admin.guard';
 import {JwtInterceptor} from './jwt-security/http-interceptor/jwt.interceptor';
 import {HomeComponent} from './web-pages/home/home.component';
@@ -47,6 +46,9 @@ import {TableModule} from 'primeng/table';
 import {MessageModule, MessagesModule} from 'primeng/primeng';
 import { InfoCertificateComponent } from './web-pages/header-page/info-certificate/info-certificate.component';
 import {InfoUserComponent} from './web-pages/header-page/info-user/info-user.component';
+import { ManagementPlateformComponent } from './web-pages/administration/management-plateform/management-plateform.component';
+import { ManagementRootComponent } from './web-pages/administration/management-root/management-root.component';
+import { ManagementServerComponent } from './web-pages/administration/management-server/management-server.component';
 
 @NgModule({
   declarations: [
@@ -70,7 +72,10 @@ import {InfoUserComponent} from './web-pages/header-page/info-user/info-user.com
     ManagementEnvironmentComponent,
     ManagementCertificateComponent,
     InfoUserComponent,
-    InfoCertificateComponent
+    InfoCertificateComponent,
+    ManagementPlateformComponent,
+    ManagementRootComponent,
+    ManagementServerComponent
   ],
   imports: [
     BrowserModule,
@@ -101,7 +106,7 @@ import {InfoUserComponent} from './web-pages/header-page/info-user/info-user.com
     MessagesModule,
     MessageModule
   ],
-  providers: [DevGuard, ServiceGuard, AdminGuard,
+  providers: [DevGuard, AdminGuard,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,

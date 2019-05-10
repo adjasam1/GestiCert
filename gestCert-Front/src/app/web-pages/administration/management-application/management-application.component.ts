@@ -28,7 +28,9 @@ export class ManagementApplicationComponent implements OnInit {
   ngOnInit() {
     this.applicationsList = this.applicationDataService.availableApplications$;
     this.idApplication = +this.route.snapshot.params.id;
-    this.applicationDataService.findApplication(this.idApplication).subscribe(application => { this.editedApplication = application; });
+    this.applicationDataService.findApplication(this.idApplication).subscribe(application => {
+      this.editedApplication = application;
+    });
 
     this.applicationDataService.getApplicationPrimeNg().then(applications => this.applications = applications);
 

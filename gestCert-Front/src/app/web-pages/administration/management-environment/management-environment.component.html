@@ -2,79 +2,81 @@
   <h1>Administration des Environnements</h1>
 </div>
 
+
+
 <div class="cadre">
 
   <div id="formulaire">
-    <h1 *ngIf="editedEnvironment.idEnvironment; else elseBlock1"
-        title="Formulaire pour modifier l'environnement {{ editedEnvironment.nameEnvironment }}">
-      Environnement {{ editedEnvironment.nameEnvironment }}
-    </h1>
-    <ng-template #elseBlock1 title="Formulaire pour ajouter un environnement">
-      <h1>Ajout d'un environnement <br></h1>
-    </ng-template>
-    <h2>* Champs obligatoires</h2>
-    <form>
-      <div>
-        <div class="form-control">
-          <label for="name">Nom * : </label>
-          <div *ngFor="let col of cols" [ngSwitch]="col.field">
-            <input *ngSwitchCase="'nameEnvironment'" placeholder="Entrez le nom"
-                   pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-                   type="search" id="name" [(ngModel)]="editedEnvironment.nameEnvironment" name="name"
-                   title="Champ pour le nom de l'environnement" required>
-          </div>
-        </div>
-      </div>
-    </form>
-    <br>
-    <div id="modification">
-      <a *ngIf="editedEnvironment.idEnvironment" id="supprime" role="button" (click)="onDelete()"
-         title="Supprimer l'environnement {{editedEnvironment.nameEnvironment}}">Supprimer</a>
-      <a id="sauvegarde" role="button" (click)="onSave()"
-         title="Sauvegarder le service {{editedEnvironment.nameEnvironment}}">Sauvegarder</a>
-    </div>
-  </div>
 
-  <div title="Liste des environnements">
+    <h2>Recherche</h2>
 
-    <div>
-      <h1>Recherche</h1>
+    <div class="cadre2">
       <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
         <div id="filtre1">
-          <input *ngSwitchCase="'nameEnvironment'" pInputText type="text"
-                 (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Entrez le Nom">
+          <input *ngSwitchCase="'nameEnvironment'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom de l'environnement">
         </div>
       </div>
     </div>
 
-    <div>
-      <h1>Liste des Environnements</h1>
-      <div id="table">
-        <p-table #dt [columns]="cols" [value]="environments" [paginator]="true" [rows]="5" dataKey="nameEnvironment"
-                 [resizableColumns]="true" [reorderableColumns]="true" selectionMode="single"
-                 [(selection)]="selectedEnvironment" stateStorage="session" stateKey="statedemo-session">
+    <div id="espace">
+      <h2 *ngIf="editedEnvironment.idEnvironment; else elseBlock1"
+          title="Formulaire pour modifier l'environnement {{ editedEnvironment.nameEnvironment }}">
+        Environnement {{ editedEnvironment.nameEnvironment }}
+      </h2>
+      <ng-template #elseBlock1 title="Formulaire pour ajouter un environnement">
+        <h2>Ajout d'un environnement <br></h2>
+      </ng-template>
+      <div class="cadre2">
+        <h3>* Champs obligatoires</h3>
+        <form>
+          <div>
+            <div class="form-control">
+              <label for="name">Nom * : </label>
+              <span *ngFor="let col of cols" [ngSwitch]="col.field">
+              <input *ngSwitchCase="'nameEnvironment'" placeholder="Entrez le nom"
+                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     type="search" id="name" [(ngModel)]="editedEnvironment.nameEnvironment" name="name"
+                     title="Champ pour le nom de l'environnement" required>
+            </span>
+            </div>
+            <br>
+          </div>
+        </form>
+        <br>
+        <div id="modification">
+          <a *ngIf="editedEnvironment.idEnvironment" class="choix" role="button" routerLink="/gestion/env" title="Annuler les modifications sur l'environnement {{ editedEnvironment.nameEnvironment }}">Annuler</a>
+          <a *ngIf="editedEnvironment.idEnvironment" class="choix" role="button" (click)="onDelete()" title="Supprimer l'environnement {{ editedEnvironment.nameEnvironment }}">Supprimer</a>
+          <a class="choix" role="button" (click)="onSave()" title="Sauvegarder l'environnement {{ editedEnvironment.nameEnvironment }}">Sauvegarder</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="liste" title="Liste des environnements">
+
+    <h2>Liste des Environnements</h2>
+
+    <div id="table">
+      <div id="autour">
+        <p-table #dt [columns]="cols" [value]="environments" [paginator]="true" [rows]="4" dataKey="nameEnvironment" [resizableColumns]="true" [reorderableColumns]="true"
+                 selectionMode="single" [(selection)]="selectedEnvironment" stateStorage="session" stateKey="statedemo-session">
           <ng-template pTemplate="header" let-columns>
             <tr>
-              <th *ngFor="let col of columns" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+              <th *ngFor="let col of cols" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
-              <th id="bouton"></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-environment let-columns="columns">
-            <tr [pSelectableRow]="environment">
-              <td *ngFor="let col of columns">{{ environment[col.field] }}</td>
-              <td><a role="button" routerLink="/gestion/env/{{environment.idEnvironment}}"
-                     title="Modification de l'environnement {{ environment.idEnvironment }}">Gérer</a></td>
+            <tr routerLink="/gestion/env/{{ environment.idEnvironment }}" [pSelectableRow]="environment">
+              <td *ngFor="let col of cols">{{ environment[col.field] }}</td>
             </tr>
           </ng-template>
         </p-table>
       </div>
     </div>
-
   </div>
 
 </div>
-
-<div id="fin">===</div>

@@ -1,11 +1,18 @@
 package gestiCert.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import javax.persistence.EntityManager;
+import javax.persistence.ParameterMode;
+import javax.persistence.StoredProcedureQuery;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import gestiCert.dto.AppUserDto;
+//import gestiCert.dto.AppUserDto;
 import gestiCert.dto.JsonWebToken;
 import gestiCert.exception.ExistingIdRHUserException;
 import gestiCert.exception.InvalidCredentialsException;
@@ -32,10 +39,15 @@ import gestiCert.service.AppUserService;
 public class AppUserController {
 
 	private AppUserService appUserServ;
+	
+	@Autowired
+	private EntityManager entityManager;
 
 	public AppUserController(AppUserService appUserService) {
 		this.appUserServ = appUserService;
 	}
+	
+	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();;
 
 	/**
 	 * Method to register a new user in database.
@@ -43,14 +55,14 @@ public class AppUserController {
 	 * @param user the new user to create.
 	 * @return a JWT if sign up is ok, a bad response code otherwise.
 	 */
-	@PostMapping("/sign-up")
-	public ResponseEntity<JsonWebToken> signUp(@RequestBody AppUser user) {
-		try {
-			return ResponseEntity.ok(new JsonWebToken(appUserServ.signup(user)));
-		} catch (ExistingIdRHUserException ex) {
-			return ResponseEntity.badRequest().build();
-		}
-	}
+//	@PostMapping("/sign-up")
+//	public ResponseEntity<JsonWebToken> signUp(@RequestBody AppUser user) {
+//		try {
+//			return ResponseEntity.ok(new JsonWebToken(appUserServ.signup(user)));
+//		} catch (ExistingIdRHUserException ex) {
+//			return ResponseEntity.badRequest().build();
+//		}
+//	}
 
 	/**
 	 * Method to sign in a user (already existing).
@@ -58,14 +70,20 @@ public class AppUserController {
 	 * @param user the user to sign in to the app.
 	 * @return a JWT if sign in is ok, a bad response code otherwise.
 	 */
-	@PostMapping("/sign-in")
-	public ResponseEntity<JsonWebToken> signIn(@RequestBody AppUser user) {
-		try {
-			return ResponseEntity.ok(new JsonWebToken(appUserServ.signin(user.getIdRHUser(), user.getPasswordUser())));
-		} catch (InvalidCredentialsException ex) {
-			return ResponseEntity.badRequest().build();
-		}
-	}
+//	@PostMapping("/sign-in")
+//	public ResponseEntity<JsonWebToken> signIn(@RequestBody AppUser user) {
+//		try {
+//			JsonWebToken token = new JsonWebToken(appUserServ.signin(user.getIdRHUser(), user.getPasswordUser()));
+//			System.out.println("aaaaa : " + new JsonWebToken(appUserServ.signin(user.getIdRHUser(), user.getPasswordUser())));
+//			return ResponseEntity.ok(token);
+//		} catch (InvalidCredentialsException ex) {
+//			System.out.println("ex : " + ex);
+//			return ResponseEntity.badRequest().build();
+//		} catch (Exception e) {
+//			System.out.println("e : " + e);
+//			return ResponseEntity.badRequest().build();
+//		}
+//	}
 
 	/**
 	 * Method to get all users from the database. This method is restricted to Admin
@@ -73,13 +91,13 @@ public class AppUserController {
 	 * 
 	 * @return the list of all users registered in the database.
 	 */
-	@GetMapping("/role")
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
-	public List<AppUserDto> getAllUsersAuth() {
-		return appUserServ.findAllUsers().stream()
-				.map(appUser -> new AppUserDto(appUser.getIdRHUser(), appUser.getRoleList()))
-				.collect(Collectors.toList());
-	}
+//	@GetMapping("/role")
+////    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//	public List<AppUserDto> getAllUsersAuth() {
+//		return appUserServ.findAllUsers().stream()
+//				.map(appUser -> new AppUserDto(appUser.getIdRHUser(), appUser.getRoleList()))
+//				.collect(Collectors.toList());
+//	}
 
 //    @GetMapping
 ////  @PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -94,16 +112,43 @@ public class AppUserController {
 	 * @param appUserName the user name to look for.
 	 * @return a User object if found, a not found response code otherwise.
 	 */
-	@GetMapping("/{idRHUser}")
-//    @PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<AppUserDto> getOneUserByIdRH(@PathVariable String idRHUser) {
-		Optional<AppUser> appUser = appUserServ.findUserByIdRHUser(idRHUser);
-		if (appUser.isPresent()) {
-			return ResponseEntity.ok(new AppUserDto(appUser.get().getIdRHUser(), appUser.get().getRoleList()));
-		} else {
-			return ResponseEntity.notFound().build();
-		}
+//	@GetMapping("/{idRHUser}")
+////    @PreAuthorize("hasRole('ROLE_ADMIN')")
+//	public ResponseEntity<AppUserDto> getOneUserByIdRH(@PathVariable String idRHUser) {
+//		Optional<AppUser> appUser = appUserServ.findUserByIdRHUser(idRHUser);
+//		if (appUser.isPresent()) {
+//			return ResponseEntity.ok(new AppUserDto(appUser.get().getIdRHUser(), appUser.get().getRoleList()));
+//		} else {
+//			return ResponseEntity.notFound().build();
+//		}
+//	}
+	
+	// auth proc stockee
+	@GetMapping("/getIdUser/{a}")
+	public Integer getIdUser(@PathVariable String a) {
+		System.out.println("aaaaa" + a);
+		return appUserServ.findUserByIdRH(a);
 	}
+	
+	@GetMapping("/role/{idUser}")
+	public List<String> getRoleUser(@PathVariable Integer idUser) {
+		System.out.println("essai");
+		ArrayList<String> roles = new ArrayList<String>();
+		// BUG ICI
+		StoredProcedureQuery storedProcedure = entityManager.createStoredProcedureQuery("proc_role");
+		System.out.println(entityManager);
+        storedProcedure.registerStoredProcedureParameter(1, Integer.class , ParameterMode.IN);
+        storedProcedure.registerStoredProcedureParameter(2, String.class , ParameterMode.OUT);
+        
+        storedProcedure.setParameter(1, idUser);
+        System.out.println("idUser : " + idUser);
+        storedProcedure.execute();
+        String roleUser = (String) storedProcedure.getOutputParameterValue(2);
+		roles.add(roleUser);
+		return roles;
+	}
+	
+	
 
 	/**
 	 * methodes qui gerent les methodes HTTP entrantes appropriees (GET, POST, PUT,
@@ -251,7 +296,13 @@ public class AppUserController {
 		}
 
 		try {
-			// user.setPasswordUser(bCryptPasswordEncoder.encode(user.getPasswordUser()));
+			// appUserServ.signup(user);
+			newUser = null;
+			 System.out.println(user.getPasswordUser());
+			 user.setPasswordUser(bCryptPasswordEncoder.encode(user.getPasswordUser()));
+			// System.out.println(bCryptPasswordEncoder.encode(user.getPasswordUser()));
+			 
+			 System.out.println(user.getPasswordUser());
 			newUser = appUserServ.createUser(user);
 			// return ResponseEntity.ok(userServ.createUser(user));
 		} catch (Exception e) {

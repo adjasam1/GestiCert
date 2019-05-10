@@ -188,6 +188,11 @@ public class AppUserServiceImpl implements AppUserService {
 		appUserRepo.deleteById(idUser);
 	}
 
+	@Override
+	public int findUserByIdRH(String idRHUser)
+	{
+		return appUserRepo.findUserByIdRH(idRHUser);
+	}
 
 
 }

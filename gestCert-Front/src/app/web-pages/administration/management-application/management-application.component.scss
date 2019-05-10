@@ -12,7 +12,7 @@ h2
 
 #espace
 {
-  margin-top: 40px;
+  margin-top: 11.9%;
 }
 
 h3
@@ -28,6 +28,7 @@ h3
   border: 2px solid black;
   border-radius: 5px;
   margin: 0 10% 10% 10%;
+  padding-left: 1%;
   background-color: #D9EAF4;
   display: inline-flex;
   width: 80%;
@@ -44,14 +45,14 @@ h3
 
 #autour
 {
-  margin: 2.5%;
+  margin: 2%;
 }
 
 .cadre2
 {
   border: 1px solid black;
   border-radius: 5px;
-  margin-bottom: 2.5%;
+  margin-bottom: 5%;
 }
 
 #liste .cadre2
@@ -61,7 +62,7 @@ h3
 
 #filtre1, #filtre2
 {
-  margin: 2.5%;
+  margin: 2%;
 }
 
 #filtre1 input, #filtre2 input
@@ -128,14 +129,19 @@ form
 
 #liste
 {
-  width: 100%;
-  padding: 0 20px 20px 20px;
+  width: 120%;
+  padding: 0 20px 0 5px;
 }
 
 #formulaire
 {
   width: 100%;
   padding: 0 10px;
+}
+
+label
+{
+  font-size: 12px;
 }
 
 a

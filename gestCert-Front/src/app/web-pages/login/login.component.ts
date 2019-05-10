@@ -67,10 +67,16 @@ export class LoginComponent implements OnInit {
     } else if ((appUser.idRHUser === this.userIdRHUrl && appUser.passwordUser === null) ||
       (appUser.idRHUser !== this.userIdRHUrl && appUser.passwordUser === null)) {
       alert('Mot de passe manquant');
-    } else if ((appUser.idRHUser !== this.userIdRHUrl) || (appUser.idRHUser === this.userIdRHUrl && this.userPassword === false)) {
-      alert('Identifiant RH et/ou Mot de passe incorrecte(s)');
-      logForm.reset();
+   // } else if ((appUser.idRHUser !== this.userIdRHUrl) || (appUser.idRHUser === this.userIdRHUrl && this.userPassword === false)) {
+   //   alert('Identifiant RH et/ou Mot de passe incorrecte(s)');
+    //  logForm.reset();
     } else {
+      this.userDataService.getUserByIdUser(this.userIdRHUrl).subscribe(
+        (res: number) => { console.log('res : ' + res);
+        this.userDataService.getRoleUser(res).subscribe(
+          (autre) => { console.log('autre : ' + autre[0]); }
+        ); }
+      );
       this.router.navigate(['/accueil/' + this.userIdUrl]);
     }
   }
