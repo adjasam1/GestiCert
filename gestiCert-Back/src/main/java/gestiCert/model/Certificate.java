@@ -145,11 +145,7 @@ public class Certificate implements Serializable
 
 	public Certificate(@Size(min = 16, max = 17) String nameCertificate, String linkAddressPrincipal,
 			String linkInstallation, String passwordCertificate) {
-		super();
-		this.nameCertificate = nameCertificate;
-		this.linkAddressPrincipal = linkAddressPrincipal;
-		this.linkInstallation = linkInstallation;
-		this.passwordCertificate = passwordCertificate;
+		this(nameCertificate, linkAddressPrincipal, linkInstallation, passwordCertificate, null, null);
 	}
 
 	public Certificate(@Size(min = 16, max = 17) String nameCertificate, String linkAddressPrincipal,

@@ -48,7 +48,7 @@ public class AddressAlternativeController
 	public AddressAlternativeController(AddressAlternativeService addressAlternativeServ)
 	{
 		super();
-		this.addressAlternativeServ = addressAlternativeServ;
+//		this.addressAlternativeServ = addressAlternativeServ;
 	}
 	
 	/**
