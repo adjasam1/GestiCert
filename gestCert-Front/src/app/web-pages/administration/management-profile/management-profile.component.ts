@@ -15,6 +15,10 @@ export class ManagementProfileComponent implements OnInit {
   idProfile: number;
   editedProfile: Profile = new Profile(0, '');
 
+  profiles: Profile;
+  cols: any;
+  selectedProfile: Profile;
+
   constructor(private profileDataService: ProfileDataService,
               private route: ActivatedRoute,
               private router: Router) { }
@@ -24,6 +28,12 @@ export class ManagementProfileComponent implements OnInit {
     this.profilesList = this.profileDataService.availableProfiles$;
     this.idProfile = +this.route.snapshot.params.id;
     this.profileDataService.findProfile(this.idProfile).subscribe(profile => { this.editedProfile = profile; });
+
+    this.profileDataService.getProfilePrimeNg().then(profiles => this.profiles = profiles);
+
+    this.cols = [
+      { field: 'typeProfile', header: 'Type' }
+    ];
 
   }
 

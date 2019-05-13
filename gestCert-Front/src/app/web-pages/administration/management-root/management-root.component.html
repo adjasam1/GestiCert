@@ -1,3 +1,83 @@
-<p>
-  management-root works!
-</p>
+<div class="titre" title="Administration des racines">
+  <h1>Administration des Racines</h1>
+</div>
+
+
+
+<div class="cadre">
+
+  <div id="formulaire">
+
+    <h2>Recherche</h2>
+
+    <div class="cadre2">
+      <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
+        <div id="filtre1">
+          <input *ngSwitchCase="'nameRoot'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom de la racine">
+        </div>
+      </div>
+    </div>
+
+    <div id="espace">
+      <h2 *ngIf="editedRoot.idRoot; else elseBlock1"
+          title="Formulaire pour modifier la racine {{ editedRoot.nameRoot }}">
+        Racine : {{ editedRoot.nameRoot }}
+      </h2>
+      <ng-template #elseBlock1 title="Formulaire pour ajouter une racine">
+        <h2>Ajout d'une racine <br></h2>
+      </ng-template>
+      <div class="cadre2">
+        <h3>* Champs obligatoires</h3>
+        <form>
+          <div>
+            <div class="form-control">
+              <label for="name">Nom * : </label>
+              <span *ngFor="let col of cols" [ngSwitch]="col.field">
+              <input *ngSwitchCase="'nameRoot'" placeholder="Entrez le nom"
+                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     type="search" id="name" [(ngModel)]="editedRoot.nameRoot" name="name"
+                     title="Champ pour le nom de la racine" required>
+            </span>
+            </div>
+            <br>
+          </div>
+        </form>
+        <br>
+        <div id="modification">
+          <a *ngIf="editedRoot.idRoot" class="choix" role="button" routerLink="/gestion/rac" title="Annuler les modifications sur la racine {{ editedRoot.nameRoot }}">Annuler</a>
+          <a *ngIf="editedRoot.idRoot" class="choix" role="button" (click)="onDelete()" title="Supprimer la racine {{ editedRoot.nameRoot }}">Supprimer</a>
+          <a class="choix" role="button" (click)="onSave()" title="Sauvegarder la racine {{ editedRoot.nameRoot }}">Sauvegarder</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="liste" title="Liste des racines">
+
+    <h2>Liste des Racines</h2>
+
+    <div id="table">
+      <div id="autour">
+        <p-table #dt [columns]="cols" [value]="roots" [paginator]="true" [rows]="4" dataKey="nameRoot" [resizableColumns]="true" [reorderableColumns]="true"
+                 selectionMode="single" [(selection)]="selectedRoot" stateStorage="session" stateKey="statedemo-session">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of cols" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-root let-columns="columns">
+            <tr routerLink="/gestion/rac/{{ root.idRoot }}" [pSelectableRow]="root">
+              <td *ngFor="let col of cols">{{ root[col.field] }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+
+</div>
+

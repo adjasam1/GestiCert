@@ -3,7 +3,6 @@ package gestiCert.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 import javax.persistence.EntityManager;
 import javax.persistence.ParameterMode;
@@ -22,10 +21,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-//import gestiCert.dto.AppUserDto;
 import gestiCert.dto.JsonWebToken;
-import gestiCert.exception.ExistingIdRHUserException;
 import gestiCert.exception.InvalidCredentialsException;
+//import gestiCert.dto.AppUserDto;
 import gestiCert.model.AppUser;
 import gestiCert.service.AppUserService;
 
@@ -70,20 +68,20 @@ public class AppUserController {
 	 * @param user the user to sign in to the app.
 	 * @return a JWT if sign in is ok, a bad response code otherwise.
 	 */
-//	@PostMapping("/sign-in")
-//	public ResponseEntity<JsonWebToken> signIn(@RequestBody AppUser user) {
-//		try {
-//			JsonWebToken token = new JsonWebToken(appUserServ.signin(user.getIdRHUser(), user.getPasswordUser()));
-//			System.out.println("aaaaa : " + new JsonWebToken(appUserServ.signin(user.getIdRHUser(), user.getPasswordUser())));
-//			return ResponseEntity.ok(token);
-//		} catch (InvalidCredentialsException ex) {
-//			System.out.println("ex : " + ex);
-//			return ResponseEntity.badRequest().build();
-//		} catch (Exception e) {
-//			System.out.println("e : " + e);
-//			return ResponseEntity.badRequest().build();
-//		}
-//	}
+	@PostMapping("/sign-in")
+	public ResponseEntity<JsonWebToken> signIn(@RequestBody AppUser user) {
+		try {
+			JsonWebToken token = new JsonWebToken(appUserServ.signin(user.getIdRHUser(), user.getPasswordUser()));
+			System.out.println("aaaaa : " + new JsonWebToken(appUserServ.signin(user.getIdRHUser(), user.getPasswordUser())));
+			return ResponseEntity.ok(token);
+		} catch (InvalidCredentialsException ex) {
+			System.out.println("ex : " + ex);
+			return ResponseEntity.badRequest().build();
+		} catch (Exception e) {
+			System.out.println("e : " + e);
+			return ResponseEntity.badRequest().build();
+		}
+	}
 
 	/**
 	 * Method to get all users from the database. This method is restricted to Admin

@@ -7,6 +7,7 @@ import {Profile} from '../../../model/profile';
 import {Department} from '../../../model/department';
 import {ProfileDataService} from '../../../service/profile-data.service';
 import {DepartmentDataService} from '../../../service/department-data.service';
+import {NgForm, Validators} from '@angular/forms';
 
 @Component ({
   selector: 'app-management-user',
@@ -21,11 +22,17 @@ export class ManagementUserComponent implements OnInit {
 
   /* TEST PRIMENG */
   users: AppUser;
-  cols: any[];
+  cols: any;
   selectedUser: AppUser;
 
   profilesList: BehaviorSubject<Profile[]>;
   departmentsList: BehaviorSubject<Department[]>;
+
+ /* loginForm = this.fb.group({
+    idRHUser: [null, Validators.compose([Validators.required, Validators.minLength(7), Validators.maxLength(7)])],
+    passwordUser: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])
+    ]
+  });*/
 
   constructor(private userDataService: UserDataService,
               private profileDataService: ProfileDataService,
@@ -46,9 +53,9 @@ export class ManagementUserComponent implements OnInit {
     this.departmentsList = this.departmentDataService.availableDepartments$;
 
     this.cols = [
-      { field: 'idRHUser', header: 'idRH' },
-      { field: 'nameUser', header: 'Nom' },
-      { field: 'firstNameUser', header: 'Prénom' }
+      { field: 'idRHUser', header: 'idRH', width: '24%' },
+      { field: 'nameUser', header: 'Nom', width: '38%' },
+      { field: 'firstNameUser', header: 'Prénom', width: '38%' }
     ];
 
   }

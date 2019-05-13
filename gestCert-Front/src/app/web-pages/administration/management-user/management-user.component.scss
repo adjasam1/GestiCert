@@ -12,7 +12,12 @@ h2
 
 #espace
 {
-  margin-top: 9.7%;
+  margin-top: 8.4%;
+}
+
+#espace2
+{
+  margin-top: 13%;
 }
 
 h3
@@ -68,6 +73,11 @@ h3
 .filtre1 input, #filtre2 input
 {
   width: 100%;
+}
+
+form input, form select
+{
+  width: 65%;
 }
 
 thead

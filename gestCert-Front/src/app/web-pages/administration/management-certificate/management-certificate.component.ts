@@ -68,9 +68,9 @@ export class ManagementCertificateComponent implements OnInit {
     this.serversList = this.serverDataService.availableServers$;
 
     this.cols = [
-      { field: 'nameCertificate', header: 'Nom Certificat' },
-  //    { field: 'application.nameApplication', header: 'Nom Application' },
-      { field: 'dateEndValidity', header: 'Fin Validité' }
+      { field: 'nameCertificate', header: 'Nom Certificat', width: '40%' },
+      { field: 'application.nameApplication', header: 'Nom Application', width: '35%' },
+      { field: 'dateEndValidity', header: 'Validité', width: '25%' }
     ];
   }
 

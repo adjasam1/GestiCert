@@ -51,18 +51,23 @@ export class ProfileComponent implements OnInit {
 
   onSave() {
     console.log('aaa : ' + this.editedUser);
-    if (!this.idUser) {
+ /*   if (!this.idUser) {
       if (confirm('Êtes-vous certain de vouloir ajouter un nouvel utilisateur ?')) {
         console.log('aaa : ' + this.editedUser);
         this.userDataService.createUser(this.editedUser);
         this.router.navigate([history.go(-1)]);
       }
-    } else {
-      if (confirm('Êtes-vous certain de vouloir modifier votre profil ?')) {
-        this.userDataService.updateUser(this.editedUser);
-        this.router.navigate(['/accueil/' + this.editedUser.idUser]);
-      }
+    } else { */
+    if (confirm('Êtes-vous certain de vouloir modifier votre profil ?')) {
+      this.userDataService.updateUser(this.editedUser);
+      this.router.navigate([history.go(-1)]);
+      //     this.router.navigate(['/accueil/' + this.editedUser.idUser]);
     }
+    //  }
+  }
+
+  comeBack(): void {
+    this.router.navigate([history.go(-1)]);
   }
 
 //  addField(): void {

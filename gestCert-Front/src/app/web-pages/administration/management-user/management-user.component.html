@@ -7,7 +7,7 @@
   <div id="formulaire">
     <h2 *ngIf="editedUser.idUser; else elseBlock1"
         title="Formulaire pour modifier l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
-      Utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}
+      Utilisateur : {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}
     </h2>
     <ng-template #elseBlock1 title="Formulaire pour ajouter un utilisateur">
       <h2>Ajout d'un utilisateur<br></h2>
@@ -21,7 +21,7 @@
             <span *ngFor="let col of cols" [ngSwitch]="col.field">
               <input *ngSwitchCase="'idRHUser'" placeholder="Entrez l'identifiant RH"
                      pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-                     type="search" id="idRHUser" [(ngModel)]="editedUser.nameUser" name="idRHUser"
+                     type="search" id="idRHUser" [(ngModel)]="editedUser.idRHUser" name="idRHUser"
                      title="Champ pour l'identifiant de l'utilisateur" required>
             </span>
           </div>
@@ -32,7 +32,7 @@
                    placeholder="Entrez le mot de passe"
                    required title="Champ pour le mot de passe de l'utilisateur">
           </div>
-          <br>
+          <br *ngIf="editedUser.idUser === 0">
           <div class="form-control">
             <label for="nameUser">Nom * : </label>
             <span *ngFor="let col of cols" [ngSwitch]="col.field">
@@ -48,7 +48,7 @@
             <span *ngFor="let col of cols" [ngSwitch]="col.field">
               <input *ngSwitchCase="'firstNameUser'" placeholder="Entrez le prénom"
                      pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-                     type="search" id="firstNameUser" [(ngModel)]="editedUser.nameUser" name="firstNameUser"
+                     type="search" id="firstNameUser" [(ngModel)]="editedUser.firstNameUser" name="firstNameUser"
                      title="Champ pour le prénom de l'utilisateur" required>
             </span>
           </div>
@@ -79,20 +79,21 @@
           <br>
           <div class="form-control">
             <label for="eMailUser">E-mail * : </label>
-            <input type="date" id="eMailUser" [(ngModel)]="editedUser.eMailUser" name="eMailUser"
+            <input type="search" id="eMailUser" [(ngModel)]="editedUser.eMailUser" name="eMailUser"
                    placeholder="Entrez l'e-mail"
                    required title="Champ pour l'e-mail de l'utilisateur">
           </div>
           <br>
           <div class="form-control">
             <label for="phoneUser">Téléphone * : </label>
-            <input type="date" id="phoneUser" [(ngModel)]="editedUser.phoneUser" name="phoneUser"
+            <input type="search" id="phoneUser" [(ngModel)]="editedUser.phoneUser" name="phoneUser"
                    placeholder="Entrez le téléphone"
                    required title="Champ pour le téléphone de l'utilisateur">
           </div>
         </div>
       </form>
       <br>
+      <div *ngIf="editedUser.idUser" id="espace2"></div>
       <div id="modification">
         <a *ngIf="editedUser.idUser" class="choix" role="button" routerLink="/gestion/uti" title="Annuler les modifications sur l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Annuler</a>
         <a *ngIf="editedUser.idUser" class="choix" role="button" (click)="onDelete()" title="Supprimer l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Supprimer</a>
@@ -123,11 +124,11 @@
 
     <div id="table">
       <div id="autour">
-        <p-table #dt [columns]="cols" [value]="users" [paginator]="true" [rows]="4" dataKey="idRHUser" [resizableColumns]="true" [reorderableColumns]="true"
+        <p-table #dt [columns]="cols" [value]="users" [paginator]="true" [rows]="4" dataKey="idRHUser" [reorderableColumns]="true"
                  selectionMode="single" [(selection)]="selectedUser" stateStorage="session" stateKey="statedemo-session">
           <ng-template pTemplate="header" let-columns>
             <tr>
-              <th id="th1" *ngFor="let col of cols" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+              <th id="th1" *ngFor="let col of cols" [pSortableColumn]="col.field" colspan="col.colspan" [ngStyle]="{'width': col.width}" pReorderableColumn>
                 {{col.header}}
                 <p-sortIcon [field]="col.field"></p-sortIcon>
               </th>
@@ -144,147 +145,3 @@
   </div>
 
 </div>
-
-
-<!--<div>
-  <a role="button" title="Ajouter un certificat">Ajouter un certificat</a>
-</div>
-<div class="titre" title="Liste des certificats">
-  <h1>Liste des Certificats</h1>
-</div>
-
-<div class="cadre">
-  <table class="table1">
-    <thead>
-    <tr>
-      <th class="th1">Nom Certificat</th>
-      <th class="th2">Nom Application</th>
-      <th class="th2"></th>
-    </tr>
-    </thead>
-
-    <tbody *ngFor="let certificate of certificatesList | async"
-           title="Certificat {{ certificate.environment.nameEnvironment }} de l'application {{ certificate.application.nameApplication }}">
-    <tr>
-      <td>{{ certificate.nameCertificate }}</td>
-      <td>{{ certificate.application.nameApplication }}</td>
-      <td>
-        <a role="button"
-           title="Modification du  certificat {{ certificate.environment.nameEnvironment }} de l'application {{ certificate.application.nameApplication }}">Modifier</a>
-        <a role="button"
-           title="Modification du  certificat {{ certificate.environment.nameEnvironment }} de l'application {{ certificate.application.nameApplication }}">Supprimer</a>
-      </td>
-    </tr>
-    </tbody>
-  </table>
-</div>-->
-
-
-
-<!--<div class="titre" title="Administration des utilisateurs">
-  <h1>Administration des Utilisateurs</h1>
-</div>
-
-<div class="cadre">
-
-  <div id="1">
-    <h1 *ngIf="editedUser.idUser; else elseBlock1"
-        title="Formulaire pour modifier l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Modification de l'utilisateur
-        <br>{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}</h1>
-    <ng-template #elseBlock1 title="Formulaire pour ajouter un utilisateur"><h1>Ajout d'un utilisateur <br></h1></ng-template>
-    <h2>* Champs obligatoires</h2>
-    <form>
-      <div>
-        <div class="form-control">
-          <label for="idRH">Identifiant * : </label>
-          <input type="search" id="idRH" [(ngModel)]="editedUser.idRHUser" name="idRH" placeholder="Entrez l'identifiant RH"
-                 required title="Champ pour l'identifiant RH">
-        </div>
-        <br>
-        <div class="form-control" *ngIf="editedUser.idUser === 0">
-          <label for="mdp">Mot de passe * : </label>
-          <input type="search" id="mdp" [(ngModel)]="editedUser.passwordUser" name="mdp"
-                 placeholder="Entrez le mot de passe" required title="Champ pour le mot de passe">
-        </div>
-        <br *ngIf="editedUser.idUser === 0">
-        <div class="form-control">
-          <label for="nom">Nom * : </label>
-          <input type="search" id="nom" [(ngModel)]="editedUser.nameUser" name="nom" placeholder="Entrez le nom" required title="Champ pour le nom">
-        </div>
-        <br>
-        <div class="form-control">
-          <label for="prenom">Prénom * : </label>
-          <input type="search" id="prenom" [(ngModel)]="editedUser.firstNameUser" name="prenom" placeholder="Entrez le prénom"
-                 required title="Champ pour le prénom">
-        </div>
-        <br>
-        <div class="form-control">
-          <label for="profile">Profil * : </label>
-          <select
-            name="profile"
-            id="profile"
-            class="form-control"
-            [(ngModel)]="editedUser.profile" title="Champ pour le profil">
-            <option *ngFor="let profile of profilesList | async"
-                    [value]="profile.idProfile">{{ profile.typeProfile }}</option>
-          </select>
-        </div>
-        <br>
-      </div>
-      <div class="form-control">
-        <label for="department">Service * : </label>
-        <select
-          name="department"
-          id="department"
-          class="form-control"
-          [(ngModel)]="editedUser.department" title="Champ pour le service">
-          <option *ngFor="let department of departmentsList | async"
-                  [value]="department.idDepartment">{{ department.nameDepartment }}</option>
-        </select>
-      </div>
-      <br>
-      <div class="form-control">
-        <label for="tel">Téléphone : </label>
-        <input type="search" id="tel" [(ngModel)]="editedUser.phoneUser" name="tel" placeholder="Entrez le téléphone" title="Champ pour le téléphone">
-      </div>
-      <br>
-      <div class="form-control">
-        <label for="email">E-mail * : </label>
-        <input type="search" id="email" [(ngModel)]="editedUser.eMailUser" name="email" placeholder="Entrez le mail" title="Champ pour le mail">
-      </div>
-      <br>
-    </form>
-    <br>
-    <div id="modification">
-      <a *ngIf="editedUser.idUser" id="supprime" role="button" (click)="onDelete()" title="Supprimer l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Supprimer</a>
-      <a id="sauvegarde" role="button" (click)="onSave()" title="Sauvegarder l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Sauvegarder</a>
-    </div>
-  </div>
-
-  <div id="2" title="Liste des utilisateurs">
-    <h1>Liste des Utilisateurs</h1>
-
-    <table class="table">
-      <thead>
-      <tr>
-        <th>IdRH</th>
-        <th>Nom</th>
-        <th>Prénom</th>
-        <th></th>
-      </tr>
-      </thead>
-
-      <tbody ng *ngFor="let user of usersList | async" title="{{ user.idRHUser }} {{ user.nameUser }} {{ user.firstNameUser }}">
-      <tr>
-        <td>{{ user.idRHUser }}</td>
-        <td>{{ user.nameUser }}</td>
-        <td>{{ user.firstNameUser }}</td>
-        <td>
-          <a role="button" routerLink="/gestion/uti/{{user.idUser}}"
-             title="Modification du compte de {{ user.idRHUser }} {{ user.nameUser }} {{ user.firstNameUser }}">Modifier/Supprimer</a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>
-</div>-->

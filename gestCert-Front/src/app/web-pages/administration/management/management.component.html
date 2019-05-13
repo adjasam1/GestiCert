@@ -13,9 +13,6 @@
     <div id="deconnexion" title="Déconnexion de l'application">
       <a role="button" (click)="deconnexion()">Déconnexion</a>
     </div>
-    <div title="Retour à l'accueil">
-      <a role="button" (click)="comeBack()">Retour</a>
-    </div>
   </div>
 </section>
 
@@ -95,65 +92,13 @@
 <section class="gest" title="Gestion des racines">
   <input type="hidden" [routerLink]="'/gestion/rac'" routerLinkActive #grac="routerLinkActive"/>
   <section *ngIf="grac.isActive">
-    <div>
-      <a role="button" title="Ajouter une racine">Ajouter une racine</a>
-    </div>
-    <div class="titre" title="Liste des racines">
-      <h1>Liste des Racines</h1>
-    </div>
-
-    <div class="cadre">
-      <table class="table">
-        <thead>
-        <tr>
-          <th class="th2">Nom</th>
-          <th></th>
-        </tr>
-        </thead>
-
-        <tbody *ngFor="let root of rootsList | async" title="Racine {{ root.nameRoot }}">
-        <tr>
-          <td>{{ root.nameRoot }}</td>
-          <td>
-            <a role="button" title="Modification de la racine {{ root.nameRoot }}">Modifier</a>
-            <a role="button" title="Suppression de la racine {{ root.nameRoot }}">Supprimer</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-management-root></app-management-root>
   </section>
 </section>
 
 <section class="gest" title="Gestion des serveurs">
   <input type="hidden" [routerLink]="'/gestion/sur'" routerLinkActive #gsur="routerLinkActive"/>
   <section *ngIf="gsur.isActive">
-    <div>
-      <a role="button" title="Ajouter un serveur">Ajouter un serveur</a>
-    </div>
-    <div class="titre" title="Liste des serveurs">
-      <h1>Liste des Serveurs</h1>
-    </div>
-
-    <div class="cadre">
-      <table class="table">
-        <thead>
-        <tr>
-          <th class="th2">Nom</th>
-          <th></th>
-        </tr>
-        </thead>
-
-        <tbody *ngFor="let server of serversList | async" title="Serveur {{ server.nameServer }}">
-        <tr>
-          <td>{{ server.nameServer }}</td>
-          <td>
-            <a role="button" title="Modification du serveur {{ server.nameServer }}">Modifier</a>
-            <a role="button" title="Suppression du serveur {{ server.nameServer }}">Supprimer</a>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-    </div>
+    <app-management-server></app-management-server>
   </section>
 </section>

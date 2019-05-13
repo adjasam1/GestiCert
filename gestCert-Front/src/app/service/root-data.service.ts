@@ -1,7 +1,9 @@
 import { Injectable } from '@angular/core';
 import {Root} from '../model/root';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
+import {Environment} from '../model/environment';
+import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -42,4 +44,51 @@ export class RootDataService {
         this.availableRoots$.next(this.availableRoots);
       });
   }
+
+  public findRoot(rootId: number): Observable<Root> {
+    if (rootId) {
+      if (!this.availableRoots) {
+        return this.getRoot().pipe(map(roots => roots.find(root =>
+          root.idRoot === rootId)));
+      }
+      return of(this.availableRoots.find(root => root.idRoot === rootId));
+    } else {
+      return of(new Root(0, '', null));
+    }
+  }
+
+  public createRoot(newRoot: Root) {
+    this.httpClient.post<Root>('http://localhost:8080/api/racine/ajout', newRoot).subscribe(
+      createRoot => {
+        this.availableRoots.push(createRoot);
+        this.availableRoots$.next(this.availableRoots);
+      }
+    );
+  }
+
+  public updateRoot(root: Root) {
+    this.httpClient.put<Root>(`http://localhost:8080/api/racine/modifid=${root.idRoot}`, root).subscribe(
+      updateRoot => {
+        this.availableRoots$.next(this.availableRoots);
+      }
+    );
+  }
+
+  public deleteRoot(root: Root) {
+    this.httpClient.delete<Root>(`http://localhost:8080/api/racine/supprid=${root.idRoot}`).subscribe(
+      deleteRoot => {
+        const index1 = this.availableRoots.indexOf(root);
+        this.availableRoots.splice(index1, 1);
+        this.availableRoots$.next(this.availableRoots);
+      }
+    );
+  }
+
+  /* TEST PRIMENG */
+  public getRootPrimeNg() {
+    return this.httpClient.get('http://localhost:8080/api/racine').toPromise().then(data => {
+      return data;
+    });
+  }
+
 }

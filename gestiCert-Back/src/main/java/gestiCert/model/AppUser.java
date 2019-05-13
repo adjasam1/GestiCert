@@ -76,7 +76,7 @@ public class AppUser implements Serializable {
 	private Profile profile;
 	
 	@JsonIgnore
-	@ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
+	@ManyToMany//(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
 	@JoinTable(name = "utilisateur_application", joinColumns = @JoinColumn(name = "id_utilisateur"),
 		inverseJoinColumns = @JoinColumn(name = "id_application"),
 		foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),

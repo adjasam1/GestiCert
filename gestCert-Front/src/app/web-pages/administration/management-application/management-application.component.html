@@ -9,7 +9,7 @@
   <div id="formulaire">
     <h2 *ngIf="editedApplication.idApplication; else elseBlock1"
         title="Formulaire pour modifier l'application {{ editedApplication.nameApplication }}">
-      Application {{ editedApplication.nameApplication }}
+      Application : {{ editedApplication.nameApplication }}
     </h2>
     <ng-template #elseBlock1 title="Formulaire pour ajouter une application">
       <h2>Ajout d'une application <br></h2>
@@ -103,11 +103,11 @@
 
     <div id="table">
       <div id="autour">
-      <p-table #dt [columns]="cols" [value]="applications" [paginator]="true" [rows]="4" dataKey="codeCCX" [resizableColumns]="true" [reorderableColumns]="true"
+      <p-table #dt [columns]="cols" [value]="applications" [paginator]="true" [rows]="4" dataKey="codeCCX" [reorderableColumns]="true"
         selectionMode="single" [(selection)]="selectedApplication" stateStorage="session" stateKey="statedemo-session">
         <ng-template pTemplate="header" let-columns>
           <tr>
-            <th id="th1" *ngFor="let col of cols" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+            <th id="th1" *ngFor="let col of cols" [pSortableColumn]="col.field" colspan="col.colspan" [ngStyle]="{'width': col.width}" pReorderableColumn>
               {{col.header}}
               <p-sortIcon [field]="col.field"></p-sortIcon>
             </th>

@@ -88,4 +88,11 @@ export class DepartmentDataService {
       }
     );
   }
+
+  /* TEST PRIMENG */
+  public getDepartmentPrimeNg() {
+    return this.httpClient.get('http://localhost:8080/api/service').toPromise().then(data => {
+      return data;
+    });
+  }
 }

@@ -2,6 +2,94 @@
   <h1>Administration des Services</h1>
 </div>
 
+
+
+<div class="cadre">
+
+  <div id="formulaire">
+    <h2>Recherche</h2>
+
+    <div class="cadre2">
+      <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
+        <div id="filtre1">
+          <input *ngSwitchCase="'nameDepartment'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom du service">
+        </div>
+      </div>
+    </div>
+
+    <div id="espace">
+      <h2 *ngIf="editedDepartment.idDepartment; else elseBlock1"
+          title="Formulaire pour modifier le service {{ editedDepartment.nameDepartment }}">
+        Service : {{ editedDepartment.nameDepartment }}
+      </h2>
+      <ng-template #elseBlock1 title="Formulaire pour ajouter un service">
+        <h2>Ajout d'un service <br></h2>
+      </ng-template>
+      <div class="cadre2">
+        <h3>* Champs obligatoires</h3>
+        <form>
+          <div class="form-control">
+            <label for="name">Nom * : </label>
+            <span *ngFor="let col of cols" [ngSwitch]="col.field">
+              <input *ngSwitchCase="'nameDepartment'" placeholder="Entrez le nom"
+                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     type="search" id="name" [(ngModel)]="editedDepartment.nameDepartment" name="name"
+                     title="Champ pour le nom du service" required>
+            </span>
+          </div>
+        </form>
+        <div id="modification">
+          <a *ngIf="editedDepartment.idDepartment" class="choix" role="button" routerLink="/gestion/sce" title="Annuler les modifications sur le service {{ editedDepartment.nameDepartment }}">Annuler</a>
+          <a *ngIf="editedDepartment.idDepartment" class="choix" role="button" (click)="onDelete()" title="Supprimer le service {{ editedDepartment.nameDepartment }}">Supprimer</a>
+          <a class="choix" role="button" (click)="onSave()" title="Sauvegarder le service {{ editedDepartment.nameDepartment }}">Sauvegarder</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="liste" title="Liste des services">
+
+    <h2>Liste des Services</h2>
+
+    <div id="table">
+      <div id="autour">
+        <p-table #dt [columns]="cols" [value]="departments" [paginator]="true" [rows]="3" dataKey="nameDepartment" [resizableColumns]="true" [reorderableColumns]="true"
+                 selectionMode="single" [(selection)]="selectedDepartment" stateStorage="session" stateKey="statedemo-session">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of cols" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-department let-columns="columns">
+            <tr routerLink="/gestion/sce/{{ department.idDepartment }}" [pSelectableRow]="department">
+              <td *ngFor="let col of cols">{{ department[col.field] }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<!--
+<div class="titre" title="Administration des services">
+  <h1>Administration des Services</h1>
+</div>
+
 <div class="cadre">
 
   <div>
@@ -51,3 +139,4 @@
   </div>
 
 </div>
+-->

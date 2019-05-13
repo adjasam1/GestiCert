@@ -1,56 +1,76 @@
-<div title="Administration des profils">
-   <h1>Administration des Profils</h1>
- </div>
-
- <div class="cadre">
-
-   <div>
-     <h1 *ngIf="editedProfile.idProfile; else elseBlock1"
-         title="Formulaire pour modifier le profil {{ editedProfile.typeProfile }}">Modification du profil <br>{{ editedProfile.typeProfile }}</h1>
-     <ng-template #elseBlock1 title="Formulaire pour ajouter un profil"><h1>Ajout d'un profil<br></h1></ng-template>
-     <h2>* Champs obligatoires</h2>
-     <form>
-       <div>
-         <div class="form-control">
-           <label for="typPro">Type de profil * : </label>
-           <input type="search" id="typPro" [(ngModel)]="editedProfile.typeProfile" name="typPro"
-                  placeholder="Entrez le type de profil"
-                  required title="Champ pour le type de profil">
-         </div>
-         <br>
-       </div>
-     </form>
-     <br>
-     <div id="modification">
-       <a *ngIf="editedProfile.idProfile" id="supprime" role="button" (click)="onDelete()" title="Supprimer le profil {{editedProfile.typeProfile}}">Supprimer</a>
-       <a id="sauvegarde" role="button" (click)="onSave()" title="Sauvegarder le profil {{editedProfile.typeProfile}}">Sauvegarder</a>
-     </div>
-   </div>
+<div class="titre" title="Administration des profils">
+  <h1>Administration des Profils</h1>
+</div>
 
 
-   <div title="Liste des profils">
-     <h1>Liste des Profils</h1>
 
-   <table class="table">
-     <thead>
-     <tr>
-       <th>Type</th>
-       <th></th>
-     </tr>
-     </thead>
+<div class="cadre">
 
-     <tbody *ngFor="let profile of profilesList | async" title="{{ profile.typeProfile }}">
-     <tr>
-       <td>{{ profile.typeProfile }}</td>
-       <td>
-         <a role="button" routerLink="/gestion/pro/{{profile.idProfile}}"
-            title="Modification du profil {{ profile.typeProfile }}">Modifier/Supprimer</a>
-     <!--    <a role="button" (click)="onDelete()"
-            title="Suppression du profil {{ profile.typeProfile }}">Supprimer</a> -->
-       </td>
-     </tr>
-     </tbody>
-   </table>
-   </div>
+  <div id="formulaire">
+    <h2>Recherche</h2>
 
- </div>
+    <div class="cadre2">
+      <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
+        <div id="filtre1">
+          <input *ngSwitchCase="'typeProfile'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le type de profil">
+        </div>
+      </div>
+    </div>
+
+    <div id="espace">
+      <h2 *ngIf="editedProfile.idProfile; else elseBlock1"
+          title="Formulaire pour modifier le profil {{ editedProfile.typeProfile }}">
+        Profil : {{ editedProfile.typeProfile }}
+      </h2>
+      <ng-template #elseBlock1 title="Formulaire pour ajouter un profil">
+        <h2>Ajout d'un profil <br></h2>
+      </ng-template>
+      <div class="cadre2">
+        <h3>* Champs obligatoires</h3>
+        <form>
+            <div class="form-control">
+              <label for="typePro">Type * : </label>
+              <span *ngFor="let col of cols" [ngSwitch]="col.field">
+              <input *ngSwitchCase="'typeProfile'" placeholder="Entrez le type"
+                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     type="search" id="typePro" [(ngModel)]="editedProfile.typeProfile" name="typePro"
+                     title="Champ pour le type du profil" required>
+            </span>
+            </div>
+        </form>
+        <div id="modification">
+          <a *ngIf="editedProfile.idProfile" class="choix" role="button" routerLink="/gestion/pro" title="Annuler les modifications sur le profil {{ editedProfile.typeProfile }}">Annuler</a>
+          <a *ngIf="editedProfile.idProfile" class="choix" role="button" (click)="onDelete()" title="Supprimer le profil {{ editedProfile.typeProfile }}">Supprimer</a>
+          <a class="choix" role="button" (click)="onSave()" title="Sauvegarder le profil {{ editedProfile.typeProfile }}">Sauvegarder</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="liste" title="Liste des profils">
+
+    <h2>Liste des Profils</h2>
+
+    <div id="table">
+      <div id="autour">
+        <p-table #dt [columns]="cols" [value]="profiles" [paginator]="true" [rows]="3" dataKey="typeProfile" [resizableColumns]="true" [reorderableColumns]="true"
+                 selectionMode="single" [(selection)]="selectedProfile" stateStorage="session" stateKey="statedemo-session">
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+              <th *ngFor="let col of cols" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>
+                {{col.header}}
+                <p-sortIcon [field]="col.field"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-profile let-columns="columns">
+            <tr routerLink="/gestion/pro/{{ profile.idProfile }}" [pSelectableRow]="profile">
+              <td *ngFor="let col of cols">{{ profile[col.field] }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+  </div>
+
+</div>

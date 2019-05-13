@@ -3,6 +3,7 @@ import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DepartmentDataService} from '../../../service/department-data.service';
 import {Department} from '../../../model/department';
+import {Profile} from '../../../model/profile';
 
 @Component ({
   selector: 'app-management-department',
@@ -15,21 +16,31 @@ export class ManagementDepartmentComponent implements OnInit {
   idDepartment: number;
   editedDepartment: Department = new Department(0, '');
 
+  departments: Department;
+  cols: any;
+  selectedDepartment: Department;
+
   constructor(private departmentDataService: DepartmentDataService,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
-    this.departmentDataService.publishDepartment();
-
     this.departmentsList = this.departmentDataService.availableDepartments$;
     this.idDepartment = +this.route.snapshot.params.id;
-    this.departmentDataService.findDepartment(this.idDepartment).subscribe(department => { this.editedDepartment = department; });
+    this.departmentDataService.findDepartment(this.idDepartment).subscribe(department => {
+      this.editedDepartment = department;
+    });
+
+    this.departmentDataService.getDepartmentPrimeNg().then(departments => this.departments = departments);
+
+    this.cols = [
+      { field: 'nameDepartment', header: 'Nom' }
+    ];
   }
 
   onSave() {
     if (!this.idDepartment) {
-      if (confirm('Êtes-vous certain de vouloir ajouter un nouvel service ?')) {
+      if (confirm('Êtes-vous certain de vouloir ajouter un nouveau service ?')) {
         this.departmentDataService.createDepartment(this.editedDepartment);
       }
     } else {

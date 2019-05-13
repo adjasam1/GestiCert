@@ -5,18 +5,40 @@
 <app-info-user></app-info-user>
 
 <section id="formulaire">
-  <h1 *ngIf="editedUser.idUser; else elseBlock1">Mon Profil</h1>
-  <ng-template #elseBlock1><h1>Ajout d'un Utilisateur</h1></ng-template>
-  <h2>* Champs obligatoires</h2>
+  <h1>Mon Profil</h1>
+  <table>
+    <tbody>
+    <tr>
+      <td class="td1"><strong>Identifiant RH :</strong></td>
+      <td class="td2">{{editedUser.idRHUser}}</td>
+    </tr>
+    <tr>
+      <td class="td1"><strong>Nom :</strong></td>
+      <td class="td2">{{editedUser.nameUser}}</td>
+    </tr>
+    <tr>
+      <td class="td1"><strong>Prénom :</strong></td>
+      <td class="td2">{{editedUser.firstNameUser}}</td>
+    </tr>
+    <tr>
+      <td class="td1"><strong>Service :</strong></td>
+      <td class="td2">{{editedUser.department.nameDepartment}}</td>
+    </tr>
+    <tr>
+      <td class="td1"><strong>Profil :</strong></td>
+      <td class="td2">{{editedUser.profile.typeProfile}}</td>
+    </tr>
+    </tbody>
+  </table>
   <form>
-    <div>
+ <!--   <div>
       <div class="form-control">
         <label for="idRH">Identifiant RH * : </label>
         <input type="search" id="idRH" [(ngModel)]="editedUser.idRHUser" name="idRH" placeholder="Entrez l'identifiant RH"
                required title="Champ pour l'identifiant RH">
       </div>
-      <br>
-      <div class="form-control">
+      <br>-->
+ <!--     <div class="form-control">
         <label for="mdp">Mot de passe * : </label>
         <input type="password" id="mdp" [(ngModel)]="editedUser.passwordUser" name="mdp"
                placeholder="Entrez le mot de passe" required title="Champ pour le mot de passe">
@@ -33,8 +55,8 @@
                   [value]="profile.idProfile">{{ profile.typeProfile }}</option>
         </select>
       </div>
-      <br>
-    </div>
+      <br>-->
+ <!--   </div>
     <div class="form-control">
       <label for="nom">Nom * : </label>
       <input type="search" id="nom" [(ngModel)]="editedUser.nameUser" name="nom" placeholder="Entrez le nom" required title="Champ pour le nom">
@@ -45,12 +67,12 @@
       <input type="search" id="prenom" [(ngModel)]="editedUser.firstNameUser" name="prenom" placeholder="Entrez le prénom"
              required title="Champ pour le prénom">
     </div>
-    <br>
-    <div class="form-control">
-      <label for="userService">Service * : </label>
+    <br>-->
+ <!--   <div class="form-control">
+      <label for="userService">Service * : </label>-->
       <!--   <input type="number" id="service" [(ngModel)]="editedUser.department.idDepartment" name="service"
                 placeholder="Entrez le prénom" required>-->
-      <select
+ <!--     <select
         name="userService"
         id="userService"
         class="form-control"
@@ -59,20 +81,22 @@
                 [value]="department.idDepartment">{{ department.nameDepartment }}</option>
       </select>
     </div>
-    <br>
+    <br>-->
+    <h2>* Champs obligatoires</h2>
     <div class="form-control">
-      <label for="tel">Téléphone : </label>
+      <label for="tel"><strong>Téléphone : </strong></label>
       <input type="search" id="tel" [(ngModel)]="editedUser.phoneUser" name="tel" placeholder="Entrez le téléphone" title="Champ pour le téléphone">
     </div>
     <br>
     <div class="form-control">
-      <label for="email">E-mail * : </label>
+      <label for="email"><strong>E-mail * : </strong></label>
       <input type="search" id="email" [(ngModel)]="editedUser.eMailUser" name="email" placeholder="Entrez le mail" title="Champ pour le mail">
     </div>
     <br>
   </form>
   <br>
   <div id="modification" title="Sauvegarder les modifications sur mon profil">
+    <a role="button" (click)="comeBack()">Annuler</a>
     <a role="button" (click)="onSave()">Sauvegarder</a>
   </div>
 </section>

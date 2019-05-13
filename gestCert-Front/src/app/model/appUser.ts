@@ -9,7 +9,7 @@ export class AppUser {
               public password?: string,
               public roleList?: string[]) {}*/
 
-
+  /* ? obligatoire pour primeng afin que l'objet n'est pas assigne avec tous ses attributs */
   constructor(public idUser?: number,
               public nameUser?: string,
               public firstNameUser?: string,

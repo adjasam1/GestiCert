@@ -35,8 +35,8 @@ export class ManagementApplicationComponent implements OnInit {
     this.applicationDataService.getApplicationPrimeNg().then(applications => this.applications = applications);
 
     this.cols = [
-      { field: 'codeCCX', header: 'CCX' },
-      { field: 'nameApplication', header: 'Nom' }
+      { field: 'codeCCX', header: 'CCX', width: '25%' },
+      { field: 'nameApplication', header: 'Nom', width: '75%' }
     ];
   }
 

@@ -91,7 +91,7 @@ export class ManagementComponent implements OnInit {
 
   deconnexion(): void {
     if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
-      this.router.navigate(['authe']);
+      this.router.navigate(['']);
     }
   }
 

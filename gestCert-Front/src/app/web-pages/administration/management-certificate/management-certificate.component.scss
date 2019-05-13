@@ -1,3 +1,31 @@
+th
+{
+  font-size: 10px;
+  height: 40px;
+}
+
+td
+{
+  font-size: 12px;
+  height: 40px;
+}
+
+
+
+td a[role="button"], .choix[role="button"]
+{
+  background-color: #9CC6DA;
+  border: 1px solid #003DA5;
+  margin: 2px;
+}
+
+td a[role="button"]:hover, #choix[role="button"]:hover
+{
+  background-color: #003DA5;
+  border: 1px solid #FFCB05;
+  margin: 2px;
+}
+
 h1
 {
   text-align: center;
@@ -12,7 +40,7 @@ h2
 
 #espace
 {
-  margin-top: 10.2%;
+  margin-top: 13.8%;
 }
 
 h3
@@ -68,51 +96,6 @@ h3
 #filtre1 input, #filtre2 input
 {
   width: 100%;
-}
-
-thead
-{
-  background-color: #134092;
-  color: #fff0de;
-}
-
-tbody tr:nth-child(odd)
-{
-  background-color: #D9EAF4;
-}
-
-tbody tr:nth-child(even)
-{
-  background-color: rgba(255, 252, 100, 0.52);
-}
-
-tbody tr:nth-child(odd):hover
-{
-  background-color: rgba(165, 197, 255, 0.99);
-}
-
-tbody tr:nth-child(even):hover
-{
-  background-color: rgb(195, 192, 87);
-}
-
-th, td {
-  border: 1px solid black;
-  padding: 5px;
-}
-
-td a[role="button"], .choix[role="button"]
-{
-  background-color: #9CC6DA;
-  border: 1px solid #003DA5;
-  margin: 2px;
-}
-
-td a[role="button"]:hover, #choix[role="button"]:hover
-{
-  background-color: #003DA5;
-  border: 1px solid #FFCB05;
-  margin: 2px;
 }
 
 #modification

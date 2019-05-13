@@ -13,14 +13,19 @@ import {AddressAlternative} from '../../model/addressAlternative';
 })
 export class CertificateComponent implements OnInit {
 
-  private certificatesList: BehaviorSubject<Certificate[]>;
-  private idCertificate: number;
-  private editedCertificate: Certificate;
+  certificatesList: BehaviorSubject<Certificate[]>;
+  idCertificate: number;
+  editedCertificate: Certificate;
 
-  private addressAlternativesList: BehaviorSubject<AddressAlternative[]>;
-  private editedAddressAlternative: AddressAlternative[];
+  addressAlternativesList: BehaviorSubject<AddressAlternative[]>;
+  editedAddressAlternative: AddressAlternative[];
 
-  private display = false;
+  display = false;
+
+  /* TEST PRIMENG */
+  certificates: Certificate;
+  cols: any;
+  selectedCertificate: Certificate;
 
   constructor(private certificateDataService: CertificateDataService,
               private addressAlternativeDataService: AddressAlternativeDataService,
@@ -42,6 +47,22 @@ export class CertificateComponent implements OnInit {
     this.addressAlternativeDataService.getAddressAlternative().subscribe(addressAlternatives =>
       this.editedAddressAlternative = addressAlternatives);
     // console.log('aaa' + this.editedCertificate.linkAddressPrincipal);
+
+    this.certificateDataService.getCertificatePrimeNg().then(certificates => this.certificates = certificates);
+
+    this.cols = [
+      { field: 'nameCertificate', header: 'Nom', width: '30%' },
+      { field: 'environment.nameEnvironment', header: 'Type', width: '20%' },
+      { field: 'plateform.namePlateform', header: 'Name', width: '20%' },
+      { field: 'server.nameServer', header: 'Name', width: '20%' },
+      { field: 'assets/icons/certificate.svg', header: 'assets/icons/download.svg', width: '10%' }
+    ];
+  }
+
+  deconnect(): void {
+    if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
+      this.router.navigate(['']);
+    }
   }
 
   showDialog() {

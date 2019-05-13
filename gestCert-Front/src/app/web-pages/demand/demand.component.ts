@@ -16,6 +16,11 @@ import {TypeDemandDataService} from '../../service/type-demand-data.service';
 import {TypeDemand} from '../../model/typeDemand';
 import {AddressAlternativeDataService} from '../../service/address-alternative-data.service';
 import {AddressAlternative} from '../../model/addressAlternative';
+import {PlateformDataService} from '../../service/plateform-data.service';
+import {ServerDataService} from '../../service/server-data.service';
+import {Plateform} from '../../model/plateform';
+import {Server} from '../../model/server';
+import {ThemePalette} from '@angular/material';
 
 @Component({
   selector: 'app-demand',
@@ -41,6 +46,8 @@ export class DemandComponent implements OnInit {
   editedDemand: Demand;
 
   typeDemandsList: BehaviorSubject<TypeDemand[]>;
+  plateformsList: BehaviorSubject<Plateform[]>;
+  serversList: BehaviorSubject<Server[]>;
 
   dateNow: Date = new Date();
   alertDate: Date = new Date();
@@ -52,6 +59,8 @@ export class DemandComponent implements OnInit {
               private addressAlternativeDataService: AddressAlternativeDataService,
               private demandDataService: DemandDataService,
               private typeDemandDataService: TypeDemandDataService,
+              private plateformDataService: PlateformDataService,
+              private serverDataService: ServerDataService,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -73,18 +82,16 @@ export class DemandComponent implements OnInit {
     this.demandDataService.findDemand(this.idDemand).subscribe(demand => this.editedDemand = demand);
 
     this.typeDemandsList = this.typeDemandDataService.availableTypeDemands$;
+    this.plateformsList = this.plateformDataService.availablePlateforms$;
+    this.serversList = this.serverDataService.availableServers$;
 
     this.dateAlert();
   }
 
-  deconnexion(): void {
+  deconnect(): void {
     if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
       this.router.navigate(['']);
     }
-  }
-
-  comeBack(): void {
-    this.router.navigate([history.go(-1)]);
   }
 
   dateAlert(): void {

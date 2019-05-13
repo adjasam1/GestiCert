@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Profile} from '../model/profile';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {Department} from '../model/department';
 
 @Injectable({
   providedIn: 'root'
@@ -86,6 +87,13 @@ export class ProfileDataService {
         this.availableProfiles$.next(this.availableProfiles);
       }
     );
+  }
+
+  /* TEST PRIMENG */
+  public getProfilePrimeNg() {
+    return this.httpClient.get('http://localhost:8080/api/profil').toPromise().then(data => {
+      return data;
+    });
   }
 
 }

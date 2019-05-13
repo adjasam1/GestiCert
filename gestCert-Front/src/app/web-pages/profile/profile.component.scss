@@ -24,9 +24,25 @@ button
   margin-left: 5px;
 }
 
+table
+{
+  margin-left: 4%;
+}
+
+.td1
+{
+  text-align: right;
+}
+
+.td2
+{
+  text-align: left;
+}
+
 a
 {
   padding: 2px 5px;
+  color: black;
 }
 
 a[role="button"] {
@@ -85,7 +101,7 @@ form
 
 input, select
 {
-  width: 70%;
+  width: 66%;
 }
 
 h1, h2

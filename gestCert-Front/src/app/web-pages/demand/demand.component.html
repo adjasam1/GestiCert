@@ -4,7 +4,25 @@
     GestiCert</title>
 </head>
 
-<app-info-certificate></app-info-certificate>
+<section id="entete">
+
+  <div title="{{ editedCertificate.environment.nameEnvironment }} {{ editedCertificate.application.nameApplication }}">
+    <div id="name">
+      <p>
+        <img src="assets/icons/certificate.svg">&nbsp;
+        Certificat <strong>{{ editedCertificate.environment.nameEnvironment }}</strong>
+        de l'application <strong>{{ editedCertificate.application.nameApplication }}</strong>
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <div id="deconnexion" title="Déconnexion de l'application">
+      <a role="button" (click)="deconnect()">Déconnexion</a>
+    </div>
+  </div>
+
+</section>
 
 <section id="formulaire">
   <h1 *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseBlock1">Demande du certificat SSL</h1>
@@ -17,14 +35,36 @@
         Information sur le demandeur :
         <a role="button" routerLink="/profil/{{editedUser.idUser}}">Modifier</a>
       </h4>
-      <p><strong>Service du demandeur :</strong> {{editedUser.department.nameDepartment}}<br>
-        <strong>Nom du demandeur :</strong> {{editedUser.nameUser}}<br>
-        <strong>Prénom du demandeur :</strong> {{editedUser.firstNameUser}}<br>
-        <strong>Fonction du demandeur :</strong> {{editedUser.profile.typeProfile}}<br>
-        <strong>Téléphone du demandeur :</strong> {{editedUser.phoneUser}}<br>
-        <strong>E-mail du demandeur :</strong> {{editedUser.eMailUser}}<br>
-      </p>
+      <table id="table1">
+        <tbody>
+        <tr>
+          <td class="td1"><strong>Service du demandeur :</strong></td>
+          <td class="td2">{{editedUser.department.nameDepartment}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Nom du demandeur :</strong></td>
+          <td class="td2">{{editedUser.nameUser}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Prénom du demandeur :</strong></td>
+          <td class="td2">{{editedUser.firstNameUser}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Fonction du demandeur :</strong></td>
+          <td class="td2">{{editedUser.profile.typeProfile}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Téléphone du demandeur :</strong></td>
+          <td class="td2">{{editedUser.phoneUser}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>E-mail du demandeur :</strong></td>
+          <td class="td2">{{editedUser.eMailUser}}</td>
+        </tr>
+        </tbody>
+      </table>
     </section>
+    <br>
     <section id="referent">
       <h4>Si le demandeur est un prestataire, le postier référent recevra les notifications d'expirations</h4>
       <div class="form-control">
@@ -32,17 +72,36 @@
         <input type="search" id="emailRef" name="emailRef" placeholder="Entrez l'e-mail du référent"
                required title="Champ pour l'e-mail du postier référent si le demandeur est un prestataire">
       </div>
-      <br>
     </section>
+    <br>
     <section>
       <h4>Information sur le client :</h4>
-      <p><strong>Nom du client :</strong> {{editedCertificate.application.nameClient}}<br>
-        <strong>Prénom du client :</strong> {{editedCertificate.application.firstNameClient}}<br>
-        <strong>Direction du client :</strong> {{editedCertificate.application.managementClient}}<br>
-        <strong>Téléphone du client :</strong> {{editedCertificate.application.phoneClient}}<br>
-        <strong>E-mail du client :</strong> {{editedCertificate.application.eMailClient}}<br>
-      </p>
+      <table id="table2">
+        <tbody>
+        <tr>
+          <td class="td1"><strong>Nom du client :</strong></td>
+          <td class="td2">{{editedCertificate.application.nameClient}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Prénom du client :</strong></td>
+          <td class="td2">{{editedCertificate.application.firstNameClient}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Direction du client :</strong></td>
+          <td class="td2">{{editedCertificate.application.managementClient}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Téléphone du client :</strong></td>
+          <td class="td2">{{editedCertificate.application.phoneClient}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>E-mail du client :</strong></td>
+          <td class="td2">{{editedCertificate.application.eMailClient}}</td>
+        </tr>
+        </tbody>
+      </table>
     </section>
+    <br>
     <section>
     <h4>Information compléméntaire :</h4>
     <div class="form-control">
@@ -58,32 +117,43 @@
     </section>
     <section>
       <h3>2. Information sur la demande :</h3>
-      <p><strong>Type de la demande :</strong>
-        <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') > (dateNow | date: 'yyyy-MM-dd'))"> Renouvellement</span>
-        <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))"> Création</span>
-        <!-- <div class="form-control">
-                <label for="typeDem">Type de demande * : </label>
-                <select
-                  name="typeDem"
-                  id="typeDem"
-                  class="form-control"
-                  title="Champ pour le type de la demande">
-                  <option *ngFor="let typeDemand of typeDemandsList | async"
-                          [value]="typeDemand.idTypeDemand">{{ typeDemand.typeTypeDemand }}</option>
-                </select>
-              </div>  -->
-        <br>
-        <strong>Code CCX de l'application :</strong> {{editedCertificate.application.codeCCX}}<br>
-        <strong>Nom commun</strong> "URL principale du site" <strong>:</strong> {{editedCertificate.linkAddressPrincipal}}<br>
-        <strong>Adresses alternatives :</strong> {{editedCertificate.addressAlternative[0].linkAddressAlternative}}<br>
-        <strong>Plateforme :</strong> {{editedCertificate.plateform.namePlateform}}<br>
-        <strong>Serveur :</strong> {{editedCertificate.server[0].nameServer}}<br>
-      </p>
+      <table id="table3">
+        <tbody>
+        <tr>
+          <td class="td1"><strong>Type de la demande :</strong></td>
+          <td class="td2">
+            <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd'))"> Renouvellement</span>
+            <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))"> Création</span>
+          </td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Code CCX de l'application :</strong></td>
+          <td class="td2">{{editedCertificate.application.codeCCX}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Nom commun</strong> "URL principale du site" <strong>:</strong></td>
+          <td class="td2">{{editedCertificate.linkAddressPrincipal}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Adresses alternatives :</strong></td>
+          <td class="td2">{{editedCertificate.addressAlternative[0].linkAddressAlternative}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Plateforme :</strong></td>
+          <td class="td2">{{editedCertificate.plateform.namePlateform}}</td>
+        </tr>
+        <tr>
+          <td class="td1"><strong>Serveur :</strong></td>
+          <td class="td2">{{editedCertificate.server[0].nameServer}}</td>
+        </tr>
+        </tbody>
+      </table>
     </section>
   </form>
   <br>
-  <div class="modification" title="Transmettre la demande">
-    <a role="button">Transmettre</a>
+  <div class="modification">
+    <a role="button" routerLink="/accueil/{{editedUser.idUser}}" title="annuler la demande">Annuler</a>
+    <a role="button" title="Transmettre la demande">Transmettre</a>
   </div>
 
 

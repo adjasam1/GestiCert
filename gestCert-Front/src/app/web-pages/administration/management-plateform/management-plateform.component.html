@@ -20,7 +20,7 @@
     <div id="espace">
       <h2 *ngIf="editedPlateform.idPlateform; else elseBlock1"
           title="Formulaire pour modifier la plateforme {{ editedPlateform.namePlateform }}">
-        Plateforme {{ editedPlateform.namePlateform }}
+        Plateforme : {{ editedPlateform.namePlateform }}
       </h2>
       <ng-template #elseBlock1 title="Formulaire pour ajouter une plateforme">
         <h2>Ajout d'une plateforme <br></h2>

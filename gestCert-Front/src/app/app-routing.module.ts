@@ -13,7 +13,7 @@ import {ManagementComponent} from './web-pages/administration/management/managem
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-  { path: 'authe', component: AuthenticationComponent },
+//  { path: 'authe', component: AuthenticationComponent },
   { path: 'accueil/:id', component: HomeComponent },
   { path: 'gestion', component: ManagementComponent },
   { path: 'gestion/uti', component: ManagementComponent },
@@ -38,7 +38,11 @@ const routes: Routes = [
   { path: 'gestion/pla/:id', component: ManagementComponent },
   { path: 'gestion/pla/ajout', component: ManagementComponent },
   { path: 'gestion/rac', component: ManagementComponent },
+  { path: 'gestion/rac/:id', component: ManagementComponent },
+  { path: 'gestion/rac/ajout', component: ManagementComponent },
   { path: 'gestion/sur', component: ManagementComponent },
+  { path: 'gestion/sur/:id', component: ManagementComponent },
+  { path: 'gestion/sur/ajout', component: ManagementComponent },
   { path: 'certificat/:id', component: CertificateComponent },
   { path: 'contact', component: ContactComponent },
   { path: 'site', component: SiteComponent },

@@ -21,7 +21,7 @@
     <div id="espace">
       <h2 *ngIf="editedEnvironment.idEnvironment; else elseBlock1"
           title="Formulaire pour modifier l'environnement {{ editedEnvironment.nameEnvironment }}">
-        Environnement {{ editedEnvironment.nameEnvironment }}
+        Environnement : {{ editedEnvironment.nameEnvironment }}
       </h2>
       <ng-template #elseBlock1 title="Formulaire pour ajouter un environnement">
         <h2>Ajout d'un environnement <br></h2>
