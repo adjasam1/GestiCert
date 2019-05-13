@@ -5,6 +5,7 @@ import {Certificate} from '../../model/certificate';
 import {CertificateDataService} from '../../service/certificate-data.service';
 import {AddressAlternativeDataService} from '../../service/address-alternative-data.service';
 import {AddressAlternative} from '../../model/addressAlternative';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-certificate',
@@ -30,9 +31,11 @@ export class CertificateComponent implements OnInit {
   constructor(private certificateDataService: CertificateDataService,
               private addressAlternativeDataService: AddressAlternativeDataService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('Certificat');
 
     this.certificatesList = this.certificateDataService.availableCertificates$;
 
@@ -51,11 +54,12 @@ export class CertificateComponent implements OnInit {
     this.certificateDataService.getCertificatePrimeNg().then(certificates => this.certificates = certificates);
 
     this.cols = [
-      { field: 'nameCertificate', header: 'Nom', width: '30%' },
-      { field: 'environment.nameEnvironment', header: 'Type', width: '20%' },
+      { field: 'nameCertificate', header: 'Nom', width: '50%' },
+      { field: 'idCertificate', header: 'Type', width: '50%' }
+      /*,
       { field: 'plateform.namePlateform', header: 'Name', width: '20%' },
       { field: 'server.nameServer', header: 'Name', width: '20%' },
-      { field: 'assets/icons/certificate.svg', header: 'assets/icons/download.svg', width: '10%' }
+      { field: 'assets/icons/certificate.svg', header: 'assets/icons/download.svg', width: '10%' }*/
     ];
   }
 

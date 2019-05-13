@@ -1,9 +1,26 @@
 import {Certificate} from './certificate';
 
+export interface Plateform {
+
+  idPlateform?: number;
+  namePlateform?: string;
+  certificates?: Certificate[];
+
+}
+
 export class Plateform {
 
-  constructor(public idPlateform?: number,
-              public namePlateform?: string,
-              public certificates?: Certificate[]) {}
+  public idPlateform?: number;
+  public namePlateform?: string;
+  public certificates?: Certificate[];
+
+  constructor(idPlateform?: number,
+              namePlateform?: string,
+              certificates?: Certificate[]) {
+
+    this.idPlateform = idPlateform;
+    this.namePlateform = namePlateform;
+    this.certificates = certificates;
+  }
 
 }

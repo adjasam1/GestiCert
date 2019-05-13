@@ -18,7 +18,7 @@ export class ManagementUserComponent implements OnInit {
 
   usersList: BehaviorSubject<AppUser[]>;
   idUser: number;
-  editedUser: AppUser = new AppUser(0, '', '', '', '', '', '', null, null);
+  editedUser: AppUser = new AppUser(0, '', '', '', '', '', '', new Profile(), new Department());
 
   /* TEST PRIMENG */
   users: AppUser;

@@ -36,6 +36,7 @@ export class ManagementCertificateComponent implements OnInit {
 
   /* TEST PRIMENG */
   certificates: Certificate;
+  listCertificates: Certificate[];
   cols: any[];
   yearFilter: number;
   yearTimeout: any;
@@ -57,10 +58,17 @@ export class ManagementCertificateComponent implements OnInit {
     this.idCertificate = +this.route.snapshot.params.id;
     this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificate => { this.editedCertificate = certificate; });
 
-    this.certificateDataService.getCertificatePrimeNg().then(certificates => this.certificates = certificates);
+    this.certificateDataService.publishCertificate();
+    this.certificateDataService.availableCertificates$.subscribe(certificate => this.listCertificates = certificate);
+    this.certificateDataService.getCertificatePrimeNg().then(certificates => {
+      this.certificates = certificates;
+      this.listCertificates.forEach(certificate => certificate.applicationName = certificate.application.nameApplication);
+    });
 
     this.applicationsList = this.applicationDataService.availableApplications$;
-    this.applicationDataService.getApplicationPrimeNg().then(applications => this.applications = applications);
+    this.applicationDataService.getApplicationPrimeNg().then(applications => {
+      this.applications = applications;
+    });
 
     this.environmentsList = this.environmentDataService.availableEnvironments$;
     this.plateformsList = this.plateformDataService.availablePlateforms$;
@@ -69,7 +77,7 @@ export class ManagementCertificateComponent implements OnInit {
 
     this.cols = [
       { field: 'nameCertificate', header: 'Nom Certificat', width: '40%' },
-      { field: 'application.nameApplication', header: 'Nom Application', width: '35%' },
+      { field: 'applicationName', header: 'Nom Application', width: '35%' },
       { field: 'dateEndValidity', header: 'Validité', width: '25%' }
     ];
   }
