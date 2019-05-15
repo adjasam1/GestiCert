@@ -59,7 +59,7 @@
               name="profile"
               id="profile"
               class="form-control"
-              [(ngModel)]="editedUser.profile" title="Champ pour le profil de l'utilisateur">
+              [(ngModel)]="editedUser.profile.idProfile" title="Champ pour le profil de l'utilisateur">
               <option *ngFor="let profile of profilesList | async"
                       [value]="profile.idProfile">{{ profile.typeProfile }}</option>
             </select>
@@ -71,7 +71,7 @@
               name="department"
               id="department"
               class="form-control"
-              [(ngModel)]="editedUser.department" title="Champ pour le service de l'utilisateur">
+              [(ngModel)]="editedUser.department.idDepartment" title="Champ pour le service de l'utilisateur">
               <option *ngFor="let department of departmentsList | async"
                       [value]="department.idDepartment">{{ department.nameDepartment }}</option>
             </select>

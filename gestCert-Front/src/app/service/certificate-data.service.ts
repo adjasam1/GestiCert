@@ -67,7 +67,7 @@ export class CertificateDataService {
 
 
   public createCertificate(newCertificate: Certificate) {
-    this.httpClient.post<Certificate>('http://localhost:8080/api/certificate/ajout', newCertificate).subscribe(
+    this.httpClient.post<Certificate>('http://localhost:8080/api/certificat/ajout', newCertificate).subscribe(
       createCertificate => {
         this.availableCertificates.push(createCertificate);
         this.availableCertificates$.next(this.availableCertificates);
@@ -76,7 +76,7 @@ export class CertificateDataService {
   }
 
   public updateCertificate(certificate: Certificate) {
-    this.httpClient.put<Certificate>(`http://localhost:8080/api/certificate/modifid=${certificate.idCertificate}`, certificate).subscribe(
+    this.httpClient.put<Certificate>(`http://localhost:8080/api/certificat/modifid=${certificate.idCertificate}`, certificate).subscribe(
       updateCertificate => {
         this.availableCertificates$.next(this.availableCertificates);
       }
@@ -84,7 +84,7 @@ export class CertificateDataService {
   }
 
   public deleteCertificate(certificate: Certificate) {
-    this.httpClient.delete<Certificate>(`http://localhost:8080/api/certificate/supprid=${certificate.idCertificate}`).subscribe(
+    this.httpClient.delete<Certificate>(`http://localhost:8080/api/certificat/supprid=${certificate.idCertificate}`).subscribe(
       deleteCertificate => {
         const index1 = this.availableCertificates.indexOf(certificate);
         this.availableCertificates.splice(index1, 1);

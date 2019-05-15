@@ -7,7 +7,6 @@ import {Profile} from '../../../model/profile';
 import {Department} from '../../../model/department';
 import {ProfileDataService} from '../../../service/profile-data.service';
 import {DepartmentDataService} from '../../../service/department-data.service';
-import {NgForm, Validators} from '@angular/forms';
 
 @Component ({
   selector: 'app-management-user',
@@ -27,6 +26,8 @@ export class ManagementUserComponent implements OnInit {
 
   profilesList: BehaviorSubject<Profile[]>;
   departmentsList: BehaviorSubject<Department[]>;
+  listDepartments: Department[];
+  listProfiles: Profile[];
 
  /* loginForm = this.fb.group({
     idRHUser: [null, Validators.compose([Validators.required, Validators.minLength(7), Validators.maxLength(7)])],
@@ -45,12 +46,30 @@ export class ManagementUserComponent implements OnInit {
     this.usersList = this.userDataService.availableUsers$;
 
     this.idUser = +this.route.snapshot.params.id;
-    this.userDataService.findUser(this.idUser).subscribe(user => { this.editedUser = user; });
+    if (this.idUser) {
+      this.userDataService.findUser(this.idUser).subscribe(user => {
+        this.editedUser = user;
+      });
+    } else {
+      this.editedUser = {
+        idUser: 0,
+        department: {idDepartment: 1},
+        profile: {idProfile: 1}
+      };
+    }
 
     this.userDataService.getUserPrimeNg().then(users => this.users = users);
 
     this.profilesList = this.profileDataService.availableProfiles$;
     this.departmentsList = this.departmentDataService.availableDepartments$;
+
+    this.departmentsList.subscribe(
+      departments => this.listDepartments = departments
+    );
+
+    this.profilesList.subscribe(
+      profiles => this.listProfiles = profiles
+    );
 
     this.cols = [
       { field: 'idRHUser', header: 'idRH', width: '24%' },
@@ -63,15 +82,21 @@ export class ManagementUserComponent implements OnInit {
   onSave() {
     if (!this.idUser) {
       if (confirm('Êtes-vous certain de vouloir ajouter un nouvel utilisateur ?')) {
-        console.log('create : ' + this.editedUser);
+        console.log('create : ', this.editedUser);
+        this.editedUser.department = this.listDepartments.find(department => {
+          return department.idDepartment === +this.editedUser.department.idDepartment;
+        });
+        this.editedUser.profile = this.listProfiles.find(profile => {
+          return profile.idProfile === +this.editedUser.profile.idProfile;
+        });
         this.userDataService.createUser(this.editedUser);
-        console.log('create : ' + this.editedUser);
+        console.log('create : ', this.editedUser);
       }
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier cet utilisateur ?')) {
-        console.log('update : ' + this.editedUser);
+        console.log('update : ', this.editedUser);
         this.userDataService.updateUser(this.editedUser);
-        console.log('update : ' + this.editedUser);
+        console.log('update : ', this.editedUser);
       }
     }
     this.router.navigate(['/gestion/uti']);

@@ -40,7 +40,7 @@ h2
 
 #espace
 {
-  margin-top: 13.8%;
+  margin-top: 15.4%;
 }
 
 h3
@@ -88,12 +88,12 @@ h3
   width: 100%;
 }
 
-#filtre1, #filtre2
+.filtre1, #filtre2
 {
   margin: 2%;
 }
 
-#filtre1 input, #filtre2 input
+.filtre1 input, #filtre2 input
 {
   width: 100%;
 }
@@ -144,4 +144,25 @@ a[role="button"]:hover {
   color: #FFCB05;
   background-color: #003DA5;
   text-decoration: none;
+}
+
+input, select
+{
+  width: 65%;
+}
+
+.label1
+{
+  text-align: left;
+}
+
+p
+{
+  margin-left: 2%;
+  margin-top: 0;
+}
+
+.input1
+{
+  width: 98%;
 }

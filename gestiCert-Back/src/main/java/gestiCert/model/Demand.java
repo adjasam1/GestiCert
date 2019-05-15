@@ -77,12 +77,12 @@ public class Demand implements Serializable
 	 */
 	
 	//@JsonIgnore
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_statut_demande")
 	private StatusDemand statusDemand;
 	
 	//@JsonIgnore
-	@ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_type_demande")
 	private TypeDemand typeDemand;
 	

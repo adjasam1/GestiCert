@@ -20,6 +20,7 @@ export interface Certificate {
   root?: Root;
   server?: Server[];
   addressAlternative?: AddressAlternative[];
+  applicationName?: string;
 
 }
 
@@ -38,6 +39,7 @@ export class Certificate {
   public root?: Root;
   public server?: Server[];
   public addressAlternative?: AddressAlternative[];
+  public applicationName?: string;
 
   constructor(idCertificate: number,
               nameCertificate: string,

@@ -62,7 +62,7 @@ export class UserDataService {
   }
 
   public createUser(newUser: AppUser) {
-    this.httpClient.post<AppUser>('http://localhost:8080/api/utilisateur/ajout', newUser).subscribe(
+    this.httpClient.post<AppUser>(`http://localhost:8080/api/utilisateur/ajout`, newUser).subscribe(
       createUser => {
         this.availableUsers.push(createUser);
         this.availableUsers$.next(this.availableUsers);
@@ -84,6 +84,7 @@ export class UserDataService {
         const index1 = this.availableUsers.indexOf(user);
         this.availableUsers.splice(index1, 1);
         this.availableUsers$.next(this.availableUsers);
+        this.publishUser();
       }
     );
   }

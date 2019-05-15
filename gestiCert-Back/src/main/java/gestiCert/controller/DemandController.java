@@ -1,7 +1,13 @@
 package gestiCert.controller;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -9,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import gestiCert.mail.MailConfig;
 import gestiCert.model.Demand;
 import gestiCert.service.DemandService;
 
@@ -38,6 +46,9 @@ public class DemandController
 	
 	@Autowired
 	private DemandService demandServ;
+	
+	@Autowired
+    public JavaMailSender emailSender;
 
 	/**
 	 * constructeur
@@ -95,5 +106,25 @@ public class DemandController
 	{
 		return demandServ.deleteDemand(idDemand);
 	}
+ 
+    @ResponseBody
+    @RequestMapping("/mail")
+    public ResponseEntity<?> sendHtmlEmail(@RequestBody Demand demand) throws MessagingException {
+    	
+    	System.out.println("mail : " + demand.getIdDemand());
+ 
+    MimeMessage message = emailSender.createMimeMessage();
+    boolean multipart = true;
+    MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
+    StringBuffer htmlMsg= new StringBuffer();
+    htmlMsg.append("<h1>Email avec les balises HTML</h1>");
+    htmlMsg.append("<h2>"+demand.getIdDemand()+"</h2>");
+    htmlMsg.append("<img alt='Portrait de Vanessa Paradis - Agnès Lanchon' src='https://numerosoft.fr/caricatures/vanessaparadis250x354.jpg'>");
+    message.setContent(htmlMsg.toString(), "text/html"); // on précise le format HTML
+    helper.setTo(MailConfig.OTHER_EMAIL);
+    helper.setSubject("Test : Envoyer un email avec du HTML + image");
+    this.emailSender.send(message);
+    return ResponseEntity.status(HttpStatus.OK).body(demand);
+    }
 
 }

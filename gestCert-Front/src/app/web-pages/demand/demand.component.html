@@ -67,9 +67,9 @@
     <br>
     <section id="referent">
       <h4>Si le demandeur est un prestataire, le postier référent recevra les notifications d'expirations</h4>
-      <div class="form-control">
-        <label for="emailRef">E-mail du postier référent : </label>
-        <input type="search" id="emailRef" name="emailRef" placeholder="Entrez l'e-mail du référent"
+      <div class="form-control" id="form1">
+        <label for="emailRef"><strong>E-mail du postier référent : </strong></label>
+        <input type="search" id="emailRef" [(ngModel)]="editedDemand.eMailReferent" name="emailRef" placeholder="Entrez l'e-mail du référent"
                required title="Champ pour l'e-mail du postier référent si le demandeur est un prestataire">
       </div>
     </section>
@@ -104,14 +104,19 @@
     <br>
     <section>
     <h4>Information compléméntaire :</h4>
-    <div class="form-control">
-      <label for="desirDate">Date de réalisation souhaitée * : </label>
-      <input type="date" id="desirDate" name="desirDate" required title="Champ pour la date de réalisation souhaitée">
+    <div class="form-control" id="form2">
+      <label for="desirDate"><strong>Date de réalisation souhaitée * : </strong></label>
+      <input type="date" id="desirDate" [(ngModel)]="editedDemand.dateCreationDesired" name="desirDate" required title="Champ pour la date de réalisation souhaitée">
     </div>
     <br>
+      <div class="form-control" id="form3">
+        <label for="transmissionDate"><strong>Date de transmission * : </strong></label>
+      <input type="date" id="transmissionDate" [(ngModel)]="editedDemand.dateTransmission" name="transmissionDate" required title="Champ pour la date de réalisation souhaitée">
+    </div>
+      <br>
     <div id="contexte" class="form-control">
-      <label for="contxt">Description du contexte : </label>
-      <textarea id="contxt" name="contxt" rows="2" cols="48" placeholder="Entrez la description du contexte de la demande" required title="Champ pour la description du contexte"></textarea>
+      <label for="contxt"><p id="p1"><strong>Description du contexte : </strong></p></label>
+      <textarea id="contxt" [(ngModel)]="editedDemand.descriptionContext" name="contxt" rows="2" cols="48" placeholder="Entrez la description du contexte de la demande" required title="Champ pour la description du contexte"></textarea>
     </div>
     <br>
     </section>
@@ -135,7 +140,7 @@
           <td class="td2">{{editedCertificate.linkAddressPrincipal}}</td>
         </tr>
         <tr>
-          <td class="td1"><strong>Adresses alternatives :</strong></td>
+          <td class="td1"><strong>Adresse(s) alternative(s) :</strong></td>
           <td class="td2">{{editedCertificate.addressAlternative[0].linkAddressAlternative}}</td>
         </tr>
         <tr>
@@ -143,7 +148,7 @@
           <td class="td2">{{editedCertificate.plateform.namePlateform}}</td>
         </tr>
         <tr>
-          <td class="td1"><strong>Serveur :</strong></td>
+          <td class="td1"><strong>Serveur(s) :</strong></td>
           <td class="td2">{{editedCertificate.server[0].nameServer}}</td>
         </tr>
         </tbody>
@@ -153,7 +158,7 @@
   <br>
   <div class="modification">
     <a role="button" routerLink="/accueil/{{editedUser.idUser}}" title="annuler la demande">Annuler</a>
-    <a role="button" title="Transmettre la demande">Transmettre</a>
+    <a role="button" (click)="onSave()" title="Transmettre la demande">Transmettre</a>
   </div>
 
 

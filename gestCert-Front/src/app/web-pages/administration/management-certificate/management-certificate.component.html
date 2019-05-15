@@ -50,55 +50,55 @@
           </div>
           <br>
           <div class="form-control">
-            <label for="application">Nom Application * : </label>
+            <label for="application">Application * : </label>
             <select
               name="application"
               id="application"
               class="form-control"
-              [(ngModel)]="editedCertificate.application" title="Champ pour le nom de l'application">
+              [(ngModel)]="editedCertificate.application.idApplication" title="Champ pour le nom de l'application">
               <option *ngFor="let application of applicationsList | async"
                       [value]="application.idApplication">{{ application.nameApplication }}</option>
             </select>
           </div>
           <br>
           <div class="form-control">
-            <label for="environment">Nom Environnement * : </label>
+            <label for="environment">Environnement * : </label>
             <select
               name="environment"
               id="environment"
               class="form-control"
-              [(ngModel)]="editedCertificate.environment" title="Champ pour le nom de l'environnement">
+              [(ngModel)]="editedCertificate.environment.idEnvironment" title="Champ pour le nom de l'environnement">
               <option *ngFor="let environment of environmentsList | async"
                       [value]="environment.idEnvironment">{{ environment.nameEnvironment }}</option>
             </select>
           </div>
           <br>
           <div class="form-control">
-            <label for="plateform">Nom Plateforme * : </label>
+            <label for="plateform">Plateforme * : </label>
             <select
               name="plateform"
               id="plateform"
               class="form-control"
-              [(ngModel)]="editedCertificate.plateform" title="Champ pour le nom de la plateforme">
+              [(ngModel)]="editedCertificate.plateform.idPlateform" title="Champ pour le nom de la plateforme">
               <option *ngFor="let plateform of plateformsList | async"
                       [value]="plateform.idPlateform">{{ plateform.namePlateform }}</option>
             </select>
           </div>
           <br>
           <div class="form-control">
-            <label for="root">Nom Racine * : </label>
+            <label for="root">Racine * : </label>
             <select
               name="root"
               id="root"
               class="form-control"
-              [(ngModel)]="editedCertificate.root" title="Champ pour le nom de la racine">
+              [(ngModel)]="editedCertificate.root.idRoot" title="Champ pour le nom de la racine">
               <option *ngFor="let root of rootsList | async"
                       [value]="root.idRoot">{{ root.nameRoot }}</option>
             </select>
           </div>
           <br>
           <div class="form-control">
-            <label for="server">Nom(s) Serveur(s) * : </label>
+            <label for="server">Serveur(s) * : </label>
             <select
               name="server"
               id="server"
@@ -110,22 +110,22 @@
           </div>
           <br>
           <div class="form-control">
-            <label for="linkInst">Lien Téléchargement * : </label>
-            <input type="search" id="linkInst" [(ngModel)]="editedCertificate.linkInstallation" name="linkInst"
+            <label class="label1" for="linkInst"><p>Lien Téléchargement * :</p></label>
+            <input class="input1" type="search" id="linkInst" [(ngModel)]="editedCertificate.linkInstallation" name="linkInst"
                    placeholder="Entrez le lien de téléchargement"
                    required title="Champ pour le lien du fichier de téléchargement du certificat">
           </div>
           <br>
           <div class="form-control">
-            <label for="linkPrin">Adresse Principale * : </label>
-            <input type="search" id="linkPrin" [(ngModel)]="editedCertificate.linkAddressPrincipal" name="linkPrin"
+            <label class="label1" for="linkPrin"><p>Adresse Principale * :</p></label>
+            <input class="input1" type="search" id="linkPrin" [(ngModel)]="editedCertificate.linkAddressPrincipal" name="linkPrin"
                    placeholder="Entrez le lien de l'adresse principale"
                    required title="Champ pour le lien de l'adresse principale du certificat">
           </div>
           <br>
           <div class="form-control">
-            <label for="linkAlt">Adresse(s) Alternative(s) : </label>
-            <input type="search" id="linkAlt" [(ngModel)]="editedCertificate.addressAlternative" name="linkAlt"
+            <label class="label1" for="linkAlt"><p>Adresse(s) Alternative(s) :</p></label>
+            <input class="input1" type="search" id="linkAlt" [(ngModel)]="editedCertificate.addressAlternative" name="linkAlt"
                    placeholder="Entrez lien(s) adresse(s) alternative(s)"
                    required title="Champ pour le ou les liens des adresses alternantives">
           </div>
@@ -147,11 +147,14 @@
 
     <div class="cadre2">
       <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
-        <div id="filtre1">
-          <input *ngSwitchCase="'codeCCX'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le code CCX de l'application">
-        </div>
-        <div id="filtre2">
+        <div class="filtre1">
           <input *ngSwitchCase="'nameCertificate'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom du certificat">
+        </div>
+        <div class="filtre1">
+          <input *ngSwitchCase="'applicationName'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom de l'application">
+        </div>
+        <div class="filtre1">
+          <input *ngSwitchCase="'dateEndValidity'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par l'année de fin de validité">
         </div>
       </div>
     </div>
@@ -160,7 +163,7 @@
 
     <div id="table">
       <div id="autour">
-        <p-table #dt [columns]="cols" [value]="certificates" [paginator]="true" [rows]="10" dataKey="nameCertificate" [reorderableColumns]="true"
+        <p-table #dt [columns]="cols" [value]="listCertificates" [paginator]="true" [rows]="9" dataKey="nameCertificate" [reorderableColumns]="true"
                  selectionMode="single" [(selection)]="selectedCertificate" stateStorage="session" stateKey="statedemo-session">
           <ng-template pTemplate="header" let-columns>
             <tr>
