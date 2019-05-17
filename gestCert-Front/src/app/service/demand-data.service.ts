@@ -84,6 +84,10 @@ export class DemandDataService {
   }
 
   public sendMail(demand: Demand) {
-    this.httpClient.post<Demand>('http://localhost:8080/api/demande/mail', demand);
+    this.httpClient.post<Demand>('http://localhost:8080/api/demande/mail', demand).subscribe();
   }
+
+/*  public sendMail(demandId: number) {
+    this.httpClient.post('http://localhost:8080/api/demande/mail', demandId).subscribe();
+  }*/
 }

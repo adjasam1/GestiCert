@@ -6,35 +6,35 @@ import {AppUser} from './appUser';
 
 export interface Demand {
 
-  idDemand: number;
-  dateDemand: Date;
-  dateCreationDesired: Date;
-  dateTransmission: Date;
-  eMailReferent: string;
-  descriptionContext: string;
-  remarkRoot: string;
-  statusDemand: StatusDemand;
-  typeDemand: TypeDemand;
-  user: AppUser;
-  application: Application;
-  certificate: Certificate;
+  idDemand?: number;
+  dateDemand?: Date;
+  dateCreationDesired?: Date;
+  dateTransmission?: Date;
+  eMailReferent?: string;
+  descriptionContext?: string;
+  remarkRoot?: string;
+  statusDemand?: StatusDemand;
+  typeDemand?: TypeDemand;
+  user?: AppUser;
+  application?: Application;
+  certificate?: Certificate;
 
 }
 
 export class Demand {
 
-  public idDemand: number;
-  public dateDemand: Date;
-  public dateCreationDesired: Date;
-  public dateTransmission: Date;
-  public eMailReferent: string;
-  public descriptionContext: string;
-  public remarkRoot: string;
-  public statusDemand: StatusDemand;
-  public typeDemand: TypeDemand;
-  public user: AppUser;
-  public application: Application;
-  public certificate: Certificate;
+  public idDemand?: number;
+  public dateDemand?: Date;
+  public dateCreationDesired?: Date;
+  public dateTransmission?: Date;
+  public eMailReferent?: string;
+  public descriptionContext?: string;
+  public remarkRoot?: string;
+  public statusDemand?: StatusDemand;
+  public typeDemand?: TypeDemand;
+  public user?: AppUser;
+  public application?: Application;
+  public certificate?: Certificate;
 
   constructor(idDemand: number,
               dateDemand: Date,

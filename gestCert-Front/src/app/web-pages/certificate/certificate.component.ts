@@ -43,8 +43,8 @@ export class CertificateComponent implements OnInit {
 
     this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificate => this.editedCertificate = certificate);
 
-    console.log('certificatesList : ' + this.certificatesList);
-    console.log('editedCertificate : ' + this.editedCertificate);
+ //   console.log('certificatesList : ' + this.certificatesList);
+ //   console.log('editedCertificate : ' + this.editedCertificate);
 
     this.addressAlternativesList = this.addressAlternativeDataService.availableAddressAlternatives$;
     this.addressAlternativeDataService.getAddressAlternative().subscribe(addressAlternatives =>

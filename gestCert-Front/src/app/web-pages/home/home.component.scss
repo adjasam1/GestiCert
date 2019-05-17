@@ -1,14 +1,68 @@
+#entete
+{
+  display: flex;
+  justify-content: space-between;
+}
+
+#name
+{
+  margin-left: 10px;
+}
+
+img
+{
+  padding-right: 5px;
+  width: 20px;
+}
+
+#deconnexion, #retour
+{
+  margin-right: 20px;
+}
+
+#deconnexion
+{
+  margin-top: 10px;
+  margin-bottom: 5px;
+}
+
+a
+{
+  padding: 2px 5px;
+}
+
+a[role="button"] {
+  color: black;
+  font-size: 12px;
+  margin-left: 15px;
+  text-decoration: none;
+}
+
+a[role="button"]:hover {
+  color: #FFCB05;
+  background-color: #3071a9;
+  border-radius: 4px;
+  text-decoration: none;
+}
+
+section
+{
+  margin-bottom: 20px;
+}
+
 // BOUTONS
 #profile, #management
 {
   margin-bottom: 5px;
+  margin-left: 15px;
 }
+
 a
 {
   padding: 2px 5px;
   color: black;
   border-radius: 4px;
-  margin-left: 15px;
+  margin-left: 0px;
 }
 
 a[role="button"] {
@@ -21,6 +75,11 @@ a[role="button"]:hover {
   background-color: #3071a9;
   border-radius: 4px;
   text-decoration: none;
+}
+
+td a
+{
+  font-size: 10px;
 }
 
 td a[role="button"], #sauvegarde[role="button"]
@@ -50,15 +109,21 @@ h1
   margin: 0 auto 80px auto;
   width: 80%;
   min-width: 700px;
-  background-color:  rgba(165, 197, 255, 0.99);
+  background-color: #D9EAF4;
 }
 
-table
+#autour
+{
+  margin: 2%;
+}
+
+#table1
 {
   border-collapse: collapse;
-  border: 2px solid black;
-  margin: 0.5%;
-  width: 99%;
+  border: 1px solid black;
+  border-radius: 5px;
+  margin: 1%;
+  width: 98%;
   text-align: left;
 }
 
@@ -78,24 +143,14 @@ tbody tr:nth-child(odd):hover
   background-color: rgba(165, 197, 255, 0.99);
 }
 
-#th1
+#th1, #th2
 {
-  width: 7%;
+  font-size: 12px;
 }
 
-.th2
+#th2
 {
   width: 18%;
-}
-
-#th3
-{
-  width: 12%;
-}
-
-#th4
-{
-  width: 27%;
 }
 
 th, td {

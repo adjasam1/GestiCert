@@ -26,28 +26,32 @@ export class LoginService {
   signIn(user: AppUser) {
     this.httpClient.post<JsonWebToken>(environment.apiUrl + 'utilisateur/sign-in', user).subscribe(
       token => {
-        console.log(token);
         sessionStorage.setItem(environment.accessToken, token.token);
-        alert('ok : ' + token.token);
 
         this.getUserRoles();
+
+  //      const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
+   //     const idRH = decodedToken.sub;
+   //     console.log('je suis loggé !!!');
+   //     this.router.navigate(['/accueil/' + idRH]);
 
       //  this.router.navigate(['/accueil/']);
       },
    /* error => alert('Identifiant RH et/ou Mot de passe manquant(s) ou incorrecte(s)')*/);
   }
 
-  signOut() {
+/*  signOut() {
     sessionStorage.removeItem(environment.accessToken);
-  }
+  }*/
 
   private getUserRoles() {
     if (sessionStorage.getItem(environment.accessToken)) {
       const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
       const authorities: Array<any> = decodedToken.auth;
       this.userRoles.next(authorities.map(authority => authority.authority));
-      alert('auth : ' + authorities);
-      console.log('auth : ' + authorities);
+ //     console.log('token : ' , decodedToken);
+      const idRH = decodedToken.sub;
+      this.router.navigate(['/accueil/' + idRH]);
     }
   }
 }

@@ -122,6 +122,12 @@
                    placeholder="Entrez le lien de l'adresse principale"
                    required title="Champ pour le lien de l'adresse principale du certificat">
           </div>
+    <!--      <br>
+          <div *ngFor="let addrAlt of listAddressesAlternatives">
+            <div *ngIf="editedCertificate.idCertificate === addrAlt.certificate.idCertificate">
+              {{ addrAlt.linkAddressAlternative }}
+            </div>
+          </div>-->
           <br>
           <div class="form-control">
             <label class="label1" for="linkAlt"><p>Adresse(s) Alternative(s) :</p></label>

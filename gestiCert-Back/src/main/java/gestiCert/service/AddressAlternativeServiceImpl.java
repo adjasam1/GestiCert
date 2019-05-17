@@ -221,5 +221,27 @@ public class AddressAlternativeServiceImpl implements AddressAlternativeService
 		
 		return ResponseEntity.status(HttpStatus.OK).body("Suppression OK");
 	}
+	
+//	@Override
+//	public ResponseEntity<?> getAddressAlternativeByIdCertificate(Integer idCertificate)
+//	{
+//
+//		List<AddressAlternative> listAddressAlternatives = null;
+//		
+//		try
+//		{
+//			listAddressAlternatives = addressAlternativeRepo.findByIdCertificate(idCertificate);
+//		} catch (Exception e)
+//		{
+//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+//		}
+//		
+//		if (listAddressAlternatives == null)
+//		{
+//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+//		}
+//		
+//		return ResponseEntity.status(HttpStatus.OK).body(listAddressAlternatives);
+//	}
 
 }

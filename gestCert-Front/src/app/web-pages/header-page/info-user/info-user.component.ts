@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AppUser} from '../../../model/appUser';
@@ -12,7 +12,7 @@ import {UserDataService} from '../../../service/user-data.service';
 export class InfoUserComponent implements OnInit {
 
   usersList: BehaviorSubject<AppUser[]>;
-  idUser: number;
+  idRH: string;
   editedUser: AppUser;
 
   constructor(private userDataService: UserDataService,
@@ -23,10 +23,10 @@ export class InfoUserComponent implements OnInit {
 
     this.usersList = this.userDataService.availableUsers$;
 
-    this.idUser = +this.route.snapshot.params.id;
-    console.log('idUser : ' + this.idUser);
+    this.idRH = this.route.snapshot.params.id;
+ //   console.log('idUser : ' + this.idUser);
 
-    this.userDataService.findUser(this.idUser).subscribe(user => this.editedUser = user);
+    this.userDataService.findUserByIdRH(this.idRH).subscribe(user => this.editedUser = user);
   }
 
   deconnect(): void {
@@ -39,4 +39,4 @@ export class InfoUserComponent implements OnInit {
     this.router.navigate([history.go(-1)]);
   }
 
-}
+}*/

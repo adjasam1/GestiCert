@@ -71,8 +71,12 @@ public class AppUserController {
 	@PostMapping("/sign-in")
 	public ResponseEntity<JsonWebToken> signIn(@RequestBody AppUser user) {
 		try {
+			System.out.println("toto : " + user.getPasswordUser());
+//			String mdpEncode = bCryptPasswordEncoder.encode(user.getPasswordUser());
+//			System.out.println("titi : " + mdpEncode);
 			JsonWebToken token = new JsonWebToken(appUserServ.signin(user.getIdRHUser(), user.getPasswordUser()));
 			System.out.println("aaaaa : " + new JsonWebToken(appUserServ.signin(user.getIdRHUser(), user.getPasswordUser())));
+			System.out.println("le token : " + token);
 			return ResponseEntity.ok(token);
 		} catch (InvalidCredentialsException ex) {
 			System.out.println("ex : " + ex);

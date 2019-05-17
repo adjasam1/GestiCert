@@ -16,6 +16,8 @@ import {ServerDataService} from '../../../service/server-data.service';
 import {Server} from '../../../model/server';
 import {ClassAndStylePlayerBuilder} from '@angular/core/src/render3/styling/class_and_style_bindings';
 import {AppUser} from '../../../model/appUser';
+import {AddressAlternativeDataService} from '../../../service/address-alternative-data.service';
+import {AddressAlternative} from '../../../model/addressAlternative';
 
 @Component({
   selector: 'app-management-certificate',
@@ -38,8 +40,10 @@ export class ManagementCertificateComponent implements OnInit {
   listPlateforms: Plateform[];
   rootsList: BehaviorSubject<Root[]>;
   listRoots: Root[];
+  addressesAlternativesList: BehaviorSubject<AddressAlternative[]>;
+  listAddressesAlternatives: AddressAlternative[];
   serversList: BehaviorSubject<Server[]>;
-//  listServers: Server[];
+  listServers: Server[];
 
   /* TEST PRIMENG */
   certificates: Certificate;
@@ -53,6 +57,7 @@ export class ManagementCertificateComponent implements OnInit {
               private environmentDataService: EnvironmentDataService,
               private plateformDataService: PlateformDataService,
               private rootDataService: RootDataService,
+              private addressAlternativeDataService: AddressAlternativeDataService,
               private serverDataService: ServerDataService,
               private route: ActivatedRoute,
               private router: Router) { }
@@ -106,6 +111,7 @@ export class ManagementCertificateComponent implements OnInit {
     this.environmentsList = this.environmentDataService.availableEnvironments$;
     this.plateformsList = this.plateformDataService.availablePlateforms$;
     this.rootsList = this.rootDataService.availableRoots$;
+    this.addressesAlternativesList = this.addressAlternativeDataService.availableAddressAlternatives$;
     this.serversList = this.serverDataService.availableServers$;
 
     this.applicationsList.subscribe(
@@ -120,9 +126,15 @@ export class ManagementCertificateComponent implements OnInit {
     this.rootsList.subscribe(
       roots => this.listRoots = roots
     );
- /*   this.serversList.subscribe(
+    this.addressesAlternativesList.subscribe(
+      addressesAlternatives => this.listAddressesAlternatives = addressesAlternatives
+    );
+
+    console.log('listAdress 1 : ', );
+    console.log('listAdress 2 : ', this.listAddressesAlternatives);
+    this.serversList.subscribe(
       servers => this.listServers = servers
-    );*/
+    );
 
     this.cols = [
       { field: 'nameCertificate', header: 'Nom Certificat', width: '40%' },

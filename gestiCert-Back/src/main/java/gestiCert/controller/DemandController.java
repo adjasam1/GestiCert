@@ -111,20 +111,21 @@ public class DemandController
     @RequestMapping("/mail")
     public ResponseEntity<?> sendHtmlEmail(@RequestBody Demand demand) throws MessagingException {
     	
-    	System.out.println("mail : " + demand.getIdDemand());
+  //  	System.out.println("mail : " + demand.getIdDemand());
  
     MimeMessage message = emailSender.createMimeMessage();
     boolean multipart = true;
     MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
     StringBuffer htmlMsg= new StringBuffer();
-    htmlMsg.append("<h1>Email avec les balises HTML</h1>");
+    htmlMsg.append("<h1>Test envoi mail</h1>");
     htmlMsg.append("<h2>"+demand.getIdDemand()+"</h2>");
-    htmlMsg.append("<img alt='Portrait de Vanessa Paradis - Agnès Lanchon' src='https://numerosoft.fr/caricatures/vanessaparadis250x354.jpg'>");
+    htmlMsg.append("<h3>"+demand.getApplication().getNameApplication()+"</h3>");
+    htmlMsg.append("<h4>Nom Demandeur : "+demand.getUser().getNameUser()+"</h4>");
     message.setContent(htmlMsg.toString(), "text/html"); // on précise le format HTML
     helper.setTo(MailConfig.OTHER_EMAIL);
-    helper.setSubject("Test : Envoyer un email avec du HTML + image");
+    helper.setSubject("Essai 1 : Envoyer un email avec du HTML + image");
     this.emailSender.send(message);
-    return ResponseEntity.status(HttpStatus.OK).body(demand);
+    return ResponseEntity.status(HttpStatus.OK).body("envois OK : " + null);
     }
 
 }

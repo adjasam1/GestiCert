@@ -16,7 +16,9 @@ import {DepartmentDataService} from '../../../service/department-data.service';
 export class ManagementUserComponent implements OnInit {
 
   usersList: BehaviorSubject<AppUser[]>;
+  idRH: string;
   idUser: number;
+  editedUser1: AppUser;
   editedUser: AppUser = new AppUser(0, '', '', '', '', '', '', new Profile(), new Department());
 
   /* TEST PRIMENG */
@@ -44,6 +46,11 @@ export class ManagementUserComponent implements OnInit {
   ngOnInit() {
 
     this.usersList = this.userDataService.availableUsers$;
+
+  /*  this.idRH = this.route.snapshot.params.id1;
+    this.userDataService.findUserByIdRH(this.idRH).subscribe(user => {
+      this.editedUser1 = user;
+    });*/
 
     this.idUser = +this.route.snapshot.params.id;
     if (this.idUser) {

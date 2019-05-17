@@ -25,252 +25,160 @@
 </section>
 
 <section id="formulaire">
-  <h1 *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseBlock1">Demande du certificat SSL</h1>
-  <ng-template #elseBlock1><h1>Renouvellement du certificat SSL</h1></ng-template>
-  <h2>* Champs obligatoires</h2>
-  <form>
-    <h3>1. Identification de la demande :</h3>
-    <section id="demandeur">
-      <h4>
-        Information sur le demandeur :
-        <a role="button" routerLink="/profil/{{editedUser.idUser}}">Modifier</a>
-      </h4>
-      <table id="table1">
-        <tbody>
-        <tr>
-          <td class="td1"><strong>Service du demandeur :</strong></td>
-          <td class="td2">{{editedUser.department.nameDepartment}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Nom du demandeur :</strong></td>
-          <td class="td2">{{editedUser.nameUser}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Prénom du demandeur :</strong></td>
-          <td class="td2">{{editedUser.firstNameUser}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Fonction du demandeur :</strong></td>
-          <td class="td2">{{editedUser.profile.typeProfile}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Téléphone du demandeur :</strong></td>
-          <td class="td2">{{editedUser.phoneUser}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>E-mail du demandeur :</strong></td>
-          <td class="td2">{{editedUser.eMailUser}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </section>
-    <br>
-    <section id="referent">
-      <h4>Si le demandeur est un prestataire, le postier référent recevra les notifications d'expirations</h4>
-      <div class="form-control" id="form1">
-        <label for="emailRef"><strong>E-mail du postier référent : </strong></label>
-        <input type="search" id="emailRef" [(ngModel)]="editedDemand.eMailReferent" name="emailRef" placeholder="Entrez l'e-mail du référent"
-               required title="Champ pour l'e-mail du postier référent si le demandeur est un prestataire">
-      </div>
-    </section>
-    <br>
-    <section>
-      <h4>Information sur le client :</h4>
-      <table id="table2">
-        <tbody>
-        <tr>
-          <td class="td1"><strong>Nom du client :</strong></td>
-          <td class="td2">{{editedCertificate.application.nameClient}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Prénom du client :</strong></td>
-          <td class="td2">{{editedCertificate.application.firstNameClient}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Direction du client :</strong></td>
-          <td class="td2">{{editedCertificate.application.managementClient}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Téléphone du client :</strong></td>
-          <td class="td2">{{editedCertificate.application.phoneClient}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>E-mail du client :</strong></td>
-          <td class="td2">{{editedCertificate.application.eMailClient}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </section>
-    <br>
-    <section>
-    <h4>Information compléméntaire :</h4>
-    <div class="form-control" id="form2">
-      <label for="desirDate"><strong>Date de réalisation souhaitée * : </strong></label>
-      <input type="date" id="desirDate" [(ngModel)]="editedDemand.dateCreationDesired" name="desirDate" required title="Champ pour la date de réalisation souhaitée">
-    </div>
-    <br>
-      <div class="form-control" id="form3">
-        <label for="transmissionDate"><strong>Date de transmission * : </strong></label>
-      <input type="date" id="transmissionDate" [(ngModel)]="editedDemand.dateTransmission" name="transmissionDate" required title="Champ pour la date de réalisation souhaitée">
-    </div>
+    <h1 *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseBlock1">Demande du certificat SSL</h1>
+    <ng-template #elseBlock1><h1>Renouvellement du certificat SSL</h1></ng-template>
+    <h2>* Champs obligatoires</h2>
+  <div id="cadreForm">
+    <form>
+      <h3>1. Identification de la demande :</h3>
+      <section id="demandeur">
+        <h4>
+          Information sur le demandeur :
+          <a role="button" routerLink="/profil/{{editedUser.idUser}}">Modifier</a>
+        </h4>
+        <table id="table1">
+          <tbody>
+          <tr>
+            <td class="td1"><strong>Service du demandeur :</strong></td>
+            <td class="td2">{{editedUser.department.nameDepartment}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Nom du demandeur :</strong></td>
+            <td class="td2">{{editedUser.nameUser}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Prénom du demandeur :</strong></td>
+            <td class="td2">{{editedUser.firstNameUser}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Fonction du demandeur :</strong></td>
+            <td class="td2">{{editedUser.profile.typeProfile}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Téléphone du demandeur :</strong></td>
+            <td class="td2">{{editedUser.phoneUser}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>E-mail du demandeur :</strong></td>
+            <td class="td2">{{editedUser.eMailUser}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
       <br>
-    <div id="contexte" class="form-control">
-      <label for="contxt"><p id="p1"><strong>Description du contexte : </strong></p></label>
-      <textarea id="contxt" [(ngModel)]="editedDemand.descriptionContext" name="contxt" rows="2" cols="48" placeholder="Entrez la description du contexte de la demande" required title="Champ pour la description du contexte"></textarea>
-    </div>
+      <section id="referent">
+        <h4>Si le demandeur est un prestataire, le postier référent recevra les notifications d'expirations</h4>
+        <div class="form-control" id="form1">
+          <label for="emailRef">
+            <strong>E-mail du postier référent : </strong>
+            <span *ngIf="(editedDemand.idDemand !== 0)">{{editedDemand.eMailReferent}}</span>
+          </label>
+          <input type="search" id="emailRef" *ngIf="editedDemand.idDemand === 0" [(ngModel)]="editedDemand.eMailReferent"
+                 name="emailRef" placeholder="Entrez l'e-mail du référent"
+                 required title="Champ pour l'e-mail du postier référent si le demandeur est un prestataire">
+        </div>
+      </section>
+      <br>
+      <section>
+        <h4>Information sur le client :</h4>
+        <table id="table2">
+          <tbody>
+          <tr>
+            <td class="td1"><strong>Nom du client :</strong></td>
+            <td class="td2">{{editedCertificate.application.nameClient}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Prénom du client :</strong></td>
+            <td class="td2">{{editedCertificate.application.firstNameClient}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Direction du client :</strong></td>
+            <td class="td2">{{editedCertificate.application.managementClient}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Téléphone du client :</strong></td>
+            <td class="td2">{{editedCertificate.application.phoneClient}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>E-mail du client :</strong></td>
+            <td class="td2">{{editedCertificate.application.eMailClient}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+      <br>
+      <section>
+        <h4>Information compléméntaire :</h4>
+        <div class="form-control" id="form2">
+          <label for="desirDate">
+            <strong>Date de réalisation souhaitée * : </strong>
+            <span *ngIf="(editedDemand.idDemand !== 0)">{{editedDemand.dateCreationDesired | date: 'dd/MM/yyyy'}}</span>
+          </label>
+          <input type="date" id="desirDate" *ngIf="editedDemand.idDemand === 0" [(ngModel)]="editedDemand.dateCreationDesired"
+                 name="desirDate" required title="Champ pour la date de réalisation souhaitée">
+        </div>
+        <br>
+        <div class="form-control" id="form3">
+          <label for="transmissionDate">
+            <strong>Date de transmission * : </strong>
+            <span *ngIf="(editedDemand.idDemand !== 0)">{{editedDemand.dateTransmission | date: 'dd/MM/yyyy'}}</span>
+          </label>
+          <input type="date" id="transmissionDate" *ngIf="editedDemand.idDemand === 0" [(ngModel)]="editedDemand.dateTransmission"
+                 name="transmissionDate" required title="Champ pour la date de réalisation souhaitée">
+        </div>
+        <br>
+        <div id="contexte" class="form-control">
+          <label for="contxt">
+            <strong id="context">Description du contexte : </strong>
+            <span *ngIf="(editedDemand.idDemand !== 0)">{{editedDemand.dateTransmission | date: 'dd/MM/yyyy'}}</span>
+          </label>
+          <br>
+          <textarea id="contxt" *ngIf="editedDemand.idDemand === 0" [(ngModel)]="editedDemand.descriptionContext"
+                    name="contxt" rows="2" cols="48" placeholder="Entrez la description du contexte de la demande"
+                    required title="Champ pour la description du contexte"></textarea>
+        </div>
+        <br>
+      </section>
+      <section>
+        <h3>2. Information sur la demande :</h3>
+        <table id="table3">
+          <tbody>
+          <tr>
+            <td class="td1"><strong>Type de la demande :</strong></td>
+            <td class="td2">
+              <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd'))"> Renouvellement</span>
+              <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))"> Création</span>
+            </td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Code CCX de l'application :</strong></td>
+            <td class="td2">{{editedCertificate.application.codeCCX}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Nom commun</strong> "URL principale du site" <strong>:</strong></td>
+            <td class="td2">{{editedCertificate.linkAddressPrincipal}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Adresse(s) alternative(s) :</strong></td>
+            <td class="td2">{{editedCertificate.addressAlternative[0].linkAddressAlternative}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Plateforme :</strong></td>
+            <td class="td2">{{editedCertificate.plateform.namePlateform}}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Serveur(s) :</strong></td>
+            <td class="td2">{{editedCertificate.server[0].nameServer}}</td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+    </form>
     <br>
-    </section>
-    <section>
-      <h3>2. Information sur la demande :</h3>
-      <table id="table3">
-        <tbody>
-        <tr>
-          <td class="td1"><strong>Type de la demande :</strong></td>
-          <td class="td2">
-            <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd'))"> Renouvellement</span>
-            <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))"> Création</span>
-          </td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Code CCX de l'application :</strong></td>
-          <td class="td2">{{editedCertificate.application.codeCCX}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Nom commun</strong> "URL principale du site" <strong>:</strong></td>
-          <td class="td2">{{editedCertificate.linkAddressPrincipal}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Adresse(s) alternative(s) :</strong></td>
-          <td class="td2">{{editedCertificate.addressAlternative[0].linkAddressAlternative}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Plateforme :</strong></td>
-          <td class="td2">{{editedCertificate.plateform.namePlateform}}</td>
-        </tr>
-        <tr>
-          <td class="td1"><strong>Serveur(s) :</strong></td>
-          <td class="td2">{{editedCertificate.server[0].nameServer}}</td>
-        </tr>
-        </tbody>
-      </table>
-    </section>
-  </form>
-  <br>
-  <div class="modification">
-    <a role="button" routerLink="/accueil/{{editedUser.idUser}}" title="annuler la demande">Annuler</a>
-    <a role="button" (click)="onSave()" title="Transmettre la demande">Transmettre</a>
+    <div class="modification">
+      <a role="button" routerLink="/accueil/{{editedUser.idRHUser}}" title="annuler la demande">Annuler</a>
+      <a role="button" *ngIf="editedDemand.idDemand === 0" (click)="onSave()" title="Valider la demande">Valider</a>
+      <a role="button" *ngIf="editedDemand.idDemand !== 0" (click)="onSend()" title="Envoyer la demande">Transmettre</a>
+    </div>
   </div>
-
-
-
-<!--
-  <br><br>
-  <h2>* Champs obligatoires</h2>
-  <form>
-    <h3>1. Identification de la demande</h3>
-    <div>
-      <div class="form-control">
-        <label for="department">Service du demandeur * : </label>
-        <select
-          name="department"
-          id="department"
-          class="form-control"
-          [(ngModel)]="editedUser.department.idDepartment" title="Champ pour le service du demandeur">
-          <option *ngFor="let department of departmentsList | async"
-                  [value]="department.idDepartment">{{ department.nameDepartment }}</option>
-        </select>
-      </div>
-      <br>
-      <div class="form-control">
-        <label for="nameUser">Nom du demandeur * : </label>
-        <input type="search" id="nameUser" [(ngModel)]="editedUser.nameUser" name="nameUser"
-               placeholder="Entrez le nom du demandeur" required title="Champ pour le nom du demandeur">
-      </div>
-      <br>
-      <div class="form-control">
-        <label for="firstNameUser">Prénom du demandeur * : </label>
-        <input type="search" id="firstNameUser" [(ngModel)]="editedUser.firstNameUser" name="firstNameUser" placeholder="Entrez le prénom du demandeur"
-                 required title="Champ pour le prénom du demandeur">
-      </div>
-    </div>
-    <br>
-    <div class="form-control">
-      <label for="profile">Fonction du demandeur * : </label>
-      <select
-        name="profile"
-        id="profile"
-        class="form-control"
-        [(ngModel)]="editedUser.profile.idProfile" title="Champ pour la fonction du demandeur">
-        <option *ngFor="let profile of profilesList | async"
-                [value]="profile.idProfile">{{ profile.typeProfile }}</option>
-      </select>
-    </div>
-    <br>
-    <div class="form-control">
-      <label for="phoneUser">Téléphone du demandeur : </label>
-      <input type="search" id="phoneUser" [(ngModel)]="editedUser.phoneUser" name="phoneUser" placeholder="Entrez le téléphone du demandeur"
-             required title="Champ pour le téléphone du demandeur">
-    </div>
-    <br>
-    <div class="form-control">
-      <label for="emailUser">E-mail du demandeur * : </label>
-      <input type="search" id="emailUser" [(ngModel)]="editedUser.eMailUser" name="emailUser" placeholder="Entrez l'e-mail du demandeur"
-             required title="Champ pour l'e-mail du demandeur">
-    </div>
-    <br>
-    <div class="form-control">
-      <h4>Si le demandeur est un prestataire, le postier référent recevra les notifications d'expirations</h4>
-      <label for="emailReferent">E-mail du postier référent : </label>
-      <input type="search" id="emailReferent" name="emailReferent" placeholder="Entrez l'e-mail du référent"
-             required title="Champ pour l'e-mail du postier référent si le demandeur est un prestataire">
-    </div>
-    <br>
-    <div class="form-control">
-      <label for="nameClient">Nom du client * : </label>
-      <input type="search" id="nameClient" [(ngModel)]="editedCertificate.application.nameClient" name="nameClient"
-             placeholder="Entrez le nom du client" required title="Champ pour le nom du client">
-    </div>
-    <br>
-    <div class="form-control">
-      <label for="firstNameClient">Prénom du client * : </label>
-      <input type="search" id="firstNameClient" [(ngModel)]="editedCertificate.application.firstNameClient" name="firstNameClient"
-             placeholder="Entrez le prénom du client" required title="Champ pour le prénom du client">
-    </div>
-    <br>
-    <div class="form-control">
-      <label for="managementClient">Direction du client * : </label>
-      <input type="search" id="managementClient" [(ngModel)]="editedCertificate.application.managementClient" name="managementClient"
-             placeholder="Entrez la direction du client" required title="Champ pour la direction du client">
-    </div>
-    <br>
-    <div class="form-control">
-      <label for="phoneClient">Téléphone du client * : </label>
-      <input type="search" id="phoneClient" [(ngModel)]="editedCertificate.application.phoneClient" name="phoneClient"
-             placeholder="Entrez le téléphone du client" required title="Champ pour le téléphone du client">
-    </div>
-    <br>
-    <div class="form-control">
-      <label for="eMailClient">E-mail du client * : </label>
-      <input type="search" id="eMailClient" [(ngModel)]="editedCertificate.application.eMailClient" name="eMailClient"
-             placeholder="Entrez l'e-mail du client" required title="Champ pour l'e-mail du client">
-    </div>
-    <br>
-    <div class="form-control">
-      <label for="desiredDate">Date de réalisation souhaitée * : </label>
-      <input type="date" id="desiredDate" name="desiredDate" required title="Champ pour la date de réalisation souhaitée">
-    </div>
-    <br>
-    <div id="conte" class="form-control">
-    <label for="context">Description du contexte : <br></label>
-      <textarea id="context" name="context" rows="2" cols="48" placeholder="Entrez la description du contexte de la demande" required title="Champ pour la description du contexte"></textarea>
-    </div>
-    <br>
-    <h3>2. Information sur la demande</h3>
-
-    <br>
-  </form>
-  <br>
-  <div class="modification" title="Transmettre la demande">
-    <a role="button">Transmettre</a>
-  </div> -->
 </section>

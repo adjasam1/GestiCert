@@ -2,17 +2,17 @@ import {Demand} from './demand';
 
 export interface StatusDemand {
 
-  idStatusDemand: number;
-  nameStatusDemand: string;
-  demands: Demand[];
+  idStatusDemand?: number;
+  nameStatusDemand?: string;
+  demands?: Demand[];
 
 }
 
 export class StatusDemand {
 
-  public idStatusDemand: number;
-  public nameStatusDemand: string;
-  public demands: Demand[];
+  public idStatusDemand?: number;
+  public nameStatusDemand?: string;
+  public demands?: Demand[];
 
   constructor(idStatusDemand: number,
               nameStatusDemand: string,

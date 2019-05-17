@@ -27,4 +27,6 @@ public interface AddressAlternativeService {
 
 	ResponseEntity<String> deleteAddressAlternative(Integer idAddressAlternative);
 
+//	ResponseEntity<?> getAddressAlternativeByIdCertificate(Integer idCertificate);
+
 }

@@ -1,4 +1,5 @@
 @import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url('https://fonts.googleapis.com/css?family=Montserrat&display=swap');
 
 html, body
 {
@@ -12,4 +13,5 @@ body
   display: table;
   width: 100%;
   position: absolute;
+  font-family: 'Montserrat', sans-serif;
 }

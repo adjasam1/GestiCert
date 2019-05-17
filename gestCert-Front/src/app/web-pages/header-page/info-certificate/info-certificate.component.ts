@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+/*import { Component, OnInit } from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Certificate} from '../../../model/certificate';
@@ -37,4 +37,4 @@ export class InfoCertificateComponent implements OnInit {
     this.router.navigate([history.go(-1)]);
   }
 
-}
+}*/

@@ -32,17 +32,22 @@ img
 
 #table3
 {
-  margin-left: 4.5%;
+  margin-left: 3.5%;
 }
 
 .td1
 {
-text-align: right;
+  text-align: right;
 }
 
 .td2
 {
-text-align: left;
+  text-align: left;
+}
+
+strong
+{
+  font-size: 16px;
 }
 
 button
@@ -126,7 +131,7 @@ input, select
 
 #form2
 {
-  margin-left: 13%;
+  margin-left: 12%;
 }
 
 #form3
@@ -185,8 +190,18 @@ h4
 
 textarea
 {
-  margin-left: 10%;
-  width: 80%;
+  margin-left: 20%;
+  width: 60%;
+}
+
+#context
+{
+  margin-left: 20%;
+}
+
+#cadreForm
+{
+  margin: 0 0 0 10%;
 }
 
 

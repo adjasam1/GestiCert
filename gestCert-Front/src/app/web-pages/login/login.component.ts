@@ -6,6 +6,7 @@ import {UserDataService} from '../../service/user-data.service';
 import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
 import * as jwt_decode from 'jwt-decode';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -16,9 +17,9 @@ export class LoginComponent implements OnInit {
 
   hide = true;
 
-  userIdUrl: number;
+/*  userIdUrl: number;
   userIdRHUrl: string;
-  userPassword: boolean = false;
+  userPassword: boolean = false;*/
 
   usersList: BehaviorSubject<AppUser[]>;
   editedUser: AppUser[];
@@ -44,22 +45,22 @@ export class LoginComponent implements OnInit {
     appUser.idRHUser = this.loginForm.value.idRHUser;
     appUser.passwordUser = this.loginForm.value.passwordUser;
     this.loginService.signIn(appUser);
-    console.log('a : ' + appUser.idRHUser);
-    console.log('b : ' + appUser.passwordUser);
-    for (const user of this.editedUser) {
+  //  console.log('a : ' + appUser.idRHUser);
+ //   console.log('b : ' + appUser.passwordUser);
+ /*   for (const user of this.editedUser) {
       console.log('aa : ' + user.idRHUser);
-      console.log('bb : ' + user.passwordUser);
+      console.log('bb : ' + user.passwordUser);*/
  /*     let ccc = jwt_decode(sessionStorage.getItem(user.passwordUser));
       console.log('cc : ' + ccc); */
-      if ((appUser.idRHUser === user.idRHUser)) {
+    /*  if ((appUser.idRHUser === user.idRHUser)) {
         this.userIdRHUrl = user.idRHUser;
         if (appUser.passwordUser === user.passwordUser) {
           this.userIdUrl = user.idUser;
           this.userPassword = true;
         }
-      }
-    }
-    if (appUser.idRHUser === null && appUser.passwordUser === null) {
+      }*/
+  //  }
+    /*if (appUser.idRHUser === null && appUser.passwordUser === null) {
       alert('Identifiant RH et Mot de passe manquants');
     } else if (appUser.idRHUser === null) {
       alert('Identifiant RH manquant');
@@ -77,8 +78,7 @@ export class LoginComponent implements OnInit {
           (autre) => { console.log('autre : ' + autre[0]); }
         ); }
       );
-      this.router.navigate(['/accueil/' + this.userIdUrl]);
-    }
+    } */
   }
 
   getUser(): void {

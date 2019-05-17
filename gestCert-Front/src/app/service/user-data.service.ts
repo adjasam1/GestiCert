@@ -61,6 +61,18 @@ export class UserDataService {
     }
   }
 
+  public findUserByIdRH(idRH: string): Observable<AppUser> {
+    console.log('Je suis dans le findUserByIdRH !!');
+    if (idRH) {
+      if (!this.availableUsers) {
+        return this.getUser().pipe(map(users => users.find(user => user.idRHUser === idRH)));
+      }
+      return of(this.availableUsers.find(user => user.idRHUser === idRH));
+    } else {
+      return of(new AppUser(0, '', '', '', '', '', '', null, null, null, null));
+    }
+  }
+
   public createUser(newUser: AppUser) {
     this.httpClient.post<AppUser>(`http://localhost:8080/api/utilisateur/ajout`, newUser).subscribe(
       createUser => {

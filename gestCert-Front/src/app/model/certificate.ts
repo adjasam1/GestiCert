@@ -21,6 +21,9 @@ export interface Certificate {
   server?: Server[];
   addressAlternative?: AddressAlternative[];
   applicationName?: string;
+  applicationCCX?: string;
+  environmentName?: string;
+  rootName?: string;
 
 }
 
@@ -40,6 +43,9 @@ export class Certificate {
   public server?: Server[];
   public addressAlternative?: AddressAlternative[];
   public applicationName?: string;
+  public applicationCCX?: string;
+  public environmentName?: string;
+  public rootName?: string;
 
   constructor(idCertificate: number,
               nameCertificate: string,

@@ -28,7 +28,9 @@ import {ApplicationDataService} from '../../../service/application-data.service'
 export class ManagementComponent implements OnInit {
 
   usersList: BehaviorSubject<AppUser[]>;
+  idRH: string;
   editedUser: AppUser;
+
   profilesList: BehaviorSubject<Profile[]>;
   departmentsList: BehaviorSubject<Department[]>;
   applicationsList: BehaviorSubject<Application[]>;
@@ -40,7 +42,6 @@ export class ManagementComponent implements OnInit {
 
   idDepartment: number;
   editedDepartment: Department = new Department(0, '');
-
 
   editedCertificate: Certificate[];
   editedApplication: Application[];
@@ -61,6 +62,17 @@ export class ManagementComponent implements OnInit {
               private router: Router) { }
 
   ngOnInit() {
+
+    this.usersList = this.userDataService.availableUsers$;
+
+    this.idRH = this.route.snapshot.params.id1;
+    //   console.log('idUser : ' + this.idRH);
+
+    this.userDataService.findUserByIdRH(this.idRH).subscribe(user => {
+      this.editedUser = user;
+      //    console.log('j\'ai trouvé le user !!!');
+    });
+
     this.usersList = this.userDataService.availableUsers$;
     this.profilesList = this.profileDataService.availableProfiles$;
     this.departmentsList = this.departmentDataService.availableDepartments$;
@@ -71,13 +83,15 @@ export class ManagementComponent implements OnInit {
     this.rootsList = this.rootDataService.availableRoots$;
     this.serversList = this.serverDataService.availableServers$;
 
-    this.idDepartment = +this.route.snapshot.params.id;
+
+
+  /*  this.idDepartment = +this.route.snapshot.params.id;
     this.departmentDataService.findDepartment(this.idDepartment).subscribe(department => {
       this.editedDepartment = department;
-    });
+    });*/
 
 
-    this.getCertificate();
+ /*   this.getCertificate();
 
     this.applicationsList = this.applicationDataService.availableApplications$;
     this.getApplication();
@@ -86,7 +100,7 @@ export class ManagementComponent implements OnInit {
     this.getEnvironment();
 
 
-    this.getRoot();
+    this.getRoot();*/
   }
 
   deconnexion(): void {
@@ -95,11 +109,11 @@ export class ManagementComponent implements OnInit {
     }
   }
 
-  comeBack(): void {
+/*  comeBack(): void {
     this.router.navigate([history.go(-1)]);
-  }
+  }*/
 
-  onSave() {
+ /* onSave() {
     if (!this.idDepartment) {
       if (confirm('Êtes-vous certain de vouloir ajouter un nouvel service ?')) {
         this.departmentDataService.createDepartment(this.editedDepartment);
@@ -110,10 +124,10 @@ export class ManagementComponent implements OnInit {
       }
     }
     this.router.navigate(['/gestion/sce']);
-  }
+  }*/
 
 
-
+/*
 
   getCertificate(): void {
     this.certificateDataService.getCertificate().subscribe(certificates => this.editedCertificate = certificates);
@@ -130,7 +144,7 @@ export class ManagementComponent implements OnInit {
   getRoot(): void {
     this.rootDataService.getRoot().subscribe(roots => this.editedRoot = roots);
   }
-
+*/
 
 
 

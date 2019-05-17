@@ -40,7 +40,7 @@ public class Demand implements Serializable
 	 */
 	
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_demande")
 	private Integer idDemand;
 	
@@ -106,6 +106,27 @@ public class Demand implements Serializable
 	{
 		
 	}
+	
+	
+
+	public Demand(@NotNull Date dateDemand, Date dateCreationDesired, Date dateTransmission, String eMailReferent,
+			String descriptionContext, String remarkRoot, StatusDemand statusDemand, TypeDemand typeDemand,
+			AppUser user, Application application, Certificate certificate) {
+		super();
+		this.dateDemand = dateDemand;
+		this.dateCreationDesired = dateCreationDesired;
+		this.dateTransmission = dateTransmission;
+		this.eMailReferent = eMailReferent;
+		this.descriptionContext = descriptionContext;
+		this.remarkRoot = remarkRoot;
+		this.statusDemand = statusDemand;
+		this.typeDemand = typeDemand;
+		this.user = user;
+		this.application = application;
+		this.certificate = certificate;
+	}
+
+
 
 	public Demand(Integer idDemand, @NotNull Date dateDemand, Date dateCreationDesired,
 			Date dateTransmission, String eMailReferent, String descriptionContext, String remarkRoot,

@@ -102,5 +102,12 @@ public class AddressAlternativeController
 	{
 		return addressAlternativeServ.deleteAddressAlternative(idAddressAlternative);
 	}
+	
+//	@GetMapping("/idCertificate={idCertificate}")
+////	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+//	public ResponseEntity<?> getAddressAlternativesByIdCertificate(@PathVariable Integer idCertificate)
+//	{
+//		return addressAlternativeServ.getAddressAlternativeByIdCertificate(idCertificate);
+//	}
 
 }

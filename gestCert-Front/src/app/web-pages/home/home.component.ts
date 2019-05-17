@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
   alertDate: Date = new Date();
 
   usersList: BehaviorSubject<AppUser[]>;
-  idUser: number;
+  idRH: string;
   editedUser: AppUser;
 
   certificatesList: BehaviorSubject<Certificate[]>;
@@ -35,6 +35,14 @@ export class HomeComponent implements OnInit {
   editedEnvironment: Environment[];
   rootsList: BehaviorSubject<Root[]>;
   editedRoot: Root[];
+
+  /* TEST PRIMENG */
+  certificates: Certificate;
+//  certificate: Certificate = new PrimeCertificate();
+  listCertificates: Certificate[];
+  cols: any[];
+  selectedCertificate: Certificate;
+  listApplications: Application[];
 
 
   constructor(private profileDataService: ProfileDataService,
@@ -50,13 +58,25 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.usersList = this.userDataService.availableUsers$;
 
-    this.idUser = +this.route.snapshot.params.id;
-    console.log('idUser : ' + this.idUser);
+    this.idRH = this.route.snapshot.params.id1;
+ //   console.log('idUser : ' + this.idRH);
 
-    this.userDataService.findUser(this.idUser).subscribe(user => this.editedUser = user);
+    this.userDataService.findUserByIdRH(this.idRH).subscribe(user => {
+      this.editedUser = user;
+  //    console.log('j\'ai trouvé le user !!!');
+    });
 
-    this.certificatesList = this.certificateDataService.availableCertificates$;
-    this.getCertificate();
+    this.certificateDataService.availableCertificates$.subscribe(certificate => this.listCertificates = certificate);
+    this.certificateDataService.getCertificatePrimeNg().then(certificates => {
+      this.listCertificates = certificates;
+      this.listCertificates.forEach(certificate => certificate.applicationCCX = certificate.application.codeCCX);
+      this.listCertificates.forEach(certificate => certificate.applicationName = certificate.application.nameApplication);
+      this.listCertificates.forEach(certificate => certificate.environmentName = certificate.environment.nameEnvironment);
+      this.listCertificates.forEach(certificate => certificate.rootName = certificate.root.nameRoot);
+    });
+
+ //   this.certificatesList = this.certificateDataService.availableCertificates$;
+ //   this.getCertificate();
 
     this.applicationsList = this.applicationDataService.availableApplications$;
     this.getApplication();
@@ -68,11 +88,19 @@ export class HomeComponent implements OnInit {
     this.getRoot();
 
     this.dateAlert();
+
+    this.cols = [
+      { field: 'applicationCCX', header: 'CCX', width: '10%' },
+      { field: 'applicationName', header: 'Application', width: '16%' },
+      { field: 'environmentName', header: 'Environnement', width: '20%' },
+      { field: 'rootName', header: 'Type', width: '15%' },
+      { field: 'dateIssue', header: 'Emission', width: '15%' }
+    ];
   }
 
-  getCertificate(): void {
+/*  getCertificate(): void {
     this.certificateDataService.getCertificate().subscribe(certificates => this.editedCertificate = certificates);
-  }
+  }*/
 
   getApplication(): void {
     this.applicationDataService.getApplication().subscribe(applications => this.editedApplication = applications);
@@ -90,5 +118,11 @@ export class HomeComponent implements OnInit {
     const thisMonth = this.dateNow.getMonth();
     const oneMonth = 1;
     this.alertDate.setUTCMonth(thisMonth + oneMonth);
+  }
+
+  deconnect(): void {
+    if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
+      this.router.navigate(['']);
+    }
   }
 }

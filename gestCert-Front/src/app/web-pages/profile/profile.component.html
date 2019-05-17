@@ -2,7 +2,25 @@
   <title>Mon profil - GestiCert</title>
 </head>
 
-<app-info-user></app-info-user>
+<section id="entete">
+
+  <div title="{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
+    <div id="name">
+      <p>
+        <img src="assets/icons/person.png">
+        &nbsp;<strong>{{ editedUser.nameUser | uppercase}}&nbsp;&nbsp;{{ editedUser.firstNameUser }}</strong>
+      </p>
+    </div>
+
+  </div>
+
+  <div>
+    <div id="deconnexion" title="Déconnexion de l'application">
+      <a role="button" (click)="deconnect()">Déconnexion</a>
+    </div>
+  </div>
+
+</section>
 
 <section id="formulaire">
   <h1>Mon Profil</h1>

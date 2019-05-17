@@ -14,10 +14,10 @@ import {ManagementComponent} from './web-pages/administration/management/managem
 const routes: Routes = [
   { path: '', component: LoginComponent },
 //  { path: 'authe', component: AuthenticationComponent },
-  { path: 'accueil/:id', component: HomeComponent },
+  { path: 'accueil/:id1', component: HomeComponent },
   { path: 'gestion', component: ManagementComponent },
   { path: 'gestion/uti', component: ManagementComponent },
-  { path: 'gestion/uti/:id', component: ManagementComponent },
+  { path: 'gestion/uti/:id2', component: ManagementComponent },
   { path: 'gestion/uti/ajout', component: ManagementComponent },
   { path: 'gestion/pro', component: ManagementComponent },
   { path: 'gestion/pro/:id', component: ManagementComponent },
@@ -47,9 +47,9 @@ const routes: Routes = [
   { path: 'contact', component: ContactComponent },
   { path: 'site', component: SiteComponent },
   { path: 'accessibilite', component: AccessibiliteComponent },
-  { path: 'profil/:id', component: ProfileComponent },
-  { path: 'profil/ajout', component: ProfileComponent },
-  { path: 'accueil/:id1/demande/:id2', component: DemandComponent },
+  { path: 'accueil/:id1/profil', component: ProfileComponent },
+  { path: 'accueil/:id1/certificat/:id2', component: DemandComponent },
+  { path: 'accueil/:id1/certificat/:id2/demande/:id3', component: DemandComponent },
   { path: '**', component: LoginComponent }
 ];
 

@@ -19,7 +19,7 @@ import {AppUser} from '../../model/appUser';
 export class ProfileComponent implements OnInit {
 
   usersList: BehaviorSubject<AppUser[]>;
-  idUser: number;
+  idRH: string;
   editedUser: AppUser = new AppUser(null, '', '', '', '', '', '', null, null, null, null);
 
   profilesList: BehaviorSubject<Profile[]>;
@@ -38,15 +38,21 @@ export class ProfileComponent implements OnInit {
 
     this.usersList = this.userDataService.availableUsers$;
 
-    this.idUser = +this.route.snapshot.params.id;
+    this.idRH = this.route.snapshot.params.id1;
 
-    this.userDataService.findUser(this.idUser).subscribe(user => {
+    this.userDataService.findUserByIdRH(this.idRH).subscribe(user => {
       this.editedUser = user;
     });
 
     this.profilesList = this.profileDataService.availableProfiles$;
     this.departmentsList = this.departmentDataService.availableDepartments$;
     this.applicationsList = this.applicationDataService.availableApplications$;
+  }
+
+  deconnect(): void {
+    if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
+      this.router.navigate(['']);
+    }
   }
 
   onSave() {

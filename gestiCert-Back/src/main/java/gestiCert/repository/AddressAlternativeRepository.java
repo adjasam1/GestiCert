@@ -30,5 +30,7 @@ public interface AddressAlternativeRepository extends JpaRepository<AddressAlter
 	
 	@Query("FROM AddressAlternative addressAlternative WHERE addressAlternative.linkAddressAlternative LIKE %?1%")
 	public List<AddressAlternative> findByLinkAddressAlternative(String linkAddressAlternative);
+	
+//	public List<AddressAlternative> findByIdCertificate(Integer idCertificate);
 
 }
