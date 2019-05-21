@@ -31,3 +31,13 @@ app-footer
   display: table-row;
 }
 
+@media (max-width: 600px) {
+  #gauche, #droite {
+    display: none;
+  }
+
+  #centre {
+    width: 100%;
+  }
+}
+
