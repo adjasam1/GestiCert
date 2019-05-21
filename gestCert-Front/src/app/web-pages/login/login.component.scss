@@ -1,57 +1,54 @@
-section
-{
-  border: 1px solid #134092;
+/* CADRE */
+section {
+  border: 1px solid #003DA5;
   border-radius: 5px;
   width: 30%;
   min-width: 300px;
   text-align: center;
   background-color: #D9EAF4;
-  margin: 40px auto 80px auto;
+  margin: 40px auto 50px auto;
   padding-bottom: 20px;
 }
 
-h1
-{
+/* TITRE */
+h1 {
   font-size: 20px;
 }
 
-h2
-{
+h2 {
   font-size: 10px;
   color: brown;
 }
 
-.example-container
+/* FORMULAIRE */
+mat-form-field
 {
+  font-family: Montserrat, sans-serif;
   display: flex;
   flex-direction: column;
   margin: 10px 30px;
 }
 
-#connexion
-{
+::placeholder {
+  color: brown;
+}
+
+mat-error {
+  color: brown;
+}
+
+/* BOUTON */
+#connexion {
   margin-top: 20px;
 }
 
-mat-error
-{
-  color: brown;
-}
-
-::placeholder
-{
-  color: brown;
-}
-
-a
-{
-  color: black;
-  font-size: 12px;
+a {
   padding: 2px 5px;
 }
 
-a[role="button"]
-{
+a[role="button"] {
+  color: black;
+  font-size: 12px;
   background-color: #9CC6DA;
   border: 1px solid #003DA5;
   text-decoration: none;
@@ -60,19 +57,18 @@ a[role="button"]
   margin-bottom: 10px;
 }
 
-a[role="button"]:hover
-{
+a[role="button"]:hover {
   color: #FFCB05;
   background-color: #003DA5;
-  border: 1px solid #FFCB05;
 }
 
-
-@media (max-width: 400px)
-{
-  section
-  {
+/* ADAPTABILITE */
+@media (max-width: 400px) {
+  section {
     min-width: 250px;
   }
-}
 
+  h1 {
+    font-size: 16px;
+  }
+}

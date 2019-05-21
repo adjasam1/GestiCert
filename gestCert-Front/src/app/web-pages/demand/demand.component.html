@@ -27,7 +27,6 @@
 <section id="formulaire">
     <h1 *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseBlock1">Demande du certificat SSL</h1>
     <ng-template #elseBlock1><h1>Renouvellement du certificat SSL</h1></ng-template>
-    <h2>* Champs obligatoires</h2>
   <div id="cadreForm">
     <form>
       <h3>1. Identification de la demande :</h3>
@@ -108,7 +107,7 @@
       </section>
       <br>
       <section>
-        <h4>Information compléméntaire :</h4>
+        <h4>Information compléméntaire : <span>* Champs obligatoires</span></h4>
         <div class="form-control" id="form2">
           <label for="desirDate">
             <strong>Date de réalisation souhaitée * : </strong>

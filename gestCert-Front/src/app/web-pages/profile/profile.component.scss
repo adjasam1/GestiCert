@@ -66,7 +66,7 @@ button
 
 table
 {
-  margin-left: 4%;
+  margin-left: 9%;
 }
 
 .td1
@@ -83,6 +83,7 @@ a
 {
   padding: 2px 5px;
   color: black;
+  font-size: 12px;
 }
 
 a[role="button"] {
@@ -109,6 +110,11 @@ a[role="button"]:hover {
   text-decoration: none;
 }
 
+#modification
+{
+  text-align: right;
+}
+
 #modification a[role="button"]
 {
   background-color: #9CC6DA;
@@ -128,20 +134,25 @@ a[role="button"]:hover {
   border: 2px solid #134092;
   border-radius: 10px;
   width: 50%;
-  text-align: right;
   background-color: #D9EAF4;
   margin: 10px auto 100px auto;
   padding: 20px;
 }
 
-form
+#label1
 {
-  margin-right: 5%;
+  margin-left: 15%;
 }
 
-input, select
+#label2
+{
+  margin-left: 19%;
+}
+
+input
 {
   width: 66%;
+  font-family: Montserrat, sans-serif;
 }
 
 h1, h2
@@ -160,10 +171,14 @@ h2
   color: brown;
 }
 
-
 #plus
 {
   width: 10px;
+}
+
+td strong, label strong
+{
+  font-size: 12px;
 }
 
 

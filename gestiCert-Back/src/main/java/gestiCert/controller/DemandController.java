@@ -110,9 +110,6 @@ public class DemandController
     @ResponseBody
     @RequestMapping("/mail")
     public ResponseEntity<?> sendHtmlEmail(@RequestBody Demand demand) throws MessagingException {
-    	
-  //  	System.out.println("mail : " + demand.getIdDemand());
- 
     MimeMessage message = emailSender.createMimeMessage();
     boolean multipart = true;
     MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");

@@ -13,7 +13,7 @@
     <div class="cadre2">
       <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
         <div id="filtre1">
-          <input *ngSwitchCase="'nameEnvironment'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom de l'environnement">
+          <input *ngSwitchCase="'nameEnvironment'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="PAR LE NOM DE L'ENVIRONNEMENT">
         </div>
       </div>
     </div>
@@ -31,9 +31,9 @@
         <form>
           <div>
             <div class="form-control">
-              <label for="name">Nom * : </label>
+              <label for="name"><strong>Nom * : </strong></label>
               <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameEnvironment'" placeholder="Entrez le nom"
+              <input *ngSwitchCase="'nameEnvironment'" placeholder="NOM"
                      pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
                      type="search" id="name" [(ngModel)]="editedEnvironment.nameEnvironment" name="name"
                      title="Champ pour le nom de l'environnement" required>
@@ -42,7 +42,6 @@
             <br>
           </div>
         </form>
-        <br>
         <div id="modification">
           <a *ngIf="editedEnvironment.idEnvironment" class="choix" role="button" routerLink="/gestion/env" title="Annuler les modifications sur l'environnement {{ editedEnvironment.nameEnvironment }}">Annuler</a>
           <a *ngIf="editedEnvironment.idEnvironment" class="choix" role="button" (click)="onDelete()" title="Supprimer l'environnement {{ editedEnvironment.nameEnvironment }}">Supprimer</a>

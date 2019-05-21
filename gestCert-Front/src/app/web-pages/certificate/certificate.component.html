@@ -22,65 +22,9 @@
 
 <section id="search">
 
-  <h2 id="espace">Liste des Certificats</h2>
+  <h2 id="espace">Certificat</h2>
 
-  <p-table [value]="certificates">
-    <ng-template pTemplate="header">
-      <tr>
-        <th>Vin</th>
-        <th>Year</th>
-        <th>Brand</th>
-        <th>Color</th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-certificate>
-      <tr>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td></td>
-      </tr>
-    </ng-template>
-  </p-table>
 
-<!--  <p-table [columns]="cols" [value]="certificates">
-    <ng-template pTemplate="header" let-columns>
-      <tr>
-        <th *ngFor="let col of columns">
-          {{col.header}}
-        </th>
-      </tr>
-    </ng-template>
-    <ng-template pTemplate="body" let-certificate let-columns="columns">
-      <tr>
-        <td *ngFor="let col of columns">
-          {{certificate[col.field]}}
-        </td>
-      </tr>
-    </ng-template>
-  </p-table>-->
-
- <!--   <div id="table">
-      <div id="autour">
-        <p-table #dt [columns]="cols" [value]="certificates" [paginator]="true" [rows]="10" dataKey="nameCertificate" [reorderableColumns]="true"
-                 selectionMode="single" [(selection)]="selectedCertificate" stateStorage="session" stateKey="statedemo-session">
-          <ng-template pTemplate="header" let-columns>
-            <tr>
-              <th id="th0" *ngFor="let col of cols" [pSortableColumn]="col.field" class="{{col.field}}"
-                  colspan="col.colspan" [ngStyle]="{'width': col.width}" pReorderableColumn>
-                {{col.header}}
-                <p-sortIcon [field]="col.field"></p-sortIcon>
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-certificate let-columns="columns">
-            <tr [pSelectableRow]="certificate">
-              <td *ngFor="let col of cols" class="{{col.field}}">{{ certificate[col.field] }}</td>
-            </tr>
-          </ng-template>
-        </p-table>
-      </div>
-    </div>-->
 </section>
 
 

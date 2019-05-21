@@ -1,164 +1,167 @@
-h1
-{
+/* TITRES */
+h1 {
   text-align: center;
   font-size: 20px;
 }
 
-h2
-{
-  text-align: left;
+h2 {
   font-size: 15px;
 }
 
-#espace
-{
-  margin-top: 11.9%;
-}
-
-h3
-{
+h3 {
   font-size: 10px;
   color: brown;
   text-align: center;
   padding-bottom: 10px;
 }
 
-.cadre
-{
-  border: 2px solid black;
+/* CADRES */
+#cadre1 {
+  border: 2px solid #003DA5;
   border-radius: 5px;
-  margin: 0 10% 10% 10%;
-  padding-left: 1%;
+  margin: 0 10% 80px 10%;
+  padding: 0 1%;
   background-color: #D9EAF4;
   display: inline-flex;
   width: 80%;
 }
 
-#table
-{
-  border-collapse: collapse;
-  border: 1px solid black;
+#cadre2 {
+  border: 1px solid #003DA5;
+  border-radius: 5px;
+  margin: 0 4% 15px 0;
+  padding: 4%;
+}
+
+.cadre3 {
+  border: 1px solid #003DA5;
   border-radius: 5px;
   width: 100%;
-  text-align: left;
+  padding: 2%;
 }
 
-#autour
-{
-  margin: 2%;
+#gauche {
+  width: 100%;
+}
+/*
+#liste {
+  margin-top: 32px;
+}*/
+
+/* FORMULAIRE */
+#formulaire {
+  width: 100%;
 }
 
-.cadre2
-{
-  border: 1px solid black;
-  border-radius: 5px;
-  margin-bottom: 5%;
+form {
+  text-align: right;
+  margin-right: 5%;
 }
 
-#liste .cadre2
+label {
+  font-size: 10px;
+}
+
+.form-control {
+  margin-bottom: 15px;
+}
+
+input {
+  font-family: Montserrat, sans-serif;
+}
+
+form input {
+  width: 60%;
+}
+
+.recherche input
 {
   width: 100%;
 }
 
-#filtre1, #filtre2
-{
-  margin: 2%;
+.recherche:last-child {
+  margin-top: 5px;
 }
 
-#filtre1 input, #filtre2 input
-{
-  width: 100%;
+/* BOUTONS */
+#action {
+  text-align: right;
+  margin-top: 20px;
 }
 
-thead
-{
-  background-color: #134092;
-  color: #fff0de;
+#action a {
+  padding: 2px 5px;
+  color: black;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-left: 15px;
 }
 
-tbody tr:nth-child(odd)
-{
-  background-color: #D9EAF4;
-}
-
-tbody tr:nth-child(even)
-{
-  background-color: rgba(255, 252, 100, 0.52);
-}
-
-tbody tr:nth-child(odd):hover
-{
-  background-color: rgba(165, 197, 255, 0.99);
-}
-
-tbody tr:nth-child(even):hover
-{
-  background-color: rgb(195, 192, 87);
-}
-
-th, td {
-  border: 1px solid black;
-  padding: 5px;
-}
-
-td a[role="button"], .choix[role="button"]
+#action a[role="button"]
 {
   background-color: #9CC6DA;
   border: 1px solid #003DA5;
-  margin: 2px;
 }
 
-td a[role="button"]:hover, #choix[role="button"]:hover
+#action a[role="button"]:hover
 {
-  background-color: #003DA5;
-  border: 1px solid #FFCB05;
-  margin: 2px;
-}
-
-#modification
-{
-  text-align: right;
-  margin: 0 2.5% 2.5% 0;
-}
-
-form
-{
-  text-align: right;
-  margin: 2.5% 5% 0 2.5%;
-}
-
-#liste
-{
-  width: 120%;
-  padding: 0 20px 0 5px;
-}
-
-#formulaire
-{
-  width: 100%;
-  padding: 0 10px;
-}
-
-label
-{
-  font-size: 12px;
-}
-
-a
-{
-  color: black;
-  padding: 2px 5px;
-}
-
-a[role="button"] {
-  text-decoration: none;
-  border-radius: 4px;
-  margin-left: 10px;
-  margin-bottom: 10px;
-}
-
-a[role="button"]:hover {
   color: #FFCB05;
   background-color: #003DA5;
-  text-decoration: none;
+}
+
+/* ADAPTABILITE */
+@media (max-width: 900px) {
+  form {
+    margin-right: 0;
+  }
+
+  #cadre1 {
+    width: 90%;
+    margin: 0 5% 100px 5%;
+  }
+}
+
+@media (max-width: 800px) {
+  #cadre1 {
+    width: 98%;
+    margin: 0 1% 100px 1%;
+  }
+}
+
+@media (max-width: 700px) {
+  #gauche {
+    width: 70%;
+  }
+}
+
+@media (max-width: 550px) {
+  #cadre1 {
+    display: inline-block;
+    width: 90%;
+    margin: 0 5% 100px 5%;
+    padding: 0 5% 5% 5%;
+  }
+
+  #cadre2, .cadre3 {
+    width: 100%;
+  }
+
+  #cadre2 {
+    margin-bottom: 30px;
+  }
+
+  #gauche {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 350px) {
+  #cadre1 {
+    width: 98%;
+    margin: 0 1% 100px 1%;
+  }
 }

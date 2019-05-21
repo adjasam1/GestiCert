@@ -1,39 +1,39 @@
-<head>
-  <title>Login - GestiCert</title>
-</head>
+<title>GestiCert - Authentification</title>
 
-<section id="authentification" title="Formulaire d'authentification">
-  <form #logForm="ngForm" [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit()">
-  <div>
-    <h1>Authentification requise</h1>
-    <h2>* Champs obligatoire</h2>
-  </div>
+<section title="Formulaire d'authentification">
 
-    <div class="example-container" title="Champ pour l'identifiant RH">
+  <form #logForm="ngForm" [formGroup]="loginForm" novalidate (ngSubmit)="onSubmit(logForm)">
+
+    <div>
+      <h1>Authentification requise</h1>
+      <h2>* Champs obligatoire</h2>
+    </div>
+
+    <div>
       <mat-form-field>
-        <input matInput placeholder="Identifiant RH *" formControlName="idRHUser">
+        <input matInput title="Champ pour l'identifiant RH" placeholder="Identifiant RH *" formControlName="idRHUser">
         <mat-error *ngIf="loginForm.controls['idRHUser'].hasError('required')">
           L'identifiant RH est <strong>obligatoire</strong>
         </mat-error>
       </mat-form-field>
-    </div>
-    <div class="example-container" title="Champ pour le mot de passe">
       <mat-form-field>
-        <input matInput type="password" placeholder="Mot de passe *" [type]="hide ? 'password' : 'text'" formControlName="passwordUser">
+        <input matInput type="password" title="Champ pour le mot de passe" placeholder="Mot de passe *"
+               [type]="hide ? 'password' : 'text'" formControlName="passwordUser">
         <button mat-icon-button matSuffix (click)="hide = !hide">
-          <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+          <mat-icon title="Bouton pour activer et désactiver la visibilité du mot de passe">
+            {{ hide ? 'visibility_off' : 'visibility' }}
+          </mat-icon>
         </button>
         <mat-error *ngIf="loginForm.controls['passwordUser'].hasError('required')">
           Le mot de passe est <strong>obligatoire</strong>
         </mat-error>
       </mat-form-field>
     </div>
+
     <div id="connexion" title="Bouton pour se connecter">
       <a role="button" value="connexion" (click)="onSubmit(logForm)">connexion</a>
     </div>
 
-    </form>
+  </form>
 
 </section>
-
-

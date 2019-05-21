@@ -12,6 +12,7 @@ import {ApplicationDataService} from '../../service/application-data.service';
 import {EnvironmentDataService} from '../../service/environment-data.service';
 import {RootDataService} from '../../service/root-data.service';
 import {AppUser} from '../../model/appUser';
+import {FormBuilder, NgForm, Validators} from '@angular/forms';
 
 @Component({
   selector: 'app-accueil',
@@ -44,8 +45,16 @@ export class HomeComponent implements OnInit {
   selectedCertificate: Certificate;
   listApplications: Application[];
 
+  loginForm = this.fb.group({
+    applicationCCX: [null, Validators.compose([Validators.minLength(3), Validators.maxLength(3)])],
+    applicationName: [null, Validators.compose([])],
+    environmentName: [null, Validators.compose([])],
+ //   applicationCCX: [null, Validators.compose([Validators.minLength(3), Validators.maxLength(3)])],
+  });
 
-  constructor(private profileDataService: ProfileDataService,
+
+  constructor(private fb: FormBuilder,
+              private profileDataService: ProfileDataService,
               private userDataService: UserDataService,
               private certificateDataService: CertificateDataService,
               private applicationDataService: ApplicationDataService,
@@ -90,12 +99,17 @@ export class HomeComponent implements OnInit {
     this.dateAlert();
 
     this.cols = [
-      { field: 'applicationCCX', header: 'CCX', width: '10%' },
-      { field: 'applicationName', header: 'Application', width: '16%' },
-      { field: 'environmentName', header: 'Environnement', width: '20%' },
-      { field: 'rootName', header: 'Type', width: '15%' },
-      { field: 'dateIssue', header: 'Emission', width: '15%' }
+      { field: 'applicationCCX', header: 'CCX', width: '80px' },
+      { field: 'applicationName', header: 'Application' },
+      { field: 'environmentName', header: 'Environnement' },
+      { field: 'rootName', header: 'Type' },
+      { field: 'dateIssue', header: 'Emission', width: '120px' }
     ];
+  }
+
+  reset(logForm: NgForm): void {
+    logForm.reset();
+    this.router.navigate(['/accueil/' + this.editedUser.idRHUser]);
   }
 
 /*  getCertificate(): void {

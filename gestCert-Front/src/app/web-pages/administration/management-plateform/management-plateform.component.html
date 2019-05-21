@@ -12,7 +12,7 @@
     <div class="cadre2">
       <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
         <div id="filtre1">
-          <input *ngSwitchCase="'namePlateform'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom de la plateforme">
+          <input *ngSwitchCase="'namePlateform'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="PAR LE NOM DE LA PLATEFORME">
         </div>
       </div>
     </div>
@@ -30,9 +30,9 @@
         <form>
           <div>
             <div class="form-control">
-              <label for="name">Nom * : </label>
+              <label for="name"><strong>Nom * : </strong></label>
               <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'namePlateform'" placeholder="Entrez le nom"
+              <input *ngSwitchCase="'namePlateform'" placeholder="NOM"
                      pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
                      type="search" id="name" [(ngModel)]="editedPlateform.namePlateform" name="name"
                      title="Champ pour le nom de la plateforme" required>

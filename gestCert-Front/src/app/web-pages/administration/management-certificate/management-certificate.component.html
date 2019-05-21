@@ -19,9 +19,9 @@
       <form>
         <div>
           <div class="form-control">
-            <label for="name">Nom Certificat * : </label>
+            <label for="name"><strong>Nom Certificat * : </strong></label>
             <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameCertificate'" placeholder="Entrez le nom"
+              <input *ngSwitchCase="'nameCertificate'" placeholder="NOM"
                      pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
                      type="search" id="name" [(ngModel)]="editedCertificate.nameCertificate" name="name"
                      title="Champ pour le nom du certificat" required>
@@ -29,28 +29,28 @@
           </div>
           <br>
           <div class="form-control">
-            <label for="password">Mot de passe * : </label>
+            <label for="password"><strong>Mot de passe * : </strong></label>
             <input type="password" id="password" [(ngModel)]="editedCertificate.passwordCertificate" name="password"
-                   placeholder="Entrez le mot de passe"
+                   placeholder="MOT DE PASSE"
                    required title="Champ pour le mot de passe du certificat">
           </div>
           <br>
           <div class="form-control">
-            <label for="dateIssue">Date Emission * : </label>
+            <label for="dateIssue"><strong>Date Emission * : </strong></label>
             <input type="date" id="dateIssue" [(ngModel)]="editedCertificate.dateIssue" name="dateIssue"
                    placeholder="Entrez la date d'émission"
                    required title="Champ pour la date d'émission du certificat">
           </div>
           <br>
           <div class="form-control">
-            <label for="validity">Fin de Validité * : </label>
+            <label for="validity"><strong>Fin de Validité * : </strong></label>
             <input type="date" id="validity" [(ngModel)]="editedCertificate.dateEndValidity" name="validity"
                    placeholder="Entrez la date de fin de validité"
                    required title="Champ pour la date de fin de validité du certificat">
           </div>
           <br>
           <div class="form-control">
-            <label for="application">Application * : </label>
+            <label for="application"><strong>Application * : </strong></label>
             <select
               name="application"
               id="application"
@@ -62,7 +62,7 @@
           </div>
           <br>
           <div class="form-control">
-            <label for="environment">Environnement * : </label>
+            <label for="environment"><strong>Environnement * : </strong></label>
             <select
               name="environment"
               id="environment"
@@ -74,7 +74,7 @@
           </div>
           <br>
           <div class="form-control">
-            <label for="plateform">Plateforme * : </label>
+            <label for="plateform"><strong>Plateforme * : </strong></label>
             <select
               name="plateform"
               id="plateform"
@@ -86,7 +86,7 @@
           </div>
           <br>
           <div class="form-control">
-            <label for="root">Racine * : </label>
+            <label for="root"><strong>Racine * : </strong></label>
             <select
               name="root"
               id="root"
@@ -98,7 +98,7 @@
           </div>
           <br>
           <div class="form-control">
-            <label for="server">Serveur(s) * : </label>
+            <label for="server"><strong>Serveur(s) * : </strong></label>
             <select
               name="server"
               id="server"
@@ -110,16 +110,16 @@
           </div>
           <br>
           <div class="form-control">
-            <label class="label1" for="linkInst"><p>Lien Téléchargement * :</p></label>
+            <label class="label1" for="linkInst"><p><strong>Lien de Téléchargement * :</strong></p></label>
             <input class="input1" type="search" id="linkInst" [(ngModel)]="editedCertificate.linkInstallation" name="linkInst"
-                   placeholder="Entrez le lien de téléchargement"
+                   placeholder="LIEN DE TELECHARGEMENT"
                    required title="Champ pour le lien du fichier de téléchargement du certificat">
           </div>
           <br>
           <div class="form-control">
-            <label class="label1" for="linkPrin"><p>Adresse Principale * :</p></label>
+            <label class="label1" for="linkPrin"><p><strong>Adresse Principale * :</strong></p></label>
             <input class="input1" type="search" id="linkPrin" [(ngModel)]="editedCertificate.linkAddressPrincipal" name="linkPrin"
-                   placeholder="Entrez le lien de l'adresse principale"
+                   placeholder="ADRESSE PRINCIPALE"
                    required title="Champ pour le lien de l'adresse principale du certificat">
           </div>
     <!--      <br>
@@ -130,15 +130,14 @@
           </div>-->
           <br>
           <div class="form-control">
-            <label class="label1" for="linkAlt"><p>Adresse(s) Alternative(s) :</p></label>
+            <label class="label1" for="linkAlt"><p><strong>Adresse(s) Alternative(s) :</strong></p></label>
             <input class="input1" type="search" id="linkAlt" [(ngModel)]="editedCertificate.addressAlternative" name="linkAlt"
-                   placeholder="Entrez lien(s) adresse(s) alternative(s)"
+                   placeholder="ADRESSE(S) ALTERNATIVE(S)"
                    required title="Champ pour le ou les liens des adresses alternantives">
           </div>
           <br>
         </div>
       </form>
-      <br>
       <div id="modification">
         <a *ngIf="editedCertificate.idCertificate" class="choix" role="button" routerLink="/gestion/cer" title="Annuler les modifications sur le certificat {{ editedCertificate.nameCertificate }}">Annuler</a>
         <a *ngIf="editedCertificate.idCertificate" class="choix" role="button" (click)="onDelete()" title="Supprimer le certificat {{ editedCertificate.nameCertificate }}">Supprimer</a>
@@ -154,13 +153,13 @@
     <div class="cadre2">
       <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
         <div class="filtre1">
-          <input *ngSwitchCase="'nameCertificate'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom du certificat">
+          <input *ngSwitchCase="'nameCertificate'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="PAR LE NOM DU CERTIFICAT">
         </div>
         <div class="filtre1">
-          <input *ngSwitchCase="'applicationName'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom de l'application">
+          <input *ngSwitchCase="'applicationName'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="PAR LE NOM DE L'APPLICATION">
         </div>
         <div class="filtre1">
-          <input *ngSwitchCase="'dateEndValidity'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par l'année de fin de validité">
+          <input *ngSwitchCase="'dateEndValidity'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="PAR L'ANNEE DE FIN DE VALIDITE">
         </div>
       </div>
     </div>

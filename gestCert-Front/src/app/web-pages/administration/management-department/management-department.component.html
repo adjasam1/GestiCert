@@ -12,7 +12,8 @@
     <div class="cadre2">
       <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
         <div id="filtre1">
-          <input *ngSwitchCase="'nameDepartment'" pInputText type="search" (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="Par le nom du service">
+          <input *ngSwitchCase="'nameDepartment'" pInputText type="search" placeholder="PAR LE NOM DU SERVICE"
+                 (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
         </div>
       </div>
     </div>
@@ -29,19 +30,21 @@
         <h3>* Champs obligatoires</h3>
         <form>
           <div class="form-control">
-            <label for="name">Nom * : </label>
+            <label for="name"><strong>Nom * : </strong></label>
             <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameDepartment'" placeholder="Entrez le nom"
-                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-                     type="search" id="name" [(ngModel)]="editedDepartment.nameDepartment" name="name"
-                     title="Champ pour le nom du service" required>
+              <input *ngSwitchCase="'nameDepartment'" placeholder="NOM" pInputText type="search" id="name"
+                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" name="name"
+                     [(ngModel)]="editedDepartment.nameDepartment" title="Champ pour le nom du service" required>
             </span>
           </div>
         </form>
         <div id="modification">
-          <a *ngIf="editedDepartment.idDepartment" class="choix" role="button" routerLink="/gestion/sce" title="Annuler les modifications sur le service {{ editedDepartment.nameDepartment }}">Annuler</a>
-          <a *ngIf="editedDepartment.idDepartment" class="choix" role="button" (click)="onDelete()" title="Supprimer le service {{ editedDepartment.nameDepartment }}">Supprimer</a>
-          <a class="choix" role="button" (click)="onSave()" title="Sauvegarder le service {{ editedDepartment.nameDepartment }}">Sauvegarder</a>
+          <a *ngIf="editedDepartment.idDepartment" class="choix" role="button" routerLink="/gestion/sce"
+             title="Annuler les modifications sur le service {{ editedDepartment.nameDepartment }}">Annuler</a>
+          <a *ngIf="editedDepartment.idDepartment" class="choix" role="button" (click)="onDelete()"
+             title="Supprimer le service {{ editedDepartment.nameDepartment }}">Supprimer</a>
+          <a class="choix" role="button" (click)="onSave()"
+             title="Sauvegarder le service {{ editedDepartment.nameDepartment }}">Sauvegarder</a>
         </div>
       </div>
     </div>
@@ -53,8 +56,9 @@
 
     <div id="table">
       <div id="autour">
-        <p-table #dt [columns]="cols" [value]="departments" [paginator]="true" [rows]="3" dataKey="nameDepartment" [resizableColumns]="true" [reorderableColumns]="true"
-                 selectionMode="single" [(selection)]="selectedDepartment" stateStorage="session" stateKey="statedemo-session">
+        <p-table #dt [columns]="cols" [value]="departments" [paginator]="true" [rows]="3" dataKey="nameDepartment"
+                 [resizableColumns]="true" [reorderableColumns]="true" selectionMode="single"
+                 [(selection)]="selectedDepartment" stateStorage="session" stateKey="statedemo-session">
           <ng-template pTemplate="header" let-columns>
             <tr>
               <th *ngFor="let col of cols" [pSortableColumn]="col.field" pResizableColumn pReorderableColumn>

@@ -53,14 +53,14 @@ export class CertificateComponent implements OnInit {
 
     this.certificateDataService.getCertificatePrimeNg().then(certificates => this.certificates = certificates);
 
-    this.cols = [
+ /*   this.cols = [
       { field: 'nameCertificate', header: 'Nom', width: '50%' },
-      { field: 'idCertificate', header: 'Type', width: '50%' }
+      { field: 'idCertificate', header: 'Type', width: '50%' }*/
       /*,
       { field: 'plateform.namePlateform', header: 'Name', width: '20%' },
       { field: 'server.nameServer', header: 'Name', width: '20%' },
       { field: 'assets/icons/certificate.svg', header: 'assets/icons/download.svg', width: '10%' }*/
-    ];
+ /*   ]; */
   }
 
   deconnect(): void {
