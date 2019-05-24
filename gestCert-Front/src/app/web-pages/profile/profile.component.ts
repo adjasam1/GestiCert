@@ -51,6 +51,7 @@ export class ProfileComponent implements OnInit {
 
   deconnect(): void {
     if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
+      sessionStorage.clear();
       this.router.navigate(['']);
     }
   }

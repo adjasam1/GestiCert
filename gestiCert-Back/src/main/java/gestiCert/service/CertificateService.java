@@ -25,7 +25,7 @@ public interface CertificateService {
 
 	ResponseEntity<?> getCertificateByDateIssue(Date number);
 
-	ResponseEntity<?> createCertificate(Certificate certificate);
+	Certificate createCertificate(Certificate certificate);
 
 	ResponseEntity<?> updateCertificate(Certificate certificate, Integer idCertificate);
 

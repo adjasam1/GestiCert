@@ -6,6 +6,7 @@ import {CertificateDataService} from '../../service/certificate-data.service';
 import {AddressAlternativeDataService} from '../../service/address-alternative-data.service';
 import {AddressAlternative} from '../../model/addressAlternative';
 import {Title} from '@angular/platform-browser';
+import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-certificate',
@@ -22,6 +23,7 @@ export class CertificateComponent implements OnInit {
   editedAddressAlternative: AddressAlternative[];
 
   display = false;
+  passwordDecode: string;
 
   /* TEST PRIMENG */
   certificates: Certificate;
@@ -65,13 +67,22 @@ export class CertificateComponent implements OnInit {
 
   deconnect(): void {
     if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
+      sessionStorage.clear();
       this.router.navigate(['']);
     }
   }
 
   showDialog() {
     this.display = true;
-    alert('Mot de passe du certificat ' + this.editedCertificate.nameCertificate + ' :\n' + this.editedCertificate.passwordCertificate);
+    this.passwordDecode = atob(this.editedCertificate.passwordCertificate);
+    alert(this.passwordDecode);
+    alert('Mot de passe du certificat ' + this.editedCertificate.nameCertificate + ' :\n' + this.passwordDecode);
   }
 
 }
+/*const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
+const authorities: Array<any> = decodedToken.auth;
+this.userRoles.next(authorities.map(authority => authority.authority));
+//     console.log('token : ' , decodedToken);
+const idRH = decodedToken.sub;
+this.router.navigate(['/accueil/' + idRH]);*/

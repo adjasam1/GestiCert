@@ -1,12 +1,16 @@
 package gestiCert.service;
 
+import java.io.UnsupportedEncodingException;
+import java.util.Base64;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.yaml.snakeyaml.external.biz.base64Coder.Base64Coder;
 
 import gestiCert.model.Certificate;
 import gestiCert.repository.CertificateRepository;
@@ -227,20 +231,11 @@ public class CertificateServiceImpl implements CertificateService
 	 */
 	
 	@Override
-	public ResponseEntity<?> createCertificate(Certificate certificate)
+	public Certificate createCertificate(Certificate certificate)
 	{
-		Certificate newCertificate = null;
 		
-		try
-		{
-//			newCertificate = new Certificate(certificate.getNameCertificate(), certificate.getLinkAddressPrincipal(), certificate.getLinkInstallation(), passwordEncoder.encode(certificate.getPasswordCertificate()), certificate.getDateIssue(), certificate.getDateEndValidity(), certificate.getApplication(), certificate.getEnvironment(), certificate.getPlateform(), certificate.getRoot());
-			newCertificate = certificateRepo.saveAndFlush(certificate);
-//			newCertificate.setPasswordCertificate(passwordEncoder.encode(newCertificate.getPasswordCertificate()));
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-		}
+		return certificateRepo.saveAndFlush(certificate);
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(newCertificate);
 	}
 	
 //	@Override

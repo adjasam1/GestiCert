@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import gestiCert.model.AddressAlternative;
+import gestiCert.model.Certificate;
 import gestiCert.service.AddressAlternativeService;
 
 /**
@@ -80,6 +81,12 @@ public class AddressAlternativeController
 	public ResponseEntity<?> getAddressAlternativeByLink(@PathVariable String word)
 	{
 		return addressAlternativeServ.getAddressAlternativeByLink(word);
+	}
+	
+	@GetMapping("/certificat={certificate}")
+	public ResponseEntity<?> getAddressAlternativeByCertificate(@PathVariable Certificate certificate)
+	{
+		return addressAlternativeServ.getAddressAlternativeByCertificate(certificate);
 	}
 	
 	@PostMapping("/ajout")

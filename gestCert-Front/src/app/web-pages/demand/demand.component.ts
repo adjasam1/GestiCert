@@ -45,6 +45,8 @@ export class DemandComponent implements OnInit {
   departmentsList: BehaviorSubject<Department[]>;
   profilesList: BehaviorSubject<Profile[]>;
   addressAlternativesList: BehaviorSubject<AddressAlternative[]>;
+  idAddressAlternative: number;
+  listAddressAlternatives: AddressAlternative;
 
   demandsList: BehaviorSubject<Demand[]>;
   idDemand: number;
@@ -96,7 +98,11 @@ export class DemandComponent implements OnInit {
     this.departmentsList = this.departmentDataService.availableDepartments$;
     this.profilesList = this.profileDataService.availableProfiles$;
     this.addressAlternativesList = this.addressAlternativeDataService.availableAddressAlternatives$;
-
+ //   this.addressAlternativesList.subscribe( addressAlternatives => this.listAddressAlternatives = addressAlternatives );
+    this.addressAlternativeDataService.findAddressAlternativeByCertificate(this.idCertificate).subscribe(addressAlternatives =>
+      this.listAddressAlternatives = addressAlternatives);
+    console.log('idCertificate : ', this.idCertificate);
+    console.log('liste address alter : ', this.listAddressAlternatives);
     this.demandsList = this.demandDataService.availableDemands$;
     this.idDemand = +this.route.snapshot.params.id3;
     this.demandDataService.findDemand(this.idDemand).subscribe(demand => this.editedDemand = demand);
@@ -129,6 +135,7 @@ export class DemandComponent implements OnInit {
 
   deconnect(): void {
     if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
+      sessionStorage.clear();
       this.router.navigate(['']);
     }
   }

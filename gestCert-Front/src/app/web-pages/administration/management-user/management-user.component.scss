@@ -1,4 +1,229 @@
-h1
+/* TITRES */
+h1 {
+  text-align: center;
+  font-size: 20px;
+}
+
+h2 {
+  font-size: 15px;
+}
+
+h3 {
+  font-size: 10px;
+  color: brown;
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+/* CADRES */
+#cadre1 {
+  border: 2px solid #003DA5;
+  border-radius: 5px;
+  margin: 0 10% 80px 10%;
+  padding: 0 1% 1% 1%;
+  background-color: #D9EAF4;
+  display: inline-flex;
+  width: 80%;
+}
+
+#cadre2 {
+  border: 1px solid #003DA5;
+  border-radius: 5px;
+  margin: 0 4% 0 0;
+  padding: 4%;
+}
+
+#droite {
+  width: 100%;
+}
+
+.cadre3 {
+  border: 1px solid #003DA5;
+  border-radius: 5px;
+  width: 100%;
+  padding: 2%;
+  align-content: space-between;
+}
+
+.liste {
+  margin-top: 45px;
+}
+
+/* FORMULAIRE */
+#formulaire {
+  width: 100%;
+}
+
+form {
+  text-align: right;
+  margin-right: 5%;
+}
+
+label {
+  font-size: 10px;
+}
+
+input, select {
+  font-family: Montserrat, sans-serif;
+}
+
+form input, form select {
+  width: 60%;
+  margin-bottom: 15px;
+}
+
+.recherche input
+{
+  width: 100%;
+}
+
+.recherche:last-child {
+  margin-top: 5px;
+}
+
+/* BOUTONS */
+#action {
+  text-align: right;
+  margin-top: 5px;
+}
+
+#action a {
+  padding: 2px 5px;
+  color: black;
+  font-size: 12px;
+  border-radius: 4px;
+  margin-left: 15px;
+}
+
+#action a[role="button"]
+{
+  background-color: #9CC6DA;
+  border: 1px solid #003DA5;
+}
+
+#action a[role="button"]:hover
+{
+  color: #FFCB05;
+  background-color: #003DA5;
+}
+
+#modif {
+  margin: 37px 0;
+}
+
+/* ADAPTABILITE */
+@media (max-width: 900px) {
+  form {
+    margin-right: 0;
+  }
+
+  #cadre1 {
+    width: 90%;
+    margin: 0 5% 100px 5%;
+  }
+}
+
+@media (max-width: 800px) {
+  #cadre1 {
+    width: 98%;
+    margin: 0 1% 100px 1%;
+  }
+}
+
+@media (max-width: 750px) {
+  #droite {
+    width: 120%;
+  }
+
+  .liste {
+    margin-top: 38px;
+  }
+
+  #action a {
+     margin-left: 2px;
+   }
+}
+
+@media (max-width: 670px) {
+  #cadre1 {
+    display: inline-block;
+    width: 90%;
+    margin: 0 5% 100px 5%;
+    padding: 0 5% 5% 5%;
+  }
+
+  #cadre2, .cadre3 {
+    width: 100%;
+  }
+
+  #cadre2 {
+    margin-bottom: 30px;
+  }
+
+  #droite {
+    width: 100%;
+  }
+
+  h1 {
+    font-size: 16px;
+  }
+
+  #action a {
+    margin-left: 15px;
+  }
+
+  #modif {
+    margin: 0;
+  }
+}
+
+@media (max-width: 380px) {
+  #cadre1 {
+    width: 98%;
+    margin: 0 1% 100px 1%;
+  }
+
+  #action a {
+    margin-left: 10px;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*h1
 {
   text-align: center;
   font-size: 20px;
@@ -182,4 +407,4 @@ a[role="button"]:hover {
 strong
 {
   font-size: 10px;
-}
+}*/

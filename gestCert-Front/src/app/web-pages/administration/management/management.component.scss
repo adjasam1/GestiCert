@@ -148,6 +148,15 @@ input
   font-family: Montserrat, sans-serif;
 }
 
+@media (max-width: 400px) {
+  img {
+    display: none;
+  }
 
+  p {
+    font-size: 12px;
+    font-weight: bold;
+  }
+}
 
 

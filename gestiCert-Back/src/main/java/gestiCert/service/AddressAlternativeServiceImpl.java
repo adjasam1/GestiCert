@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import gestiCert.model.AddressAlternative;
+import gestiCert.model.Certificate;
 import gestiCert.repository.AddressAlternativeRepository;
 
 /**
@@ -127,6 +128,18 @@ public class AddressAlternativeServiceImpl implements AddressAlternativeService
 		}
 		
 		return ResponseEntity.status(HttpStatus.OK).body(listAddressAlternatives);
+	}
+	
+	@Override
+	public ResponseEntity<?> getAddressAlternativeByCertificate(Certificate certificate)
+	{
+		Iterable<AddressAlternative> addrAlterByCert = null;
+		try {
+			addrAlterByCert = addressAlternativeRepo.findByCertificate(certificate);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(addrAlterByCert);
 	}
 	
 	/**

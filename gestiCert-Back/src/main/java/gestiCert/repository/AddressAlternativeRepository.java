@@ -1,12 +1,14 @@
 package gestiCert.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import gestiCert.model.AddressAlternative;
+import gestiCert.model.Certificate;
 
 /**
  * AddressAlternativeRepository indique que la classe amelioree AddressAlternative est un referentiel qui etend JpaRepository
@@ -31,6 +33,6 @@ public interface AddressAlternativeRepository extends JpaRepository<AddressAlter
 	@Query("FROM AddressAlternative addressAlternative WHERE addressAlternative.linkAddressAlternative LIKE %?1%")
 	public List<AddressAlternative> findByLinkAddressAlternative(String linkAddressAlternative);
 	
-//	public List<AddressAlternative> findByIdCertificate(Integer idCertificate);
+	public List<AddressAlternative> findByCertificate(Certificate certificate);
 
 }

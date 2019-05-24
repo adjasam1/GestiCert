@@ -85,7 +85,7 @@ export class ApplicationDataService {
 
   /* TEST PRIMENG */
   public getApplicationPrimeNg() {
-    return this.httpClient.get('http://localhost:8080/api/application').toPromise().then(data => {
+    return this.httpClient.get<any>('http://localhost:8080/api/application').toPromise().then(data => {
       return data;
     });
   }

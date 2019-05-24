@@ -3,7 +3,9 @@ package gestiCert.controller;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -40,6 +42,8 @@ public class CertificateController
 	
 	@Autowired
 	private CertificateService certificateServ;
+	
+	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
 	/**
 	 * constructeur
@@ -106,7 +110,19 @@ public class CertificateController
 //	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> postCertificate(@RequestBody Certificate certificate)
 	{
-		return certificateServ.createCertificate(certificate);
+		Certificate newCertificate = null;
+		
+		try
+		{
+			certificate.setPasswordCertificate(bCryptPasswordEncoder.encode(certificate.getPasswordCertificate()));
+//			newCertificate = new Certificate(certificate.getNameCertificate(), certificate.getLinkAddressPrincipal(), certificate.getLinkInstallation(), passwordEncoder.encode(certificate.getPasswordCertificate()), certificate.getDateIssue(), certificate.getDateEndValidity(), certificate.getApplication(), certificate.getEnvironment(), certificate.getPlateform(), certificate.getRoot());
+			newCertificate = certificateServ.createCertificate(certificate);
+//			newCertificate.setPasswordCertificate(passwordEncoder.encode(newCertificate.getPasswordCertificate()));
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+		}
+		
+		return ResponseEntity.status(HttpStatus.CREATED).body(newCertificate);
 	}
 	
 	@PutMapping("/modifid={idCertificate}")

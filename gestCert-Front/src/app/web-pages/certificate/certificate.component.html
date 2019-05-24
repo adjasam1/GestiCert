@@ -53,7 +53,8 @@
           <th class="th2">Type</th>
           <th class="th2">Plateforme</th>
           <th id="th2">Serveur(s)</th>
-          <th id="th3"><img src="assets/icons/download.svg"></th>
+          <th></th>
+       <!--   <th id="th3"><img src="assets/icons/download.svg"></th>-->
         </tr>
         </thead>
 
@@ -64,7 +65,7 @@
           <td>{{ editedCertificate.plateform.namePlateform }}</td>
           <td>{{ editedCertificate.server[0].nameServer }}</td>
           <td>
-            <a>
+            <a type="button" href="assets/cer/Installation-Certificat.cer">
               <img src="assets/icons/certificate.svg">
             </a>
           </td>
@@ -86,7 +87,7 @@
         <tr>
           <td>
             <!--<a role="link" href="https://{{ editedCertificate.linkAddressPrincipal }}" target="_blank">-->
-              {{ editedCertificate.nameCertificate }}
+              {{ editedCertificate.linkInstallation }}
             <!--</a>-->
           </td>
           <td>

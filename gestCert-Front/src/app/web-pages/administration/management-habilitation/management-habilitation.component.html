@@ -1,0 +1,124 @@
+<div title="Administration des habilitations d'un utilisateur">
+
+  <div id="cadre1">
+
+    <p-table #dt [columns]="cols2" [value]="applications" selectionMode="single" [(selection)]="selectedApplication"
+             (onRowSelect)="onRowSelect($event)" [paginator]="true" [rows]="7">
+      <ng-template pTemplate="caption">
+        Cliquez sur une application pour le modifier ou le supprimer
+      </ng-template>
+      <ng-template pTemplate="header" let-columns>
+        <tr>
+          <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+            {{col.header}}
+            <p-sortIcon [field]="col.field"></p-sortIcon>
+          </th>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="body" let-rowData let-columns="columns">
+        <tr [pSelectableRow]="rowData">
+          <td *ngFor="let col of columns">
+            {{rowData[col.field]}}
+          </td>
+        </tr>
+      </ng-template>
+      <ng-template pTemplate="summary" let-rowData>
+        <div style="text-align: left">
+          <button type="button" pButton icon="fa fa-plus" (click)="onSave()" label="Nouvelle application"></button>
+        </div>
+      </ng-template>
+    </p-table>
+
+  </div>
+
+  <h1>Administration des Habilitations d'un Utilisateur</h1>
+
+  <div id="cadre1">
+
+    <section id="droite" title="Habilitation d'un utilisateur à une application">
+
+      <div id="formulaire" title="Formulaire pour l'habilitation d'un utilisateur à une application">
+
+        <h2>Recherche d'un utilisateur</h2>
+
+        <div class="cadre3">
+
+          <div *ngFor="let col of cols" [ngSwitch]="col.field">
+            <div class="recherche">
+              <input *ngSwitchCase="'idRHUser'" pInputText type="search" placeholder="PAR L'IDENTIFIANT RH"
+                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     title="Champ pour rechercher un utilisateur par son identifiant RH">
+            </div>
+            <div class="recherche">
+              <input *ngSwitchCase="'nameUser'" pInputText type="search" placeholder="PAR LE NOM"
+                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     title="Champ pour rechercher un utilisateur par son nom">
+            </div>
+            <div class="recherche">
+              <input *ngSwitchCase="'firstNameUser'" pInputText type="search" placeholder="PAR LE PRENOM"
+                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     title="Champ pour rechercher un utilisateur par son prénom">
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+      <div class="liste" title="Liste des ">
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>
+
+<!--
+<div id="liste" title="Liste des utilisateurs">
+
+  <h2>Recherche</h2>
+
+  <div class="cadre2">
+    <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
+      <div class="filtre1">
+        <input *ngSwitchCase="'idRHUser'" pInputText type="search" placeholder="PAR L'IDENTIFIANT RH DE L'UTILISATEUR"
+               (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+      </div>
+      <div class="filtre1">
+        <input *ngSwitchCase="'nameUser'" pInputText type="search" placeholder="PAR LE NOM DE L'UTILISATEUR"
+               (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+      </div>
+      <div class="filtre1">
+        <input *ngSwitchCase="'firstNameUser'" pInputText type="search" placeholder="PAR LE PRENOM DE L'UTILISATEUR"
+               (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+      </div>
+    </div>
+  </div>
+
+  <h2 id="espace">Liste des Utilisateurs</h2>
+
+  <div id="table">
+    <div id="autour">
+      <p-table #dt [columns]="cols" [value]="users" [paginator]="true" [rows]="4" dataKey="idRHUser"
+               [reorderableColumns]="true" selectionMode="single" [(selection)]="selectedUser"
+               stateStorage="session" stateKey="statedemo-session">
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <th id="th1" *ngFor="let col of cols" [pSortableColumn]="col.field" colspan="col.colspan"
+                [ngStyle]="{'width': col.width}" pReorderableColumn>
+              {{col.header}}
+              <p-sortIcon [field]="col.field"></p-sortIcon>
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-user let-columns="columns">
+          <tr routerLink="/gestion/uti/{{ user.idUser }}" [pSelectableRow]="user">
+            <td *ngFor="let col of cols">{{ user[col.field] }}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+</div>-->

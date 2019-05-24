@@ -109,7 +109,8 @@ public class DemandController
  
     @ResponseBody
     @RequestMapping("/mail")
-    public ResponseEntity<?> sendHtmlEmail(@RequestBody Demand demand) throws MessagingException {
+    public ResponseEntity<?> sendHtmlEmail(@RequestBody Demand demand) throws MessagingException
+    {
     MimeMessage message = emailSender.createMimeMessage();
     boolean multipart = true;
     MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");

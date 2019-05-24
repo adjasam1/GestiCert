@@ -7,6 +7,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import gestiCert.model.Certificate;
 import gestiCert.model.Server;
 import gestiCert.repository.ServerRepository;
 
@@ -128,6 +129,12 @@ public class ServerServiceImpl implements ServerService
 		
 		return ResponseEntity.status(HttpStatus.OK).body(listServers);
 	}
+	
+//	@Override
+//	public List<Server> getServerByCertificate(Certificate certificate)
+//	{
+//		return serverRepo.findByCertificate(certificate);
+//	}
 	
 	/**
 	 * methode qui ajoute un serveur

@@ -1,120 +1,148 @@
-<head>
-  <title>Mon profil - GestiCert</title>
-</head>
+<title>GestiCert - Mon profil</title>
 
-<section id="entete">
+<div title="Page du profil de {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
 
-  <div title="{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
-    <div id="name">
+  <section id="entete">
+
+    <div id="name" title="{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
       <p>
         <img src="assets/icons/person.png">
-        &nbsp;<strong>{{ editedUser.nameUser | uppercase}}&nbsp;&nbsp;{{ editedUser.firstNameUser }}</strong>
+        <strong>{{ editedUser.nameUser | uppercase}}</strong><strong>{{ editedUser.firstNameUser }}</strong>
       </p>
     </div>
 
-  </div>
-
-  <div>
     <div id="deconnexion" title="Déconnexion de l'application">
       <a role="button" (click)="deconnect()">Déconnexion</a>
     </div>
-  </div>
 
-</section>
+  </section>
 
-<section id="formulaire">
-  <h1>Mon Profil</h1>
-  <table>
-    <tbody>
-    <tr>
-      <td class="td1"><strong>Identifiant RH :</strong></td>
-      <td class="td2">{{editedUser.idRHUser}}</td>
-    </tr>
-    <tr>
-      <td class="td1"><strong>Nom :</strong></td>
-      <td class="td2">{{editedUser.nameUser}}</td>
-    </tr>
-    <tr>
-      <td class="td1"><strong>Prénom :</strong></td>
-      <td class="td2">{{editedUser.firstNameUser}}</td>
-    </tr>
-    <tr>
-      <td class="td1"><strong>Service :</strong></td>
-      <td class="td2">{{editedUser.department.nameDepartment}}</td>
-    </tr>
-    <tr>
-      <td class="td1"><strong>Profil :</strong></td>
-      <td class="td2">{{editedUser.profile.typeProfile}}</td>
-    </tr>
-    </tbody>
-  </table>
-  <form>
- <!--   <div>
-      <div class="form-control">
-        <label for="idRH">Identifiant RH * : </label>
-        <input type="search" id="idRH" [(ngModel)]="editedUser.idRHUser" name="idRH" placeholder="Entrez l'identifiant RH"
-               required title="Champ pour l'identifiant RH">
+  <section>
+
+    <div id="cadre1">
+
+      <h1>Mon Profil</h1>
+
+      <div id="cadre2" title="Formulaire de mon profil">
+
+        <table>
+          <tbody>
+          <tr title="Mon identifiant RH est {{editedUser.idRHUser}}">
+            <td class="td1"><strong>Identifiant RH : </strong></td>
+            <td class="td2">{{editedUser.idRHUser}}</td>
+          </tr>
+          <tr title="Mon nom est {{editedUser.nameUser}}">
+            <td class="td1"><strong>Nom : </strong></td>
+            <td class="td2">{{editedUser.nameUser}}</td>
+          </tr>
+          <tr title="Mon prénom est {{editedUser.firstNameUser}}">
+            <td class="td1"><strong>Prénom : </strong></td>
+            <td class="td2">{{editedUser.firstNameUser}}</td>
+          </tr>
+          <tr title="Mon service est {{editedUser.department.nameDepartment}}">
+            <td class="td1"><strong>Service : </strong></td>
+            <td class="td2">{{editedUser.department.nameDepartment}}</td>
+          </tr>
+          <tr title="Mon profil est {{editedUser.profile.typeProfile}}">
+            <td class="td1"><strong>Profil : </strong></td>
+            <td class="td2">{{editedUser.profile.typeProfile}}</td>
+          </tr>
+          <tr>
+            <td></td>
+            <td id="td3"><strong>* Champs obligatoires</strong></td>
+          </tr>
+          <tr title="Mon téléphone est {{editedUser.phoneUser}}">
+            <td class="td1"><label for="tel" id="label1"><strong>Téléphone : </strong></label></td>
+            <td class="td2">
+              <input type="search" id="tel" [(ngModel)]="editedUser.phoneUser" name="tel"
+                     placeholder="TELEPHONE" title="Champ pour le téléphone">
+            </td>
+          </tr>
+          <tr title="Mon mail est {{editedUser.eMailUser}}">
+            <td class="td1"><label for="email" id="label2"><strong>E-mail * : </strong></label></td>
+            <td class="td2">
+              <input type="search" id="email" [(ngModel)]="editedUser.eMailUser" name="email"
+                     placeholder="E-MAIL" title="Champ pour le mail">
+            </td>
+          </tr>
+          </tbody>
+        </table>
+
+        <div id="action">
+          <a role="button" (click)="comeBack()" title="Annuler les modifications sur mon profil">Annuler</a>
+          <a role="button" (click)="onSave()" title="Sauvegarder les modifications sur mon profil">Sauvegarder</a>
+        </div>
+
       </div>
-      <br>-->
- <!--     <div class="form-control">
-        <label for="mdp">Mot de passe * : </label>
-        <input type="password" id="mdp" [(ngModel)]="editedUser.passwordUser" name="mdp"
-               placeholder="Entrez le mot de passe" required title="Champ pour le mot de passe">
-      </div>
-      <br>
-      <div class="form-control">
-        <label for="userProfile">Profil * : </label>
-        <select
-          name="userProfile"
-          id="userProfile"
-          class="form-control"
-          [(ngModel)]="editedUser.profile.idProfile" title="Champ pour le profil">
-          <option *ngFor="let profile of profilesList | async"
-                  [value]="profile.idProfile">{{ profile.typeProfile }}</option>
-        </select>
-      </div>
-      <br>-->
- <!--   </div>
-    <div class="form-control">
-      <label for="nom">Nom * : </label>
-      <input type="search" id="nom" [(ngModel)]="editedUser.nameUser" name="nom" placeholder="Entrez le nom" required title="Champ pour le nom">
+
     </div>
-    <br>
-    <div class="form-control">
-      <label for="prenom">Prénom * : </label>
-      <input type="search" id="prenom" [(ngModel)]="editedUser.firstNameUser" name="prenom" placeholder="Entrez le prénom"
-             required title="Champ pour le prénom">
-    </div>
-    <br>-->
- <!--   <div class="form-control">
-      <label for="userService">Service * : </label>-->
-      <!--   <input type="number" id="service" [(ngModel)]="editedUser.department.idDepartment" name="service"
-                placeholder="Entrez le prénom" required>-->
- <!--     <select
-        name="userService"
-        id="userService"
-        class="form-control"
-        [(ngModel)]="editedUser.department.idDepartment" title="Champ pour le service">
-        <option *ngFor="let department of departmentsList | async"
-                [value]="department.idDepartment">{{ department.nameDepartment }}</option>
-      </select>
-    </div>
-    <br>-->
-    <h2>* Champs obligatoires</h2>
-    <div class="form-control">
-      <label for="tel" id="label1"><strong>Téléphone : </strong></label>
-      <input type="search" id="tel" [(ngModel)]="editedUser.phoneUser" name="tel" placeholder="Entrez le téléphone" title="Champ pour le téléphone">
-    </div>
-    <br>
-    <div class="form-control">
-      <label for="email" id="label2"><strong>E-mail * : </strong></label>
-      <input type="search" id="email" [(ngModel)]="editedUser.eMailUser" name="email" placeholder="Entrez le mail" title="Champ pour le mail">
-    </div>
-    <br>
-  </form>
-  <br>
-  <div id="modification" title="Sauvegarder les modifications sur mon profil">
-    <a role="button" (click)="comeBack()">Annuler</a>
-    <a role="button" (click)="onSave()">Sauvegarder</a>
-  </div>
-</section>
+
+  </section>
+
+</div>
+
+        <!--  <form>
+            <div>
+              <div class="form-control">
+                <label for="idRH">Identifiant RH * : </label>
+                <input type="search" id="idRH" [(ngModel)]="editedUser.idRHUser" name="idRH" placeholder="Entrez l'identifiant RH"
+                       required title="Champ pour l'identifiant RH">
+              </div>
+              <br>-->
+        <!--     <div class="form-control">
+               <label for="mdp">Mot de passe * : </label>
+               <input type="password" id="mdp" [(ngModel)]="editedUser.passwordUser" name="mdp"
+                      placeholder="Entrez le mot de passe" required title="Champ pour le mot de passe">
+             </div>
+             <br>
+             <div class="form-control">
+               <label for="userProfile">Profil * : </label>
+               <select
+                 name="userProfile"
+                 id="userProfile"
+                 class="form-control"
+                 [(ngModel)]="editedUser.profile.idProfile" title="Champ pour le profil">
+                 <option *ngFor="let profile of profilesList | async"
+                         [value]="profile.idProfile">{{ profile.typeProfile }}</option>
+               </select>
+             </div>
+             <br>-->
+        <!--   </div>
+           <div class="form-control">
+             <label for="nom">Nom * : </label>
+             <input type="search" id="nom" [(ngModel)]="editedUser.nameUser" name="nom" placeholder="Entrez le nom" required title="Champ pour le nom">
+           </div>
+           <br>
+           <div class="form-control">
+             <label for="prenom">Prénom * : </label>
+             <input type="search" id="prenom" [(ngModel)]="editedUser.firstNameUser" name="prenom" placeholder="Entrez le prénom"
+                    required title="Champ pour le prénom">
+           </div>
+           <br>-->
+        <!--   <div class="form-control">
+             <label for="userService">Service * : </label>-->
+        <!--   <input type="number" id="service" [(ngModel)]="editedUser.department.idDepartment" name="service"
+                  placeholder="Entrez le prénom" required>-->
+        <!--     <select
+               name="userService"
+               id="userService"
+               class="form-control"
+               [(ngModel)]="editedUser.department.idDepartment" title="Champ pour le service">
+               <option *ngFor="let department of departmentsList | async"
+                       [value]="department.idDepartment">{{ department.nameDepartment }}</option>
+             </select>
+           </div>
+           <br>
+           <h2>* Champs obligatoires</h2>
+           <div class="form-control">
+             <label for="tel " id="label 1"><strong>Téléphone : </strong></label>
+             <input type="search" id="tel " [(ngModel)]="editedUser.phoneUser" name="tel" placeholder="Entrez le téléphone" title="Champ pour le téléphone">
+           </div>
+           <br>
+           <div class="form-control">
+             <label for="email " id="label2 "><strong>E-mail * : </strong></label>
+             <input type="search" id="email " [(ngModel)]="editedUser.eMailUser" name="email" placeholder="Entrez le mail" title="Champ pour le mail">
+           </div>
+           <br>
+         </form>
+         <br>-->

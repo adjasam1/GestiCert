@@ -28,15 +28,22 @@
       </ng-template>
       <div class="cadre2">
         <h3>* Champs obligatoires</h3>
-        <form>
+        <form #logForm="ngForm">
           <div>
-            <div class="form-control">
+            <div class="form-control" *ngIf="editedRoot.idRoot === 0">
               <label for="name">Nom * : </label>
               <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameRoot'" placeholder="Entrez le nom"
-                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+              <input *ngSwitchCase="'nameRoot'" placeholder="Entrez le nom" pInputText
                      type="search" id="name" [(ngModel)]="editedRoot.nameRoot" name="name"
-                     title="Champ pour le nom de la racine" required>
+                     title="Champ pour ajouter le nom d'une racine" required>
+            </span>
+            </div>
+            <div class="form-control" *ngIf="editedRoot.idRoot">
+              <label for="name2">Nom * : </label>
+              <span *ngFor="let col of cols" [ngSwitch]="col.field">
+              <input *ngSwitchCase="'nameRoot'" placeholder="Modifiez le nom" pInputText
+                     type="search" id="name2" [(ngModel)]="editedRoot.nameRoot" name="name"
+                     title="Champ pour modifier le nom de la racine" required>
             </span>
             </div>
             <br>
@@ -46,7 +53,7 @@
         <div id="modification">
           <a *ngIf="editedRoot.idRoot" class="choix" role="button" routerLink="/gestion/rac" title="Annuler les modifications sur la racine {{ editedRoot.nameRoot }}">Annuler</a>
           <a *ngIf="editedRoot.idRoot" class="choix" role="button" (click)="onDelete()" title="Supprimer la racine {{ editedRoot.nameRoot }}">Supprimer</a>
-          <a class="choix" role="button" (click)="onSave()" title="Sauvegarder la racine {{ editedRoot.nameRoot }}">Sauvegarder</a>
+          <a class="choix" role="button" (click)="onSave(logForm)" title="Sauvegarder la racine {{ editedRoot.nameRoot }}">Sauvegarder</a>
         </div>
       </div>
     </div>
@@ -59,7 +66,8 @@
 
     <div id="table">
       <div id="autour">
-        <p-table #dt [columns]="cols" [value]="roots" [paginator]="true" [rows]="4" dataKey="nameRoot" [resizableColumns]="true" [reorderableColumns]="true"
+        <p-table #dt [columns]="cols" [value]="roots" [paginator]="true" [rows]="4" dataKey="nameRoot"
+                 [resizableColumns]="true" [reorderableColumns]="true"
                  selectionMode="single" [(selection)]="selectedRoot" stateStorage="session" stateKey="statedemo-session">
           <ng-template pTemplate="header" let-columns>
             <tr>

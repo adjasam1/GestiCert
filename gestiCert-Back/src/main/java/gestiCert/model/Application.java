@@ -80,7 +80,7 @@ public class Application implements Serializable
 	 * @see Certificate
 	 */
 
-	//@JsonIgnore
+//	@JsonIgnore
 	@ManyToMany(mappedBy = "applications")
 	private List<AppUser> users;
 	

@@ -1,7 +1,10 @@
 package gestiCert.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
+import gestiCert.model.Certificate;
 import gestiCert.model.Server;
 
 /**
@@ -25,5 +28,7 @@ public interface ServerService {
 	ResponseEntity<?> updateServer(Server server, Integer idServer);
 
 	ResponseEntity<String> deleteServer(Integer idServer);
+
+//	List<Server> getServerByCertificate(Certificate certificate);
 
 }

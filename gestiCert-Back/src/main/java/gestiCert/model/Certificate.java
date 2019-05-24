@@ -22,6 +22,7 @@ import javax.validation.constraints.Size;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * Certificat est la classe representant un certificat d'une application
@@ -82,7 +83,7 @@ public class Certificate implements Serializable
 	 * @see addresseAlternative
 	 */
 	
-	//@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_application")
 	private Application application;
@@ -102,13 +103,14 @@ public class Certificate implements Serializable
 	@JoinColumn(name = "id_racine")
 	private Root root;
 	
-	@JsonIgnore
-	@ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+//	@JsonIgnore
+	@JsonIgnoreProperties("certificate")
+	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name ="certificat_serveur", joinColumns = @JoinColumn(name = "id_certificat"), inverseJoinColumns = @JoinColumn(name = "id_serveur"))
 	private List<Server> servers;
 	
-	//@JsonIgnore
-	@OneToMany(mappedBy = "certificate")
+//	@JsonIgnore
+	@OneToMany(mappedBy = "certificate", cascade = CascadeType.ALL)
 	private List<AddressAlternative> addressAlternatives;
 	
 	/**

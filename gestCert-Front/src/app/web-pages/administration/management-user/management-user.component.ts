@@ -16,7 +16,7 @@ import {DepartmentDataService} from '../../../service/department-data.service';
 export class ManagementUserComponent implements OnInit {
 
   usersList: BehaviorSubject<AppUser[]>;
-  idRH: string;
+ // idRH: string;
   idUser: number;
   editedUser1: AppUser;
   editedUser: AppUser = new AppUser(0, '', '', '', '', '', '', new Profile(), new Department());
@@ -31,7 +31,7 @@ export class ManagementUserComponent implements OnInit {
   listDepartments: Department[];
   listProfiles: Profile[];
 
- /* loginForm = this.fb.group({
+/*  loginForm = this.fb.group({
     idRHUser: [null, Validators.compose([Validators.required, Validators.minLength(7), Validators.maxLength(7)])],
     passwordUser: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])
     ]
@@ -79,9 +79,9 @@ export class ManagementUserComponent implements OnInit {
     );
 
     this.cols = [
-      { field: 'idRHUser', header: 'idRH', width: '24%' },
-      { field: 'nameUser', header: 'Nom', width: '38%' },
-      { field: 'firstNameUser', header: 'Prénom', width: '38%' }
+      { field: 'idRHUser', header: 'idRH', width: '85px' },
+      { field: 'nameUser', header: 'Nom' },
+      { field: 'firstNameUser', header: 'Prénom' }
     ];
 
   }
@@ -89,21 +89,17 @@ export class ManagementUserComponent implements OnInit {
   onSave() {
     if (!this.idUser) {
       if (confirm('Êtes-vous certain de vouloir ajouter un nouvel utilisateur ?')) {
-        console.log('create : ', this.editedUser);
         this.editedUser.department = this.listDepartments.find(department => {
           return department.idDepartment === +this.editedUser.department.idDepartment;
         });
         this.editedUser.profile = this.listProfiles.find(profile => {
           return profile.idProfile === +this.editedUser.profile.idProfile;
         });
-        this.userDataService.createUser(this.editedUser);
-        console.log('create : ', this.editedUser);
       }
+      this.userDataService.createUser(this.editedUser);
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier cet utilisateur ?')) {
-        console.log('update : ', this.editedUser);
         this.userDataService.updateUser(this.editedUser);
-        console.log('update : ', this.editedUser);
       }
     }
     this.router.navigate(['/gestion/uti']);

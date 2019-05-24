@@ -157,9 +157,15 @@
             <td class="td1"><strong>Nom commun</strong> "URL principale du site" <strong>:</strong></td>
             <td class="td2">{{editedCertificate.linkAddressPrincipal}}</td>
           </tr>
-          <tr>
-            <td class="td1"><strong>Adresse(s) alternative(s) :</strong></td>
-            <td class="td2">{{editedCertificate.addressAlternative[0].linkAddressAlternative}}</td>
+          <tr *ngFor="let addrAlt of listAddressAlternatives">
+            <td class="td1">
+              <strong>Adresse(s) alternative(s) :</strong>
+            </td>
+            <td class="td2">
+       <!--       <span *ngIf="editedCertificate.idCertificate === addrAlt.certificate.idCertificate">-->
+                {{addrAlt.linkAddressAlternative}}
+        <!--      </span>-->
+            </td>
           </tr>
           <tr>
             <td class="td1"><strong>Plateforme :</strong></td>
@@ -167,7 +173,7 @@
           </tr>
           <tr>
             <td class="td1"><strong>Serveur(s) :</strong></td>
-            <td class="td2">{{editedCertificate.server[0].nameServer}}</td>
+            <td class="td2">{{editedCertificate.server.nameServer}}</td>
           </tr>
           </tbody>
         </table>

@@ -1,21 +1,24 @@
-<div class="titre" title="Administration des utilisateurs">
+<div title="Administration des utilisateurs">
+
   <h1>Administration des Utilisateurs</h1>
-</div>
 
-<div class="cadre">
+  <div id="cadre1">
 
-  <div id="formulaire">
-    <h2 *ngIf="editedUser.idUser; else elseBlock1"
-        title="Formulaire pour modifier l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
-      Utilisateur : {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}
-    </h2>
-    <ng-template #elseBlock1 title="Formulaire pour ajouter un utilisateur">
-      <h2>Ajout d'un utilisateur<br></h2>
-    </ng-template>
-    <div class="cadre2">
-      <h3>* Champs obligatoires</h3>
-      <form>
-        <div>
+    <section id="formulaire" title="Formulaire pour ajouter ou modifier un utilisateur">
+
+      <h2 *ngIf="editedUser.idUser; else elseBlock1"
+          title="Formulaire pour modifier l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
+        Utilisateur : {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}
+      </h2>
+      <ng-template #elseBlock1 title="Formulaire pour ajouter un utilisateur">
+        <h2>Ajout d'un utilisateur<br></h2>
+      </ng-template>
+
+      <div id="cadre2">
+
+        <h3>* Champs obligatoires</h3>
+
+        <form>
           <div class="form-control">
             <label for="idRHUser"><strong>Identifiant RH * : </strong></label>
             <span *ngFor="let col of cols" [ngSwitch]="col.field">
@@ -24,13 +27,6 @@
                      [(ngModel)]="editedUser.idRHUser" title="Champ pour l'identifiant de l'utilisateur" required>
             </span>
           </div>
-          <br>
-          <div class="form-control" *ngIf="editedUser.idUser === 0">
-            <label for="password"><strong>Mot de passe * : </strong></label>
-            <input type="password" id="password" [(ngModel)]="editedUser.passwordUser" name="password"
-                   placeholder="MOT DE PASSE" title="Champ pour le mot de passe de l'utilisateur" required>
-          </div>
-          <br *ngIf="editedUser.idUser === 0">
           <div class="form-control">
             <label for="nameUser"><strong>Nom * : </strong></label>
             <span *ngFor="let col of cols" [ngSwitch]="col.field">
@@ -39,7 +35,6 @@
                      [(ngModel)]="editedUser.nameUser" title="Champ pour le nom de l'utilisateur" required>
             </span>
           </div>
-          <br>
           <div class="form-control">
             <label for="firstNameUser"><strong>Prénom * : </strong></label>
             <span *ngFor="let col of cols" [ngSwitch]="col.field">
@@ -48,100 +43,120 @@
                      [(ngModel)]="editedUser.firstNameUser" title="Champ pour le prénom de l'utilisateur" required>
             </span>
           </div>
-          <br>
+          <div class="form-control" *ngIf="editedUser.idUser === 0; else elseBlock2">
+            <label for="password"><strong>Mot de passe * : </strong></label>
+            <input type="password" id="password" [(ngModel)]="editedUser.passwordUser" name="password"
+                   placeholder="MOT DE PASSE" title="Champ pour le mot de passe de l'utilisateur" required>
+          </div>
+          <ng-template #elseBlock2>
+            <div id="modif"></div>
+          </ng-template>
           <div class="form-control">
             <label for="profile"><strong>Profil * : </strong></label>
             <select name="profile" id="profile" class="form-control"
-              [(ngModel)]="editedUser.profile.idProfile" title="Champ pour le profil de l'utilisateur">
+                    [(ngModel)]="editedUser.profile.idProfile" title="Champ pour le profil de l'utilisateur">
               <option *ngFor="let profile of profilesList | async" [value]="profile.idProfile">
                 {{ profile.typeProfile }}
               </option>
             </select>
           </div>
-          <br>
           <div class="form-control">
             <label for="department"><strong>Service * : </strong></label>
             <select name="department" id="department" class="form-control"
-              [(ngModel)]="editedUser.department.idDepartment" title="Champ pour le service de l'utilisateur">
+                    [(ngModel)]="editedUser.department.idDepartment" title="Champ pour le service de l'utilisateur">
               <option *ngFor="let department of departmentsList | async" [value]="department.idDepartment">
                 {{ department.nameDepartment }}
               </option>
             </select>
           </div>
-          <br>
           <div class="form-control">
             <label for="eMailUser"><strong>E-mail * : </strong></label>
             <input type="search" id="eMailUser" [(ngModel)]="editedUser.eMailUser" name="eMailUser"
                    placeholder="E-MAIL" title="Champ pour l'e-mail de l'utilisateur" required>
           </div>
-          <br>
           <div class="form-control">
-            <label for="phoneUser"><strong>Téléphone * : </strong></label>
+            <label for="phoneUser"><strong>Téléphone : </strong></label>
             <input type="search" id="phoneUser" [(ngModel)]="editedUser.phoneUser" name="phoneUser"
                    placeholder="TELEPHONE" title="Champ pour le téléphone de l'utilisateur" required>
           </div>
+        </form>
+
+        <div id="action">
+          <a *ngIf="editedUser.idUser" role="button" routerLink="/gestion/uti"
+             title="Annuler les modifications sur l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
+            Annuler
+          </a>
+          <a *ngIf="editedUser.idUser" role="button" (click)="onDelete()"
+             title="Supprimer l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Supprimer</a>
+          <a role="button" (click)="onSave()"
+             title="Sauvegarder l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Sauvegarder</a>
         </div>
-      </form>
-      <br>
-      <div id="espace2" *ngIf="editedUser.idUser"></div>
-      <div id="modification">
-        <a *ngIf="editedUser.idUser" class="choix" role="button" routerLink="/gestion/uti"
-           title="Annuler les modifications sur l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
-          Annuler
-        </a>
-        <a *ngIf="editedUser.idUser" class="choix" role="button" (click)="onDelete()"
-           title="Supprimer l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Supprimer</a>
-        <a class="choix" role="button" (click)="onSave()"
-           title="Sauvegarder l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Sauvegarder</a>
+
       </div>
-    </div>
-  </div>
 
-  <div id="liste" title="Liste des utilisateurs">
+    </section>
 
-    <h2>Recherche</h2>
+    <section id="droite">
 
-    <div class="cadre2">
-      <div id="filtres" *ngFor="let col of cols" [ngSwitch]="col.field">
-        <div class="filtre1">
-          <input *ngSwitchCase="'idRHUser'" pInputText type="search" placeholder="PAR L'IDENTIFIANT RH DE L'UTILISATEUR"
-                 (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
+      <div title="Formulaire de recherche d'un utilisateur">
+
+        <h2>Recherche</h2>
+
+        <div class="cadre3">
+
+          <div *ngFor="let col of cols" [ngSwitch]="col.field">
+            <div class="recherche">
+              <input *ngSwitchCase="'idRHUser'" pInputText type="search" placeholder="PAR L'IDENTIFIANT RH"
+                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     title="Champ pour la recherche d'un utilisateur par son identifiant RH">
+            </div>
+            <div class="recherche">
+              <input *ngSwitchCase="'nameUser'" pInputText type="search" placeholder="PAR LE NOM"
+                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     title="Champ pour la recherche d'un utilisateur par son nom">
+            </div>
+            <div class="recherche">
+              <input *ngSwitchCase="'firstNameUser'" pInputText type="search" placeholder="PAR LE PRENOM"
+                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     title="Champ pour la recherche d'un utilisateur par son prénom">
+            </div>
+          </div>
+
         </div>
-        <div class="filtre1">
-          <input *ngSwitchCase="'nameUser'" pInputText type="search" placeholder="PAR LE NOM DE L'UTILISATEUR"
-                 (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-        </div>
-        <div class="filtre1">
-          <input *ngSwitchCase="'firstNameUser'" pInputText type="search" placeholder="PAR LE PRENOM DE L'UTILISATEUR"
-                 (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)">
-        </div>
+
       </div>
-    </div>
 
-    <h2 id="espace">Liste des Utilisateurs</h2>
+      <div class="liste" title="Liste des utilisateurs">
 
-    <div id="table">
-      <div id="autour">
-        <p-table #dt [columns]="cols" [value]="users" [paginator]="true" [rows]="4" dataKey="idRHUser"
-                 [reorderableColumns]="true" selectionMode="single" [(selection)]="selectedUser"
-                 stateStorage="session" stateKey="statedemo-session">
-          <ng-template pTemplate="header" let-columns>
-            <tr>
-              <th id="th1" *ngFor="let col of cols" [pSortableColumn]="col.field" colspan="col.colspan"
-                  [ngStyle]="{'width': col.width}" pReorderableColumn>
-                {{col.header}}
-                <p-sortIcon [field]="col.field"></p-sortIcon>
-              </th>
-            </tr>
-          </ng-template>
-          <ng-template pTemplate="body" let-user let-columns="columns">
-            <tr routerLink="/gestion/uti/{{ user.idUser }}" [pSelectableRow]="user">
-              <td *ngFor="let col of cols">{{ user[col.field] }}</td>
-            </tr>
-          </ng-template>
-        </p-table>
+        <h2>Liste des Utilisateurs</h2>
+
+        <div class="cadre3">
+
+          <p-table #dt [columns]="cols" [value]="users" [paginator]="true" [rows]="4" dataKey="idRHUser"
+                   [reorderableColumns]="true" selectionMode="single" [(selection)]="selectedUser"
+                   stateStorage="session" stateKey="statedemo-session">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th *ngFor="let col of cols" [pSortableColumn]="col.field" colspan="col.colspan"
+                    [ngStyle]="{'width': col.width}" pReorderableColumn>
+                  {{col.header}}
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-user let-columns="columns">
+              <tr routerLink="/gestion/uti/{{ user.idUser }}" [pSelectableRow]="user">
+                <td *ngFor="let col of cols">{{ user[col.field] }}</td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+        </div>
+
       </div>
-    </div>
+
+    </section>
+
   </div>
 
 </div>

@@ -3,6 +3,7 @@ package gestiCert.service;
 import org.springframework.http.ResponseEntity;
 
 import gestiCert.model.AddressAlternative;
+import gestiCert.model.Certificate;
 
 /**
  * 
@@ -26,6 +27,8 @@ public interface AddressAlternativeService {
 	ResponseEntity<?> updateAddressAlternative(AddressAlternative addressAlternative, Integer idAddressAlternative);
 
 	ResponseEntity<String> deleteAddressAlternative(Integer idAddressAlternative);
+
+	ResponseEntity<?> getAddressAlternativeByCertificate(Certificate certificate);
 
 //	ResponseEntity<?> getAddressAlternativeByIdCertificate(Integer idCertificate);
 

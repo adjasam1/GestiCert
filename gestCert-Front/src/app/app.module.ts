@@ -47,6 +47,7 @@ import {MessageModule, MessagesModule} from 'primeng/primeng';
 import { ManagementPlateformComponent } from './web-pages/administration/management-plateform/management-plateform.component';
 import { ManagementRootComponent } from './web-pages/administration/management-root/management-root.component';
 import { ManagementServerComponent } from './web-pages/administration/management-server/management-server.component';
+import { ManagementHabilitationComponent } from './web-pages/administration/management-habilitation/management-habilitation.component';
 
 @NgModule({
   declarations: [
@@ -71,7 +72,8 @@ import { ManagementServerComponent } from './web-pages/administration/management
     ManagementCertificateComponent,
     ManagementPlateformComponent,
     ManagementRootComponent,
-    ManagementServerComponent
+    ManagementServerComponent,
+    ManagementHabilitationComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,7 +1,7 @@
 <title>GestiCert - Administration</title>
 
 <section id="entete">
-  <div id="user" title="Gestion de GestiCert">
+  <div id="user" title="Administration de GestiCert">
     <p>
       <img src="assets/icons/gestion.svg">
       Administration de GestiCert
@@ -16,85 +16,96 @@
 
 <section>
   <div id="menu1">
-    <a role="button" [matMenuTriggerFor]="utilisateur" title="Gestion des utilisateurs">Utilisateur</a>
-    <a role="button" routerLink="/gestion/app" title="Gestion des applications">Application</a>
-    <a role="button" [matMenuTriggerFor]="certificat" title="Gestion des certificats">Certificat</a>
+    <a role="button" [matMenuTriggerFor]="utilisateur" title="Administration des utilisateurs">Utilisateur</a>
+    <a role="button" [matMenuTriggerFor]="application" title="Administration des applications">Application</a>
+    <a role="button" [matMenuTriggerFor]="certificat" title="Administration des certificats">Certificat</a>
   </div>
 
   <div id="menu2">
     <mat-menu #utilisateur="matMenu">
-      <a class="select" role="button" routerLink="/gestion/uti" title="Gestion des utilisateurs">Utilisateur</a>
-      <a class="select" role="button" routerLink="/gestion/pro" title="Gestion des profils">Profil</a>
-      <a class="select" role="button" routerLink="/gestion/sce" title="Gestion des services">Service</a>
+      <a class="select" role="button" routerLink="/gestion/uti" title="Administration des utilisateurs">Utilisateur</a>
+      <a class="select" role="button" routerLink="/gestion/pro" title="Administration des profils">Profil</a>
+      <a class="select" role="button" routerLink="/gestion/sce" title="Administration des services">Service</a>
+      <a class="select" role="button" routerLink="/gestion/hab" title="Administration des services">Habilitation</a>
+    </mat-menu>
+    <mat-menu #application="matMenu">
+      <a class="select" role="button" routerLink="/gestion/app" title="Administration des applications">Application</a>
+      <a class="select" role="button" routerLink="/gestion/hab" title="Administration des services">Habilitation</a>
     </mat-menu>
     <mat-menu #certificat="matMenu">
-      <a class="select" role="button" routerLink="/gestion/cer" title="Gestion des certificats">Certificat</a>
-      <a class="select" role="button" routerLink="/gestion/env" title="Gestion des environnements">Environnement</a>
-      <a class="select" role="button" routerLink="/gestion/pla" title="Gestion des plateformes">Plateforme</a>
-      <a class="select" role="button" routerLink="/gestion/rac" title="Gestion des racines">Racine</a>
-      <a class="select" role="button" routerLink="/gestion/sur" title="Gestion des serveurs">Serveur</a>
+      <a class="select" role="button" routerLink="/gestion/cer" title="Administration des certificats">Certificat</a>
+      <a class="select" role="button" routerLink="/gestion/env" title="Administration des environnements">Environnement</a>
+      <a class="select" role="button" routerLink="/gestion/pla" title="Administration des plateformes">Plateforme</a>
+      <a class="select" role="button" routerLink="/gestion/rac" title="Administration des racines">Racine</a>
+      <a class="select" role="button" routerLink="/gestion/sur" title="Administration des serveurs">Serveur</a>
     </mat-menu>
   </div>
 </section>
 
-<section class="gest" title="Gestion des utilisateurs">
+<section class="gest">
   <input type="hidden" [routerLink]="'/gestion/uti'" routerLinkActive #guti="routerLinkActive"/>
   <div *ngIf="guti.isActive">
     <app-management-user></app-management-user>
   </div>
 </section>
 
-<section class="gest" title="Gestion des profils">
+<section class="gest">
   <input type="hidden" [routerLink]="'/gestion/pro'" routerLinkActive #gpro="routerLinkActive"/>
   <div *ngIf="gpro.isActive">
     <app-management-profile></app-management-profile>
   </div>
 </section>
 
-
-<section class="gest" title="Gestion des services">
+<section class="gest">
   <input type="hidden" [routerLink]="'/gestion/sce'" routerLinkActive #gsce="routerLinkActive"/>
   <div *ngIf="gsce.isActive">
     <app-management-department></app-management-department>
   </div>
 </section>
 
-<section class="gest" title="Gestion des applications">
+<section class="gest">
+  <input type="hidden" [routerLink]="'/gestion/hab'" routerLinkActive #ghab="routerLinkActive"/>
+  <div *ngIf="ghab.isActive">
+    <app-management-habilitation></app-management-habilitation>
+  </div>
+</section>
+
+<section class="gest">
   <input type="hidden" [routerLink]="'/gestion/app'" routerLinkActive #gapp="routerLinkActive"/>
   <section *ngIf="gapp.isActive">
     <app-management-application></app-management-application>
   </section>
 </section>
 
-<section class="gest" title="Gestion des certificats">
+<section class="gest">
   <input type="hidden" [routerLink]="'/gestion/cer'" routerLinkActive #gcer="routerLinkActive"/>
   <section *ngIf="gcer.isActive">
     <app-management-certificate></app-management-certificate>
   </section>
 </section>
 
-<section class="gest" title="Gestion des environnements">
+<section class="gest">
   <input type="hidden" [routerLink]="'/gestion/env'" routerLinkActive #genv="routerLinkActive"/>
   <section *ngIf="genv.isActive">
     <app-management-environment></app-management-environment>
   </section>
 </section>
 
-<section class="gest" title="Gestion des plateformes">
+<section class="gest">
   <input type="hidden" [routerLink]="'/gestion/pla'" routerLinkActive #gpla="routerLinkActive"/>
   <section *ngIf="gpla.isActive">
     <app-management-plateform></app-management-plateform>
   </section>
 </section>
 
-<section class="gest" title="Gestion des racines">
+<section class="gest">
   <input type="hidden" [routerLink]="'/gestion/rac'" routerLinkActive #grac="routerLinkActive"/>
   <section *ngIf="grac.isActive">
     <app-management-root></app-management-root>
   </section>
 </section>
 
-<section class="gest" title="Gestion des serveurs">
+<section class="gest">
   <input type="hidden" [routerLink]="'/gestion/sur'" routerLinkActive #gsur="routerLinkActive"/>
   <section *ngIf="gsur.isActive">
     <app-management-server></app-management-server>
