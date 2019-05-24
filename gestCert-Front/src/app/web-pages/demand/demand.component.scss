@@ -52,7 +52,7 @@ strong
 
 button
 {
-  margin-left: 5px;
+  margin-left: 15px;
 }
 
 #bouton
@@ -69,12 +69,12 @@ a
 {
   padding: 2px 5px;
   color: black;
+  font-size: 12px;
 }
 
 a[role="button"] {
   text-decoration: none;
   border-radius: 4px;
-  margin-left: 10px;
   margin-bottom: 10px;
 }
 
@@ -94,7 +94,6 @@ a[role="button"]:hover {
 .modification a[role="button"]:hover
 {
   background-color: #003DA5;
-  border: 1px solid #FFCB05;
   margin: 2px;
 }
 
