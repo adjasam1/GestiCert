@@ -28,12 +28,11 @@
       </ng-template>
       <div class="cadre2">
         <h3>* Champs obligatoires</h3>
-        <form>
+        <form #logForm="ngForm">
           <div class="form-control">
             <label for="name"><strong>Nom * : </strong></label>
             <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameDepartment'" placeholder="NOM" pInputText type="search" id="name"
-                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" name="name"
+              <input placeholder="NOM" type="search" id="name" name="name"
                      [(ngModel)]="editedDepartment.nameDepartment" title="Champ pour le nom du service" required>
             </span>
           </div>
@@ -43,7 +42,7 @@
              title="Annuler les modifications sur le service {{ editedDepartment.nameDepartment }}">Annuler</a>
           <a *ngIf="editedDepartment.idDepartment" class="choix" role="button" (click)="onDelete()"
              title="Supprimer le service {{ editedDepartment.nameDepartment }}">Supprimer</a>
-          <a class="choix" role="button" (click)="onSave()"
+          <a class="choix" role="button" (click)="onSave(logForm)"
              title="Sauvegarder le service {{ editedDepartment.nameDepartment }}">Sauvegarder</a>
         </div>
       </div>

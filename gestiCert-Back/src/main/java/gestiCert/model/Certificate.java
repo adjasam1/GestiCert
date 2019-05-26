@@ -19,6 +19,8 @@ import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.annotations.Type;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -110,6 +112,8 @@ public class Certificate implements Serializable
 	private List<Server> servers;
 	
 //	@JsonIgnore
+	@JsonIgnore
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OneToMany(mappedBy = "certificate", cascade = CascadeType.ALL)
 	private List<AddressAlternative> addressAlternatives;
 	
@@ -312,5 +316,12 @@ public class Certificate implements Serializable
 	{
 		this.addressAlternatives = addressAlternatives;
 	}
+
+	@Override
+	public String toString() {
+		return " " + addressAlternatives;
+	}
+	
+	
 
 }

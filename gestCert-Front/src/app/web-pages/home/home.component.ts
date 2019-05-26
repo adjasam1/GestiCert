@@ -41,7 +41,9 @@ export class HomeComponent implements OnInit {
   certificates: Certificate;
 //  certificate: Certificate = new PrimeCertificate();
   listCertificates: Certificate[];
-  cols: any[];
+  cols1: any[];
+  cols2: any[];
+  cols3: any[];
   selectedCertificate: Certificate;
   listApplications: Application[];
 
@@ -98,12 +100,25 @@ export class HomeComponent implements OnInit {
 
     this.dateAlert();
 
-    this.cols = [
+    this.cols1 = [
       { field: 'applicationCCX', header: 'CCX', width: '80px' },
       { field: 'applicationName', header: 'Application' },
       { field: 'environmentName', header: 'Environnement' },
       { field: 'rootName', header: 'Type' },
       { field: 'dateIssue', header: 'Emission', width: '120px' }
+    ];
+
+    this.cols2 = [
+      { field: 'applicationCCX', header: 'CCX', width: '80px' },
+      { field: 'applicationName', header: 'Application' },
+      { field: 'environmentName', header: 'Environnement' },
+      { field: 'rootName', header: 'Type' },
+    ];
+
+    this.cols3 = [
+      { field: 'applicationCCX', header: 'CCX', width: '80px' },
+      { field: 'applicationName', header: 'Application' },
+      { field: 'environmentName', header: 'Environnement' },
     ];
   }
 

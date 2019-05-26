@@ -7,6 +7,7 @@ import {Profile} from '../../../model/profile';
 import {Department} from '../../../model/department';
 import {ProfileDataService} from '../../../service/profile-data.service';
 import {DepartmentDataService} from '../../../service/department-data.service';
+import {NgForm} from '@angular/forms';
 
 @Component ({
   selector: 'app-management-user',
@@ -65,7 +66,7 @@ export class ManagementUserComponent implements OnInit {
       };
     }
 
-    this.userDataService.getUserPrimeNg().then(users => this.users = users);
+    this.onRefresh();
 
     this.profilesList = this.profileDataService.availableProfiles$;
     this.departmentsList = this.departmentDataService.availableDepartments$;
@@ -86,7 +87,11 @@ export class ManagementUserComponent implements OnInit {
 
   }
 
-  onSave() {
+  onRefresh() {
+    this.userDataService.getUserPrimeNg().then(users => this.users = users);
+  }
+
+  onSave(logForm: NgForm) {
     if (!this.idUser) {
       if (confirm('Êtes-vous certain de vouloir ajouter un nouvel utilisateur ?')) {
         this.editedUser.department = this.listDepartments.find(department => {
@@ -96,10 +101,19 @@ export class ManagementUserComponent implements OnInit {
           return profile.idProfile === +this.editedUser.profile.idProfile;
         });
       }
-      this.userDataService.createUser(this.editedUser);
+      this.userDataService.createUser(this.editedUser).subscribe(user => {
+        this.onRefresh();
+        this.router.navigate(['/gestion/uti']);
+        this.onRefresh();
+        }
+      );
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier cet utilisateur ?')) {
-        this.userDataService.updateUser(this.editedUser);
+        this.userDataService.updateUser(this.editedUser).subscribe( updateUser => {
+          this.onRefresh();
+          this.router.navigate(['/gestion/uti']);
+          this.onRefresh();
+        });
       }
     }
     this.router.navigate(['/gestion/uti']);
@@ -107,9 +121,12 @@ export class ManagementUserComponent implements OnInit {
 
   onDelete() {
     if (confirm('Êtes-vous certain de vouloir supprimer cet utilisateur ?')) {
-      this.userDataService.deleteUser(this.editedUser);
+      this.userDataService.deleteUser(this.editedUser).subscribe( deleteUser => {
+        this.onRefresh();
+      });
+      this.router.navigate(['/gestion/uti']);
+      this.onRefresh();
     }
-    this.router.navigate(['/gestion/uti']);
   }
 
 }

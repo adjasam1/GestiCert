@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import gestiCert.mail.MailConfig;
 import gestiCert.model.Demand;
 import gestiCert.service.DemandService;
+import gestiCert.service.MailService;
 
 /**
  * DemandController route les requetes au DemandService
@@ -48,7 +49,10 @@ public class DemandController
 	private DemandService demandServ;
 	
 	@Autowired
-    public JavaMailSender emailSender;
+	private MailService mailServ;
+
+//	@Autowired
+//    public JavaMailSender emailSender;
 
 	/**
 	 * constructeur
@@ -109,21 +113,22 @@ public class DemandController
  
     @ResponseBody
     @RequestMapping("/mail")
-    public ResponseEntity<?> sendHtmlEmail(@RequestBody Demand demand) throws MessagingException
+    public Object sendHtmlEmail(@RequestBody Demand demand) throws MessagingException
     {
-    MimeMessage message = emailSender.createMimeMessage();
-    boolean multipart = true;
-    MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
-    StringBuffer htmlMsg= new StringBuffer();
-    htmlMsg.append("<h1>Test envoi mail</h1>");
-    htmlMsg.append("<h2>"+demand.getIdDemand()+"</h2>");
-    htmlMsg.append("<h3>"+demand.getApplication().getNameApplication()+"</h3>");
-    htmlMsg.append("<h4>Nom Demandeur : "+demand.getUser().getNameUser()+"</h4>");
-    message.setContent(htmlMsg.toString(), "text/html"); // on précise le format HTML
-    helper.setTo(MailConfig.OTHER_EMAIL);
-    helper.setSubject("Essai 1 : Envoyer un email avec du HTML + image");
-    this.emailSender.send(message);
-    return ResponseEntity.status(HttpStatus.OK).body("envois OK : " + null);
+//    MimeMessage message = emailSender.createMimeMessage();
+//    boolean multipart = true;
+//    MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
+//    StringBuffer htmlMsg= new StringBuffer();
+//    htmlMsg.append("<h1>Test envoi mail</h1>");
+//    htmlMsg.append("<h2>"+demand.getIdDemand()+"</h2>");
+//    htmlMsg.append("<h3>"+demand.getApplication().getNameApplication()+"</h3>");
+//    htmlMsg.append("<h4>Nom Demandeur : "+demand.getUser().getNameUser()+"</h4>");
+//    message.setContent(htmlMsg.toString(), "text/html"); // on précise le format HTML
+//    helper.setTo(MailConfig.OTHER_EMAIL);
+//    helper.setSubject("Essai 1 : Envoyer un email avec du HTML + image");
+//    this.emailSender.send(message);
+//    return ResponseEntity.status(HttpStatus.OK).body("envois OK : " + null);
+    	return mailServ.sendHtmlEmail(demand);
     }
 
 }

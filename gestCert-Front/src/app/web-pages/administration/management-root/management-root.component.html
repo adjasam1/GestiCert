@@ -33,17 +33,15 @@
             <div class="form-control" *ngIf="editedRoot.idRoot === 0">
               <label for="name">Nom * : </label>
               <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameRoot'" placeholder="Entrez le nom" pInputText
-                     type="search" id="name" [(ngModel)]="editedRoot.nameRoot" name="name"
-                     title="Champ pour ajouter le nom d'une racine" required>
+              <input placeholder="Entrez le nom" type="search" id="name" name="name"
+                     [(ngModel)]="editedRoot.nameRoot" title="Champ pour ajouter le nom d'une racine" required>
             </span>
             </div>
             <div class="form-control" *ngIf="editedRoot.idRoot">
               <label for="name2">Nom * : </label>
               <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameRoot'" placeholder="Modifiez le nom" pInputText
-                     type="search" id="name2" [(ngModel)]="editedRoot.nameRoot" name="name"
-                     title="Champ pour modifier le nom de la racine" required>
+              <input placeholder="Modifiez le nom" type="search" id="name2" name="name"
+                     [(ngModel)]="editedRoot.nameRoot" title="Champ pour modifier le nom de la racine" required>
             </span>
             </div>
             <br>
@@ -51,9 +49,12 @@
         </form>
         <br>
         <div id="modification">
-          <a *ngIf="editedRoot.idRoot" class="choix" role="button" routerLink="/gestion/rac" title="Annuler les modifications sur la racine {{ editedRoot.nameRoot }}">Annuler</a>
-          <a *ngIf="editedRoot.idRoot" class="choix" role="button" (click)="onDelete()" title="Supprimer la racine {{ editedRoot.nameRoot }}">Supprimer</a>
-          <a class="choix" role="button" (click)="onSave(logForm)" title="Sauvegarder la racine {{ editedRoot.nameRoot }}">Sauvegarder</a>
+          <a *ngIf="editedRoot.idRoot" class="choix" role="button" routerLink="/gestion/rac"
+             title="Annuler les modifications sur la racine {{ editedRoot.nameRoot }}">Annuler</a>
+          <a *ngIf="editedRoot.idRoot" class="choix" role="button" (click)="onDelete(logForm)"
+             title="Supprimer la racine {{ editedRoot.nameRoot }}">Supprimer</a>
+          <a class="choix" role="button" (click)="onSave(logForm)"
+             title="Sauvegarder la racine {{ editedRoot.nameRoot }}">Sauvegarder</a>
         </div>
       </div>
     </div>
@@ -88,4 +89,23 @@
   </div>
 
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

@@ -11,7 +11,7 @@ import {DepartmentDataService} from '../../service/department-data.service';
 import {ProfileDataService} from '../../service/profile-data.service';
 import {Demand} from '../../model/demand';
 import {DemandDataService} from '../../service/demand-data.service';
-import {NgForm} from '@angular/forms';
+import {FormBuilder, NgForm, Validators} from '@angular/forms';
 import {TypeDemandDataService} from '../../service/type-demand-data.service';
 import {TypeDemand} from '../../model/typeDemand';
 import {AddressAlternativeDataService} from '../../service/address-alternative-data.service';
@@ -65,6 +65,7 @@ export class DemandComponent implements OnInit {
   listApplications: Application[];
   listStatusDemands: StatusDemand[];
   listTypeDemands: TypeDemand[];
+  listServers: Server[];
   listDemands: Demand[];
 
   idMail: number;
@@ -82,6 +83,7 @@ export class DemandComponent implements OnInit {
               private demandDataService: DemandDataService,
               private statusDemandDataService: StatusDemandDataService,
               private typeDemandDataService: TypeDemandDataService,
+              private fb: FormBuilder,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -101,18 +103,21 @@ export class DemandComponent implements OnInit {
  //   this.addressAlternativesList.subscribe( addressAlternatives => this.listAddressAlternatives = addressAlternatives );
     this.addressAlternativeDataService.findAddressAlternativeByCertificate(this.idCertificate).subscribe(addressAlternatives =>
       this.listAddressAlternatives = addressAlternatives);
-    console.log('idCertificate : ', this.idCertificate);
-    console.log('liste address alter : ', this.listAddressAlternatives);
+ //   console.log('idCertificate : ', this.idCertificate);
+ //   console.log('liste address alter : ', this.listAddressAlternatives);
     this.demandsList = this.demandDataService.availableDemands$;
     this.idDemand = +this.route.snapshot.params.id3;
     this.demandDataService.findDemand(this.idDemand).subscribe(demand => this.editedDemand = demand);
-    console.log('idDemand : ' + this.idDemand);
+//    console.log('idDemand : ' + this.idDemand);
 
     this.applicationsList = this.applicationDataService.availableApplications$;
     this.statusDemandsList = this.statusDemandDataService.availableStatusDemands$;
     this.typeDemandsList = this.typeDemandDataService.availableTypeDemands$;
     this.plateformsList = this.plateformDataService.availablePlateforms$;
+
     this.serversList = this.serverDataService.availableServers$;
+ //   this.serverDataService.findServer(this.editedCertificate.idCertificate).subscribe( servers => this.listServers = servers );
+
 
     this.usersList.subscribe(
       users => this.listUsers = users
@@ -129,7 +134,12 @@ export class DemandComponent implements OnInit {
     this.typeDemandsList.subscribe(
       types => this.listTypeDemands = types
     );
+    this.serversList.subscribe(
+      servers => this.listServers = servers
+    );
 
+ //   alert(JSON.stringify(this.editedCertificate));
+    this.listServers = this.editedCertificate.servers;
  //   this.dateAlert();
   }
 

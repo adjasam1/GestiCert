@@ -27,11 +27,19 @@ p strong {
 }
 
 a {
-  padding: 2px 5px;
   color: black;
   font-size: 12px;
   border-radius: 4px;
   margin-left: 0px;
+  padding: 2px 5px;
+}
+
+.buton1 {
+  padding: 2px 6px;
+}
+
+.buton2 {
+  padding: 2px 5px;
 }
 
 a[role="button"] {
@@ -59,7 +67,7 @@ td a[role="button"]:hover, form a[role="button"]:hover {
 }
 
 /* CADRES */
-#cadre1 {
+.cadre1 {
   border: 2px solid #003DA5;
   border-radius: 5px;
   margin: 30px auto 80px auto;
@@ -96,15 +104,15 @@ input {
   font-family: Montserrat, sans-serif;
 }
 
-#filtre1 input {
+.filtre1 input {
   width: 60px;
 }
 
-#filtre3 input{
+.filtre3 input{
   width: 80px;
 }
 
-#filtre4 input{
+.filtre4 input{
   width: 130px;
 }
 
@@ -113,11 +121,15 @@ input {
   margin-top: 50px;
 }
 
-#th2 {
+.th2 {
   width: 140px;
 }
 
 /* ADAPTABILITE */
+#resp2, #resp3 {
+  display: none;
+}
+
 @media (max-width: 1200px) {
   th, td {
     font-size: 10px;
@@ -125,16 +137,64 @@ input {
 }
 
 @media (max-width: 1000px) {
-  .th2 {
+  #resp1 {
     display: none;
+  }
+
+  #resp2 {
+    display: flex;
   }
 }
 
 @media (max-width: 800px) {
+  .cadre1 {
+    width: 98%;
+    margin: 30px 1% 80px 1%;
+  }
+
+  #resp2 {
+    display: none;
+  }
+
+  #resp3 {
+    display: flex;
+  }
+}
+
+@media (max-width: 630px) {
+  .filtre2 input {
+    width: 130px;
+  }
+
+  p-table img {
+    display: none;
+  }
+
+  a[role="button"] {
+    margin-left: 0;
+  }
+
+  .th2 {
+    width: 80px;
+  }
+}
+
+@media (max-width: 500px) {
   form {
-    display: inline-block;
+    display: inline;
+    padding: 0;
     text-align: right;
-    padding: 10px;
+  }
+
+  .filtre1 input, .filtre2 input {
+    width: 55%;
+    margin: 1% 3% 1% 0;
+  }
+}
+
+@media (max-width: 430px) {
+  .th2, .td2 {
+    display: none;
   }
 }
 

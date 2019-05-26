@@ -151,6 +151,15 @@ public class Profile implements Serializable
 
 
 
+	@Override
+	public String toString() {
+		return " " + typeProfile;
+	}
+
+
+
+	
+
 	
 
 	

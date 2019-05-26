@@ -18,7 +18,7 @@ export interface Certificate {
   environment?: Environment;
   plateform?: Plateform;
   root?: Root;
-  server?: Server[];
+  servers?: Server[];
   addressAlternative?: AddressAlternative[];
   applicationName?: string;
   applicationCCX?: string;
@@ -40,7 +40,7 @@ export class Certificate {
   public environment?: Environment;
   public plateform?: Plateform;
   public root?: Root;
-  public server?: Server[];
+  public servers?: Server[];
   public addressAlternative?: AddressAlternative[];
   public applicationName?: string;
   public applicationCCX?: string;
@@ -58,7 +58,7 @@ export class Certificate {
               environment: Environment,
               plateform: Plateform,
               root: Root,
-              server: Server[],
+              servers: Server[],
               addressAlternative: AddressAlternative[]) {
 
     this.idCertificate = idCertificate;
@@ -72,7 +72,7 @@ export class Certificate {
     this.environment = environment;
     this.plateform = plateform;
     this.root = root;
-    this.server = server;
+    this.servers = servers;
     this.addressAlternative = addressAlternative;
   }
 

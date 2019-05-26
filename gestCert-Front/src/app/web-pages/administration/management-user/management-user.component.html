@@ -18,35 +18,26 @@
 
         <h3>* Champs obligatoires</h3>
 
-        <form>
+        <form #logForm="ngForm">
           <div class="form-control">
             <label for="idRHUser"><strong>Identifiant RH * : </strong></label>
-            <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'idRHUser'" placeholder="IDENTIFIANT RH" pInputText type="search" id="idRHUser"
-                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" name="idRHUser"
+              <input placeholder="IDENTIFIANT RH" type="search" id="idRHUser" name="idRHUser"
                      [(ngModel)]="editedUser.idRHUser" title="Champ pour l'identifiant de l'utilisateur" required>
-            </span>
           </div>
           <div class="form-control">
             <label for="nameUser"><strong>Nom * : </strong></label>
-            <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameUser'" placeholder="NOM" pInputText type="search" id="nameUser"
-                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" name="nameUser"
+              <input placeholder="NOM" type="search" id="nameUser" name="nameUser"
                      [(ngModel)]="editedUser.nameUser" title="Champ pour le nom de l'utilisateur" required>
-            </span>
           </div>
           <div class="form-control">
             <label for="firstNameUser"><strong>Prénom * : </strong></label>
-            <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'firstNameUser'" placeholder="PRENOM" pInputText type="search" id="firstNameUser"
-                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" name="firstNameUser"
+              <input placeholder="PRENOM" type="search" id="firstNameUser" name="firstNameUser"
                      [(ngModel)]="editedUser.firstNameUser" title="Champ pour le prénom de l'utilisateur" required>
-            </span>
           </div>
           <div class="form-control" *ngIf="editedUser.idUser === 0; else elseBlock2">
             <label for="password"><strong>Mot de passe * : </strong></label>
-            <input type="password" id="password" [(ngModel)]="editedUser.passwordUser" name="password"
-                   placeholder="MOT DE PASSE" title="Champ pour le mot de passe de l'utilisateur" required>
+            <input placeholder="MOT DE PASSE" type="password" id="password" name="password"
+                   [(ngModel)]="editedUser.passwordUser" title="Champ pour le mot de passe de l'utilisateur" required>
           </div>
           <ng-template #elseBlock2>
             <div id="modif"></div>
@@ -71,13 +62,13 @@
           </div>
           <div class="form-control">
             <label for="eMailUser"><strong>E-mail * : </strong></label>
-            <input type="search" id="eMailUser" [(ngModel)]="editedUser.eMailUser" name="eMailUser"
-                   placeholder="E-MAIL" title="Champ pour l'e-mail de l'utilisateur" required>
+            <input placeholder="E-MAIL" type="search" id="eMailUser" name="eMailUser"
+                   [(ngModel)]="editedUser.eMailUser" title="Champ pour l'e-mail de l'utilisateur" required>
           </div>
           <div class="form-control">
             <label for="phoneUser"><strong>Téléphone : </strong></label>
-            <input type="search" id="phoneUser" [(ngModel)]="editedUser.phoneUser" name="phoneUser"
-                   placeholder="TELEPHONE" title="Champ pour le téléphone de l'utilisateur" required>
+            <input placeholder="TELEPHONE" type="search" id="phoneUser" name="phoneUser"
+                   [(ngModel)]="editedUser.phoneUser" title="Champ pour le téléphone de l'utilisateur" required>
           </div>
         </form>
 
@@ -88,7 +79,7 @@
           </a>
           <a *ngIf="editedUser.idUser" role="button" (click)="onDelete()"
              title="Supprimer l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Supprimer</a>
-          <a role="button" (click)="onSave()"
+          <a role="button" (click)="onSave(logForm)"
              title="Sauvegarder l'utilisateur {{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">Sauvegarder</a>
         </div>
 

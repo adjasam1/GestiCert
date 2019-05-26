@@ -1,6 +1,8 @@
 package gestiCert.controller;
 
 import java.util.Date;
+import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,7 +18,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import gestiCert.model.Certificate;
+import gestiCert.model.Server;
+import gestiCert.repository.CertificateRepository;
 import gestiCert.service.CertificateService;
+import gestiCert.service.ServerService;
 
 /**
  * CertificateController route les requetes au CertificateService
@@ -42,6 +47,10 @@ public class CertificateController
 	
 	@Autowired
 	private CertificateService certificateServ;
+	private CertificateRepository certificateRepo;
+	
+	@Autowired
+	private ServerService serverServ;
 	
 	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 

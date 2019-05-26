@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DepartmentDataService} from '../../../service/department-data.service';
 import {Department} from '../../../model/department';
 import {Profile} from '../../../model/profile';
+import {NgForm} from '@angular/forms';
 
 @Component ({
   selector: 'app-management-department',
@@ -31,21 +32,34 @@ export class ManagementDepartmentComponent implements OnInit {
       this.editedDepartment = department;
     });
 
-    this.departmentDataService.getDepartmentPrimeNg().then(departments => this.departments = departments);
+    this.onRefresh();
 
     this.cols = [
       { field: 'nameDepartment', header: 'Nom' }
     ];
   }
 
-  onSave() {
+  onRefresh() {
+    this.departmentDataService.getDepartmentPrimeNg().then(departments => this.departments = departments);
+  }
+
+  onSave(logForm: NgForm) {
     if (!this.idDepartment) {
       if (confirm('Êtes-vous certain de vouloir ajouter un nouveau service ?')) {
-        this.departmentDataService.createDepartment(this.editedDepartment);
+        this.departmentDataService.createDepartment(this.editedDepartment).subscribe( createDepartment => {
+          this.onRefresh();
+          logForm.reset();
+          this.router.navigate(['/gestion/pro']);
+          this.onRefresh();
+        });
       }
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier ce service ?')) {
-        this.departmentDataService.updateDepartment(this.editedDepartment);
+        this.departmentDataService.updateDepartment(this.editedDepartment).subscribe( updateDepartment => {
+          this.onRefresh();
+          this.router.navigate(['/gestion/pro']);
+          this.onRefresh();
+        });
       }
     }
     this.router.navigate(['/gestion/sce']);
@@ -53,7 +67,9 @@ export class ManagementDepartmentComponent implements OnInit {
 
   onDelete() {
     if (confirm('Êtes-vous certain de vouloir supprimer ce service ?')) {
-      this.departmentDataService.deleteDepartment(this.editedDepartment);
+      this.departmentDataService.deleteDepartment(this.editedDepartment).subscribe( deleteDepartment => {
+        this.onRefresh();
+      });
     }
     this.router.navigate(['/gestion/sce']);
   }

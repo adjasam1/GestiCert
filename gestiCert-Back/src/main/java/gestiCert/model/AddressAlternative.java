@@ -111,4 +111,11 @@ public class AddressAlternative implements Serializable
 		this.certificate = certificate;
 	}
 
+	@Override
+	public String toString() {
+		return " " + linkAddressAlternative;
+	}
+	
+	
+
 }

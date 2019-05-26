@@ -1,5 +1,7 @@
 package gestiCert.service;
 
+import javax.mail.MessagingException;
+
 import org.springframework.http.ResponseEntity;
 
 import gestiCert.model.Demand;
@@ -24,5 +26,7 @@ public interface DemandService {
 	ResponseEntity<?> updateDemand(Demand demand, Integer idDemand);
 
 	ResponseEntity<String> deleteDemand(Integer idDemand);
+
+//	Object sendHtmlEmail(Demand demand) throws MessagingException;
 
 }

@@ -57,8 +57,6 @@ export class ManagementRootComponent implements OnInit {
           this.onRefresh();
         });
       }
-      this.rootDataService.getRootPrimeNg().then(roots => this.roots = roots);
-      this.router.navigate(['/gestion/rac']);
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier cette racine ?')) {
         this.rootDataService.updateRoot(this.editedRoot).subscribe( updateRoot => {
@@ -71,7 +69,7 @@ export class ManagementRootComponent implements OnInit {
     }
   }
 
-  onDelete() {
+  onDelete(logForm: NgForm) {
     if (confirm('Êtes-vous certain de vouloir supprimer cette racine ?')) {
       this.rootDataService.deleteRoot(this.editedRoot).subscribe(deleteRoot => {
    //     const index1 = this.rootDataService.availableRoots.indexOf(this.editedRoot);
@@ -79,10 +77,9 @@ export class ManagementRootComponent implements OnInit {
    //     this.rootDataService.availableRoots$.next(this.rootDataService.availableRoots);
       //  this.rootDataService.getRootPrimeNg().then(roots => this.roots = roots);
    //     this.rootDataService.publishRoot();
-        this.onRefresh();
-        this.router.navigate(['/gestion/rac']);
-        this.onRefresh();
       });
+      this.onRefresh();
+      this.router.navigate(['/gestion/rac']);
     }
   }
 

@@ -4,10 +4,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
+import gestiCert.mail.MailConfig;
 import gestiCert.model.Demand;
 import gestiCert.repository.DemandRepository;
 
@@ -33,6 +41,8 @@ public class DemandServiceImpl implements DemandService
 
 	private DemandRepository demandRepo;
 
+//	@Autowired
+//    public JavaMailSender emailSender;
 	/**
 	 * constructeur
 	 * 
@@ -182,5 +192,23 @@ public class DemandServiceImpl implements DemandService
 		
 		return ResponseEntity.status(HttpStatus.OK).body("Suppression OK");
 	}
+	
+//	@Override
+//	public Object sendHtmlEmail(Demand demand) throws MessagingException
+//    {
+//    MimeMessage message = emailSender.createMimeMessage();
+//    boolean multipart = true;
+//    MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
+//    StringBuffer htmlMsg= new StringBuffer();
+//    htmlMsg.append("<h1>Test envoi mail</h1>");
+//    htmlMsg.append("<h2>"+demand.getIdDemand()+"</h2>");
+//    htmlMsg.append("<h3>"+demand.getApplication().getNameApplication()+"</h3>");
+//    htmlMsg.append("<h4>Nom Demandeur : "+demand.getUser().getNameUser()+"</h4>");
+//    message.setContent(htmlMsg.toString(), "text/html"); // on précise le format HTML
+//    helper.setTo(MailConfig.OTHER_EMAIL);
+//    helper.setSubject("Essai 1 : Envoyer un email avec du HTML + image");
+//    this.emailSender.send(message);
+//	return htmlMsg;
+//    }
 
 }

@@ -78,7 +78,7 @@ export class ManagementCertificateComponent implements OnInit {
         environment: {idEnvironment: 1},
         plateform: {idPlateform: 1},
         root: {idRoot: 1},
-        server: [{idServer: 1}]
+        servers: [{idServer: 1}]
       };
     }
 

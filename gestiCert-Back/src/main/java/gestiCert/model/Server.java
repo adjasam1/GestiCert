@@ -14,6 +14,9 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
@@ -55,6 +58,7 @@ public class Server implements Serializable
 	 */
 	
 	@JsonIgnore
+	@OnDelete(action = OnDeleteAction.CASCADE)
 	@ManyToMany(mappedBy = "servers", fetch = FetchType.LAZY)
 	private List<Certificate> certificates;
 	
@@ -118,5 +122,14 @@ public class Server implements Serializable
 	{
 		this.certificates = certificates;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return " " + nameServer;
+	}
+	
+	
 
 }

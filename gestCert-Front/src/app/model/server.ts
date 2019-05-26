@@ -4,7 +4,7 @@ export interface Server {
 
   idServer?: number;
   nameServer?: string;
-  certificates?: Certificate[];
+  certificate?: Certificate[];
 
 }
 
@@ -12,15 +12,15 @@ export class Server {
 
   public idServer?: number;
   public nameServer?: string;
-  public certificates?: Certificate[];
+  public certificate?: Certificate[];
 
   constructor(idServer?: number,
               nameServer?: string,
-              certificates?: Certificate[]) {
+              certificate?: Certificate[]) {
 
     this.idServer = idServer;
     this.nameServer = nameServer;
-    this.certificates = certificates;
+    this.certificate = certificate;
   }
 
 }

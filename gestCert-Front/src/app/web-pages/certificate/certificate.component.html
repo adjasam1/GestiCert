@@ -14,19 +14,21 @@
 
   <div>
     <div id="deconnexion" title="Déconnexion de l'application">
-      <a role="button" (click)="deconnect()">Déconnexion</a>
+      <a role="button" (click)="onDeconnect()">Déconnexion</a>
     </div>
   </div>
 
 </section>
 
+
+<!--
 <section id="search">
 
   <h2 id="espace">Certificat</h2>
 
 
 </section>
-
+-->
 
 
 
@@ -43,6 +45,7 @@
   </div>
 
   <div id="cadre1">
+
     <div>
       <table id="table1">
         <thead>
@@ -53,8 +56,7 @@
           <th class="th2">Type</th>
           <th class="th2">Plateforme</th>
           <th id="th2">Serveur(s)</th>
-          <th></th>
-       <!--   <th id="th3"><img src="assets/icons/download.svg"></th>-->
+          <th id="th3"><img src="assets/icons/download.svg"></th>
         </tr>
         </thead>
 
@@ -63,7 +65,7 @@
           <td>{{ editedCertificate.nameCertificate }}</td>
           <td>{{ editedCertificate.root.nameRoot }}</td>
           <td>{{ editedCertificate.plateform.namePlateform }}</td>
-          <td>{{ editedCertificate.server[0].nameServer }}</td>
+          <td><span *ngFor="let server of listServers">{{server.nameServer}}<br *ngIf="listServers.length > 0"></span></td>
           <td>
             <a type="button" href="assets/cer/Installation-Certificat.cer">
               <img src="assets/icons/certificate.svg">
@@ -74,11 +76,30 @@
       </table>
     </div>
 
-    <div id="cadre2">
-      <table id="table2">
+    <div class="cadre2">
+      <table class="table2">
         <thead>
         <tr>
           <th id="th4">Adresse Principale</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr>
+          <td>
+            <a role="link" href="https://{{ editedCertificate.linkAddressPrincipal }}" target="_blank">
+              {{ editedCertificate.linkAddressPrincipal }}
+            </a>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="cadre2">
+      <table class="table2">
+        <thead>
+        <tr>
           <th id="th5">Adresse(s) Alternative(s)</th>
         </tr>
         </thead>
@@ -86,19 +107,11 @@
         <tbody>
         <tr>
           <td>
-            <!--<a role="link" href="https://{{ editedCertificate.linkAddressPrincipal }}" target="_blank">-->
-              {{ editedCertificate.linkInstallation }}
-            <!--</a>-->
-          </td>
-          <td>
-     <!--       <a role="link" href="https://{{editedCertificate.addressAlternative[0].linkAddressAlternative}}" target="_blank">
-              {{ editedCertificate.addressAlternative[0].linkAddressAlternative }}-->
-    <!--        <a *ngFor="let addr of editedAddressAlternative" role="link" href="https://{{ addr.linkAddressAlternative }}" target="_blank">
-             <span *ngIf="editedCertificate.idCertificate === addr.certificate.idCertificate">
-                {{ addr.linkAddressAlternative }}<br>
-              </span>
-            </a>-->
-          </td>
+            <span *ngFor="let addressAlternative of listAddressAlternative">
+            <a role="link" href="https://{{ addressAlternative.linkAddressAlternative }}" target="_blank">
+              {{ addressAlternative.linkAddressAlternative }}<br>
+            </a>
+          </span></td>
         </tr>
         </tbody>
       </table>
@@ -111,6 +124,7 @@
           <th class="th6">Mot de Passe</th>
           <th class="th6">Date Emission</th>
           <th id="th7">Fin Validité</th>
+          <th></th>
         </tr>
         </thead>
 
@@ -121,10 +135,33 @@
               <p-header>Mot de Passe du certificat {{ editedCertificate.nameCertificate }} :</p-header>
               {{ editedCertificate.passwordCertificate }}
             </p-dialog>
-            <a role="button" (click)="showDialog()">Afficher</a>
+            <a role="button" (click)="onShowDialog()">Afficher</a>
           </td>
           <td>{{ editedCertificate.dateIssue | date: 'dd/MM/yyyy' }}</td>
           <td>{{ editedCertificate.dateEndValidity | date: 'dd/MM/yyyy' }}</td>
+          <td>
+            <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') > (alertDate | date: 'yyyy-MM-dd'))">
+              <img src="assets/icons/ok.svg"
+                   title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} valide">
+            </div>
+            <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
+              <img src="assets/icons/not_ok.svg"
+                   title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} non valide">
+              <a role="button" class="buton1" (click)="onNewDemand()"
+                 title="Demander le certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }}">
+                Demander
+              </a>
+            </div>
+            <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
+                     ((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
+              <img src="assets/icons/warning.svg"
+                   title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} en fin de validité">
+              <a role="button" class="buton2" (click)="onNewDemand()"
+                 title="Renouveler le certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} en fin de validité">
+                Renouveler
+              </a>
+            </div>
+          </td>
         </tr>
         </tbody>
       </table>

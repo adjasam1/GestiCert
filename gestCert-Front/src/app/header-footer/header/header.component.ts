@@ -25,7 +25,7 @@ export class HeaderComponent {
   comeBack() {
     const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
     this.idRH = decodedToken.sub;
-    console.log('idRH header : ' + this.idRH);
+ //   console.log('idRH header : ' + this.idRH);
     this.router.navigate(['/accueil/' + this.idRH]);
   }
 

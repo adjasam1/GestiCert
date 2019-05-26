@@ -29,12 +29,12 @@
     <ng-template #elseBlock1><h1>Renouvellement du certificat SSL</h1></ng-template>
   <div id="cadreForm">
     <form>
-      <h3>1. Identification de la demande :</h3>
+      <h2>1. Identification de la demande :</h2>
       <section id="demandeur">
-        <h4>
+        <h3>
           Information sur le demandeur :
           <a role="button" routerLink="/profil/{{editedUser.idUser}}">Modifier</a>
-        </h4>
+        </h3>
         <table id="table1">
           <tbody>
           <tr>
@@ -79,7 +79,7 @@
       </section>
       <br>
       <section>
-        <h4>Information sur le client :</h4>
+        <h3>Information sur le client :</h3>
         <table id="table2">
           <tbody>
           <tr>
@@ -107,7 +107,7 @@
       </section>
       <br>
       <section>
-        <h4>Information compléméntaire : <span>* Champs obligatoires</span></h4>
+        <h3>Information complémentaire : <span>* Champs obligatoires</span></h3>
         <div class="form-control" id="form2">
           <label for="desirDate">
             <strong>Date de réalisation souhaitée * : </strong>
@@ -129,7 +129,7 @@
         <div id="contexte" class="form-control">
           <label for="contxt">
             <strong id="context">Description du contexte : </strong>
-            <span *ngIf="(editedDemand.idDemand !== 0)">{{editedDemand.dateTransmission | date: 'dd/MM/yyyy'}}</span>
+            <span *ngIf="(editedDemand.idDemand !== 0)">{{editedDemand.descriptionContext}}</span>
           </label>
           <br>
           <textarea id="contxt" *ngIf="editedDemand.idDemand === 0" [(ngModel)]="editedDemand.descriptionContext"
@@ -139,7 +139,7 @@
         <br>
       </section>
       <section>
-        <h3>2. Information sur la demande :</h3>
+        <h2>2. Information sur la demande :</h2>
         <table id="table3">
           <tbody>
           <tr>
@@ -171,9 +171,10 @@
             <td class="td1"><strong>Plateforme :</strong></td>
             <td class="td2">{{editedCertificate.plateform.namePlateform}}</td>
           </tr>
-          <tr>
+          <tr *ngFor="let server of listServers">
             <td class="td1"><strong>Serveur(s) :</strong></td>
-            <td class="td2">{{editedCertificate.server.nameServer}}</td>
+            <td class="td2">{{server.nameServer}}</td>
+   <!--         <td class="td2">{{editedCertificate.server.nameServer}}</td>-->
           </tr>
           </tbody>
         </table>
