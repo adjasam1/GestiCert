@@ -1,7 +1,6 @@
 package gestiCert.service;
 
 import java.text.SimpleDateFormat;
-import java.util.List;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
@@ -12,7 +11,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import gestiCert.mail.MailConfig;
-import gestiCert.model.AddressAlternative;
 import gestiCert.model.Demand;
 
 @Service

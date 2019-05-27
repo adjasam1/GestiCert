@@ -1,7 +1,5 @@
 package gestiCert.service;
 
-import javax.mail.MessagingException;
-
 import org.springframework.http.ResponseEntity;
 
 import gestiCert.model.Demand;

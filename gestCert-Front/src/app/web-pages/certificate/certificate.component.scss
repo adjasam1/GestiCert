@@ -15,20 +15,15 @@ img
   width: 20px;
 }
 
-#deconnexion, #retour
-{
-  margin-right: 20px;
-}
-
 #deconnexion
 {
-  margin-top: 10px;
-  margin-bottom: 5px;
+  margin: 10px 20px 5px 0;
 }
 
 a
 {
   padding: 2px 5px;
+  font-size: 12px;
 }
 
 a[role="button"] {
@@ -46,27 +41,14 @@ a[role="button"]:hover {
 
 
 
-
-
-
-
-
-
-#entete
-{
-  display: flex;
-  justify-content: space-between;
+td a {
+  font-size: 16px;
 }
 
-#name
-{
-  margin-left: 10px;
-}
 
-#deconnex
-{
-  margin: 20px;
-}
+
+
+
 
 button
 {
@@ -86,13 +68,8 @@ a[role="button"] {
 
 a[role="button"]:hover, [role="button"].bouton:focus {
   color: #FFCB05;
-  background-color: #00539E;
+  background-color: #003DA5;
   text-decoration: none;
-}
-
-a[role="button"]:active {
-  color: #fff;
-  background-color: #00539E;
 }
 
 h1
@@ -198,12 +175,12 @@ td a[role="button"]
   background-color: #9CC6DA;
   border: 1px solid #003DA5;
   margin: 2px;
+  font-size: 12px;
 }
 
 td a[role="button"]:hover
 {
   background-color: #003DA5;
-  border: 1px solid #FFCB05;
   margin: 2px;
 }
 

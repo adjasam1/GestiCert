@@ -1,4 +1,4 @@
-import {Component, OnInit, TemplateRef} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {Certificate} from '../../model/certificate';
@@ -39,7 +39,7 @@ export class CertificateComponent implements OnInit {
   /* TEST PRIMENG */
   certificates: Certificate;
   cols: any;
-  selectedCertificate: Certificate;
+//  selectedCertificate: Certificate;
 
   constructor(private certificateDataService: CertificateDataService,
               private addressAlternativeDataService: AddressAlternativeDataService,
@@ -107,8 +107,6 @@ export class CertificateComponent implements OnInit {
   onShowDialog() {
     this.display = true;
     this.passwordDecode = atob(this.editedCertificate.passwordCertificate);
-    alert(this.passwordDecode);
-    alert('Mot de passe du certificat ' + this.editedCertificate.nameCertificate + ' :\n' + this.passwordDecode);
   }
 
 }
