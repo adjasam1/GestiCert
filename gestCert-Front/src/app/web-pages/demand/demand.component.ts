@@ -11,7 +11,7 @@ import {DepartmentDataService} from '../../service/department-data.service';
 import {ProfileDataService} from '../../service/profile-data.service';
 import {Demand} from '../../model/demand';
 import {DemandDataService} from '../../service/demand-data.service';
-import {FormBuilder, NgForm, Validators} from '@angular/forms';
+import {FormBuilder} from '@angular/forms';
 import {TypeDemandDataService} from '../../service/type-demand-data.service';
 import {TypeDemand} from '../../model/typeDemand';
 import {AddressAlternativeDataService} from '../../service/address-alternative-data.service';
@@ -20,8 +20,6 @@ import {PlateformDataService} from '../../service/plateform-data.service';
 import {ServerDataService} from '../../service/server-data.service';
 import {Plateform} from '../../model/plateform';
 import {Server} from '../../model/server';
-import {ThemePalette} from '@angular/material';
-import {getLocaleDateFormat} from '@angular/common';
 import {ApplicationDataService} from '../../service/application-data.service';
 import {Application} from '../../model/application';
 import {StatusDemandDataService} from '../../service/status-demand-data.service';
@@ -45,7 +43,7 @@ export class DemandComponent implements OnInit {
   departmentsList: BehaviorSubject<Department[]>;
   profilesList: BehaviorSubject<Profile[]>;
   addressAlternativesList: BehaviorSubject<AddressAlternative[]>;
-  idAddressAlternative: number;
+//  idAddressAlternative: number;
   listAddressAlternatives: AddressAlternative;
 
   demandsList: BehaviorSubject<Demand[]>;
@@ -66,9 +64,9 @@ export class DemandComponent implements OnInit {
   listStatusDemands: StatusDemand[];
   listTypeDemands: TypeDemand[];
   listServers: Server[];
-  listDemands: Demand[];
+//  listDemands: Demand[];
 
-  idMail: number;
+//  idMail: number;
 
   dateNow: Date = new Date();
 

@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+/*import {Component, OnInit} from '@angular/core';
 import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {MatTableDataSource} from '@angular/material';
@@ -81,9 +81,9 @@ export class AuthenticationComponent implements OnInit {
 
 // getProfile(): void {}
 
-/*  getUserByProfile(): void {
+/  getUserByProfile(): void {
     this.userDataService.getUser().subscribe(users => this.userDataService = users.filter(({  })))
-  }*/
+  }/
 
 
-}
+}*/

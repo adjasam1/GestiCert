@@ -1,10 +1,7 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {Environment} from '../../../model/environment';
+import {Component, OnInit} from '@angular/core';
 import {Root} from '../../../model/root';
-import {EnvironmentDataService} from '../../../service/environment-data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RootDataService} from '../../../service/root-data.service';
-import {BehaviorSubject} from 'rxjs';
 import {NgForm} from '@angular/forms';
 
 @Component({
@@ -14,7 +11,7 @@ import {NgForm} from '@angular/forms';
 })
 export class ManagementRootComponent implements OnInit {
 
-  rootsList: BehaviorSubject<Root[]>;
+//  rootsList: BehaviorSubject<Root[]>;
   idRoot: number;
   editedRoot: Root = new Root(0, '', null);
 

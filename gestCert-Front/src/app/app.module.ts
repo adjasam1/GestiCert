@@ -32,7 +32,6 @@ import {AdminGuard} from './jwt-security/guards/admin.guard';
 import {JwtInterceptor} from './jwt-security/http-interceptor/jwt.interceptor';
 import {HomeComponent} from './web-pages/home/home.component';
 import {ProfileComponent} from './web-pages/profile/profile.component';
-import {AuthenticationComponent} from './web-pages/authentication/authentication.component';
 import {DialogModule} from 'primeng/dialog';
 import { DemandComponent } from './web-pages/demand/demand.component';
 import {ManagementComponent} from './web-pages/administration/management/management.component';
@@ -57,7 +56,6 @@ import { ManagementHabilitationComponent } from './web-pages/administration/mana
     ContactComponent,
     SiteComponent,
     AccessibiliteComponent,
-    AuthenticationComponent,
     HomeComponent,
     ProfileComponent,
     CertificateComponent,

@@ -7,7 +7,6 @@ import {ContactComponent} from './header-footer/contact/contact.component';
 import {SiteComponent} from './header-footer/site/site.component';
 import {AccessibiliteComponent} from './header-footer/accessibilite/accessibilite.component';
 import {ProfileComponent} from './web-pages/profile/profile.component';
-import {AuthenticationComponent} from './web-pages/authentication/authentication.component';
 import {DemandComponent} from './web-pages/demand/demand.component';
 import {ManagementComponent} from './web-pages/administration/management/management.component';
 

@@ -3,7 +3,6 @@ import {BehaviorSubject} from 'rxjs';
 import {Certificate} from '../../../model/certificate';
 import {ActivatedRoute, Router} from '@angular/router';
 import {CertificateDataService} from '../../../service/certificate-data.service';
-import {SelectItem} from 'primeng/api';
 import {Application} from '../../../model/application';
 import {ApplicationDataService} from '../../../service/application-data.service';
 import {EnvironmentDataService} from '../../../service/environment-data.service';
@@ -14,8 +13,6 @@ import {RootDataService} from '../../../service/root-data.service';
 import {Root} from '../../../model/root';
 import {ServerDataService} from '../../../service/server-data.service';
 import {Server} from '../../../model/server';
-import {ClassAndStylePlayerBuilder} from '@angular/core/src/render3/styling/class_and_style_bindings';
-import {AppUser} from '../../../model/appUser';
 import {AddressAlternativeDataService} from '../../../service/address-alternative-data.service';
 import {AddressAlternative} from '../../../model/addressAlternative';
 
@@ -46,7 +43,7 @@ export class ManagementCertificateComponent implements OnInit {
   listServers: Server[];
 
   /* TEST PRIMENG */
-  certificates: Certificate;
+//  certificates: Certificate;
 //  certificate: Certificate = new PrimeCertificate();
   listCertificates: Certificate[];
   cols: any[];

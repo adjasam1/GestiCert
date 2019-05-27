@@ -19,7 +19,7 @@ export class ManagementUserComponent implements OnInit {
   usersList: BehaviorSubject<AppUser[]>;
  // idRH: string;
   idUser: number;
-  editedUser1: AppUser;
+//  editedUser1: AppUser;
   editedUser: AppUser = new AppUser(0, '', '', '', '', '', '', new Profile(), new Department());
 
   /* TEST PRIMENG */
@@ -103,6 +103,7 @@ export class ManagementUserComponent implements OnInit {
       }
       this.userDataService.createUser(this.editedUser).subscribe(user => {
         this.onRefresh();
+        logForm.reset();
         this.router.navigate(['/gestion/uti']);
         this.onRefresh();
         }

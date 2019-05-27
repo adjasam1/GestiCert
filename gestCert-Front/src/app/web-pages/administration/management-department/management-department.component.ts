@@ -3,7 +3,6 @@ import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {DepartmentDataService} from '../../../service/department-data.service';
 import {Department} from '../../../model/department';
-import {Profile} from '../../../model/profile';
 import {NgForm} from '@angular/forms';
 
 @Component ({

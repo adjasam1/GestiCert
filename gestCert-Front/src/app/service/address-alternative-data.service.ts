@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
-import {BehaviorSubject, Observable, of} from 'rxjs';
+import {BehaviorSubject, Observable} from 'rxjs';
 import {AddressAlternative} from '../model/addressAlternative';
 import {HttpClient} from '@angular/common/http';
-import {map} from 'rxjs/operators';
-import {Certificate} from '../model/certificate';
+// import {map} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -45,7 +44,7 @@ export class AddressAlternativeDataService {
       });
   }
 
-  public findAddressAlternative(addressAlternativeId: number): Observable<AddressAlternative> {
+/*  public findAddressAlternative(addressAlternativeId: number): Observable<AddressAlternative> {
     if (addressAlternativeId) {
       if (!this.availableAddressAlternatives) {
         return this.getAddressAlternative().pipe(map(addressAlternatives => addressAlternatives.find(addressAlternative =>
@@ -56,7 +55,7 @@ export class AddressAlternativeDataService {
     } else {
       return of(new AddressAlternative(0, '', null));
     }
-  }
+  }*/
 
   public findAddressAlternativeByCertificate(certificateId: number) {
     return this.httpClient.get<AddressAlternative>(`http://localhost:8080/api/adressealternative/certificat=${certificateId}`);

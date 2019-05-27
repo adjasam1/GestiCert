@@ -2,7 +2,6 @@ import { Injectable } from '@angular/core';
 import {Server} from '../model/server';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
-import {Root} from '../model/root';
 import {map} from 'rxjs/operators';
 
 @Injectable({

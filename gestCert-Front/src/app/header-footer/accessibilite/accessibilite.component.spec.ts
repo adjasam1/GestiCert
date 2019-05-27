@@ -9,8 +9,7 @@ describe('AccessibiliteComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ AccessibiliteComponent ]
-    })
-    .compileComponents();
+    }).compileComponents();
   }));
 
   beforeEach(() => {

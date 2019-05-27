@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, NgForm, Validators} from '@angular/forms';
+import {FormBuilder, Validators} from '@angular/forms';
 import {LoginService} from '../../service/login.service';
 import {AppUser} from '../../model/appUser';
 import {UserDataService} from '../../service/user-data.service';
 import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
-import * as jwt_decode from 'jwt-decode';
-import {environment} from '../../../environments/environment';
 
 @Component({
   selector: 'app-login',
@@ -40,7 +38,7 @@ export class LoginComponent implements OnInit {
     this.getUser();
   }
 
-  onSubmit(logForm: NgForm) {
+  onSubmit() {
     const appUser = new AppUser();
     appUser.idRHUser = this.loginForm.value.idRHUser;
     appUser.passwordUser = this.loginForm.value.passwordUser;

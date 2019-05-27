@@ -7,7 +7,7 @@
     <div title="{{ editedUser.nameUser }} {{ editedUser.firstNameUser }}">
       <div id="name">
         <p>
-          <img src="assets/icons/person.png">
+          <img src="assets/icons/person.png" alt="Logo personne">
           <strong>{{ editedUser.nameUser | uppercase}}</strong><strong>{{ editedUser.firstNameUser }}</strong>
         </p>
       </div>
@@ -40,41 +40,45 @@
       <div class="cadre2">
         <form #logForm="ngForm" [formGroup]="loginForm" novalidate (ngSubmit)="reset(logForm)">
           <div class="filtre1" title="Recherche par le code CCX">
-            <strong>Code CCX : </strong>
+            <label for="ccx"><strong>Code CCX : </strong></label>
             <span *ngFor="let col of cols1" [ngSwitch]="col.field">
               <input *ngSwitchCase="'applicationCCX'" formControlName="applicationCCX" pInputText type="search"
                      (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="CCX"
-                     title="Champ pour la recherche par le code CCX">
+                     id="ccx" name="ccx" title="Champ pour rechercher par le code CCX">
               </span>
           </div>
           <div class="filtre2">
-            <strong>Application : </strong>
+            <label for="appli"><strong>Application : </strong></label>
             <span *ngFor="let col of cols1" [ngSwitch]="col.field">
               <input *ngSwitchCase="'applicationName'" formControlName="applicationName" pInputText type="search"
-                     (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="NOM">
+                     (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="NOM"
+                     id="appli" name="appli" title="Champ pour rechercher par le nom de l'application">
             </span>
           </div>
           <div class="filtre2">
-            <strong>Environnement : </strong>
+            <label for="envir"><strong>Environnement : </strong></label>
             <span *ngFor="let col of cols1" [ngSwitch]="col.field">
               <input *ngSwitchCase="'environmentName'" pInputText type="search"
-                     (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="NOM">
+                     (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="NOM"
+                     id="envir" name="envir" title="Champ pour rechercher par le nom de l'environnement">
             </span>
           </div>
         </form>
         <form>
           <div class="filtre3">
-            <strong>Année d'émission : </strong>
+            <label for="annee"><strong>Année d'émission : </strong></label>
             <span *ngFor="let col of cols1" [ngSwitch]="col.field">
               <input *ngSwitchCase="'dateIssue'" pInputText type="search"
-                     (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="ANNEE">
+                     (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="ANNEE"
+                     id="annee" name="annee" title="Champ pour rechercher par l'année d'émission">
             </span>
           </div>
           <div class="filtre4">
-            <strong>Date d'émission : </strong>
+            <label for="date"><strong>Date d'émission : </strong></label>
             <span *ngFor="let col of cols1" [ngSwitch]="col.field">
               <input *ngSwitchCase="'dateIssue'" pInputText type="date"
-                     (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)">
+                     (input)="dt1.filter($event.target.value, col.field, col.filterMatchMode)"
+                     id="date" name="date" title="Champ pour rechercher par date d'émission">
             </span>
           </div>
           <div class="reset">
@@ -122,11 +126,11 @@
                   </td>
                   <td class="td2">
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') > (alertDate | date: 'yyyy-MM-dd'))">
-                      <img src="assets/icons/ok.svg"
+                      <img src="assets/icons/ok.svg" alt="Certificat valide"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} valide">
                     </div>
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
-                      <img src="assets/icons/not_ok.svg"
+                      <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} non valide">
                       <a role="button" class="buton1" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Demander le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }}">
@@ -135,7 +139,7 @@
                     </div>
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
                      ((certificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
-                      <img src="assets/icons/warning.svg"
+                      <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
                       <a role="button" class="buton2" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Renouveler le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
@@ -225,11 +229,11 @@
                   </td>
                   <td class="td2">
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') > (alertDate | date: 'yyyy-MM-dd'))">
-                      <img src="assets/icons/ok.svg"
+                      <img src="assets/icons/ok.svg" alt="Certificat valide"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} valide">
                     </div>
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
-                      <img src="assets/icons/not_ok.svg"
+                      <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} non valide">
                       <a role="button" class="buton1" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Demander le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }}">
@@ -238,7 +242,7 @@
                     </div>
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
                      ((certificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
-                      <img src="assets/icons/warning.svg"
+                      <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
                       <a role="button" class="buton2" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Renouveler le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
@@ -298,7 +302,7 @@
         <div class="cadre2">
           <div class="autour">
 
-            <p-table class="table1" #dt [columns]="cols3" [value]="listCertificates" [paginator]="true" [rows]="10"
+            <p-table class="table1" #dt3 [columns]="cols3" [value]="listCertificates" [paginator]="true" [rows]="10"
                      dataKey="applicationCCX" [reorderableColumns]="true" selectionMode="single"
                      [(selection)]="selectedCertificate" stateStorage="session" stateKey="statedemo-session">
               <ng-template pTemplate="header" let-columns>
@@ -325,11 +329,11 @@
                   </td>
                   <td class="td2">
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') > (alertDate | date: 'yyyy-MM-dd'))">
-                      <img src="assets/icons/ok.svg"
+                      <img src="assets/icons/ok.svg" alt="Certificat valide"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} valide">
                     </div>
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
-                      <img src="assets/icons/not_ok.svg"
+                      <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} non valide">
                       <a role="button" class="buton1" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Demander le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }}">
@@ -338,7 +342,7 @@
                     </div>
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
                      ((certificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
-                      <img src="assets/icons/warning.svg"
+                      <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
                       <a role="button" class="buton2" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Renouveler le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">

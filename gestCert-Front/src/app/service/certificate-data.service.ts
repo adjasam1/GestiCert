@@ -3,7 +3,6 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Certificate} from '../model/certificate';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
-import {Application} from '../model/application';
 
 @Injectable({
   providedIn: 'root'

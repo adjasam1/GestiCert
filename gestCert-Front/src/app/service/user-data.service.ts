@@ -114,7 +114,7 @@ export class UserDataService {
   }
 
   /* auth proc stockee */
-  public  getUserByIdUser(idRHUser: string) {
+/*  public  getUserByIdUser(idRHUser: string) {
    // alert(idRHUser);
     return this.httpClient.get('http://localhost:8080/api/utilisateur/getIdUser/paaa001');
   }
@@ -122,7 +122,7 @@ export class UserDataService {
   public getRoleUser(idUser: number) {
   //  alert('getRole');
     return this.httpClient.get<string[]>('http://localhost:8080/api/utilisateur/role/' + idUser);
-  }
+  }*/
 
 }
 
