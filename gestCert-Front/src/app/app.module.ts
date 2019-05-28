@@ -42,7 +42,7 @@ import { ManagementEnvironmentComponent } from './web-pages/administration/manag
 import { ManagementCertificateComponent } from './web-pages/administration/management-certificate/management-certificate.component';
 import { ManagementApplicationComponent } from './web-pages/administration/management-application/management-application.component';
 import {TableModule} from 'primeng/table';
-import {MessageModule, MessagesModule} from 'primeng/primeng';
+import {AutoCompleteModule, MessageModule, MessagesModule} from 'primeng/primeng';
 import { ManagementPlateformComponent } from './web-pages/administration/management-plateform/management-plateform.component';
 import { ManagementRootComponent } from './web-pages/administration/management-root/management-root.component';
 import { ManagementServerComponent } from './web-pages/administration/management-server/management-server.component';
@@ -100,7 +100,8 @@ import { ManagementHabilitationComponent } from './web-pages/administration/mana
     DialogModule,
     TableModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+    AutoCompleteModule
   ],
   providers: [DevGuard, AdminGuard,
     {

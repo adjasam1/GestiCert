@@ -15,6 +15,8 @@ import {ServerDataService} from '../../../service/server-data.service';
 import {Server} from '../../../model/server';
 import {AddressAlternativeDataService} from '../../../service/address-alternative-data.service';
 import {AddressAlternative} from '../../../model/addressAlternative';
+import {StatusDemandDataService} from '../../../service/status-demand-data.service';
+import {StatusDemand} from '../../../model/statusDemand';
 
 @Component({
   selector: 'app-management-certificate',
@@ -25,7 +27,10 @@ export class ManagementCertificateComponent implements OnInit {
 
   certificatesList: BehaviorSubject<Certificate[]>;
   idCertificate: number;
-  editedCertificate: Certificate = new Certificate(0, '', '', '', '', null, null, null, null, null, null, null, null);
+  editedCertificate: Certificate = new Certificate(0, '', '', '', '',
+    null, null, null, null, null, '', '',
+    '', null, null, null, null, null, null, null,
+    null, null);
 
   applicationsList: BehaviorSubject<Application[]>;
   editedApplication: Application[];
@@ -41,6 +46,8 @@ export class ManagementCertificateComponent implements OnInit {
   listAddressesAlternatives: AddressAlternative[];
   serversList: BehaviorSubject<Server[]>;
   listServers: Server[];
+  statusList: BehaviorSubject<StatusDemand[]>;
+  listStatus: StatusDemand[];
 
   /* TEST PRIMENG */
 //  certificates: Certificate;
@@ -56,6 +63,7 @@ export class ManagementCertificateComponent implements OnInit {
               private rootDataService: RootDataService,
               private addressAlternativeDataService: AddressAlternativeDataService,
               private serverDataService: ServerDataService,
+              private statusDataService: StatusDemandDataService,
               private route: ActivatedRoute,
               private router: Router) { }
 
@@ -110,6 +118,7 @@ export class ManagementCertificateComponent implements OnInit {
     this.rootsList = this.rootDataService.availableRoots$;
     this.addressesAlternativesList = this.addressAlternativeDataService.availableAddressAlternatives$;
     this.serversList = this.serverDataService.availableServers$;
+    this.statusList = this.statusDataService.availableStatusDemands$;
 
     this.applicationsList.subscribe(
       applications => this.listApplications = applications
@@ -126,6 +135,13 @@ export class ManagementCertificateComponent implements OnInit {
     this.addressesAlternativesList.subscribe(
       addressesAlternatives => this.listAddressesAlternatives = addressesAlternatives
     );
+    this.serversList.subscribe(
+      servers => this.listServers = servers
+    );
+    this.statusList.subscribe(
+      status => this.listStatus = status
+    );
+
 
     console.log('listAdress 1 : ', );
     console.log('listAdress 2 : ', this.listAddressesAlternatives);
@@ -167,6 +183,9 @@ export class ManagementCertificateComponent implements OnInit {
         });
         this.editedCertificate.root = this.listRoots.find(root => {
           return root.idRoot === +this.editedCertificate.root.idRoot;
+        });
+        this.editedCertificate.statusDemand = this.listStatus.find( status => {
+          return status.idStatusDemand === +this.editedCertificate.statusDemand.idStatusDemand;
         });
 
         this.certificateDataService.createCertificate(this.editedCertificate);
