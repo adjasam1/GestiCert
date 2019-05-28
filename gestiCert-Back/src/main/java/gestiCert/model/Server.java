@@ -58,7 +58,7 @@ public class Server implements Serializable
 	 */
 	
 	@JsonIgnore
-	@OnDelete(action = OnDeleteAction.CASCADE)
+//	@OnDelete(action = OnDeleteAction.CASCADE)
 	@ManyToMany(mappedBy = "servers")
 	// , fetch = FetchType.LAZY
 	private List<Certificate> certificates;

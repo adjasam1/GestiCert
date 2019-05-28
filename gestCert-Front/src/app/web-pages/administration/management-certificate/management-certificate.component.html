@@ -97,7 +97,7 @@
             </select>
           </div>
           <br>
-       <!--   <div class="form-control">
+          <div class="form-control">
             <label for="server"><strong>Serveur(s) * : </strong></label>
             <select
               name="server"
@@ -107,7 +107,7 @@
               <option *ngFor="let server of serversList | async"
                       [value]="server.idServer">{{ server.nameServer }}</option>
             </select>
-          </div>-->
+          </div>
           <br>
           <div class="form-control">
             <label class="label1" for="linkInst"><span><strong>Lien de Téléchargement * :</strong></span></label>
@@ -129,7 +129,7 @@
               name="status"
               id="status"
               class="form-control"
-              [(ngModel)]="editedCertificate.statusDemand" title="Champ pour le statut de la demande">
+              [(ngModel)]="editedCertificate.statusDemand.idStatusDemand" title="Champ pour le statut de la demande">
               <option *ngFor="let status of statusList | async"
                       [value]="status.idStatusDemand">{{ status.nameStatusDemand }}</option>
             </select>

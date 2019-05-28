@@ -83,7 +83,7 @@ export class ManagementCertificateComponent implements OnInit {
         environment: {idEnvironment: 1},
         plateform: {idPlateform: 1},
         root: {idRoot: 1},
-        servers: [{idServer: 1}]
+        statusDemand: {idStatusDemand: 1}
       };
     }
 
@@ -161,7 +161,7 @@ export class ManagementCertificateComponent implements OnInit {
   this.editedUser.department = this.listDepartments.find(department => {
     return department.idDepartment === +this.editedUser.department.idDepartment;
   });
-  this.editedUser.profile = this.listProfiles.find(profile => {
+   this.editedUser.profile = this.listProfiles.find(profile => {
     return profile.idProfile === +this.editedUser.profile.idProfile;
   });
   this.userDataService.createUser(this.editedUser);
@@ -184,9 +184,9 @@ export class ManagementCertificateComponent implements OnInit {
         this.editedCertificate.root = this.listRoots.find(root => {
           return root.idRoot === +this.editedCertificate.root.idRoot;
         });
-        this.editedCertificate.statusDemand = this.listStatus.find( status => {
+    /*    this.editedCertificate.statusDemand = this.listStatus.find( status => {
           return status.idStatusDemand === +this.editedCertificate.statusDemand.idStatusDemand;
-        });
+        });*/
 
         this.certificateDataService.createCertificate(this.editedCertificate);
       }
