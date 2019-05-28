@@ -49,7 +49,7 @@ const routes: Routes = [
   { path: 'accessibilite', component: AccessibiliteComponent },
   { path: 'accueil/:id1/profil', component: ProfileComponent },
   { path: 'accueil/:id1/certificat/:id2', component: DemandComponent },
-  { path: 'accueil/:id1/certificat/:id2/demande/:id3', component: DemandComponent },
+  { path: 'accueil/:id1/certificat/:id2/demande', component: DemandComponent },
   { path: '**', component: LoginComponent }
 ];
 

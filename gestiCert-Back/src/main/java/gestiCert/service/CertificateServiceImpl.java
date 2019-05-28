@@ -229,7 +229,6 @@ public class CertificateServiceImpl implements CertificateService
 	@Override
 	public Certificate createCertificate(Certificate certificate)
 	{
-		
 		return certificateRepo.saveAndFlush(certificate);
 		
 	}

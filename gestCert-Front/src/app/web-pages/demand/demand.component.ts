@@ -9,8 +9,6 @@ import {Profile} from '../../model/profile';
 import {Department} from '../../model/department';
 import {DepartmentDataService} from '../../service/department-data.service';
 import {ProfileDataService} from '../../service/profile-data.service';
-import {Demand} from '../../model/demand';
-import {DemandDataService} from '../../service/demand-data.service';
 import {FormBuilder} from '@angular/forms';
 import {TypeDemandDataService} from '../../service/type-demand-data.service';
 import {TypeDemand} from '../../model/typeDemand';
@@ -43,13 +41,7 @@ export class DemandComponent implements OnInit {
   departmentsList: BehaviorSubject<Department[]>;
   profilesList: BehaviorSubject<Profile[]>;
   addressAlternativesList: BehaviorSubject<AddressAlternative[]>;
-//  idAddressAlternative: number;
   listAddressAlternatives: AddressAlternative;
-
-  demandsList: BehaviorSubject<Demand[]>;
-  idDemand: number;
-  editedDemand: Demand = new Demand(0, null, null, null, '',
-    '', '', null, null, null, null, null);
 
   applicationsList: BehaviorSubject<Application[]>;
 
@@ -64,9 +56,6 @@ export class DemandComponent implements OnInit {
   listStatusDemands: StatusDemand[];
   listTypeDemands: TypeDemand[];
   listServers: Server[];
-//  listDemands: Demand[];
-
-//  idMail: number;
 
   dateNow: Date = new Date();
 
@@ -78,7 +67,6 @@ export class DemandComponent implements OnInit {
               private plateformDataService: PlateformDataService,
               private serverDataService: ServerDataService,
               private addressAlternativeDataService: AddressAlternativeDataService,
-              private demandDataService: DemandDataService,
               private statusDemandDataService: StatusDemandDataService,
               private typeDemandDataService: TypeDemandDataService,
               private fb: FormBuilder,
@@ -98,15 +86,8 @@ export class DemandComponent implements OnInit {
     this.departmentsList = this.departmentDataService.availableDepartments$;
     this.profilesList = this.profileDataService.availableProfiles$;
     this.addressAlternativesList = this.addressAlternativeDataService.availableAddressAlternatives$;
- //   this.addressAlternativesList.subscribe( addressAlternatives => this.listAddressAlternatives = addressAlternatives );
     this.addressAlternativeDataService.findAddressAlternativeByCertificate(this.idCertificate).subscribe(addressAlternatives =>
       this.listAddressAlternatives = addressAlternatives);
- //   console.log('idCertificate : ', this.idCertificate);
- //   console.log('liste address alter : ', this.listAddressAlternatives);
-    this.demandsList = this.demandDataService.availableDemands$;
-    this.idDemand = +this.route.snapshot.params.id3;
-    this.demandDataService.findDemand(this.idDemand).subscribe(demand => this.editedDemand = demand);
-//    console.log('idDemand : ' + this.idDemand);
 
     this.applicationsList = this.applicationDataService.availableApplications$;
     this.statusDemandsList = this.statusDemandDataService.availableStatusDemands$;
@@ -114,8 +95,10 @@ export class DemandComponent implements OnInit {
     this.plateformsList = this.plateformDataService.availablePlateforms$;
 
     this.serversList = this.serverDataService.availableServers$;
- //   this.serverDataService.findServer(this.editedCertificate.idCertificate).subscribe( servers => this.listServers = servers );
-
+    this.serversList.subscribe(
+      servers => this.listServers = servers
+    );
+    this.listServers = this.editedCertificate.servers;
 
     this.usersList.subscribe(
       users => this.listUsers = users
@@ -132,88 +115,43 @@ export class DemandComponent implements OnInit {
     this.typeDemandsList.subscribe(
       types => this.listTypeDemands = types
     );
-    this.serversList.subscribe(
-      servers => this.listServers = servers
-    );
-
- //   alert(JSON.stringify(this.editedCertificate));
-    this.listServers = this.editedCertificate.servers;
- //   this.dateAlert();
   }
 
-  deconnect(): void {
+  onDeconnect(): void {
     if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
       sessionStorage.clear();
       this.router.navigate(['']);
     }
   }
 
-/*  dateAlert(): void {
-    const thisMonth = this.dateNow.getMonth();
-    const oneMonth = 1;
-    this.alertDate.setUTCMonth(thisMonth + oneMonth);
-  }*/
-
- /* valeur(form: NgForm) {
-    console.log(form.value);
-  }*/
-
   onSave() {
-  //  if (this.idCertificate !== this.editedDemand.certificate.idCertificate) {
+    if (confirm('Êtes-vous certain de vouloir enregistrer cette demande ?')) {
+      this.editedCertificate.dateDemand = this.dateNow;
+      this.editedCertificate.user = this.listUsers.find(user => {
+        return user.idUser === +this.editedUser.idUser;
+      });
+      this.editedCertificate.statusDemand = this.listStatusDemands.find(status => {
+        return status.idStatusDemand === 3;
+        //        return status.idStatusDemand === +this.editedDemand.statusDemand.idStatusDemand;
+      });
+      this.editedCertificate.typeDemand = this.listTypeDemands.find(type => {
+        if (new Date(this.editedCertificate.dateEndValidity) < this.dateNow) {
+          return type.idTypeDemand === 1;
+          //          return type.idTypeDemand === +this.editedDemand.typeDemand.idTypeDemand;
+        } else {
+          return type.idTypeDemand === 2;
+        }
+      });
 
-      if (confirm('Êtes-vous certain de vouloir enregistrer cette demande ?')) {
-        this.editedDemand.idDemand = this.editedCertificate.idCertificate;
-        this.editedDemand.dateDemand = this.dateNow;
-        this.editedDemand.user = this.listUsers.find(user => {
-          return user.idUser === +this.editedUser.idUser;
-        });
-        this.editedDemand.certificate = this.listCertificates.find(certificate => {
-          return certificate.idCertificate === +this.editedCertificate.idCertificate;
-        });
-        this.editedDemand.application = this.listApplications.find(application => {
-          return application.idApplication === +this.editedCertificate.application.idApplication;
-        });
-        this.editedDemand.statusDemand = this.listStatusDemands.find(status => {
-          return status.idStatusDemand === 1;
-          //        return status.idStatusDemand === +this.editedDemand.statusDemand.idStatusDemand;
-        });
-        this.editedDemand.typeDemand = this.listTypeDemands.find(type => {
-          if (new Date(this.editedCertificate.dateEndValidity) < this.dateNow) {
-            return type.idTypeDemand === 1;
-            //          return type.idTypeDemand === +this.editedDemand.typeDemand.idTypeDemand;
-          } else {
-            return type.idTypeDemand === 2;
-          }
-        });
-
-        this.demandDataService.createDemand(this.editedDemand);
-        console.log('create 1 : ', this.editedDemand);
-        this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
-        + this.editedCertificate.idCertificate + '/demande/' + this.editedCertificate.idCertificate]);
-        console.log('idDemande : ' + this.editedDemand.idDemand);
-
-    //    this.demandDataService.sendMail(this.editedDemand.idDemand);
-   //     console.log('create 2 : ', this.editedDemand.idDemand);
-
-   //     this.router.navigate([history.go(-1)]);
-      }
- //   }  else {
- /*     if (confirm('Demande déjà existante. Êtes-vous certain de vouloir modifier votre demande ?')) {
-        this.demandDataService.updateDemand(this.editedDemand);
-        this.router.navigate(['/accueil/' + this.editedUser.idUser]);
-      }
-    }*/
+      this.certificateDataService.updateCertificate(this.editedCertificate);
+      this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
+      + this.editedCertificate.idCertificate + '/demande']);
+    }
   }
 
   onSend() {
     if (confirm('Êtes-vous certain de vouloir envoyer cette demande ?')) {
-      this.editedDemand.statusDemand = this.listStatusDemands.find(status => {
-        return status.idStatusDemand === 3;
-        //        return status.idStatusDemand === +this.editedDemand.statusDemand.idStatusDemand;
-      });
-      this.demandDataService.updateDemand(this.editedDemand);
-      this.demandDataService.sendMail(this.editedDemand);
-      console.log('mail : ' + this.editedDemand);
+      this.certificateDataService.sendMail(this.editedCertificate);
       this.router.navigate(['/accueil/' + this.editedUser.idRHUser]);
     }
   }

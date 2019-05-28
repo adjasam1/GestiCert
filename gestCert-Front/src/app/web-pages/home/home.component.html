@@ -99,7 +99,8 @@
                      [(selection)]="selectedCertificate" stateStorage="session" stateKey="statedemo-session">
               <ng-template pTemplate="header" let-columns>
                 <tr>
-                  <th *ngFor="let col of cols1" [pSortableColumn]="col.field" class="{{col.field}}" colspan="col.colspan" [ngStyle]="{'width': col.width}" pReorderableColumn>
+                  <th *ngFor="let col of cols1" [pSortableColumn]="col.field" class="{{col.field}}" colspan="col.colspan"
+                      [ngStyle]="{'width': col.width}" pReorderableColumn>
                     {{col.header}}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                   </th>
@@ -132,19 +133,23 @@
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
                       <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} non valide">
-                      <a role="button" class="buton1" routerLink="certificat/{{certificate.idCertificate}}"
+                      <a *ngIf="certificate.statusDemand.idStatusDemand !== 3; else elseBlock1a" role="button"
+                         class="buton1" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Demander le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }}">
                         Demander
                       </a>
+                      <ng-template #elseBlock1a><span class="attente">(En cours)</span></ng-template>
                     </div>
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
                      ((certificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
                       <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
-                      <a role="button" class="buton2" routerLink="certificat/{{certificate.idCertificate}}"
+                      <a *ngIf="certificate.statusDemand.idStatusDemand !== 3; else elseBlock1b" role="button"
+                         class="buton2" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Renouveler le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
                         Renouveler
                       </a>
+                      <ng-template #elseBlock1b><span class="attente">(En cours)</span></ng-template>
                     </div>
                   </td>
                 </tr>
@@ -235,19 +240,21 @@
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
                       <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} non valide">
-                      <a role="button" class="buton1" routerLink="certificat/{{certificate.idCertificate}}"
+                      <a *ngIf="certificate.statusDemand.idStatusDemand !== 3; else elseBlock2a" role="button" class="buton1" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Demander le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }}">
                         Demander
                       </a>
+                      <ng-template #elseBlock2a><span class="attente">(En cours)</span></ng-template>
                     </div>
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
                      ((certificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
                       <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
-                      <a role="button" class="buton2" routerLink="certificat/{{certificate.idCertificate}}"
+                      <a *ngIf="certificate.statusDemand.idStatusDemand !== 3; else elseBlock2b" role="button" class="buton2" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Renouveler le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
                         Renouveler
                       </a>
+                      <ng-template #elseBlock2b><span class="attente">(En cours)</span></ng-template>
                     </div>
                   </td>
                 </tr>
@@ -335,19 +342,21 @@
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
                       <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} non valide">
-                      <a role="button" class="buton1" routerLink="certificat/{{certificate.idCertificate}}"
+                      <a *ngIf="certificate.statusDemand.idStatusDemand !== 3; else elseBlock3a" role="button" class="buton1" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Demander le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }}">
                         Demander
                       </a>
+                      <ng-template #elseBlock3a><span class="attente">(En cours)</span></ng-template>
                     </div>
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
                      ((certificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
                       <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
-                      <a role="button" class="buton2" routerLink="certificat/{{certificate.idCertificate}}"
+                      <a *ngIf="certificate.statusDemand.idStatusDemand !== 3; else elseBlock3b" role="button" class="buton2" routerLink="certificat/{{certificate.idCertificate}}"
                          title="Renouveler le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
                         Renouveler
                       </a>
+                      <ng-template #elseBlock3b><span class="attente">(En cours)</span></ng-template>
                     </div>
                   </td>
                 </tr>

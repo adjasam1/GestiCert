@@ -1,4 +1,4 @@
-import {StatusDemand} from './statusDemand';
+/*import {StatusDemand} from './statusDemand';
 import {TypeDemand} from './typeDemand';
 import {Application} from './application';
 import {Certificate} from './certificate';
@@ -63,4 +63,4 @@ export class Demand {
     this.certificate = certificate;
   }
 
-}
+}*/

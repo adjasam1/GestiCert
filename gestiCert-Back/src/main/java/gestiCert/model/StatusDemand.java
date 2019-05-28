@@ -55,7 +55,7 @@ public class StatusDemand implements Serializable
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "statusDemand")
-	private List<Demand> demands;
+	private List<Certificate> certificates;
 
 	/**
 	 * constructeurs de la classe dont un vide par defaut
@@ -66,14 +66,21 @@ public class StatusDemand implements Serializable
 
 	}
 
-	public StatusDemand(Integer idStatusDemand, @Size(max = 50) @NotNull String nameStatusDemand, List<Demand> demands)
+	public StatusDemand(Integer idStatusDemand, @Size(max = 50) @NotNull String nameStatusDemand, List<Certificate> certificates)
 	{
 		super();
 		this.idStatusDemand = idStatusDemand;
 		this.nameStatusDemand = nameStatusDemand;
-		this.demands = demands;
+		this.certificates = certificates;
 	}
 	
+	
+	
+	public StatusDemand(@Size(max = 50) @NotNull String nameStatusDemand) {
+		super();
+		this.nameStatusDemand = nameStatusDemand;
+	}
+
 	/**
 	 * getter et setter de la classe
 	 * 
@@ -100,14 +107,14 @@ public class StatusDemand implements Serializable
 		this.nameStatusDemand = nameStatusDemand;
 	}
 
-	public List<Demand> getDemands()
+	public List<Certificate> certificates()
 	{
-		return demands;
+		return certificates;
 	}
 
-	public void setDemands(List<Demand> demands)
+	public void setDemands(List<Certificate> certificates)
 	{
-		this.demands = demands;
+		this.certificates = certificates;
 	}
 
 }

@@ -16,6 +16,8 @@ import gestiCert.service.ProfileService;
 import gestiCert.service.PlateformService;
 import gestiCert.service.RootService;
 import gestiCert.service.ServerService;
+import gestiCert.service.StatusDemandService;
+import gestiCert.service.TypeDemandService;
 
 /**
  * 
@@ -54,6 +56,12 @@ public class GestiCertApplication implements CommandLineRunner
 	
 	@Autowired
 	ServerService serverServ;
+	
+	@Autowired
+	StatusDemandService statusDemandServ;
+	
+	@Autowired
+	TypeDemandService typeDemandServ;
 	
 	@Autowired
 	CertificateService certificateServ;
@@ -121,9 +129,9 @@ public class GestiCertApplication implements CommandLineRunner
 //    	Profile pro3 = new Profile("Chef(fe) de Service");
 //    	profileServ.createProfile(pro3);
 //        
-//        AppUser ala = new AppUser("paaa001", "aaa", "Zanzibar", "Alain", "alain.zanzibar@laposte.fr", "0678564321", new Department(1, "Dev Web"), new Profile(3, "Chef(fe) de Service"), new ArrayList<>(Arrays.asList(Role.ROLE_ADMIN)));
+//        AppUser ala = new AppUser("paaa001", "aaa", "Zanzibar", "Alain", "alain.zanzibar@laposte.fr", "0678564321", new Department(1, "Dev Web"), new Profile(1, "Développeur(se)"), new ArrayList<>(Arrays.asList(Role.ROLE_DEV)));
 //        appUserServ.signup(ala);
-//        AppUser bea = new AppUser("pbbb002", "bbb", "Yemen", "Béatrice", "beatrice.yemen@laposte.fr", "0659527564", new Department(1, "Dev Web"), new Profile(2, "Chef(fe) de Projet"), new ArrayList<>(Arrays.asList(Role.ROLE_DEV)));
+//        AppUser bea = new AppUser("pbbb002", "bbb", "Yemen", "Béatrice", "beatrice.yemen@laposte.fr", "0659527564", new Department(1, "Dev Web"), new Profile(3, "Chef(fe) de Service"), new ArrayList<>(Arrays.asList(Role.ROLE_ADMIN)));
 //        appUserServ.signup(bea);
 //        AppUser cla = new AppUser("xccc003", "ccc", "Xéres", "Claude", "claude.xeres@laposte.fr", "0765098765", new Department(2, "SIGP3"), new Profile(1, "Développeur(se)"), new ArrayList<>(Arrays.asList(Role.ROLE_DEV)));
 //        appUserServ.signup(cla);
@@ -204,32 +212,46 @@ public class GestiCertApplication implements CommandLineRunner
 //        serverServ.createServer(se9);
 //        Server se10 = new Server("Londres V5.2");
 //        serverServ.createServer(se10);
+//        
+//    	StatusDemand sd1 = new StatusDemand("Non");
+//    	statusDemandServ.createStatusDemand(sd1);
+//    	StatusDemand sd2 = new StatusDemand("Oui");
+//    	statusDemandServ.createStatusDemand(sd2);
+//    	StatusDemand sd3 = new StatusDemand("En cours");
+//    	statusDemandServ.createStatusDemand(sd3);
+//    	
+//    	TypeDemand tp1 = new TypeDemand("Création");
+//    	typeDemandServ.createTypeDemand(tp1);
+//    	TypeDemand tp2 = new TypeDemand("Renouvellement");
+//    	typeDemandServ.createTypeDemand(tp2);
+//    	TypeDemand tp3 = new TypeDemand("Révocation");
+//    	typeDemandServ.createTypeDemand(tp3);
     	
-//    	Certificate ce1 = new Certificate("GOB-20141217-prod", "www.bahia.rh.intra.laposte.fr", "telechargements/gob1", passwordEncoder.encode(("MDP01")), null, null, null, null, null, null);
+//    	Certificate ce1 = new Certificate("GOB-20141217-prod", "www.bahia.rh.intra.laposte.fr", "assets\\cer\\Installation-Certificat.cer", "MTcxMjIwMTQtR09CL3Byb2Q", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce1);
-//    	Certificate ce2 = new Certificate("GOB-20190125-int", "www.bahia-int.rh.intra.laposte.fr", "telechargements/gob2", passwordEncoder.encode(("MDP02")), null, null, null, null, null, null);
+//    	Certificate ce2 = new Certificate("GOB-20190125-int", "www.bahia-int.rh.intra.laposte.fr", "telechargements/gob2", "MjUwMTIwMTktR09CL2ludA", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce2);
-//    	Certificate ce3 = new Certificate("J5P-20170131-rec", "www.e-recrutement-rec.rh.intra.laposte.fr", "telechargements/j5p1", passwordEncoder.encode(("MDP03")), null, null, null, null, null, null);
+//    	Certificate ce3 = new Certificate("J5P-20170131-rec", "www.e-recrutement-rec.rh.intra.laposte.fr", "telechargements/j5p1", "MzEwMTIwMTctSjVQL3JlYw", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce3);
-//    	Certificate ce4 = new Certificate("J5P-20170803-prod", "www.laposterecrute.fr", "telechargements/j5p2", passwordEncoder.encode(("MDP04")), null, null, null, null, null, null);
+//    	Certificate ce4 = new Certificate("J5P-20170803-prod", "www.laposterecrute.fr", "telechargements/j5p2", "MDMwODIwMTctSjVQL3Byb2Q", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce4);
-//    	Certificate ce5 = new Certificate("J5P-20170318-int", "www.int.laposterecrute.fr", "telechargements/j5p3", passwordEncoder.encode(("MDP05")), null, null, null, null, null, null);
+//    	Certificate ce5 = new Certificate("J5P-20170318-int", "www.int.laposterecrute.fr", "telechargements/j5p3", "MTgwMzIwMTctSjVQL2ludA", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce5);
-//    	Certificate ce6 = new Certificate("J5P-20170329-dev", "www.e-recrutement-dev.rh.intra.laposte.fr", "telechargements/j5p4", passwordEncoder.encode(("MDP06")), null, null, null, null, null, null);
+//    	Certificate ce6 = new Certificate("J5P-20170329-dev", "www.e-recrutement-dev.rh.intra.laposte.fr", "telechargements/j5p4", "MjkwMzIwMTctSjVQL2Rldg", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce6);
-//    	Certificate ce7 = new Certificate("LPM-20180806-int", "www.mon-espace-ha-int.extra.laposte.fr", "telechargements/lpm1", passwordEncoder.encode(("MDP07")), null, null, null, null, null, null);
+//    	Certificate ce7 = new Certificate("LPM-20180806-int", "www.mon-espace-ha-int.extra.laposte.fr", "telechargements/lpm1", "MDYwODIwMTgtTFBNL2ludA", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce7);
-//    	Certificate ce8 = new Certificate("LPM-20180806-prod", "www.mon-espace-ha.extra.laposte.fr", "telechargements/lpm2", passwordEncoder.encode(("MDP08")), null, null, null, null, null, null);
+//    	Certificate ce8 = new Certificate("LPM-20180806-prod", "www.mon-espace-ha.extra.laposte.fr", "telechargements/lpm2", "MDYwODIwMTgtTFBNL3Byb2Q", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce8);
-//    	Certificate ce9 = new Certificate("LR_-20180410-dev", "www.intranet-rh-preprod.rh.intra.laposte.fr", "telechargements/lr_1", passwordEncoder.encode(("MDP09")), null, null, null, null, null, null);
+//    	Certificate ce9 = new Certificate("LR_-20180410-dev", "www.intranet-rh-preprod.rh.intra.laposte.fr", "telechargements/lr_1", "MTAwNDIwMTgtTFJfL2Rldg", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce9);
-//    	Certificate ce10 = new Certificate("LR_-20180412-prod", "www.netrh.extra.laposte.fr", "telechargements/lr_2", passwordEncoder.encode(("MDP10")), null, null, null, null, null, null);
+//    	Certificate ce10 = new Certificate("LR_-20180412-prod", "www.netrh.extra.laposte.fr", "telechargements/lr_2", "MTIwNDIwMTgtTFJfL3Byb2Q", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce10);
-//    	Certificate ce11 = new Certificate("LR_-20180412-dev", "www.netrh-int.extra.laposte.fr", "telechargements/lr_3", passwordEncoder.encode(("MDP11")), null, null, null, null, null, null);
+//    	Certificate ce11 = new Certificate("LR_-20180412-dev", "www.netrh-int.extra.laposte.fr", "telechargements/lr_3", "MTIwNDIwMTgtTFJfL2Rldg", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce11);
-//    	Certificate ce12 = new Certificate("TE_-20170718-prod", "www.elections.rh.intra.laposte.fr", "telechargements/te_1", passwordEncoder.encode(("MDP12")), null, null, null, null, null, null);
+//    	Certificate ce12 = new Certificate("TE_-20170718-prod", "www.elections.rh.intra.laposte.fr", "telechargements/te_1", "MTgwNzIwMTctVEVfL3Byb2Q", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce12);
-//    	Certificate ce13 = new Certificate("TE_-20170718-dev", "www.elections-int.rh.intra.laposte.fr", "telechargements/te_2", passwordEncoder.encode(("MDP13")), null, null, null, null, null, null);
+//    	Certificate ce13 = new Certificate("TE_-20170718-dev", "www.elections-int.rh.intra.laposte.fr", "telechargements/te_2", "MTgwNzIwMTctVEVfL2Rldg", null, null, null, null, null, null, null, null, null, null, null, null, null, null, null);
 //    	certificateServ.createCertificate(ce13);
     	
 

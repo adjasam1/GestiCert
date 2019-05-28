@@ -55,7 +55,7 @@ public class TypeDemand implements Serializable
 	
 	@JsonIgnore
 	@OneToMany(mappedBy = "typeDemand")
-	private List<Demand> demands;
+	private List<Certificate> certificates;
 
 	/**
 	 * constructeurs de la classe dont un vide par defaut
@@ -66,12 +66,19 @@ public class TypeDemand implements Serializable
 
 	}
 
-	public TypeDemand(Integer idTypeDemand, @Size(max = 50) @NotNull String typeTypeDemand, List<Demand> demands)
+	public TypeDemand(Integer idTypeDemand, @Size(max = 50) @NotNull String typeTypeDemand, List<Certificate> certificates)
 	{
 		super();
 		this.idTypeDemand = idTypeDemand;
 		this.typeTypeDemand = typeTypeDemand;
-		this.demands = demands;
+		this.certificates = certificates;
+	}
+	
+	
+
+	public TypeDemand(@Size(max = 50) @NotNull String typeTypeDemand) {
+		super();
+		this.typeTypeDemand = typeTypeDemand;
 	}
 
 	/**
@@ -100,14 +107,14 @@ public class TypeDemand implements Serializable
 		this.typeTypeDemand = typeTypeDemand;
 	}
 
-	public List<Demand> getDemands()
+	public List<Certificate> certificates()
 	{
-		return demands;
+		return certificates;
 	}
 
-	public void setDemands(List<Demand> demands)
+	public void setDemands(List<Certificate> certificates)
 	{
-		this.demands = demands;
+		this.certificates = certificates;
 	}
 
 }

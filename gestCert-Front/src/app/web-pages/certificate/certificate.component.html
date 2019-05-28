@@ -147,19 +147,21 @@
             <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
               <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
                    title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} non valide">
-              <a role="button" class="buton1" (click)="onNewDemand()"
+              <a *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3; else elseBlock1" role="button" class="buton1" (click)="onNewDemand()"
                  title="Demander le certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }}">
                 Demander
               </a>
+              <ng-template #elseBlock1><span class="attente">(En cours)</span></ng-template>
             </div>
             <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
                      ((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
               <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
                    title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} en fin de validité">
-              <a role="button" class="buton2" (click)="onNewDemand()"
+              <a *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3; else elseBlock2" role="button" class="buton2" (click)="onNewDemand()"
                  title="Renouveler le certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} en fin de validité">
                 Renouveler
               </a>
+              <ng-template #elseBlock2><span class="attente">(En cours)</span></ng-template>
             </div>
           </td>
         </tr>

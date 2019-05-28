@@ -16,6 +16,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
@@ -74,6 +75,27 @@ public class Certificate implements Serializable
 	@Type(type = "date")
 	private Date dateEndValidity;
 	
+	@Column(name = "date_demande")
+	@Type(type = "date")
+	private Date dateDemand;
+	
+	@Column(name = "date_realisation_souhaitee")
+	@Type(type = "date")
+	private Date dateCreationDesired;
+	
+	@Column(name = "date_transmission")
+	@Type(type = "date")
+	private Date dateTransmission;
+	
+	@Column(name = "email_referent")
+	private String eMailReferent;
+	
+	@Column(name = "description_contexte")
+	private String descriptionContext;
+	
+	@Column(name = "remarque_racine")
+	private String remarkRoot;
+	
 	/**
 	 * relation entre l'entite certificat et les entites application, environnement, plateforme, racine, serveur et adresse alternative
 	 * 
@@ -107,7 +129,7 @@ public class Certificate implements Serializable
 	
 //	@JsonIgnore
 	@JsonIgnoreProperties("certificate")
-	@ManyToMany(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany//(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
 	@JoinTable(name ="certificat_serveur", joinColumns = @JoinColumn(name = "id_certificat"), inverseJoinColumns = @JoinColumn(name = "id_serveur"))
 	private List<Server> servers;
 	
@@ -117,6 +139,20 @@ public class Certificate implements Serializable
 	@OneToMany(mappedBy = "certificate", cascade = CascadeType.ALL)
 	private List<AddressAlternative> addressAlternatives;
 	
+	@OneToOne
+	@JoinColumn(name = "id_utilisateur_demandeur", referencedColumnName = "id_utilisateur")
+	private AppUser user;
+	
+	//@JsonIgnore
+	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinColumn(name = "id_statut_demande")
+	private StatusDemand statusDemand;
+		
+	//@JsonIgnore
+	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@JoinColumn(name = "id_type_demande")
+	private TypeDemand typeDemand;
+	
 	/**
 	 * constructeurs de la classe dont un vide par defaut
 	 */
@@ -124,6 +160,65 @@ public class Certificate implements Serializable
 	public Certificate()
 	{
 		
+	}
+	
+	public Certificate(Integer idCertificate, @Size(min = 16, max = 17) String nameCertificate,
+			String linkAddressPrincipal, String linkInstallation, String passwordCertificate, Date dateIssue,
+			Date dateEndValidity, Date dateDemand, Date dateCreationDesired, Date dateTransmission,
+			String eMailReferent, String descriptionContext, String remarkRoot, Application application,
+			Environment environment, Plateform plateform, Root root, List<Server> servers,
+			List<AddressAlternative> addressAlternatives, AppUser user, StatusDemand statusDemand,
+			TypeDemand typeDemand) {
+		super();
+		this.idCertificate = idCertificate;
+		this.nameCertificate = nameCertificate;
+		this.linkAddressPrincipal = linkAddressPrincipal;
+		this.linkInstallation = linkInstallation;
+		this.passwordCertificate = passwordCertificate;
+		this.dateIssue = dateIssue;
+		this.dateEndValidity = dateEndValidity;
+		this.dateDemand = dateDemand;
+		this.dateCreationDesired = dateCreationDesired;
+		this.dateTransmission = dateTransmission;
+		this.eMailReferent = eMailReferent;
+		this.descriptionContext = descriptionContext;
+		this.remarkRoot = remarkRoot;
+		this.application = application;
+		this.environment = environment;
+		this.plateform = plateform;
+		this.root = root;
+		this.servers = servers;
+		this.addressAlternatives = addressAlternatives;
+		this.user = user;
+		this.statusDemand = statusDemand;
+		this.typeDemand = typeDemand;
+	}
+
+	public Certificate(@Size(min = 16, max = 17) String nameCertificate, String linkAddressPrincipal,
+			String linkInstallation, String passwordCertificate, Date dateIssue, Date dateEndValidity,
+			Date dateDemand, Date dateCreationDesired, Date dateTransmission, String eMailReferent,
+			String descriptionContext, String remarkRoot, Application application, Environment environment,
+			Plateform plateform, Root root, AppUser user, StatusDemand statusDemand, TypeDemand typeDemand) {
+		super();
+		this.nameCertificate = nameCertificate;
+		this.linkAddressPrincipal = linkAddressPrincipal;
+		this.linkInstallation = linkInstallation;
+		this.passwordCertificate = passwordCertificate;
+		this.dateIssue = dateIssue;
+		this.dateEndValidity = dateEndValidity;
+		this.dateDemand = dateDemand;
+		this.dateCreationDesired = dateCreationDesired;
+		this.dateTransmission = dateTransmission;
+		this.eMailReferent = eMailReferent;
+		this.descriptionContext = descriptionContext;
+		this.remarkRoot = remarkRoot;
+		this.application = application;
+		this.environment = environment;
+		this.plateform = plateform;
+		this.root = root;
+		this.user = user;
+		this.statusDemand = statusDemand;
+		this.typeDemand = typeDemand;
 	}
 
 	public Certificate(Integer idCertificate, @Size(min = 16, max = 17) String nameCertificate,
@@ -317,11 +412,100 @@ public class Certificate implements Serializable
 		this.addressAlternatives = addressAlternatives;
 	}
 
+	public Date getDateDemand()
+	{
+		return dateDemand;
+	}
+
+	public void setDateDemand(Date dateDemand)
+	{
+		this.dateDemand = dateDemand;
+	}
+
+	public Date getDateCreationDesired()
+	{
+		return dateCreationDesired;
+	}
+
+	public void setDateCreationDesired(Date dateCreationDesired)
+	{
+		this.dateCreationDesired = dateCreationDesired;
+	}
+
+	public Date getDateTransmission()
+	{
+		return dateTransmission;
+	}
+
+	public void setDateTransmission(Date dateTransmission)
+	{
+		this.dateTransmission = dateTransmission;
+	}
+
+	public String geteMailReferent()
+	{
+		return eMailReferent;
+	}
+
+	public void seteMailReferent(String eMailReferent)
+	{
+		this.eMailReferent = eMailReferent;
+	}
+
+	public String getDescriptionContext()
+	{
+		return descriptionContext;
+	}
+
+	public void setDescriptionContext(String descriptionContext)
+	{
+		this.descriptionContext = descriptionContext;
+	}
+
+	public String getRemarkRoot()
+	{
+		return remarkRoot;
+	}
+
+	public void setRemarkRoot(String remarkRoot)
+	{
+		this.remarkRoot = remarkRoot;
+	}
+	
+	public AppUser getUser()
+	{
+		return user;
+	}
+
+	public void setUser(AppUser user)
+	{
+		this.user = user;
+	}
+
+	public StatusDemand getStatusDemand()
+	{
+		return statusDemand;
+	}
+
+	public void setStatusDemand(StatusDemand statusDemand)
+	{
+		this.statusDemand = statusDemand;
+	}
+
+	public TypeDemand getTypeDemand()
+	{
+		return typeDemand;
+	}
+
+	public void setTypeDemand(TypeDemand typeDemand)
+	{
+		this.typeDemand = typeDemand;
+	}
+
 	@Override
-	public String toString() {
+	public String toString()
+	{
 		return " " + addressAlternatives;
 	}
 	
-	
-
 }

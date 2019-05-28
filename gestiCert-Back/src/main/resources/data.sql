@@ -57,7 +57,9 @@ insert into utilisateur_application (`id_utilisateur`, `id_application`) values
 (6, 1), (6, 3), (6, 4), (6, 5),
 (7, 4),
 (8, 1), (8, 2), (8, 3), (8, 4), (8, 5),
-(9, 2), (9, 3), (9, 5);
+(9, 2), (9, 3), (9, 5),
+(10, 2), (10, 3), (10, 4),
+(11, 1), (11, 2), (11, 3), (11, 4), (11, 5);
 
 --INITIALISATION TABLE ENVIRONMENT
 insert into environnement (`nom`) values

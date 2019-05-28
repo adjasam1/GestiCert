@@ -11,7 +11,8 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import gestiCert.mail.MailConfig;
-import gestiCert.model.Demand;
+import gestiCert.model.AddressAlternative;
+import gestiCert.model.Certificate;
 
 @Service
 public class MailServiceImpl implements MailService
@@ -21,7 +22,7 @@ public class MailServiceImpl implements MailService
     public JavaMailSender emailSender;
 	
 	@Override
-	public Object sendHtmlEmail(Demand demand) throws MessagingException
+	public Object sendHtmlEmail(Certificate certificate) throws MessagingException
     {
     MimeMessage message = emailSender.createMimeMessage();
     boolean multipart = true;
@@ -48,95 +49,95 @@ public class MailServiceImpl implements MailService
     				"	<table>" + 
     				"		<tr>" + 
     				"			<td class=\"td1\"><strong>Service : </strong></td>" + 
-    				"			<td class=\"td2\">"+demand.getUser().getDepartment().getNameDepartment()+"</td>" + 
+    				"			<td class=\"td2\">"+certificate.getUser().getDepartment()+"</td>" + 
     				"		</tr>" + 
     				"		<tr>" + 
     				"			<td class=\"td1\"><strong>Nom du demandeur : </strong></td>" + 
-    				"			<td class=\"td2\">"+demand.getUser().getNameUser()+"</td>" + 
+    				"			<td class=\"td2\">"+certificate.getUser().getNameUser()+"</td>" + 
     				"		</tr>" + 
     				"		<tr>" + 
     				"			<td class=\"td1\"><strong>Prénom du demandeur : </strong></td>" + 
-    				"			<td class=\"td2\">"+demand.getUser().getFirstNameUser()+"</td>" + 
+    				"			<td class=\"td2\">"+certificate.getUser().getFirstNameUser()+"</td>" + 
     				"		</tr>" + 
     				"		<tr>" + 
     				"			<td class=\"td1\"><strong>Fonction du demandeur : </strong></td>" + 
-    				"			<td class=\"td2\">"+demand.getUser().getProfile().getTypeProfile()+"</td>" + 
+    				"			<td class=\"td2\">"+certificate.getUser().getProfile().getTypeProfile()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Téléphone du demandeur : </strong></td>" + 
-    				"           <td class=\"td2\">"+demand.getUser().getPhoneUser()+"</td>" + 
+    				"           <td class=\"td2\">"+certificate.getUser().getPhoneUser()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>E-mail du demandeur : </strong></td>" + 
-    				"           <td class=\"td2\">"+demand.getUser().geteMailUser()+"</td>" + 
+    				"           <td class=\"td2\">"+certificate.getUser().geteMailUser()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>E-mail du postier référent : </strong></td>" + 
-    				"           <td class=\"td2\">"+demand.geteMailReferent()+"</td>" + 
+    				"           <td class=\"td2\">"+certificate.geteMailReferent()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Nom du client : </strong></td>" + 
-    				"           <td class=\"td2\">"+demand.getApplication().getNameClient()+"</td>" + 
+    				"           <td class=\"td2\">"+certificate.getApplication().getNameClient()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Prénom du client : </strong></td>" + 
-    				"           <td class=\"td2\">"+demand.getApplication().getFirstNameClient()+"</td>" + 
+    				"           <td class=\"td2\">"+certificate.getApplication().getFirstNameClient()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Direction du client : </strong></td>" + 
-    				"           <td class=\"td2\">"+demand.getUser().getNameUser()+"</td>" + 
+    				"           <td class=\"td2\">"+certificate.getApplication().getManagementClient()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Téléphone du client : </strong></td>" + 
-    				"           <td class=\"td2\">"+demand.getApplication().getPhoneClient()+"</td>" + 
+    				"           <td class=\"td2\">"+certificate.getApplication().getPhoneClient()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>E-mail du client : </strong></td>" + 
-    				"           <td class=\"td2\">"+demand.getApplication().geteMailClient()+"</td>" + 
+    				"           <td class=\"td2\">"+certificate.getApplication().geteMailClient()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Date de la demande : </strong></td>" + 
-    				"           <td class=\"td2\">"+formDate.format(demand.getDateDemand())+"</td>" +
+    				"           <td class=\"td2\">"+formDate.format(certificate.getDateDemand())+"</td>" +
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Transmis le : </strong></td>" + 
-    				"           <td class=\"td2\">"+formDate.format(demand.getDateTransmission())+"</td>" + 
+    				"           <td class=\"td2\">"+formDate.format(certificate.getDateTransmission())+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Date de réalisation souhaitée : </strong></td>" + 
-    				"           <td class=\"td2\">"+formDate.format(demand.getDateCreationDesired())+"</td>" + 
+    				"           <td class=\"td2\">"+formDate.format(certificate.getDateCreationDesired())+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Description du contexte : </strong></td>" + 
-    				"           <td class=\"td2\">"+demand.getDescriptionContext()+"</td>" + 
+    				"           <td class=\"td2\">"+certificate.getDescriptionContext()+"</td>" + 
     				"       </tr>" + 
     				"    </table>" +   
     				"	<h2>2. INFORMATION SUR LA DEMANDE</h2>" +
     				"	<table>" + 
     				"		<tr>" + 
     				"			<td class=\"td1\"><strong>Demande : </strong></td>" + 
-    				"			<td class=\"td2\">"+demand.getTypeDemand().getTypeTypeDemand()+"</td>" + 
+    				"			<td class=\"td2\">"+certificate.getTypeDemand().getTypeTypeDemand()+"</td>" + 
     				"		</tr>" + 
     				"		<tr>" + 
     				"			<td class=\"td1\"><strong>Code CCX : </strong></td>" + 
-    				"			<td class=\"td2\">"+demand.getApplication().getCodeCCX()+"</td>" + 
+    				"			<td class=\"td2\">"+certificate.getApplication().getCodeCCX()+"</td>" + 
     				"		</tr>" + 
     				"		<tr>" + 
     				"			<td class=\"td1\"><strong>Nom commun </strong><br><em>\"URL Principale du site\"</em> : </td>" + 
-    				"			<td class=\"td2\">"+demand.getCertificate().getLinkAddressPrincipal()+"</td>" + 
+    				"			<td class=\"td2\">"+certificate.getLinkAddressPrincipal()+"</td>" + 
     				"		</tr>" + 
     				"		<tr>" + 
     				"			<td class=\"td1\"><strong>Adresse(s) alternative(s) </strong><br>" +
     				"				<em>\"URL(s) supplémentaire(s)</em> : </td>" + 
-    				"			<td class=\"td2\">"+demand.getCertificate().getAddressAlternatives()+"</td>" + 
+    				"			<td class=\"td2\">"+certificate.getAddressAlternatives()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Plateforme : </strong></td>" + 
-    				"           <td class=\"td2\">"+demand.getCertificate().getPlateform().getNamePlateform()+"</td>" + 
+    				"           <td class=\"td2\">"+certificate.getPlateform().getNamePlateform()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Serveur(s) : </strong></td>" + 
-    				"           <td class=\"td2\">"+demand.getCertificate().getServers().toString()+"</td>" + 
+    				"           <td class=\"td2\">"+certificate.getServers().toString()+"</td>" + 
     				"       </tr>" + 
     				"    </table>" + 
     				"</section>" + 
@@ -144,7 +145,7 @@ public class MailServiceImpl implements MailService
     				"</body>");
     message.setContent(htmlMsg.toString(), "text/html"); // on précise le format HTML
     helper.setTo(MailConfig.OTHER_EMAIL);
-    helper.setSubject("Demande du certificat SSL : " +demand.getCertificate().getNameCertificate());
+    helper.setSubject("Demande du certificat SSL : " +certificate.getNameCertificate());
     this.emailSender.send(message);
 	return htmlMsg;
     }

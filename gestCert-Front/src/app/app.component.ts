@@ -5,7 +5,6 @@ import {DepartmentDataService} from './service/department-data.service';
 import {AddressAlternativeDataService} from './service/address-alternative-data.service';
 import {ApplicationDataService} from './service/application-data.service';
 import {CertificateDataService} from './service/certificate-data.service';
-import {DemandDataService} from './service/demand-data.service';
 import {EnvironmentDataService} from './service/environment-data.service';
 import {PlateformDataService} from './service/plateform-data.service';
 import {RootDataService} from './service/root-data.service';
@@ -24,7 +23,6 @@ export class AppComponent implements OnInit {
   constructor(private addressAlternativeDataService: AddressAlternativeDataService,
               private applicationDataService: ApplicationDataService,
               private certificateDataService: CertificateDataService,
-              private demandDataService: DemandDataService,
               private departmentDataService: DepartmentDataService,
               private environmentDataService: EnvironmentDataService,
               private plateformDataService: PlateformDataService,
@@ -40,7 +38,6 @@ export class AppComponent implements OnInit {
     this.addressAlternativeDataService.publishAddressAlternative();
     this.applicationDataService.publishApplication();
     this.certificateDataService.publishCertificate();
-    this.demandDataService.publishDemand();
     this.departmentDataService.publishDepartment();
     this.environmentDataService.publishEnvironment();
     this.plateformDataService.publishPlateform();

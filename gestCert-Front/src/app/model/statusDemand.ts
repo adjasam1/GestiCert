@@ -1,10 +1,10 @@
-import {Demand} from './demand';
+import {Certificate} from './certificate';
 
 export interface StatusDemand {
 
   idStatusDemand?: number;
   nameStatusDemand?: string;
-  demands?: Demand[];
+  certificates?: Certificate[];
 
 }
 
@@ -12,15 +12,15 @@ export class StatusDemand {
 
   public idStatusDemand?: number;
   public nameStatusDemand?: string;
-  public demands?: Demand[];
+  public certificates?: Certificate[];
 
   constructor(idStatusDemand: number,
               nameStatusDemand: string,
-              demands: Demand[]) {
+              certificates?: Certificate[]) {
 
     this.idStatusDemand = idStatusDemand;
     this.nameStatusDemand = nameStatusDemand;
-    this.demands = demands;
+    this.certificates = certificates;
   }
 
 }

@@ -6,7 +6,7 @@
 
 <div class="cadre">
 
-  <div id="formulaire">
+  <div class="formulaire">
     <h2 *ngIf="editedCertificate.idCertificate; else elseBlock1"
         title="Formulaire pour modifier le certificat {{ editedCertificate.idCertificate }}">
       Certificat : {{ editedCertificate.nameCertificate }}
@@ -97,17 +97,17 @@
             </select>
           </div>
           <br>
-          <div class="form-control">
+       <!--   <div class="form-control">
             <label for="server"><strong>Serveur(s) * : </strong></label>
             <select
               name="server"
               id="server"
               class="form-control"
-              [(ngModel)]="editedCertificate.server" title="Champ pour le nom du ou des serveur(s)">
+              [(ngModel)]="editedCertificate.servers" title="Champ pour le nom du ou des serveur(s)">
               <option *ngFor="let server of serversList | async"
                       [value]="server.idServer">{{ server.nameServer }}</option>
             </select>
-          </div>
+          </div>-->
           <br>
           <div class="form-control">
             <label class="label1" for="linkInst"><span><strong>Lien de Téléchargement * :</strong></span></label>
@@ -121,6 +121,18 @@
             <input class="input1" type="search" id="linkPrin" [(ngModel)]="editedCertificate.linkAddressPrincipal" name="linkPrin"
                    placeholder="ADRESSE PRINCIPALE"
                    required title="Champ pour le lien de l'adresse principale du certificat">
+          </div>
+          <br>
+          <div class="form-control">
+            <label for="status"><strong>Statut * : </strong></label>
+            <select
+              name="status"
+              id="status"
+              class="form-control"
+              [(ngModel)]="editedCertificate.statusDemand" title="Champ pour le statut de la demande">
+              <option *ngFor="let status of statusList | async"
+                      [value]="status.idStatusDemand">{{ status.nameStatusDemand }}</option>
+            </select>
           </div>
     <!--      <br>
           <div *ngFor="let addrAlt of listAddressesAlternatives">
@@ -168,7 +180,7 @@
 
     <div id="table">
       <div id="autour">
-        <p-table #dt [columns]="cols" [value]="listCertificates" [paginator]="true" [rows]="9" dataKey="nameCertificate" [reorderableColumns]="true"
+        <p-table #dt [columns]="cols" [value]="listCertificates" [paginator]="true" [rows]="8" dataKey="nameCertificate" [reorderableColumns]="true"
                  selectionMode="single" [(selection)]="selectedCertificate" stateStorage="session" stateKey="statedemo-session">
           <ng-template pTemplate="header" let-columns>
             <tr>
@@ -180,7 +192,9 @@
           </ng-template>
           <ng-template pTemplate="body" let-certificate let-columns="columns">
             <tr routerLink="/gestion/cer/{{certificate.idCertificate}}" [pSelectableRow]="certificate">
-              <td *ngFor="let col of cols" class="{{col.field}}">{{ certificate[col.field] }}</td>
+              <td>{{ certificate.nameCertificate}}</td>
+              <td>{{ certificate.applicationName}}</td>
+              <td>{{ certificate.dateEndValidity | date: 'dd/MM/yyyy'}}</td>
             </tr>
           </ng-template>
         </p-table>

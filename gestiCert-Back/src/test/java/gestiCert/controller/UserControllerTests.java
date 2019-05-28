@@ -34,7 +34,6 @@ import gestiCert.service.AddressAlternativeService;
 import gestiCert.service.AppUserService;
 import gestiCert.service.ApplicationService;
 import gestiCert.service.CertificateService;
-import gestiCert.service.DemandService;
 import gestiCert.service.DepartmentService;
 import gestiCert.service.EnvironmentService;
 import gestiCert.service.PlateformService;
@@ -68,9 +67,6 @@ public class UserControllerTests {
 	
 	@MockBean
 	private CertificateService certificateServ;
-	
-	@MockBean
-	private DemandService demandServ;
 	
 	@MockBean
 	private DepartmentService departmentServ;

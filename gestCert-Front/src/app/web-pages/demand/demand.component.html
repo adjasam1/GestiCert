@@ -18,7 +18,7 @@
 
   <div>
     <div id="deconnexion" title="Déconnexion de l'application">
-      <a role="button" (click)="deconnect()">Déconnexion</a>
+      <a role="button" (click)="onDeconnect()">Déconnexion</a>
     </div>
   </div>
 
@@ -33,7 +33,7 @@
       <section id="demandeur">
         <h3>
           Information sur le demandeur :
-          <a role="button" routerLink="/profil/{{editedUser.idUser}}">Modifier</a>
+          <a role="button" routerLink="/accueil/{{editedUser.idRHUser}}/profil/">Modifier</a>
         </h3>
         <table id="table1">
           <tbody>
@@ -70,9 +70,9 @@
         <div class="form-control" id="form1">
           <label for="emailRef">
             <strong>E-mail du postier référent : </strong>
-            <span *ngIf="(editedDemand.idDemand !== 0)">{{editedDemand.eMailReferent}}</span>
+            <span *ngIf="(editedCertificate.statusDemand.idStatusDemand === 3)">{{editedCertificate.eMailReferent}}</span>
           </label>
-          <input type="search" id="emailRef" *ngIf="editedDemand.idDemand === 0" [(ngModel)]="editedDemand.eMailReferent"
+          <input type="search" id="emailRef" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" [(ngModel)]="editedCertificate.eMailReferent"
                  name="emailRef" placeholder="Entrez l'e-mail du référent"
                  required title="Champ pour l'e-mail du postier référent si le demandeur est un prestataire">
         </div>
@@ -111,28 +111,28 @@
         <div class="form-control" id="form2">
           <label for="desirDate">
             <strong>Date de réalisation souhaitée * : </strong>
-            <span *ngIf="(editedDemand.idDemand !== 0)">{{editedDemand.dateCreationDesired | date: 'dd/MM/yyyy'}}</span>
+            <span *ngIf="(editedCertificate.statusDemand.idStatusDemand === 3)">{{editedCertificate.dateCreationDesired | date: 'dd/MM/yyyy'}}</span>
           </label>
-          <input type="date" id="desirDate" *ngIf="editedDemand.idDemand === 0" [(ngModel)]="editedDemand.dateCreationDesired"
+          <input type="date" id="desirDate" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" [(ngModel)]="editedCertificate.dateCreationDesired"
                  name="desirDate" required title="Champ pour la date de réalisation souhaitée">
         </div>
         <br>
         <div class="form-control" id="form3">
           <label for="transmissionDate">
             <strong>Date de transmission * : </strong>
-            <span *ngIf="(editedDemand.idDemand !== 0)">{{editedDemand.dateTransmission | date: 'dd/MM/yyyy'}}</span>
+            <span *ngIf="(editedCertificate.statusDemand.idStatusDemand === 3)">{{editedCertificate.dateTransmission | date: 'dd/MM/yyyy'}}</span>
           </label>
-          <input type="date" id="transmissionDate" *ngIf="editedDemand.idDemand === 0" [(ngModel)]="editedDemand.dateTransmission"
+          <input type="date" id="transmissionDate" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" [(ngModel)]="editedCertificate.dateTransmission"
                  name="transmissionDate" required title="Champ pour la date de réalisation souhaitée">
         </div>
         <br>
         <div id="contexte" class="form-control">
           <label for="contxt">
             <strong id="context">Description du contexte : </strong>
-            <span *ngIf="(editedDemand.idDemand !== 0)">{{editedDemand.descriptionContext}}</span>
+            <span *ngIf="(editedCertificate.statusDemand.idStatusDemand === 3)">{{editedCertificate.descriptionContext}}</span>
           </label>
           <br>
-          <textarea id="contxt" *ngIf="editedDemand.idDemand === 0" [(ngModel)]="editedDemand.descriptionContext"
+          <textarea id="contxt" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" [(ngModel)]="editedCertificate.descriptionContext"
                     name="contxt" rows="2" cols="48" placeholder="Entrez la description du contexte de la demande"
                     required title="Champ pour la description du contexte"></textarea>
         </div>
@@ -183,8 +183,8 @@
     <br>
     <div class="modification">
       <a role="button" routerLink="/accueil/{{editedUser.idRHUser}}" title="annuler la demande">Annuler</a>
-      <a role="button" *ngIf="editedDemand.idDemand === 0" (click)="onSave()" title="Valider la demande">Valider</a>
-      <a role="button" *ngIf="editedDemand.idDemand !== 0" (click)="onSend()" title="Envoyer la demande">Transmettre</a>
+      <a role="button" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" (click)="onSave()" title="Valider la demande">Valider</a>
+      <a role="button" *ngIf="editedCertificate.statusDemand.idStatusDemand === 3" (click)="onSend()" title="Envoyer la demande">Transmettre</a>
     </div>
   </div>
 </section>

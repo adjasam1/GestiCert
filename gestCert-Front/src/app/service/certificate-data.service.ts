@@ -99,4 +99,8 @@ export class CertificateDataService {
     });
   }
 
+  public sendMail(certificate: Certificate) {
+    this.httpClient.post<Certificate>('http://localhost:8080/api/certificat/mail', certificate).subscribe();
+  }
+
 }

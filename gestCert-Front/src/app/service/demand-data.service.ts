@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core';
+/*import {Injectable} from '@angular/core';
 import {Demand} from '../model/demand';
 import {BehaviorSubject, Observable, of} from 'rxjs';
 import {HttpClient} from '@angular/common/http';
@@ -11,13 +11,13 @@ export class DemandDataService {
 
   /**
    * liste des demandes de l'application
-   */
+   /
 
   private availableDemands: Demand[];
 
   /**
    * liste observable rendu visible partout dans application
-   */
+   /
 
   availableDemands$: BehaviorSubject<Demand[]> = new BehaviorSubject(this.availableDemands);
 
@@ -25,7 +25,7 @@ export class DemandDataService {
 
   /**
    * cherche toutes les demandes grâce à la methode CRUD
-   */
+   /
 
   public getDemand(): Observable<Demand[]> {
     return this.httpClient.get<Demand[]>('http://localhost:8080/api/demande');
@@ -34,11 +34,11 @@ export class DemandDataService {
   /**
    * fonction chargee une fois au demarrage de l'application
    * recupere la liste des demandes depuis la base de donnees et met a jour la liste et la liste observable
-   */
+   /
 
-  public publishDemand() {
-    this.getDemand().subscribe(
-      demandsList => {
+  public publishDemand() {*/
+//    this.getDemand().subscribe(
+ /*     demandsList => {
         this.availableDemands = demandsList;
         this.availableDemands$.next(this.availableDemands);
       });
@@ -87,7 +87,7 @@ export class DemandDataService {
     this.httpClient.post<Demand>('http://localhost:8080/api/demande/mail', demand).subscribe();
   }
 
-/*  public sendMail(demandId: number) {
+/  public sendMail(demandId: number) {
     this.httpClient.post('http://localhost:8080/api/demande/mail', demandId).subscribe();
-  }*/
-}
+  }/
+}*/

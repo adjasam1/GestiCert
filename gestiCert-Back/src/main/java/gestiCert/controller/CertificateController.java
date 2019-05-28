@@ -2,10 +2,11 @@ package gestiCert.controller;
 
 import java.util.Date;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,10 +14,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import gestiCert.model.AppUser;
 import gestiCert.model.Certificate;
 import gestiCert.service.CertificateService;
+import gestiCert.service.MailService;
 
 /**
  * CertificateController route les requetes au CertificateService
@@ -44,10 +48,9 @@ public class CertificateController
 	private CertificateService certificateServ;
 //	private CertificateRepository certificateRepo;
 	
-//	@Autowired
-//	private ServerService serverServ;
+	@Autowired
+	private MailService mailServ;
 	
-	private BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 
 	/**
 	 * constructeur
@@ -118,7 +121,7 @@ public class CertificateController
 		
 		try
 		{
-			certificate.setPasswordCertificate(bCryptPasswordEncoder.encode(certificate.getPasswordCertificate()));
+		//	certificate.setPasswordCertificate(bCryptPasswordEncoder.encode(certificate.getPasswordCertificate()));
 //			newCertificate = new Certificate(certificate.getNameCertificate(), certificate.getLinkAddressPrincipal(), certificate.getLinkInstallation(), passwordEncoder.encode(certificate.getPasswordCertificate()), certificate.getDateIssue(), certificate.getDateEndValidity(), certificate.getApplication(), certificate.getEnvironment(), certificate.getPlateform(), certificate.getRoot());
 			newCertificate = certificateServ.createCertificate(certificate);
 //			newCertificate.setPasswordCertificate(passwordEncoder.encode(newCertificate.getPasswordCertificate()));
@@ -142,5 +145,25 @@ public class CertificateController
 	{
 		return certificateServ.deleteCertificate(idCertificate);
 	}
+	
+	 @ResponseBody
+	 @RequestMapping("/mail")
+	 public Object sendHtmlEmail(@RequestBody Certificate certificate) throws MessagingException
+	 {
+//   MimeMessage message = emailSender.createMimeMessage();
+//   boolean multipart = true;
+//   MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
+//   StringBuffer htmlMsg= new StringBuffer();
+//   htmlMsg.append("<h1>Test envoi mail</h1>");
+//   htmlMsg.append("<h2>"+demand.getIdDemand()+"</h2>");
+//   htmlMsg.append("<h3>"+demand.getApplication().getNameApplication()+"</h3>");
+//   htmlMsg.append("<h4>Nom Demandeur : "+demand.getUser().getNameUser()+"</h4>");
+//   message.setContent(htmlMsg.toString(), "text/html"); // on précise le format HTML
+//   helper.setTo(MailConfig.OTHER_EMAIL);
+//   helper.setSubject("Essai 1 : Envoyer un email avec du HTML + image");
+//   this.emailSender.send(message);
+//   return ResponseEntity.status(HttpStatus.OK).body("envois OK : " + null);
+   	return mailServ.sendHtmlEmail(certificate);
+   }
 
 }

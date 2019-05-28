@@ -38,7 +38,7 @@ export class HomeComponent implements OnInit {
   editedRoot: Root[];
 
   /* TEST PRIMENG */
-  certificates: Certificate;
+  certificate: Certificate;
 //  certificate: Certificate = new PrimeCertificate();
   listCertificates: Certificate[];
   cols1: any[];
@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
   //    console.log('j\'ai trouvé le user !!!');
     });
 
-    this.certificateDataService.availableCertificates$.subscribe(certificate => this.listCertificates = certificate);
+    this.certificateDataService.availableCertificates$.subscribe(certificates => this.listCertificates = certificates);
     this.certificateDataService.getCertificatePrimeNg().then(certificates => {
       this.listCertificates = certificates;
       this.listCertificates.forEach(certificate => certificate.applicationCCX = certificate.application.codeCCX);
@@ -86,10 +86,37 @@ export class HomeComponent implements OnInit {
       this.listCertificates.forEach(certificate => certificate.rootName = certificate.root.nameRoot);
     });
 
+/*   this.serversList = this.serverDataService.availableServers$;
+    this.serversList.subscribe(
+      servers => this.listServers = servers
+    );
+    this.listServers = this.editedCertificate.servers;*/
+
  //   this.certificatesList = this.certificateDataService.availableCertificates$;
  //   this.getCertificate();
 
     this.applicationsList = this.applicationDataService.availableApplications$;
+    this.applicationsList.subscribe(
+      applications => this.listApplications = applications
+    );
+    this.listApplications = this.editedUser.applications;
+    console.log('appli user : ', this.listApplications);
+ /*   this.applicationDataService.getApplicationPrimeNg().then( applications => {
+      this.listApplications = applications;
+      console.log('liste appli : ', applications);
+      this.listApplications.forEach( application =>
+        application.certificates.forEach(certificate =>
+          certificate.applicationCCX = certificate.application.codeCCX));
+      this.listApplications.forEach( application =>
+        application.certificates.forEach(certificate =>
+          certificate.applicationName = certificate.application.nameApplication));
+      this.listApplications.forEach( application =>
+        application.certificates.forEach(certificate =>
+          certificate.environmentName = certificate.environment.nameEnvironment));
+      this.listApplications.forEach( application =>
+        application.certificates.forEach(certificate =>
+          certificate.rootName = certificate.root.nameRoot));
+    })*/
     this.getApplication();
 
     this.environmentsList = this.environmentDataService.availableEnvironments$;
@@ -127,7 +154,7 @@ export class HomeComponent implements OnInit {
     this.router.navigate(['/accueil/' + this.editedUser.idRHUser]);
   }
 
-/*  getCertificate(): void {
+ /* getCertificate(): void {
     this.certificateDataService.getCertificate().subscribe(certificates => this.editedCertificate = certificates);
   }*/
 
