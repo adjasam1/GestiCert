@@ -42,11 +42,12 @@ import { ManagementEnvironmentComponent } from './web-pages/administration/manag
 import { ManagementCertificateComponent } from './web-pages/administration/management-certificate/management-certificate.component';
 import { ManagementApplicationComponent } from './web-pages/administration/management-application/management-application.component';
 import {TableModule} from 'primeng/table';
-import {AutoCompleteModule, MessageModule, MessagesModule} from 'primeng/primeng';
+import {AutoCompleteModule, MessageModule, MessagesModule, MultiSelectModule, PickListModule} from 'primeng/primeng';
 import { ManagementPlateformComponent } from './web-pages/administration/management-plateform/management-plateform.component';
 import { ManagementRootComponent } from './web-pages/administration/management-root/management-root.component';
 import { ManagementServerComponent } from './web-pages/administration/management-server/management-server.component';
-import { ManagementHabilitationComponent } from './web-pages/administration/management-habilitation/management-habilitation.component';
+import {ManagementHabilitationComponent} from './web-pages/administration/management-habilitation/management-habilitation.component';
+import { NewDemandComponent } from './web-pages/demandCertificate/new-demand/new-demand.component';
 
 @NgModule({
   declarations: [
@@ -72,6 +73,7 @@ import { ManagementHabilitationComponent } from './web-pages/administration/mana
     ManagementRootComponent,
     ManagementServerComponent,
     ManagementHabilitationComponent,
+    NewDemandComponent,
   ],
   imports: [
     BrowserModule,
@@ -101,7 +103,9 @@ import { ManagementHabilitationComponent } from './web-pages/administration/mana
     TableModule,
     MessagesModule,
     MessageModule,
-    AutoCompleteModule
+    AutoCompleteModule,
+    PickListModule,
+    MultiSelectModule
   ],
   providers: [DevGuard, AdminGuard,
     {

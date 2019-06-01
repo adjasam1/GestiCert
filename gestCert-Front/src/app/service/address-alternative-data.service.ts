@@ -60,23 +60,25 @@ export class AddressAlternativeDataService {
   public findAddressAlternativeByCertificate(certificateId: number) {
     return this.httpClient.get<AddressAlternative>(`http://localhost:8080/api/adressealternative/certificat=${certificateId}`);
   }
-/*
-  public createApplication(newApplication: Application) {
-    this.httpClient.post<Application>('http://localhost:8080/api/application/ajout', newApplication).subscribe(
-      createApplication => {
-        this.availableApplications.push(createApplication);
-        this.availableApplications$.next(this.availableApplications);
+
+  public createAddressAlternative(newAddress: AddressAlternative) {
+    this.httpClient.post<AddressAlternative>('http://localhost:8080/api/adressealternative/ajout', newAddress).subscribe(
+      createAddress => {
+        this.availableAddressAlternatives.push(createAddress);
+        this.availableAddressAlternatives$.next(this.availableAddressAlternatives);
       }
     );
   }
 
-  public updateApplication(application: Application) {
-    this.httpClient.put<Application>(`http://localhost:8080/api/application/modifid=${application.idApplication}`, application).subscribe(
-      updateApplication => {
-        this.availableApplications$.next(this.availableApplications);
+  public updateAddressAlternative(address: AddressAlternative) {
+    this.httpClient.put<AddressAlternative>(`http://localhost:8080/api/adressealternative/modifid=${address.idAddressAlternative}`, address)
+      .subscribe(updateAddress => {
+        this.availableAddressAlternatives$.next(this.availableAddressAlternatives);
       }
     );
   }
+/*
+
 
   public deleteApplication(application: Application) {
     this.httpClient.delete<Application>(`http://localhost:8080/api/application/supprid=${application.idApplication}`).subscribe(

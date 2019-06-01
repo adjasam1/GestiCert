@@ -25,7 +25,9 @@
 </section>
 
 <section id="formulaire">
-    <h1 *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseBlock1">Demande du certificat SSL</h1>
+    <h1 *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseBlock1">
+      Demande du certificat SSL
+    </h1>
     <ng-template #elseBlock1><h1>Renouvellement du certificat SSL</h1></ng-template>
   <div id="cadreForm">
     <form>
@@ -35,7 +37,7 @@
           Information sur le demandeur :
           <a role="button" routerLink="/accueil/{{editedUser.idRHUser}}/profil/">Modifier</a>
         </h3>
-        <table id="table1">
+        <table class="table1">
           <tbody>
           <tr>
             <td class="td1"><strong>Service du demandeur :</strong></td>
@@ -182,7 +184,7 @@
     </form>
     <br>
     <div class="modification">
-      <a role="button" routerLink="/accueil/{{editedUser.idRHUser}}" title="annuler la demande">Annuler</a>
+      <a role="button" (click)="onBack()" title="annuler la demande">Annuler</a>
       <a role="button" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" (click)="onSave()" title="Valider la demande">Valider</a>
       <a role="button" *ngIf="editedCertificate.statusDemand.idStatusDemand === 3" (click)="onSend()" title="Envoyer la demande">Transmettre</a>
     </div>

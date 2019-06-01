@@ -1,0 +1,316 @@
+<section id="entete">
+
+  <div title="Demande d'un nouveau certificat SSL">
+    <div id="name">
+      <p>
+        <img src="assets/icons/certificate.svg" alt="Logo certificat">&nbsp;
+        Demande d'un nouveau certificat SSL
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <div id="deconnexion" title="Déconnexion de l'application">
+      <a role="button" (click)="onDeconnect()">Déconnexion</a>
+    </div>
+  </div>
+
+</section>
+
+<section id="formulaire">
+  <h1>Demande du certificat SSL</h1>
+  <div id="cadreForm">
+    <form>
+      <h2>1. Identification de la demande :</h2>
+      <section id="demandeur" *ngIf="idDemand === editedApplication.idApplication">
+        <h3>
+          Information sur le demandeur :
+          <a><button routerLink="/accueil/{{ editedUser.idRHUser }}/profil/">Modifier</button></a>
+          <!--         <a role="button" routerLink="/accueil/{{ editedUser.idRHUser }}/profil/">Modifier</a>-->
+        </h3>
+        <table class="table1">
+          <tbody>
+          <tr>
+            <td class="td1"><strong>Service du demandeur :</strong></td>
+            <td class="td2">{{ editedUser.department.nameDepartment }}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Nom du demandeur :</strong></td>
+            <td class="td2">{{ editedUser.nameUser }}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Prénom du demandeur :</strong></td>
+            <td class="td2">{{ editedUser.firstNameUser }}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Fonction du demandeur :</strong></td>
+            <td class="td2">{{ editedUser.profile.typeProfile }}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>Téléphone du demandeur :</strong></td>
+            <td class="td2">{{ editedUser.phoneUser }}</td>
+          </tr>
+          <tr>
+            <td class="td1"><strong>E-mail du demandeur :</strong></td>
+            <td class="td2">{{ editedUser.eMailUser }}</td>
+          </tr>
+          </tbody>
+        </table>
+      </section>
+      <section id="referent" *ngIf="idDemand === 1">
+        <h4>Si le demandeur est un prestataire, le postier référent recevra les notifications d'expirations</h4>
+        <div class="form-control" class="form1">
+          <label for="emailRef"><strong>E-mail du postier référent : </strong></label>
+          <input type="search" id="emailRef" [(ngModel)]="editedCertificate.eMailReferent"
+                 name="emailRef" placeholder="E-MAIL REFERENT"
+                 required title="Champ pour l'e-mail du postier référent si le demandeur est un prestataire">
+        </div>
+      </section>
+      <section>
+        <div *ngIf="editedApplication.idApplication !== idApplication">
+        <h3>Recherche de l'application :</h3>
+          <label for="application"><strong>Application * : </strong></label>
+          <select
+            name="application"
+            id="application"
+            class="form-control"
+            [(ngModel)]="editedApplication.idApplication" title="Champ pour le nom de l'application">
+            <option *ngFor="let application of applicationsList | async"
+                    [value]="application.idApplication">{{ application.nameApplication }}</option>
+          </select>
+          <a><button (click)="onValid()">Valider</button></a>
+          <a><button routerLink="/gestion/app">Créer nouvelle application</button></a>
+        </div>
+
+        <div *ngIf="editedApplication.idApplication  === idApplication">
+          <h3>
+            Information sur le client de l'application {{editedApplication.nameApplication}} :
+            <a><button routerLink="/gestion/app/{{ editedApplication.idApplication }}">Modifier</button></a>
+            <a>
+              <button *ngIf="idDemand !== editedApplication.idApplication" routerLink="../">
+              Changer
+              </button>
+            </a>
+          </h3>
+          <table id="table2">
+            <tbody>
+            <tr>
+              <td class="td1"><strong>Nom du client :</strong></td>
+              <td class="td2">{{editedApplication.nameClient}}</td>
+            </tr>
+            <tr>
+              <td class="td1"><strong>Prénom du client :</strong></td>
+              <td class="td2">{{editedApplication.firstNameClient}}</td>
+            </tr>
+            <tr>
+              <td class="td1"><strong>Direction du client :</strong></td>
+              <td class="td2">{{editedApplication.managementClient}}</td>
+            </tr>
+            <tr>
+              <td class="td1"><strong>Téléphone du client :</strong></td>
+              <td class="td2">{{editedApplication.phoneClient}}</td>
+            </tr>
+            <tr>
+              <td class="td1"><strong>E-mail du client :</strong></td>
+              <td class="td2">{{editedApplication.eMailClient}}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div *ngIf="editedApplication.idApplication  === idApplication && idDemand !== editedApplication.idApplication">
+          <div *ngIf="listCertificates.length === 0; else listIsEmpty">
+            <h3>
+              Pas de Certificat existant pour l'application {{editedApplication.nameApplication}} :
+              <a routerLink="/accueil/{{editedUser.idRHUser}}/application/{{editedApplication.idApplication}}/demande/{{editedApplication.idApplication}}">
+                <button title="Demander un certificat pour l'application {{ editedApplication.nameApplication }}">
+                  Demander certificat
+                </button>
+              </a>
+            </h3>
+          </div>
+          <ng-template #listIsEmpty>
+          <h3>Liste des Certificats de l'application {{editedApplication.nameApplication}} : </h3>
+          <div id="table">
+            <div id="autour">
+              <p-table #dt [columns]="cols" [value]="listCertificates" dataKey="nameCertificate" [reorderableColumns]="true"
+                       selectionMode="single" stateStorage="session" stateKey="statedemo-session">
+                <ng-template pTemplate="header" let-columns>
+                  <tr>
+                    <th id="th1" *ngFor="let col of cols" [pSortableColumn]="col.field" class="{{col.field}}" colspan="col.colspan" [ngStyle]="{'width': col.width}" pReorderableColumn>
+                      {{col.header}}
+                      <p-sortIcon [field]="col.field"></p-sortIcon>
+                    </th>
+                    <th></th>
+                  </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-certificate let-columns="columns">
+                  <tr [pSelectableRow]="certificate">
+                    <td>{{ certificate.nameCertificate}}</td>
+                    <td>{{ certificate.environmentName}}</td>
+                    <td>{{ certificate.dateEndValidity | date: 'dd/MM/yyyy'}}</td>
+                    <td>
+                      <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') > (alertDate | date: 'yyyy-MM-dd'))">
+                        <img src="assets/icons/ok.svg" alt="Certificat valide"
+                             title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} valide">
+                      </div>
+                      <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
+                        <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
+                             title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} non valide">
+                        <a *ngIf="certificate.statusDemand.idStatusDemand !== 3; else elseBlock1a">
+                          <button class="buton1" routerLink="/accueil/{{editedUser.idRHUser}}/certificat/{{certificate.idCertificate}}"
+                           title="Demander le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }}">
+                          Demander
+                          </button>
+                        </a>
+                        <ng-template #elseBlock1a><span class="attente">(En cours)</span></ng-template>
+                      </div>
+                      <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
+                     ((certificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
+                        <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
+                             title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
+                        <a *ngIf="certificate.statusDemand.idStatusDemand !== 3; else elseBlock1b">
+                          <button class="buton2" routerLink="/accueil/{{editedUser.idRHUser}}/certificat/{{certificate.idCertificate}}"
+                                  title="Renouveler le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
+                          Renouveler
+                          </button>
+                        </a>
+                        <ng-template #elseBlock1b><span class="attente">(En cours)</span></ng-template>
+                      </div>
+                    </td>
+                  </tr>
+                </ng-template>
+              </p-table>
+            </div>
+          </div>
+          </ng-template>
+        </div>
+
+      </section>
+      <br>
+    </form>
+    <br>
+    <div class="modification">
+      <a role="button" routerLink="/accueil/{{editedUser.idRHUser}}" title="annuler la demande">Annuler</a>
+      <a role="button" (click)="onSave()" title="Valider la demande">Valider</a>
+    </div>
+  </div>
+</section>
+
+
+
+
+
+
+
+<!--
+
+<br>
+<section>
+  <h3>Information sur le client :</h3>
+  <table id="table2">
+    <tbody>
+    <tr>
+      <td class="td1"><strong>Nom du client :</strong></td>
+      <td class="td2">{{editedCertificate.application.nameClient}}</td>
+    </tr>
+    <tr>
+      <td class="td1"><strong>Prénom du client :</strong></td>
+      <td class="td2">{{editedCertificate.application.firstNameClient}}</td>
+    </tr>
+    <tr>
+      <td class="td1"><strong>Direction du client :</strong></td>
+      <td class="td2">{{editedCertificate.application.managementClient}}</td>
+    </tr>
+    <tr>
+      <td class="td1"><strong>Téléphone du client :</strong></td>
+      <td class="td2">{{editedCertificate.application.phoneClient}}</td>
+    </tr>
+    <tr>
+      <td class="td1"><strong>E-mail du client :</strong></td>
+      <td class="td2">{{editedCertificate.application.eMailClient}}</td>
+    </tr>
+    </tbody>
+  </table>
+</section>
+<br>
+<section>
+  <h3>Information complémentaire : <span>* Champs obligatoires</span></h3>
+  <div class="form-control" id="form2">
+    <label for="desirDate">
+      <strong>Date de réalisation souhaitée * : </strong>
+      <span *ngIf="(editedCertificate.statusDemand.idStatusDemand === 3)">{{editedCertificate.dateCreationDesired | date: 'dd/MM/yyyy'}}</span>
+    </label>
+    <input type="date" id="desirDate" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" [(ngModel)]="editedCertificate.dateCreationDesired"
+           name="desirDate" required title="Champ pour la date de réalisation souhaitée">
+  </div>
+  <br>
+  <div class="form-control" id="form3">
+    <label for="transmissionDate">
+      <strong>Date de transmission * : </strong>
+      <span *ngIf="(editedCertificate.statusDemand.idStatusDemand === 3)">{{editedCertificate.dateTransmission | date: 'dd/MM/yyyy'}}</span>
+    </label>
+    <input type="date" id="transmissionDate" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" [(ngModel)]="editedCertificate.dateTransmission"
+           name="transmissionDate" required title="Champ pour la date de réalisation souhaitée">
+  </div>
+  <br>
+  <div id="contexte" class="form-control">
+    <label for="contxt">
+      <strong id="context">Description du contexte : </strong>
+      <span *ngIf="(editedCertificate.statusDemand.idStatusDemand === 3)">{{editedCertificate.descriptionContext}}</span>
+    </label>
+    <br>
+    <textarea id="contxt" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" [(ngModel)]="editedCertificate.descriptionContext"
+              name="contxt" rows="2" cols="48" placeholder="Entrez la description du contexte de la demande"
+              required title="Champ pour la description du contexte"></textarea>
+  </div>
+  <br>
+</section>
+<section>
+  <h2>2. Information sur la demande :</h2>
+  <table id="table3">
+    <tbody>
+    <tr>
+      <td class="td1"><strong>Type de la demande :</strong></td>
+      <td class="td2">
+        <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd'))"> Renouvellement</span>
+        <span *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))"> Création</span>
+      </td>
+    </tr>
+    <tr>
+      <td class="td1"><strong>Code CCX de l'application :</strong></td>
+      <td class="td2">{{editedCertificate.application.codeCCX}}</td>
+    </tr>
+    <tr>
+      <td class="td1"><strong>Nom commun</strong> "URL principale du site" <strong>:</strong></td>
+      <td class="td2">{{editedCertificate.linkAddressPrincipal}}</td>
+    </tr>
+    <tr *ngFor="let addrAlt of listAddressAlternatives">
+      <td class="td1">
+        <strong>Adresse(s) alternative(s) :</strong>
+      </td>
+      <td class="td2">
+        <!-       <span *ngIf="editedCertificate.idCertificate === addrAlt.certificate.idCertificate">->
+        {{addrAlt.linkAddressAlternative}}
+        <!-      </span>->
+      </td>
+    </tr>
+    <tr>
+      <td class="td1"><strong>Plateforme :</strong></td>
+      <td class="td2">{{editedCertificate.plateform.namePlateform}}</td>
+    </tr>
+    <tr *ngFor="let server of listServers">
+      <td class="td1"><strong>Serveur(s) :</strong></td>
+      <td class="td2">{{server.nameServer}}</td>
+      <!-         <td class="td2">{{editedCertificate.server.nameServer}}</td>->
+    </tr>
+    </tbody>
+  </table>
+</section>
+    <div class="modification">
+      <a role="button" routerLink="/accueil/{{editedUser.idRHUser}}" title="annuler la demande">Annuler</a>
+      <a role="button" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" (click)="onSave()" title="Valider la demande">Valider</a>
+      <a role="button" *ngIf="editedCertificate.statusDemand.idStatusDemand === 3" (click)="onSend()" title="Envoyer la demande">Transmettre</a>
+    </div>
+  </div>
+</section>-->

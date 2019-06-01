@@ -1,42 +1,43 @@
 import { Component, OnInit } from '@angular/core';
-import {CertificateDataService} from '../../service/certificate-data.service';
-import {ActivatedRoute, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
-import {Certificate} from '../../model/certificate';
-import {AppUser} from '../../model/appUser';
-import {UserDataService} from '../../service/user-data.service';
-import {Profile} from '../../model/profile';
-import {Department} from '../../model/department';
-import {DepartmentDataService} from '../../service/department-data.service';
-import {ProfileDataService} from '../../service/profile-data.service';
+import {AppUser} from '../../../model/appUser';
+import {Certificate} from '../../../model/certificate';
+import {Department} from '../../../model/department';
+import {Profile} from '../../../model/profile';
+import {AddressAlternative} from '../../../model/addressAlternative';
+import {Application} from '../../../model/application';
+import {StatusDemand} from '../../../model/statusDemand';
+import {TypeDemand} from '../../../model/typeDemand';
+import {Plateform} from '../../../model/plateform';
+import {Server} from '../../../model/server';
+import {UserDataService} from '../../../service/user-data.service';
+import {DepartmentDataService} from '../../../service/department-data.service';
+import {ProfileDataService} from '../../../service/profile-data.service';
+import {ApplicationDataService} from '../../../service/application-data.service';
+import {CertificateDataService} from '../../../service/certificate-data.service';
+import {PlateformDataService} from '../../../service/plateform-data.service';
+import {ServerDataService} from '../../../service/server-data.service';
+import {AddressAlternativeDataService} from '../../../service/address-alternative-data.service';
+import {StatusDemandDataService} from '../../../service/status-demand-data.service';
+import {TypeDemandDataService} from '../../../service/type-demand-data.service';
 import {FormBuilder} from '@angular/forms';
-import {TypeDemandDataService} from '../../service/type-demand-data.service';
-import {TypeDemand} from '../../model/typeDemand';
-import {AddressAlternativeDataService} from '../../service/address-alternative-data.service';
-import {AddressAlternative} from '../../model/addressAlternative';
-import {PlateformDataService} from '../../service/plateform-data.service';
-import {ServerDataService} from '../../service/server-data.service';
-import {Plateform} from '../../model/plateform';
-import {Server} from '../../model/server';
-import {ApplicationDataService} from '../../service/application-data.service';
-import {Application} from '../../model/application';
-import {StatusDemandDataService} from '../../service/status-demand-data.service';
-import {StatusDemand} from '../../model/statusDemand';
+import {ActivatedRoute, Router} from '@angular/router';
 
 @Component({
-  selector: 'app-demand',
-  templateUrl: './demand.component.html',
-  styleUrls: ['./demand.component.scss']
+  selector: 'app-new-demand',
+  templateUrl: './new-demand.component.html',
+  styleUrls: ['./new-demand.component.scss']
 })
-export class DemandComponent implements OnInit {
+export class NewDemandComponent implements OnInit {
 
   usersList: BehaviorSubject<AppUser[]>;
-  idUser: string;
+  idRHUser: string;
   editedUser: AppUser;
 
   certificatesList: BehaviorSubject<Certificate[]>;
   idCertificate: number;
   editedCertificate: Certificate;
+  listCertificates: Certificate[];
 
   departmentsList: BehaviorSubject<Department[]>;
   profilesList: BehaviorSubject<Profile[]>;
@@ -44,6 +45,8 @@ export class DemandComponent implements OnInit {
   listAddressAlternatives: AddressAlternative;
 
   applicationsList: BehaviorSubject<Application[]>;
+  idApplication: number;
+  editedApplication: Application;
 
   statusDemandsList: BehaviorSubject<StatusDemand[]>;
   typeDemandsList: BehaviorSubject<TypeDemand[]>;
@@ -51,13 +54,19 @@ export class DemandComponent implements OnInit {
   serversList: BehaviorSubject<Server[]>;
 
   listUsers: AppUser[];
-  listCertificates: Certificate[];
   listApplications: Application[];
   listStatusDemands: StatusDemand[];
   listTypeDemands: TypeDemand[];
   listServers: Server[];
 
+  idDemand: number;
+
   dateNow: Date = new Date();
+  alertDate: Date = new Date();
+
+  appliSelected = false;
+
+  cols: any[];
 
   constructor(private userDataService: UserDataService,
               private departmentDataService: DepartmentDataService,
@@ -76,14 +85,34 @@ export class DemandComponent implements OnInit {
   ngOnInit() {
 
     this.usersList = this.userDataService.availableUsers$;
-    this.idUser = this.route.snapshot.params.id1;
-    this.userDataService.findUserByIdRH(this.idUser).subscribe(user => this.editedUser = user);
+    this.idRHUser = this.route.snapshot.params.id1;
+    this.userDataService.findUserByIdRH(this.idRHUser).subscribe(user => this.editedUser = user);
+
+    this.applicationsList = this.applicationDataService.availableApplications$;
+    this.idApplication = +this.route.snapshot.params.id2;
+    this.applicationDataService.findApplication(this.idApplication).subscribe( application => this.editedApplication = application);
 
     this.certificatesList = this.certificateDataService.availableCertificates$;
-    this.idCertificate = +this.route.snapshot.params.id2;
-    this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificate => this.editedCertificate = certificate);
+    this.certificateDataService.findCertificatesByApplication(this.idApplication)
+      .subscribe( certificates => this.listCertificates = certificates );
+    this.certificateDataService.getCertificateByApplicationPrimeNg().then(certificates => {
+      this.listCertificates = certificates;
+      this.listCertificates.forEach(certificate => certificate.environmentName = certificate.environment.nameEnvironment);
+    });
 
-    this.departmentsList = this.departmentDataService.availableDepartments$;
+    this.idDemand = +this.route.snapshot.params.id3;
+
+  //  this.idCertificate = +this.route.snapshot.params.id3;
+  //  this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificate => this.editedCertificate = certificate);
+
+    this.dateAlert();
+    this.cols = [
+      { field: 'nameCertificate', header: 'Nom Certificat', width: '30%' },
+      { field: 'environmentName', header: 'Nom Environnement', width: '30%' },
+      { field: 'dateEndValidity', header: 'Validité', width: '20%' }
+    ];
+
+ /*   this.departmentsList = this.departmentDataService.availableDepartments$;
     this.profilesList = this.profileDataService.availableProfiles$;
     this.addressAlternativesList = this.addressAlternativeDataService.availableAddressAlternatives$;
     this.addressAlternativeDataService.findAddressAlternativeByCertificate(this.idCertificate).subscribe(addressAlternatives =>
@@ -98,7 +127,7 @@ export class DemandComponent implements OnInit {
     this.serversList.subscribe(
       servers => this.listServers = servers
     );
-    this.listServers = this.editedCertificate.servers;
+//    this.listServers = this.editedCertificate.servers;
 
     this.usersList.subscribe(
       users => this.listUsers = users
@@ -114,7 +143,7 @@ export class DemandComponent implements OnInit {
     );
     this.typeDemandsList.subscribe(
       types => this.listTypeDemands = types
-    );
+    );*/
   }
 
   onDeconnect(): void {
@@ -125,19 +154,19 @@ export class DemandComponent implements OnInit {
   }
 
   onSave() {
-    if (confirm('Êtes-vous certain de vouloir enregistrer cette demande ?')) {
+/*    if (confirm('Êtes-vous certain de vouloir enregistrer cette demande ?')) {
       this.editedCertificate.dateDemand = this.dateNow;
       this.editedCertificate.user = this.listUsers.find(user => {
         return user.idUser === +this.editedUser.idUser;
       });
       this.editedCertificate.statusDemand = this.listStatusDemands.find(status => {
         return status.idStatusDemand === 3;
-        //        return status.idStatusDemand === +this.editedDemand.statusDemand.idStatusDemand;
+        /       return status.idStatusDemand === +this.editedDemand.statusDemand.idStatusDemand;
       });
       this.editedCertificate.typeDemand = this.listTypeDemands.find(type => {
         if (new Date(this.editedCertificate.dateEndValidity) < this.dateNow) {
           return type.idTypeDemand === 1;
-          //          return type.idTypeDemand === +this.editedDemand.typeDemand.idTypeDemand;
+          /          return type.idTypeDemand === +this.editedDemand.typeDemand.idTypeDemand;
         } else {
           return type.idTypeDemand === 2;
         }
@@ -146,11 +175,7 @@ export class DemandComponent implements OnInit {
       this.certificateDataService.updateCertificate(this.editedCertificate);
       this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
       + this.editedCertificate.idCertificate + '/demande']);
-    }
-  }
-
-  onBack() {
-    this.router.navigate([history.go(-1)]);
+    }*/
   }
 
   onSend() {
@@ -158,6 +183,21 @@ export class DemandComponent implements OnInit {
       this.certificateDataService.sendMail(this.editedCertificate);
       this.router.navigate(['/accueil/' + this.editedUser.idRHUser]);
     }
+  }
+
+  onValid() {
+    if (this.editedApplication.idApplication === 0) {
+      alert('Veuillez selectionner une application');
+    } else {
+      this.appliSelected = true;
+      this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/application/' + this.editedApplication.idApplication]);
+    }
+  }
+
+  dateAlert(): void {
+    const thisMonth = this.dateNow.getMonth();
+    const oneMonth = 1;
+    this.alertDate.setUTCMonth(thisMonth + oneMonth);
   }
 
 }

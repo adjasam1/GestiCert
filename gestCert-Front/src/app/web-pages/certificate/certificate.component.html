@@ -163,6 +163,11 @@
               </a>
               <ng-template #elseBlock2><span class="attente">(En cours)</span></ng-template>
             </div>
+            <a *ngIf="editedUser.profile.idProfile === 3">
+              <button routerLink="/gestion/hab/app/{{ editedCertificate.application.idApplication }}">
+                Gérer habilitation
+              </button>
+            </a>
           </td>
         </tr>
         </tbody>

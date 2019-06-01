@@ -10,6 +10,8 @@ import {environment} from '../../../environments/environment';
 import * as jwt_decode from 'jwt-decode';
 import {ServerDataService} from '../../service/server-data.service';
 import {Server} from '../../model/server';
+import {AppUser} from '../../model/appUser';
+import {UserDataService} from '../../service/user-data.service';
 
 @Component({
   selector: 'app-certificate',
@@ -22,6 +24,7 @@ export class CertificateComponent implements OnInit {
   alertDate: Date = new Date();
 
   idRH: string;
+  editedUser: AppUser;
 
   certificatesList: BehaviorSubject<Certificate[]>;
   idCertificate: number;
@@ -41,7 +44,8 @@ export class CertificateComponent implements OnInit {
   cols: any;
 //  selectedCertificate: Certificate;
 
-  constructor(private certificateDataService: CertificateDataService,
+  constructor(private userDataService: UserDataService,
+              private certificateDataService: CertificateDataService,
               private addressAlternativeDataService: AddressAlternativeDataService,
               private serverDataService: ServerDataService,
               private route: ActivatedRoute,
@@ -50,6 +54,10 @@ export class CertificateComponent implements OnInit {
 
   ngOnInit() {
     this.title.setTitle('Certificat');
+
+    const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
+    this.idRH = decodedToken.sub;
+    this.userDataService.findUserByIdRH(this.idRH).subscribe(user => this.editedUser = user);
 
     this.certificatesList = this.certificateDataService.availableCertificates$;
 

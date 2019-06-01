@@ -108,7 +108,7 @@ public class Certificate implements Serializable
 	 */
 	
 //	@JsonIgnore
-	@JsonIgnoreProperties("users")
+//	@JsonIgnoreProperties("users")
 	@ManyToOne//(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_application")
 	private Application application;

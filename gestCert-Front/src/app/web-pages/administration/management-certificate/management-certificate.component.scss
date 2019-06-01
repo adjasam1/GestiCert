@@ -134,14 +134,18 @@ a
   padding: 2px 5px;
 }
 
-a[role="button"] {
+#butServ {
+  margin-left: 40px;
+}
+
+a button, a[role="button"] {
   text-decoration: none;
   border-radius: 4px;
   margin-left: 10px;
   margin-bottom: 10px;
 }
 
-a[role="button"]:hover {
+a button:hover, a[role="button"]:hover {
   color: #FFCB05;
   background-color: #003DA5;
   text-decoration: none;
@@ -172,4 +176,48 @@ span strong
 strong
 {
   font-size: 10px;
+}
+
+:host /deep/ .ui-button {
+  color: black !important;
+  font-size: 12px !important;
+  width: 20px !important;
+  height: 20px !important;
+  background-color: #9CC6DA !important;
+  border: 1px solid #003DA5 !important;
+}
+
+:host /deep/ .ui-button:hover {
+  background-color: #003DA5 !important;
+  color: #FFCB05 !important;
+}
+
+
+
+:host /deep/ .ui-picklist .ui-picklist-list li {
+  padding: 2px 10px !important;
+}
+
+:host /deep/ .ui-picklist .ui-picklist-list li {
+  padding: 0 5px !important;
+  margin: 0 !important;
+}
+
+:host /deep/ .ui-widget {
+  font-family: Montserrat, sans-serif !important;
+}
+
+:host /deep/  .ui-picklist .ui-picklist-caption {
+  padding: 0 !important;
+  font-size: 10px !important;
+}
+
+:host /deep/  .ui-picklist .ui-picklist-buttons {
+  padding: 20px 1em 0 1em !important;
+  vertical-align: top !important;
+  height: 0 !important;
+}
+
+:host /deep/  .ui-picklist .ui-picklist-droppoint {
+  height: 2px !important;
 }

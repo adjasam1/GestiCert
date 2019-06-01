@@ -182,4 +182,8 @@ export class HomeComponent implements OnInit {
       this.router.navigate(['']);
     }
   }
+
+  onScroll() {
+    window.scrollTo(0, 0);
+  }
 }

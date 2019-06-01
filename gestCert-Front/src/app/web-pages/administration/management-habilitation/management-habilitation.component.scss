@@ -8,12 +8,12 @@ h2 {
   font-size: 15px;
 }
 
-h3 {
+/*h3 {
   font-size: 10px;
   color: brown;
   text-align: center;
   padding-bottom: 10px;
-}
+}*/
 
 /* CADRES */
 .cadre1 {
@@ -26,37 +26,30 @@ h3 {
   width: 80%;
 }
 
-#cadre2 {
+.cadre2 {
   border: 1px solid #003DA5;
+  width: 100%;
   border-radius: 5px;
-  margin: 0 4% 0 0;
   padding: 4%;
 }
 
-#gauche {
-  width: 100%;
-}
-
 .cadre3 {
-  border: 1px solid #003DA5;
-  border-radius: 5px;
-  width: 100%;
-  padding: 2%;
+  width: 80%;
+  margin: 0 auto;
   align-content: space-between;
 }
 
-.liste {
+/*.liste {
   margin-top: 39px;
-}
+}*/
 
 /* FORMULAIRE */
-#formulaire {
+/*#formulaire {
   width: 100%;
-}
+}*/
 
-form {
-  text-align: right;
-  margin-right: 5%;
+form a {
+  margin-left: 10px;
 }
 
 label {
@@ -64,14 +57,19 @@ label {
 }
 
 .form-control {
-  margin-bottom: 15px;
+//  margin-bottom: 15px;
 }
 
-input {
+select {
   font-family: Montserrat, sans-serif;
+  width: 30%;
 }
 
-form input {
+.liste {
+  padding-top: 5px;
+}
+
+/*form input {
   width: 60%;
 }
 
@@ -82,12 +80,45 @@ form input {
 
 .recherche:last-child {
   margin-top: 5px;
-}
+}*/
 
 /* BOUTONS */
-#action {
+
+/*#action {
   text-align: right;
   margin-top: 20px;
+}*/
+
+a
+{
+  color: black;
+  font-size: 12px;
+  padding: 2px 5px;
+}
+
+/*#butServ {
+  margin-left: 40px;
+}*/
+
+a button, a[role="button"] {
+  text-decoration: none;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+a button:hover, a[role="button"]:hover {
+  color: #FFCB05;
+  background-color: #003DA5;
+  text-decoration: none;
+}
+
+a button {
+  padding: 2px 5px;
+  margin-bottom: 4%;
+  color: black;
+  font-size: 12px;
+  border-radius: 4px;
+  outline: none;
 }
 
 #action a {
@@ -95,19 +126,64 @@ form input {
   color: black;
   font-size: 12px;
   border-radius: 4px;
-  margin-left: 15px;
 }
 
-#action a[role="button"]
+#action a[role="button"], a button
 {
   background-color: #9CC6DA;
   border: 1px solid #003DA5;
 }
 
-#action a[role="button"]:hover
+#action a[role="button"]:hover, a button:hover
 {
   color: #FFCB05;
   background-color: #003DA5;
+}
+
+:host /deep/ .ui-button {
+  color: black !important;
+  font-size: 12px !important;
+  width: 20px !important;
+  height: 20px !important;
+  background-color: #9CC6DA !important;
+  border: 1px solid #003DA5 !important;
+}
+
+:host /deep/ .ui-picklist.ui-picklist-responsive .ui-picklist-listwrapper {
+  min-width: 100px !important;
+}
+
+:host /deep/ .ui-button:hover {
+  background-color: #003DA5 !important;
+  color: #FFCB05 !important;
+}
+
+:host /deep/ .ui-picklist .ui-picklist-list li {
+  padding: 2px 10px !important;
+}
+
+:host /deep/ .ui-picklist .ui-picklist-list li {
+  padding: 0 5px !important;
+  margin: 0 !important;
+}
+
+:host /deep/ .ui-widget {
+  font-family: Montserrat, sans-serif !important;
+}
+
+:host /deep/  .ui-picklist .ui-picklist-caption {
+  padding: 0 !important;
+  font-size: 10px !important;
+}
+
+:host /deep/  .ui-picklist .ui-picklist-buttons {
+  padding: 20px 1em 0 1em !important;
+  vertical-align: top !important;
+  height: 0 !important;
+}
+
+:host /deep/  .ui-picklist .ui-picklist-droppoint {
+  height: 2px !important;
 }
 
 /* ADAPTABILITE */

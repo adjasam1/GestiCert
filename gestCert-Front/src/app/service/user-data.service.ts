@@ -108,7 +108,7 @@ export class UserDataService {
 
   /* TEST PRIMENG */
   public getUserPrimeNg() {
-    return this.httpClient.get('http://localhost:8080/api/utilisateur').toPromise().then(data =>  {
+    return this.httpClient.get<any>('http://localhost:8080/api/utilisateur').toPromise().then(data =>  {
       return data;
     });
   }

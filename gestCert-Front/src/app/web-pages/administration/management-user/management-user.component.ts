@@ -8,6 +8,8 @@ import {Department} from '../../../model/department';
 import {ProfileDataService} from '../../../service/profile-data.service';
 import {DepartmentDataService} from '../../../service/department-data.service';
 import {NgForm} from '@angular/forms';
+import {AdminGuard} from '../../../jwt-security/guards/admin.guard';
+import {DevGuard} from '../../../jwt-security/guards/dev.guard';
 
 @Component ({
   selector: 'app-management-user',
@@ -31,6 +33,7 @@ export class ManagementUserComponent implements OnInit {
   departmentsList: BehaviorSubject<Department[]>;
   listDepartments: Department[];
   listProfiles: Profile[];
+  role: string;
 
 /*  loginForm = this.fb.group({
     idRHUser: [null, Validators.compose([Validators.required, Validators.minLength(7), Validators.maxLength(7)])],
@@ -62,7 +65,8 @@ export class ManagementUserComponent implements OnInit {
       this.editedUser = {
         idUser: 0,
         department: {idDepartment: 1},
-        profile: {idProfile: 1}
+        profile: {idProfile: 1},
+        roleList: ['DevGuard'],
       };
     }
 
@@ -100,6 +104,11 @@ export class ManagementUserComponent implements OnInit {
         this.editedUser.profile = this.listProfiles.find(profile => {
           return profile.idProfile === +this.editedUser.profile.idProfile;
         });
+ /*       if (this.role === 'Administrateur') {
+          this.editedUser.roleList = ['AdminGuard'];
+        } else {
+          this.editedUser.roleList = ['DevGuard'];
+        }*/
       }
       this.userDataService.createUser(this.editedUser).subscribe(user => {
         this.onRefresh();

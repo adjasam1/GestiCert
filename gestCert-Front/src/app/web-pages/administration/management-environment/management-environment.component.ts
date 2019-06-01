@@ -55,8 +55,8 @@ export class ManagementEnvironmentComponent implements OnInit {
   onDelete() {
     if (confirm('Êtes-vous certain de vouloir supprimer cet environnement ?')) {
       this.environmentDataService.deleteEnvironment(this.editedEnvironment);
+      this.router.navigate(['/gestion/env']);
     }
-    this.router.navigate(['/gestion/env']);
   }
 
 }

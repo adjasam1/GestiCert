@@ -34,7 +34,7 @@
               <label for="name"><strong>Nom * : </strong></label>
               <span *ngFor="let col of cols" [ngSwitch]="col.field">
               <input *ngSwitchCase="'nameEnvironment'" placeholder="NOM"
-                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
+                     pInputText
                      type="search" id="name" [(ngModel)]="editedEnvironment.nameEnvironment" name="name"
                      title="Champ pour le nom de l'environnement" required>
             </span>

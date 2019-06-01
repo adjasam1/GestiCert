@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import gestiCert.model.AppUser;
+import gestiCert.model.Application;
 import gestiCert.model.Certificate;
 import gestiCert.service.CertificateService;
 import gestiCert.service.MailService;
@@ -111,6 +112,12 @@ public class CertificateController
 	public ResponseEntity<?> getCertificateByDateIssue(@PathVariable Date number)
 	{
 		return certificateServ.getCertificateByDateIssue(number);
+	}
+	
+	@GetMapping("/application={application}")
+	public ResponseEntity<?> getCertificateByApplication(@PathVariable Application application)
+	{
+		return certificateServ.getCertificateByApplication(application);
 	}
 	
 	@PostMapping("/ajout")

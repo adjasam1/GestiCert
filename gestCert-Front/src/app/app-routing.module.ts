@@ -9,6 +9,7 @@ import {AccessibiliteComponent} from './header-footer/accessibilite/accessibilit
 import {ProfileComponent} from './web-pages/profile/profile.component';
 import {DemandComponent} from './web-pages/demand/demand.component';
 import {ManagementComponent} from './web-pages/administration/management/management.component';
+import {NewDemandComponent} from './web-pages/demandCertificate/new-demand/new-demand.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -25,6 +26,8 @@ const routes: Routes = [
   { path: 'gestion/sce/:id', component: ManagementComponent },
   { path: 'gestion/sce/ajout', component: ManagementComponent },
   { path: 'gestion/hab', component: ManagementComponent },
+  { path: 'gestion/hab/app', component: ManagementComponent },
+  { path: 'gestion/hab/app/:id', component: ManagementComponent },
   { path: 'gestion/app', component: ManagementComponent },
   { path: 'gestion/app/:id', component: ManagementComponent },
   { path: 'gestion/app/ajout', component: ManagementComponent },
@@ -48,6 +51,9 @@ const routes: Routes = [
   { path: 'site', component: SiteComponent },
   { path: 'accessibilite', component: AccessibiliteComponent },
   { path: 'accueil/:id1/profil', component: ProfileComponent },
+  { path: 'accueil/:id1/application', component: NewDemandComponent },
+  { path: 'accueil/:id1/application/:id2', component: NewDemandComponent },
+  { path: 'accueil/:id1/application/:id2/demande/:id3', component: NewDemandComponent },
   { path: 'accueil/:id1/certificat/:id2', component: DemandComponent },
   { path: 'accueil/:id1/certificat/:id2/demande', component: DemandComponent },
   { path: '**', component: LoginComponent }

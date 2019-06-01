@@ -67,7 +67,7 @@
         </form>
 
         <div id="action">
-          <a *ngIf="editedApplication.idApplication" role="button" routerLink="/gestion/app"
+          <a *ngIf="editedApplication.idApplication" role="button" (click)="onBack()"
              title="Annuler les modifications sur l'application {{editedApplication.nameApplication}}">Annuler</a>
           <a *ngIf="editedApplication.idApplication" role="button" (click)="onDelete()"
              title="Supprimer l'application {{editedApplication.nameApplication}}">Supprimer</a>

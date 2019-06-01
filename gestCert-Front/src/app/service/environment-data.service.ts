@@ -81,6 +81,17 @@ export class EnvironmentDataService {
         this.availableEnvironments$.next(this.availableEnvironments);
       }
     );
+    /*  this.httpClient.delete<Environment>(`http://localhost:8080/api/environnement/supprid=${environment.idEnvironment}`).pipe(
+      tap(_=> this.messageService.add('OK', tr))
+      deleteEnvironment => {
+        const index1 = this.availableEnvironments.indexOf(environment);
+        this.availableEnvironments.splice(index1, 1);
+        this.availableEnvironments$.next(this.availableEnvironments);
+        alert('oooo');
+        this.messageService.add('Succes', true);
+        this.messageService.add('Erreur', false);
+      }
+    );*/
   }
 
   /* TEST PRIMENG */
@@ -89,5 +100,4 @@ export class EnvironmentDataService {
       return data;
     });
   }
-
 }

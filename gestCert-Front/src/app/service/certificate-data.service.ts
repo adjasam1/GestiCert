@@ -3,6 +3,7 @@ import {BehaviorSubject, Observable, of} from 'rxjs';
 import {Certificate} from '../model/certificate';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
+import {AddressAlternative} from '../model/addressAlternative';
 
 @Injectable({
   providedIn: 'root'
@@ -63,7 +64,9 @@ export class CertificateDataService {
     }
   }
 
-
+  public findCertificatesByApplication(applicationId: number) {
+    return this.httpClient.get<any>(`http://localhost:8080/api/certificat/application=${applicationId}`);
+  }
 
   public createCertificate(newCertificate: Certificate) {
     this.httpClient.post<Certificate>('http://localhost:8080/api/certificat/ajout', newCertificate).subscribe(
@@ -95,6 +98,14 @@ export class CertificateDataService {
   /* TEST PRIMENG */
   public getCertificatePrimeNg() {
     return this.httpClient.get<any>('http://localhost:8080/api/certificat').toPromise().then(data =>  {
+      return data;
+    });
+  }
+
+  public getCertificateByApplicationPrimeNg() {
+    return this.httpClient.get<any>('http://localhost:8080/api/certificat/application=${applicationId}')
+      .toPromise()
+      .then( data => {
       return data;
     });
   }

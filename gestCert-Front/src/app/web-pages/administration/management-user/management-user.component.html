@@ -21,18 +21,18 @@
         <form #logForm="ngForm">
           <div class="form-control">
             <label for="idRHUser"><strong>Identifiant RH * : </strong></label>
-              <input placeholder="IDENTIFIANT RH" type="search" id="idRHUser" name="idRHUser"
-                     [(ngModel)]="editedUser.idRHUser" title="Champ pour l'identifiant de l'utilisateur" required>
+            <input placeholder="IDENTIFIANT RH" type="search" id="idRHUser" name="idRHUser"
+                   [(ngModel)]="editedUser.idRHUser" title="Champ pour l'identifiant de l'utilisateur" required>
           </div>
           <div class="form-control">
             <label for="nameUser"><strong>Nom * : </strong></label>
-              <input placeholder="NOM" type="search" id="nameUser" name="nameUser"
-                     [(ngModel)]="editedUser.nameUser" title="Champ pour le nom de l'utilisateur" required>
+            <input placeholder="NOM" type="search" id="nameUser" name="nameUser"
+                   [(ngModel)]="editedUser.nameUser" title="Champ pour le nom de l'utilisateur" required>
           </div>
           <div class="form-control">
             <label for="firstNameUser"><strong>Prénom * : </strong></label>
-              <input placeholder="PRENOM" type="search" id="firstNameUser" name="firstNameUser"
-                     [(ngModel)]="editedUser.firstNameUser" title="Champ pour le prénom de l'utilisateur" required>
+            <input placeholder="PRENOM" type="search" id="firstNameUser" name="firstNameUser"
+                   [(ngModel)]="editedUser.firstNameUser" title="Champ pour le prénom de l'utilisateur" required>
           </div>
           <div class="form-control" *ngIf="editedUser.idUser === 0; else elseBlock2">
             <label for="password"><strong>Mot de passe * : </strong></label>
@@ -42,6 +42,14 @@
           <ng-template #elseBlock2>
             <div id="modif"></div>
           </ng-template>
+    <!--      <div class="form-control">
+            <label for="role"><strong>Role * : </strong></label>
+            <select name="role" id="role" class="form-control"
+                    [(ngModel)]="editedUser.roleList" title="Champ pour le profil de l'utilisateur">
+              <option [value]="role">Administrateur</option>
+              <option [value]="role">Utilisateur</option>
+            </select>
+          </div> -->
           <div class="form-control">
             <label for="profile"><strong>Profil * : </strong></label>
             <select name="profile" id="profile" class="form-control"

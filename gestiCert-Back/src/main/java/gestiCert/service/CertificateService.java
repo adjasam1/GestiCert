@@ -4,6 +4,7 @@ import java.util.Date;
 
 import org.springframework.http.ResponseEntity;
 
+import gestiCert.model.Application;
 import gestiCert.model.Certificate;
 
 /**
@@ -30,6 +31,8 @@ public interface CertificateService {
 	ResponseEntity<?> updateCertificate(Certificate certificate, Integer idCertificate);
 
 	ResponseEntity<String> deleteCertificate(Integer idCertificate);
+
+	ResponseEntity<?> getCertificateByApplication(Application application);
 
 //	ResponseEntity<?> getCertificateByIdUser(Integer idUser);
 

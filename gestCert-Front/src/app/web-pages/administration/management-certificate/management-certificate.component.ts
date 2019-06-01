@@ -44,8 +44,10 @@ export class ManagementCertificateComponent implements OnInit {
   listRoots: Root[];
   addressesAlternativesList: BehaviorSubject<AddressAlternative[]>;
   listAddressesAlternatives: AddressAlternative[];
+  editedAdressAlternative: AddressAlternative = new AddressAlternative(0, '', null);
   serversList: BehaviorSubject<Server[]>;
   listServers: Server[];
+  servers: Server[];
   statusList: BehaviorSubject<StatusDemand[]>;
   listStatus: StatusDemand[];
 
@@ -55,6 +57,8 @@ export class ManagementCertificateComponent implements OnInit {
   listCertificates: Certificate[];
   cols: any[];
   selectedCertificate: Certificate;
+
+  passwordEncode: string;
 
   constructor(private certificateDataService: CertificateDataService,
               private applicationDataService: ApplicationDataService,
@@ -76,6 +80,10 @@ export class ManagementCertificateComponent implements OnInit {
       this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificate => {
         this.editedCertificate = certificate;
       });
+      this.addressAlternativeDataService.findAddressAlternativeByCertificate(this.idCertificate).subscribe( address => {
+        this.editedAdressAlternative = address;
+      });
+      this.servers = this.editedCertificate.servers;
     } else {
       this.editedCertificate = {
         idCertificate: 0,
@@ -84,6 +92,9 @@ export class ManagementCertificateComponent implements OnInit {
         plateform: {idPlateform: 1},
         root: {idRoot: 1},
         statusDemand: {idStatusDemand: 1}
+      };
+      this.editedAdressAlternative = {
+        idAddressAlternative: 0
       };
     }
 
@@ -154,6 +165,9 @@ export class ManagementCertificateComponent implements OnInit {
       { field: 'applicationName', header: 'Nom Application', width: '35%' },
       { field: 'dateEndValidity', header: 'Validité', width: '25%' }
     ];
+
+    this.serverDataService.getServerPrimeNg().then( servers => this.listServers = servers);
+    this.servers = [];
   }
 
 /*  if (confirm('Êtes-vous certain de vouloir ajouter un nouvel utilisateur ?')) {
@@ -172,6 +186,8 @@ export class ManagementCertificateComponent implements OnInit {
     if (!this.idCertificate) {
       if (confirm('Êtes-vous certain de vouloir ajouter un nouveau certificat ?')) {
         console.log('create : ', this.editedCertificate);
+        this.passwordEncode = btoa(this.editedCertificate.passwordCertificate);
+        this.editedCertificate.passwordCertificate = this.passwordEncode;
         this.editedCertificate.application = this.listApplications.find(application => {
           return application.idApplication === +this.editedCertificate.application.idApplication;
         });
@@ -184,17 +200,25 @@ export class ManagementCertificateComponent implements OnInit {
         this.editedCertificate.root = this.listRoots.find(root => {
           return root.idRoot === +this.editedCertificate.root.idRoot;
         });
-    /*    this.editedCertificate.statusDemand = this.listStatus.find( status => {
+        this.editedCertificate.statusDemand = this.listStatus.find( status => {
           return status.idStatusDemand === +this.editedCertificate.statusDemand.idStatusDemand;
-        });*/
+        });
+        this.editedCertificate.servers = this.servers;
 
         this.certificateDataService.createCertificate(this.editedCertificate);
+
       }
+      this.editedAdressAlternative.certificate = this.editedCertificate;
+      this.addressAlternativeDataService.createAddressAlternative(this.editedAdressAlternative);
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier ce certificat ?')) {
-        console.log('update : ', this.editedCertificate);
+        this.passwordEncode = btoa(this.editedCertificate.passwordCertificate);
+        this.editedCertificate.passwordCertificate = this.passwordEncode;
         this.certificateDataService.updateCertificate(this.editedCertificate);
-        console.log('update : ', this.editedCertificate);
+   //     this.addressAlternativeDataService.updateAddressAlternative(this.editedAdressAlternative);
+        this.editedAdressAlternative.certificate = this.editedCertificate;
+        alert(this.editedAdressAlternative.certificate);
+        this.addressAlternativeDataService.createAddressAlternative(this.editedAdressAlternative);
       }
     }
     this.router.navigate(['/gestion/cer']);

@@ -98,20 +98,8 @@
           </div>
           <br>
           <div class="form-control">
-            <label for="server"><strong>Serveur(s) * : </strong></label>
-            <select
-              name="server"
-              id="server"
-              class="form-control"
-              [(ngModel)]="editedCertificate.servers" title="Champ pour le nom du ou des serveur(s)">
-              <option *ngFor="let server of serversList | async"
-                      [value]="server.idServer">{{ server.nameServer }}</option>
-            </select>
-          </div>
-          <br>
-          <div class="form-control">
             <label class="label1" for="linkInst"><span><strong>Lien de Téléchargement * :</strong></span></label>
-            <input class="input1" type="search" id="linkInst" [(ngModel)]="editedCertificate.linkInstallation" name="linkInst"
+            <input class="input1" id="linkInst" [(ngModel)]="editedCertificate.linkInstallation" name="linkInst"
                    placeholder="LIEN DE TELECHARGEMENT"
                    required title="Champ pour le lien du fichier de téléchargement du certificat">
           </div>
@@ -134,30 +122,62 @@
                       [value]="status.idStatusDemand">{{ status.nameStatusDemand }}</option>
             </select>
           </div>
-    <!--      <br>
-          <div *ngFor="let addrAlt of listAddressesAlternatives">
-            <div *ngIf="editedCertificate.idCertificate === addrAlt.certificate.idCertificate">
-              {{ addrAlt.linkAddressAlternative }}
+          <!--      <br>
+                <div *ngFor="let addrAlt of listAddressesAlternatives">
+                  <div *ngIf="editedCertificate.idCertificate === addrAlt.certificate.idCertificate">
+                    {{ addrAlt.linkAddressAlternative }}
+                  </div>
+                </div>-->
+          <br>
+   <div class="form-control">
+     <!--  *ngFor="let address of addressesAlternativesList | async"
+           <div *ngIf="editedCertificate.idCertificate === address.certificate.idCertificate">-->
+              <label class="label1" for="linkAlt2"><span><strong>Adresse(s) Alternative(s) :</strong></span></label>
+              <input class="input1" type="search" id="linkAlt2" [(ngModel)]="editedAdressAlternative.linkAddressAlternative" name="linkAlt"
+                     placeholder="ADRESSE(S) ALTERNATIVE(S)"
+                     required title="Champ pour le ou les liens des adresses alternantives">
             </div>
-          </div>-->
-          <br>
-          <div class="form-control">
-            <label class="label1" for="linkAlt"><span><strong>Adresse(s) Alternative(s) :</strong></span></label>
-            <input class="input1" type="search" id="linkAlt" [(ngModel)]="editedCertificate.addressAlternative" name="linkAlt"
-                   placeholder="ADRESSE(S) ALTERNATIVE(S)"
-                   required title="Champ pour le ou les liens des adresses alternantives">
           </div>
-          <br>
-        </div>
+   <!--     </div>-->
       </form>
-      <div id="modification">
-        <a *ngIf="editedCertificate.idCertificate" class="choix" role="button" routerLink="/gestion/cer" title="Annuler les modifications sur le certificat {{ editedCertificate.nameCertificate }}">Annuler</a>
-        <a *ngIf="editedCertificate.idCertificate" class="choix" role="button" (click)="onDelete()" title="Supprimer le certificat {{ editedCertificate.nameCertificate }}">Supprimer</a>
-        <a class="choix" role="button" (click)="onSave()" title="Sauvegarder le certificat {{ editedCertificate.nameCertificate }}">Sauvegarder</a>
+      <br>
+      <div *ngIf="editedCertificate.idCertificate === idCertificate; else elseBlock2">
+        <p-pickList [source]="listServers" [target]="editedCertificate.servers" sourceHeader="Serveur(s) :"
+                    targetHeader="Selectionné(s) :" [responsive]="true" dragdrop="true" [(ngModel)]="editedCertificate.servers"
+                    [sourceStyle]="{'height':'100px'}" [targetStyle]="{'height':'100px'}">
+          <ng-template let-server pTemplate="item">
+            <div class="ui-helper-clearfix">
+              <div style="font-size:14px;float:left;">
+                {{server.nameServer}}
+              </div>
+            </div>
+          </ng-template>
+        </p-pickList>
       </div>
+      <ng-template #elseBlock2>
+        <label><strong>Serveur(s) :</strong></label>
+        <p-pickList [source]="listServers" [target]="servers" sourceHeader="Serveur(s) :"
+                    targetHeader="Selectionné(s) :" [responsive]="true" dragdrop="true"
+                    [sourceStyle]="{'height':'100px'}" [targetStyle]="{'height':'100px'}">
+          <ng-template let-server pTemplate="item">
+            <div class="ui-helper-clearfix">
+              <div style="font-size:14px;float:left;">
+                {{server.nameServer}}
+              </div>
+            </div>
+          </ng-template>
+        </p-pickList>
+      </ng-template>
+      <a role="button" id="butServ" routerLink="/gestion/sur">Créer nouveau serveur</a>
+    <br>
+    <div id="modification">
+      <a *ngIf="editedCertificate.idCertificate" class="choix" role="button" routerLink="/gestion/cer" title="Annuler les modifications sur le certificat {{ editedCertificate.nameCertificate }}">Annuler</a>
+      <a *ngIf="editedCertificate.idCertificate" class="choix" role="button" (click)="onDelete()" title="Supprimer le certificat {{ editedCertificate.nameCertificate }}">Supprimer</a>
+      <a class="choix" role="button" (click)="onSave()" title="Sauvegarder le certificat {{ editedCertificate.nameCertificate }}">Sauvegarder</a>
     </div>
   </div>
 
+  </div>
   <div id="liste" title="Liste des applications">
 
     <h2>Recherche</h2>
@@ -203,7 +223,6 @@
   </div>
 
 </div>
-
 
 <!--<div>
   <a role="button" title="Ajouter un certificat">Ajouter un certificat</a>

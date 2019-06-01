@@ -108,7 +108,7 @@
                 </tr>
               </ng-template>
               <ng-template pTemplate="body" let-certificate>
-                <tr routerLink="/certificat/{{ certificate.idCertificate }}" [pSelectableRow]="certificate"
+                <tr (click)="onScroll()" routerLink="/certificat/{{ certificate.idCertificate }}" [pSelectableRow]="certificate"
                     title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }}">
                   <td class="th1">
                     {{ certificate.applicationCCX }}
@@ -156,6 +156,8 @@
               </ng-template>
             </p-table>
           </div>
+          <a *ngIf="editedUser.profile.idProfile === 3"><button (click)="onScroll()" routerLink="application">Demander nouveau certificat</button></a>
+          <a *ngIf="editedUser.profile.idProfile === 3"><button (click)="onScroll()" routerLink="/gestion/hab">Gérer habilitation application</button></a>
         </div>
       </div>
     </div>

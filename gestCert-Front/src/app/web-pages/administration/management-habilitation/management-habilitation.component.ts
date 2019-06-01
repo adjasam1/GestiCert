@@ -1,12 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {UserDataService} from '../../../service/user-data.service';
-import {ProfileDataService} from '../../../service/profile-data.service';
-import {DepartmentDataService} from '../../../service/department-data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AppUser} from '../../../model/appUser';
 import {BehaviorSubject} from 'rxjs';
-import {Profile} from '../../../model/profile';
-import {Department} from '../../../model/department';
 import {ApplicationDataService} from '../../../service/application-data.service';
 import {Application} from '../../../model/application';
 
@@ -17,82 +13,48 @@ import {Application} from '../../../model/application';
 })
 export class ManagementHabilitationComponent implements OnInit {
 
-  usersList: BehaviorSubject<AppUser[]>;
-  idUser: number;
-  editedUser: AppUser = new AppUser(0, '', '', '', '', '', '', new Profile(), new Department());
-
-
-  /* TEST PRIMENG */
-  users: AppUser;
-  cols: any;
-  selectedUser: AppUser;
-
-  /* TEST THOMAS */
+  applicationsList: BehaviorSubject<Application[]>;
   idApplication: number;
-  application: Application = new Application();
-  applications: Application[];
-  selectedApplications: Application[];
-  selectedApplication: Application;
-  listApplication: Application[];
-  cols2: any;
+  editedApplication: Application;
+
+  usersList: BehaviorSubject<AppUser[]>;
+  listUsers: AppUser[];
+  users: AppUser[];
+
+  appliSelected = false;
 
   constructor(private userDataService: UserDataService,
-              private profileDataService: ProfileDataService,
-              private departmentDataService: DepartmentDataService,
               private applicationDataService: ApplicationDataService,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
- /*   this.usersList = this.userDataService.availableUsers$;
-
-    this.idUser = +this.route.snapshot.params.id;
-
-    this.userDataService.findUser(this.idUser).subscribe(user => {
-      this.editedUser = user;
-    });
-
-    this.userDataService.getUserPrimeNg().then(users => this.users = users);
-
-    this.cols = [
-      { field: 'idRHUser', header: 'idRH', width: '24%' },
-      { field: 'nameUser', header: 'Nom', width: '38%' },
-      { field: 'firstNameUser', header: 'Prénom', width: '38%' }
-    ];*/
-
-
-
-    /* TEST THOMAS */
+    this.applicationsList = this.applicationDataService.availableApplications$;
     this.idApplication = +this.route.snapshot.params.id;
-    this.applicationDataService.findApplication(this.idApplication).subscribe(application => {
-      this.application = application;
+    this.applicationDataService.findApplication(this.idApplication).subscribe( application => {
+      this.editedApplication = application;
     });
-    this.applicationDataService.getApplicationPrimeNg().then(applications => this.applications = applications );
 
-    this.cols2 = [
-      {field: 'codeCCX', header: 'CCX'},
-      {field: 'nameApplication', header: 'Nom'}
-    ];
+    this.usersList = this.userDataService.availableUsers$;
+ //   this.usersList.subscribe( users => this.listUsers = users );
+    this.userDataService.getUserPrimeNg().then( users => this.listUsers = users);
+    this.users = [];
+  }
+
+  onHability() {
+    if (!this.editedApplication.idApplication) {
+      alert('Veuillez selectionner une application');
+    } else {
+      this.appliSelected = true;
+      this.router.navigate(['/gestion/hab/app/' + this.editedApplication.idApplication]);
+    }
   }
 
   onSave() {
-    if (!this.idApplication) {
-      if (confirm('Êtes-vous certain de vouloir ajouter une nouvelle application ?')) {
-        this.applicationDataService.createApplication(this.application);
-      }
-    } else {
-      if (confirm('Êtes-vous certain de vouloir modifier cette application ?')) {
-        this.applicationDataService.updateApplication(this.application);
-      }
+    if (confirm('Êtes-vous certain de vouloir modifier les habilitations de l\'application '
+                + this.editedApplication.nameApplication + ' ?')) {
+      this.applicationDataService.updateApplication(this.editedApplication);
     }
-    this.router.navigate(['/gestion/app']);
+    this.router.navigate(['/gestion/hab']);
   }
-
-  onDelete() {
-    if (confirm('Êtes-vous certain de vouloir supprimer cette application ?')) {
-      this.applicationDataService.deleteApplication(this.application);
-    }
-    this.router.navigate(['/gestion/app']);
-  }
-
 }

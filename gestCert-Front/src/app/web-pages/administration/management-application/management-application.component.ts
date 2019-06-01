@@ -60,4 +60,8 @@ export class ManagementApplicationComponent implements OnInit {
     this.router.navigate(['/gestion/app']);
   }
 
+  onBack() {
+    this.router.navigate([history.go(-1)]);
+  }
+
 }

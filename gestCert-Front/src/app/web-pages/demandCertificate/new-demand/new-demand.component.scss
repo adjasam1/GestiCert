@@ -22,17 +22,17 @@ img
 
 .table1
 {
-//  margin-left: 17.5%;
+  //  margin-left: 17.5%;
 }
 
 #table2
 {
-//  margin-left: 24%;
+  //  margin-left: 24%;
 }
 
 #table3
 {
-//  margin-left: 3.5%;
+  //  margin-left: 3.5%;
 }
 
 .td1
@@ -81,6 +81,41 @@ a[role="button"]:hover {
   text-decoration: none;
 }
 
+
+
+a button {
+  text-decoration: none;
+  border-radius: 4px;
+  margin-top: 1%;
+  text-align: right;
+}
+
+a button:hover {
+  color: #FFCB05;
+  background-color: #003DA5;
+  text-decoration: none;
+}
+
+a button {
+  padding: 2px 5px;
+  color: black;
+  font-size: 12px;
+  border-radius: 4px;
+  outline: none;
+}
+
+a button
+{
+  background-color: #9CC6DA;
+  border: 1px solid #003DA5;
+}
+
+a button:hover
+{
+  color: #FFCB05;
+  background-color: #003DA5;
+}
+
 .modification a[role="button"]
 {
   background-color: #9CC6DA;
@@ -121,7 +156,7 @@ input, select
   width: 50%;
 }
 
-#form1
+.form1
 {
   margin-left: 17.5%;
 }

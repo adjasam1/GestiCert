@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import gestiCert.model.AddressAlternative;
+import gestiCert.model.Application;
 import gestiCert.model.Certificate;
 import gestiCert.repository.CertificateRepository;
 
@@ -217,6 +219,18 @@ public class CertificateServiceImpl implements CertificateService
 		}
 		
 		return ResponseEntity.status(HttpStatus.OK).body(listCertificates);
+	}
+	
+	@Override
+	public ResponseEntity<?> getCertificateByApplication(Application application)
+	{
+		Iterable<Certificate> certificate = null;
+		try {
+			certificate = certificateRepo.findByApplication(application);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(certificate);
 	}
 	
 	/**
