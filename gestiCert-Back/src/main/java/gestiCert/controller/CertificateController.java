@@ -157,20 +157,7 @@ public class CertificateController
 	 @RequestMapping("/mail")
 	 public Object sendHtmlEmail(@RequestBody Certificate certificate) throws MessagingException
 	 {
-//   MimeMessage message = emailSender.createMimeMessage();
-//   boolean multipart = true;
-//   MimeMessageHelper helper = new MimeMessageHelper(message, multipart, "utf-8");
-//   StringBuffer htmlMsg= new StringBuffer();
-//   htmlMsg.append("<h1>Test envoi mail</h1>");
-//   htmlMsg.append("<h2>"+demand.getIdDemand()+"</h2>");
-//   htmlMsg.append("<h3>"+demand.getApplication().getNameApplication()+"</h3>");
-//   htmlMsg.append("<h4>Nom Demandeur : "+demand.getUser().getNameUser()+"</h4>");
-//   message.setContent(htmlMsg.toString(), "text/html"); // on précise le format HTML
-//   helper.setTo(MailConfig.OTHER_EMAIL);
-//   helper.setSubject("Essai 1 : Envoyer un email avec du HTML + image");
-//   this.emailSender.send(message);
-//   return ResponseEntity.status(HttpStatus.OK).body("envois OK : " + null);
-   	return mailServ.sendHtmlEmail(certificate);
-   }
+		 return mailServ.sendHtmlEmail(certificate);
+	 }
 
 }
