@@ -22,6 +22,7 @@ import {ApplicationDataService} from '../../service/application-data.service';
 import {Application} from '../../model/application';
 import {StatusDemandDataService} from '../../service/status-demand-data.service';
 import {StatusDemand} from '../../model/statusDemand';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-demand',
@@ -71,9 +72,11 @@ export class DemandComponent implements OnInit {
               private typeDemandDataService: TypeDemandDataService,
               private fb: FormBuilder,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Demande Certificat');
 
     this.usersList = this.userDataService.availableUsers$;
     this.idUser = this.route.snapshot.params.id1;
@@ -143,9 +146,12 @@ export class DemandComponent implements OnInit {
         }
       });
 
-      this.certificateDataService.updateCertificate(this.editedCertificate);
-      this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
-      + this.editedCertificate.idCertificate + '/demande']);
+      this.certificateDataService.updateCertificate(this.editedCertificate).subscribe( updateCertificate => {
+        this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
+        + this.editedCertificate.idCertificate + '/demande']);
+      });
+  /*    this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
+      + this.editedCertificate.idCertificate + '/demande']);*/
     }
   }
 

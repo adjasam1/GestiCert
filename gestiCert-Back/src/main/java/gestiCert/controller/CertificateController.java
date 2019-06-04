@@ -120,6 +120,12 @@ public class CertificateController
 		return certificateServ.getCertificateByApplication(application);
 	}
 	
+	@GetMapping("/utilisateur={idRHUser}")
+	public ResponseEntity<?> getCertificateByUser(@PathVariable String idRHUser)
+	{
+		return certificateServ.getCertificateByUser(idRHUser);
+	}
+	
 	@PostMapping("/ajout")
 //	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> postCertificate(@RequestBody Certificate certificate)

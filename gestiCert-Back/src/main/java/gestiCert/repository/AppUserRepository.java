@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 //import gestiCert.dto.AppUserDto;
 import gestiCert.model.AppUser;
-import gestiCert.model.Certificate;
 
 @Repository
 public interface AppUserRepository extends JpaRepository<AppUser, Integer>{
@@ -60,6 +59,4 @@ public interface AppUserRepository extends JpaRepository<AppUser, Integer>{
 	//authentification procedure stockee
 	@Query(value = "SELECT id_utilisateur FROM app_utilisateur WHERE idRH LIKE 'paaa001'", nativeQuery = true)
 	Integer findUserByIdRH(String idRHUser);
-	
-	
 }

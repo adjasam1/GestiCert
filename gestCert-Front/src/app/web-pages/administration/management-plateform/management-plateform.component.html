@@ -1,6 +1,5 @@
 <div class="titre" title="Administration des plateformes">
   <h1>Administration des Plateformes</h1>
-</div>
 
 
 
@@ -27,16 +26,12 @@
       </ng-template>
       <div class="cadre2">
         <h3>* Champs obligatoires</h3>
-        <form>
+        <form #logForm="ngForm">
           <div>
             <div class="form-control">
               <label for="name"><strong>Nom * : </strong></label>
-              <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'namePlateform'" placeholder="NOM"
-                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-                     type="search" id="name" [(ngModel)]="editedPlateform.namePlateform" name="name"
+              <input placeholder="NOM" type="search" id="name" name="name" [(ngModel)]="editedPlateform.namePlateform"
                      title="Champ pour le nom de la plateforme" required>
-            </span>
             </div>
             <br>
           </div>
@@ -45,7 +40,7 @@
         <div id="modification">
           <a *ngIf="editedPlateform.idPlateform" class="choix" role="button" routerLink="/gestion/pla" title="Annuler les modifications sur la plateforme {{ editedPlateform.namePlateform }}">Annuler</a>
           <a *ngIf="editedPlateform.idPlateform" class="choix" role="button" (click)="onDelete()" title="Supprimer la plateforme {{ editedPlateform.namePlateform }}">Supprimer</a>
-          <a class="choix" role="button" (click)="onSave()" title="Sauvegarder la plateforme {{ editedPlateform.namePlateform }}">Sauvegarder</a>
+          <a class="choix" role="button" (click)="onSave(logForm)" title="Sauvegarder la plateforme {{ editedPlateform.namePlateform }}">Sauvegarder</a>
         </div>
       </div>
     </div>
@@ -79,3 +74,4 @@
 
 </div>
 
+</div>

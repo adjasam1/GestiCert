@@ -4,6 +4,7 @@ import {ActivatedRoute, Router} from '@angular/router';
 import {DepartmentDataService} from '../../../service/department-data.service';
 import {Department} from '../../../model/department';
 import {NgForm} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
 
 @Component ({
   selector: 'app-management-department',
@@ -22,9 +23,12 @@ export class ManagementDepartmentComponent implements OnInit {
 
   constructor(private departmentDataService: DepartmentDataService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Administration Service');
+
     this.departmentsList = this.departmentDataService.availableDepartments$;
     this.idDepartment = +this.route.snapshot.params.id;
     this.departmentDataService.findDepartment(this.idDepartment).subscribe(department => {
@@ -48,7 +52,7 @@ export class ManagementDepartmentComponent implements OnInit {
         this.departmentDataService.createDepartment(this.editedDepartment).subscribe( createDepartment => {
           this.onRefresh();
           logForm.reset();
-          this.router.navigate(['/gestion/pro']);
+          this.router.navigate(['/gestion/sce']);
           this.onRefresh();
         });
       }
@@ -56,7 +60,7 @@ export class ManagementDepartmentComponent implements OnInit {
       if (confirm('Êtes-vous certain de vouloir modifier ce service ?')) {
         this.departmentDataService.updateDepartment(this.editedDepartment).subscribe( updateDepartment => {
           this.onRefresh();
-          this.router.navigate(['/gestion/pro']);
+          this.router.navigate(['/gestion/sce']);
           this.onRefresh();
         });
       }

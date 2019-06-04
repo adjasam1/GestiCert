@@ -9,6 +9,7 @@ import {DepartmentDataService} from '../../service/department-data.service';
 import {ApplicationDataService} from '../../service/application-data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {AppUser} from '../../model/appUser';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-profile',
@@ -31,10 +32,12 @@ export class ProfileComponent implements OnInit {
               private departmentDataService: DepartmentDataService,
               private applicationDataService: ApplicationDataService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private title: Title) {
   }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Profil');
 
     this.usersList = this.userDataService.availableUsers$;
 
@@ -66,10 +69,11 @@ export class ProfileComponent implements OnInit {
       }
     } else { */
     if (confirm('Êtes-vous certain de vouloir modifier votre profil ?')) {
-      this.userDataService.updateUser(this.editedUser);
-      this.router.navigate([history.go(-1)]);
-      //     this.router.navigate(['/accueil/' + this.editedUser.idUser]);
+      this.userDataService.updateUser(this.editedUser).subscribe(updateUser => {
+      });
     }
+    this.router.navigate([history.go(-1)]);
+      //     this.router.navigate(['/accueil/' + this.editedUser.idUser]);
     //  }
   }
 

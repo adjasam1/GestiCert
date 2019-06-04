@@ -17,6 +17,8 @@ import {AddressAlternativeDataService} from '../../../service/address-alternativ
 import {AddressAlternative} from '../../../model/addressAlternative';
 import {StatusDemandDataService} from '../../../service/status-demand-data.service';
 import {StatusDemand} from '../../../model/statusDemand';
+import {NgForm} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-management-certificate',
@@ -69,9 +71,11 @@ export class ManagementCertificateComponent implements OnInit {
               private serverDataService: ServerDataService,
               private statusDataService: StatusDemandDataService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Administration Certificat');
 
     this.certificatesList = this.certificateDataService.availableCertificates$;
     this.idCertificate = +this.route.snapshot.params.id;
@@ -182,7 +186,7 @@ export class ManagementCertificateComponent implements OnInit {
   console.log('create : ', this.editedUser);
 }*/
 
-  onSave() {
+  onSave(logForm: NgForm) {
     if (!this.idCertificate) {
       if (confirm('Êtes-vous certain de vouloir ajouter un nouveau certificat ?')) {
         console.log('create : ', this.editedCertificate);
@@ -205,20 +209,29 @@ export class ManagementCertificateComponent implements OnInit {
         });
         this.editedCertificate.servers = this.servers;
 
-        this.certificateDataService.createCertificate(this.editedCertificate);
+        this.certificateDataService.createCertificate(this.editedCertificate).subscribe( certificate => {
+          this.onRefresh();
+          logForm.reset();
+          this.router.navigate(['/gestion/cer']);
+          this.onRefresh();
+        });
 
       }
-      this.editedAdressAlternative.certificate = this.editedCertificate;
-      this.addressAlternativeDataService.createAddressAlternative(this.editedAdressAlternative);
+  //    this.editedAdressAlternative.certificate = this.editedCertificate;
+  //    this.addressAlternativeDataService.createAddressAlternative(this.editedAdressAlternative);
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier ce certificat ?')) {
         this.passwordEncode = btoa(this.editedCertificate.passwordCertificate);
         this.editedCertificate.passwordCertificate = this.passwordEncode;
-        this.certificateDataService.updateCertificate(this.editedCertificate);
+        this.certificateDataService.updateCertificate(this.editedCertificate).subscribe( updateCertificate => {
+          this.onRefresh();
+          this.router.navigate(['/gestion/cer']);
+          this.onRefresh();
+        });
    //     this.addressAlternativeDataService.updateAddressAlternative(this.editedAdressAlternative);
-        this.editedAdressAlternative.certificate = this.editedCertificate;
+ /*       this.editedAdressAlternative.certificate = this.editedCertificate;
         alert(this.editedAdressAlternative.certificate);
-        this.addressAlternativeDataService.createAddressAlternative(this.editedAdressAlternative);
+        this.addressAlternativeDataService.createAddressAlternative(this.editedAdressAlternative);*/
       }
     }
     this.router.navigate(['/gestion/cer']);
@@ -226,9 +239,18 @@ export class ManagementCertificateComponent implements OnInit {
 
   onDelete() {
     if (confirm('Êtes-vous certain de vouloir supprimer ce certificat ?')) {
-      this.certificateDataService.deleteCertificate(this.editedCertificate);
+      this.certificateDataService.deleteCertificate(this.editedCertificate).subscribe( deleteCertificate => {
+        this.onRefresh();
+      });
     }
     this.router.navigate(['/gestion/cer']);
+  }
+
+  onRefresh() {
+    this.certificateDataService.getCertificatePrimeNg().then(certificates => {
+      this.listCertificates = certificates;
+      this.listCertificates.forEach(certificate => certificate.applicationName = certificate.application.nameApplication);
+    });
   }
 
 }

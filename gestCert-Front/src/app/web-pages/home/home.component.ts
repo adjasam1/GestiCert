@@ -13,6 +13,13 @@ import {EnvironmentDataService} from '../../service/environment-data.service';
 import {RootDataService} from '../../service/root-data.service';
 import {AppUser} from '../../model/appUser';
 import {FormBuilder, NgForm, Validators} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
+import {AddressAlternativeDataService} from '../../service/address-alternative-data.service';
+import {DepartmentDataService} from '../../service/department-data.service';
+import {PlateformDataService} from '../../service/plateform-data.service';
+import {ServerDataService} from '../../service/server-data.service';
+import {StatusDemandDataService} from '../../service/status-demand-data.service';
+import {TypeDemandDataService} from '../../service/type-demand-data.service';
 
 @Component({
   selector: 'app-accueil',
@@ -41,10 +48,12 @@ export class HomeComponent implements OnInit {
   certificate: Certificate;
 //  certificate: Certificate = new PrimeCertificate();
   listCertificates: Certificate[];
+
   cols1: any[];
   cols2: any[];
   cols3: any[];
   selectedCertificate: Certificate;
+  certificates: Certificate[];
   listApplications: Application[];
 
   loginForm = this.fb.group({
@@ -56,17 +65,39 @@ export class HomeComponent implements OnInit {
 
 
   constructor(private fb: FormBuilder,
-              private profileDataService: ProfileDataService,
-              private userDataService: UserDataService,
-              private certificateDataService: CertificateDataService,
+              private addressAlternativeDataService: AddressAlternativeDataService,
               private applicationDataService: ApplicationDataService,
+              private certificateDataService: CertificateDataService,
+              private departmentDataService: DepartmentDataService,
               private environmentDataService: EnvironmentDataService,
+              private plateformDataService: PlateformDataService,
+              private profileDataService: ProfileDataService,
               private rootDataService: RootDataService,
+              private serverDataService: ServerDataService,
+              private statusDemandDataService: StatusDemandDataService,
+              private typeDemandDataService: TypeDemandDataService,
+              private userDataService: UserDataService,
               private route: ActivatedRoute,
-              private router: Router) {
+              private router: Router,
+              private title: Title) {
   }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Accueil');
+
+    this.addressAlternativeDataService.publishAddressAlternative();
+    this.applicationDataService.publishApplication();
+    this.certificateDataService.publishCertificate();
+    this.departmentDataService.publishDepartment();
+    this.environmentDataService.publishEnvironment();
+    this.plateformDataService.publishPlateform();
+    this.profileDataService.publishProfile();
+    this.rootDataService.publishRoot();
+    this.serverDataService.publishServer();
+    this.statusDemandDataService.publishStatusDemand();
+    this.typeDemandDataService.publishTypeDemand();
+    this.userDataService.publishUser();
+
     this.usersList = this.userDataService.availableUsers$;
 
     this.idRH = this.route.snapshot.params.id1;
@@ -78,13 +109,23 @@ export class HomeComponent implements OnInit {
     });
 
     this.certificateDataService.availableCertificates$.subscribe(certificates => this.listCertificates = certificates);
-    this.certificateDataService.getCertificatePrimeNg().then(certificates => {
+ /*   this.certificateDataService.getCertificatePrimeNg().then(certificates => {
       this.listCertificates = certificates;
       this.listCertificates.forEach(certificate => certificate.applicationCCX = certificate.application.codeCCX);
       this.listCertificates.forEach(certificate => certificate.applicationName = certificate.application.nameApplication);
       this.listCertificates.forEach(certificate => certificate.environmentName = certificate.environment.nameEnvironment);
       this.listCertificates.forEach(certificate => certificate.rootName = certificate.root.nameRoot);
-    });
+    });*/
+
+
+ //   this.certificateDataService.availableCertificates$.subscribe(certificates => this.certificates = certificates);
+    this.certificateDataService.getCertificateByUserPrimeNg(this.idRH).then( certificates => {
+      this.certificates = certificates;
+      this.certificates.forEach(certificate => certificate.applicationCCX = certificate.application.codeCCX);
+      this.certificates.forEach(certificate => certificate.applicationName = certificate.application.nameApplication);
+      this.certificates.forEach(certificate => certificate.environmentName = certificate.environment.nameEnvironment);
+      this.certificates.forEach(certificate => certificate.rootName = certificate.root.nameRoot);
+      });
 
 /*   this.serversList = this.serverDataService.availableServers$;
     this.serversList.subscribe(

@@ -1,7 +1,10 @@
 package gestiCert.service;
 
+import java.util.List;
+
 import org.springframework.http.ResponseEntity;
 
+import gestiCert.model.AppUser;
 import gestiCert.model.Application;
 
 public interface ApplicationService
@@ -20,5 +23,15 @@ public interface ApplicationService
 	ResponseEntity<?> updateApplication(Application application, Integer idApplication);
 
 	ResponseEntity<String> deleteApplication(Integer idApplication);
+
+//	List<Application> getApplicationByUser(Integer idRHUser);
+
+//	List<Application> getApplicationByUser(AppUser users);
+
+//	List<Application> getApplicationByUser(List<AppUser> users);
+
+//	List<Application> getApplicationByOneUser(AppUser user);
+
+//	ResponseEntity<?> getApplicationsByUser(AppUser user);
 
 }

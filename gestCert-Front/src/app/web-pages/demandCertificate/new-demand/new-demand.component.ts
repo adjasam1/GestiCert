@@ -20,8 +20,11 @@ import {ServerDataService} from '../../../service/server-data.service';
 import {AddressAlternativeDataService} from '../../../service/address-alternative-data.service';
 import {StatusDemandDataService} from '../../../service/status-demand-data.service';
 import {TypeDemandDataService} from '../../../service/type-demand-data.service';
-import {FormBuilder} from '@angular/forms';
+import {FormBuilder, NgForm} from '@angular/forms';
 import {ActivatedRoute, Router} from '@angular/router';
+import {EnvironmentDataService} from '../../../service/environment-data.service';
+import {Environment} from '../../../model/environment';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-new-demand',
@@ -36,8 +39,14 @@ export class NewDemandComponent implements OnInit {
 
   certificatesList: BehaviorSubject<Certificate[]>;
   idCertificate: number;
-  editedCertificate: Certificate;
+  editedCertificate: Certificate = new Certificate(0, '', '', '', '',
+    null, null, null, null, null, '', '',
+    '', null, null, null, null, null, null, null,
+    null, null);
   listCertificates: Certificate[];
+
+  environmentList: BehaviorSubject<Environment[]>;
+  listEnvironment: Environment[];
 
   departmentsList: BehaviorSubject<Department[]>;
   profilesList: BehaviorSubject<Profile[]>;
@@ -57,7 +66,9 @@ export class NewDemandComponent implements OnInit {
   listApplications: Application[];
   listStatusDemands: StatusDemand[];
   listTypeDemands: TypeDemand[];
+  listPlateforms: Plateform[];
   listServers: Server[];
+  servers: Server[];
 
   idDemand: number;
 
@@ -66,6 +77,8 @@ export class NewDemandComponent implements OnInit {
 
   appliSelected = false;
 
+  idEnvironment: number;
+
   cols: any[];
 
   constructor(private userDataService: UserDataService,
@@ -73,6 +86,7 @@ export class NewDemandComponent implements OnInit {
               private profileDataService: ProfileDataService,
               private applicationDataService: ApplicationDataService,
               private certificateDataService: CertificateDataService,
+              private environmentDataService: EnvironmentDataService,
               private plateformDataService: PlateformDataService,
               private serverDataService: ServerDataService,
               private addressAlternativeDataService: AddressAlternativeDataService,
@@ -80,9 +94,23 @@ export class NewDemandComponent implements OnInit {
               private typeDemandDataService: TypeDemandDataService,
               private fb: FormBuilder,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Demande Certificat');
+
+    this.editedCertificate = {
+      idCertificate: 0,
+      typeDemand: {idTypeDemand: 1},
+      environment: {idEnvironment: 1},
+      plateform: {idPlateform: 2},
+ //     root: {idRoot: 1},
+ //     statusDemand: {idStatusDemand: 1}
+    };
+ /*   this.editedAdressAlternative = {
+      idAddressAlternative: 0
+    };*/
 
     this.usersList = this.userDataService.availableUsers$;
     this.idRHUser = this.route.snapshot.params.id1;
@@ -95,7 +123,8 @@ export class NewDemandComponent implements OnInit {
     this.certificatesList = this.certificateDataService.availableCertificates$;
     this.certificateDataService.findCertificatesByApplication(this.idApplication)
       .subscribe( certificates => this.listCertificates = certificates );
-    this.certificateDataService.getCertificateByApplicationPrimeNg().then(certificates => {
+    this.environmentList = this.environmentDataService.availableEnvironments$;
+    this.certificateDataService.getCertificateByApplicationPrimeNg(this.idApplication).then(certificates => {
       this.listCertificates = certificates;
       this.listCertificates.forEach(certificate => certificate.environmentName = certificate.environment.nameEnvironment);
     });
@@ -109,10 +138,10 @@ export class NewDemandComponent implements OnInit {
     this.cols = [
       { field: 'nameCertificate', header: 'Nom Certificat', width: '30%' },
       { field: 'environmentName', header: 'Nom Environnement', width: '30%' },
-      { field: 'dateEndValidity', header: 'Validité', width: '20%' }
+      { field: 'dateEndValidity', header: 'Validité', width: '100px' }
     ];
 
- /*   this.departmentsList = this.departmentDataService.availableDepartments$;
+    this.departmentsList = this.departmentDataService.availableDepartments$;
     this.profilesList = this.profileDataService.availableProfiles$;
     this.addressAlternativesList = this.addressAlternativeDataService.availableAddressAlternatives$;
     this.addressAlternativeDataService.findAddressAlternativeByCertificate(this.idCertificate).subscribe(addressAlternatives =>
@@ -124,26 +153,18 @@ export class NewDemandComponent implements OnInit {
     this.plateformsList = this.plateformDataService.availablePlateforms$;
 
     this.serversList = this.serverDataService.availableServers$;
-    this.serversList.subscribe(
-      servers => this.listServers = servers
-    );
-//    this.listServers = this.editedCertificate.servers;
+    this.serversList.subscribe(servers => this.listServers = servers);
+    this.listServers = this.editedCertificate.servers;
 
-    this.usersList.subscribe(
-      users => this.listUsers = users
-    );
-    this.certificatesList.subscribe(
-      certificates => this.listCertificates = certificates
-    );
-    this.applicationsList.subscribe(
-      applications => this.listApplications = applications
-    );
-    this.statusDemandsList.subscribe(
-      status => this.listStatusDemands = status
-    );
-    this.typeDemandsList.subscribe(
-      types => this.listTypeDemands = types
-    );*/
+    this.usersList.subscribe(users => this.listUsers = users);
+    this.certificatesList.subscribe(certificates => this.listCertificates = certificates);
+    this.applicationsList.subscribe(applications => this.listApplications = applications);
+    this.statusDemandsList.subscribe(status => this.listStatusDemands = status);
+    this.typeDemandsList.subscribe(types => this.listTypeDemands = types);
+    this.plateformsList.subscribe(plateforms => this.listPlateforms = plateforms);
+
+    this.serverDataService.getServerPrimeNg().then( servers => this.listServers = servers);
+    this.servers = [];
   }
 
   onDeconnect(): void {
@@ -153,29 +174,44 @@ export class NewDemandComponent implements OnInit {
     }
   }
 
-  onSave() {
-/*    if (confirm('Êtes-vous certain de vouloir enregistrer cette demande ?')) {
+  onSave(logForm: NgForm) {
+    if (confirm('Êtes-vous certain de vouloir enregistrer cette demande ?')) {
+      if (this.editedCertificate.environment.idEnvironment === 1) {
+        this.editedCertificate.nameCertificate = '' + this.editedApplication.codeCCX + '-YYYYMMDD-dev';
+      } else if (this.editedCertificate.environment.idEnvironment === 2) {
+        this.editedCertificate.nameCertificate = '' + this.editedApplication.codeCCX + '-YYYYMMDD-int';
+      } else if (this.editedCertificate.environment.idEnvironment === 3) {
+        this.editedCertificate.nameCertificate = '' + this.editedApplication.codeCCX + '-YYYYMMDD-rec';
+      } else {
+        this.editedCertificate.nameCertificate = '' + this.editedApplication.codeCCX + '-YYYYMMDD-prod';
+      }
       this.editedCertificate.dateDemand = this.dateNow;
       this.editedCertificate.user = this.listUsers.find(user => {
         return user.idUser === +this.editedUser.idUser;
       });
+      this.editedCertificate.application = this.listApplications.find( application => {
+        return application.idApplication === +this.editedApplication.idApplication;
+      });
       this.editedCertificate.statusDemand = this.listStatusDemands.find(status => {
-        return status.idStatusDemand === 3;
-        /       return status.idStatusDemand === +this.editedDemand.statusDemand.idStatusDemand;
+        return status.idStatusDemand === 2;
+        //       return status.idStatusDemand === +this.editedDemand.statusDemand.idStatusDemand;
       });
       this.editedCertificate.typeDemand = this.listTypeDemands.find(type => {
-        if (new Date(this.editedCertificate.dateEndValidity) < this.dateNow) {
-          return type.idTypeDemand === 1;
-          /          return type.idTypeDemand === +this.editedDemand.typeDemand.idTypeDemand;
-        } else {
-          return type.idTypeDemand === 2;
-        }
+        return type.idTypeDemand === +this.editedCertificate.typeDemand.idTypeDemand;
       });
+      this.editedCertificate.servers = this.servers;
 
-      this.certificateDataService.updateCertificate(this.editedCertificate);
-      this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
-      + this.editedCertificate.idCertificate + '/demande']);
-    }*/
+      this.certificateDataService.createCertificate(this.editedCertificate).subscribe( certificate => {
+        this.onRefresh();
+        logForm.reset();
+        this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/application/' + this.editedApplication.idApplication]);
+        this.onRefresh();
+      });
+      this.onSend();
+    }
+    this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/application/' + this.editedApplication.idApplication]);
+ //   this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
+ //   + this.editedCertificate.idCertificate + '/demande']);
   }
 
   onSend() {
@@ -198,6 +234,13 @@ export class NewDemandComponent implements OnInit {
     const thisMonth = this.dateNow.getMonth();
     const oneMonth = 1;
     this.alertDate.setUTCMonth(thisMonth + oneMonth);
+  }
+
+  onRefresh() {
+    this.certificateDataService.getCertificatePrimeNg().then(certificates => {
+      this.listCertificates = certificates;
+      this.listCertificates.forEach(certificate => certificate.applicationName = certificate.application.nameApplication);
+    });
   }
 
 }

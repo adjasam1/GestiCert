@@ -2,7 +2,6 @@
 
 <div class="titre" title="Administration des certificats">
   <h1>Administration des Certificats</h1>
-</div>
 
 <div class="cadre">
 
@@ -16,23 +15,19 @@
     </ng-template>
     <div class="cadre2">
       <h3>* Champs obligatoires</h3>
-      <form>
+      <form #logForm="ngForm">
         <div>
           <div class="form-control">
             <label for="name"><strong>Nom Certificat * : </strong></label>
-            <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameCertificate'" placeholder="NOM"
-                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-                     type="search" id="name" [(ngModel)]="editedCertificate.nameCertificate" name="name"
-                     title="Champ pour le nom du certificat" required>
-            </span>
+              <input placeholder="NOM" type="search" id="name" name="name"
+                     [(ngModel)]="editedCertificate.nameCertificate" title="Champ pour le nom du certificat" required>
           </div>
           <br>
           <div class="form-control">
             <label for="password"><strong>Mot de passe * : </strong></label>
-            <input type="password" id="password" [(ngModel)]="editedCertificate.passwordCertificate" name="password"
-                   placeholder="MOT DE PASSE"
-                   required title="Champ pour le mot de passe du certificat">
+            <input placeholder="MOT DE PASSE" type="password" id="password" name="password"
+                   [(ngModel)]="editedCertificate.passwordCertificate" title="Champ pour le mot de passe du certificat"
+                   required>
           </div>
           <br>
           <div class="form-control">
@@ -173,7 +168,7 @@
     <div id="modification">
       <a *ngIf="editedCertificate.idCertificate" class="choix" role="button" routerLink="/gestion/cer" title="Annuler les modifications sur le certificat {{ editedCertificate.nameCertificate }}">Annuler</a>
       <a *ngIf="editedCertificate.idCertificate" class="choix" role="button" (click)="onDelete()" title="Supprimer le certificat {{ editedCertificate.nameCertificate }}">Supprimer</a>
-      <a class="choix" role="button" (click)="onSave()" title="Sauvegarder le certificat {{ editedCertificate.nameCertificate }}">Sauvegarder</a>
+      <a class="choix" role="button" (click)="onSave(logForm)" title="Sauvegarder le certificat {{ editedCertificate.nameCertificate }}">Sauvegarder</a>
     </div>
   </div>
 
@@ -224,6 +219,7 @@
 
 </div>
 
+</div>
 <!--<div>
   <a role="button" title="Ajouter un certificat">Ajouter un certificat</a>
 </div>

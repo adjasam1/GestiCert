@@ -10,6 +10,7 @@ import {DepartmentDataService} from '../../../service/department-data.service';
 import {NgForm} from '@angular/forms';
 import {AdminGuard} from '../../../jwt-security/guards/admin.guard';
 import {DevGuard} from '../../../jwt-security/guards/dev.guard';
+import {Title} from '@angular/platform-browser';
 
 @Component ({
   selector: 'app-management-user',
@@ -45,9 +46,11 @@ export class ManagementUserComponent implements OnInit {
               private profileDataService: ProfileDataService,
               private departmentDataService: DepartmentDataService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Administration Utilisateur');
 
     this.usersList = this.userDataService.availableUsers$;
 
@@ -66,7 +69,7 @@ export class ManagementUserComponent implements OnInit {
         idUser: 0,
         department: {idDepartment: 1},
         profile: {idProfile: 1},
-        roleList: ['DevGuard'],
+        roleList: ['ROLE_DEV'],
       };
     }
 

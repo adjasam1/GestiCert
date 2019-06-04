@@ -4,6 +4,7 @@ import {Certificate} from '../model/certificate';
 import {HttpClient} from '@angular/common/http';
 import {map} from 'rxjs/operators';
 import {AddressAlternative} from '../model/addressAlternative';
+import {Application} from '../model/application';
 
 @Injectable({
   providedIn: 'root'
@@ -69,30 +70,33 @@ export class CertificateDataService {
   }
 
   public createCertificate(newCertificate: Certificate) {
-    this.httpClient.post<Certificate>('http://localhost:8080/api/certificat/ajout', newCertificate).subscribe(
+    return this.httpClient.post<Certificate>('http://localhost:8080/api/certificat/ajout', newCertificate);
+    /*.subscribe(
       createCertificate => {
         this.availableCertificates.push(createCertificate);
         this.availableCertificates$.next(this.availableCertificates);
       }
-    );
+    );*/
   }
 
   public updateCertificate(certificate: Certificate) {
-    this.httpClient.put<Certificate>(`http://localhost:8080/api/certificat/modifid=${certificate.idCertificate}`, certificate).subscribe(
+    return this.httpClient.put<Certificate>(`http://localhost:8080/api/certificat/modifid=${certificate.idCertificate}`, certificate);
+    /*.subscribe(
       updateCertificate => {
         this.availableCertificates$.next(this.availableCertificates);
       }
-    );
+    );*/
   }
 
   public deleteCertificate(certificate: Certificate) {
-    this.httpClient.delete<Certificate>(`http://localhost:8080/api/certificat/supprid=${certificate.idCertificate}`).subscribe(
+    return this.httpClient.delete<Certificate>(`http://localhost:8080/api/certificat/supprid=${certificate.idCertificate}`);
+    /*.subscribe(
       deleteCertificate => {
         const index1 = this.availableCertificates.indexOf(certificate);
         this.availableCertificates.splice(index1, 1);
         this.availableCertificates$.next(this.availableCertificates);
       }
-    );
+    );*/
   }
 
   /* TEST PRIMENG */
@@ -102,8 +106,16 @@ export class CertificateDataService {
     });
   }
 
-  public getCertificateByApplicationPrimeNg() {
-    return this.httpClient.get<any>('http://localhost:8080/api/certificat/application=${applicationId}')
+  public getCertificateByApplicationPrimeNg(applicationId: number) {
+    return this.httpClient.get<any>(`http://localhost:8080/api/certificat/application=${applicationId}`)
+      .toPromise()
+      .then( data => {
+      return data;
+    });
+  }
+
+  public getCertificateByUserPrimeNg(idRHUser: string) {
+    return this.httpClient.get<any>(`http://localhost:8080/api/certificat/utilisateur=${idRHUser}`)
       .toPromise()
       .then( data => {
       return data;

@@ -4,6 +4,7 @@ import {BehaviorSubject} from 'rxjs';
 import {Profile} from '../../../model/profile';
 import {ActivatedRoute, Router} from '@angular/router';
 import {NgForm} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
 
 @Component ({
   selector: 'app-management-profile',
@@ -22,9 +23,11 @@ export class ManagementProfileComponent implements OnInit {
 
   constructor(private profileDataService: ProfileDataService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Administration Profil');
 
     this.profilesList = this.profileDataService.availableProfiles$;
     this.idProfile = +this.route.snapshot.params.id;

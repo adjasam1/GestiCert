@@ -18,24 +18,16 @@
 
         <h3>* Champs obligatoires</h3>
 
-        <form>
+        <form #logForm="ngForm">
           <div class="form-control">
             <label for="ccx"><strong>Code CCX * : </strong></label>
-            <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'codeCCX'" placeholder="CODE CCX"
-                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-                     type="search" id="ccx" [(ngModel)]="editedApplication.codeCCX" name="ccx"
+              <input placeholder="CODE CCX" type="search" id="ccx" name="ccx" [(ngModel)]="editedApplication.codeCCX"
                      title="Champ pour le code CCX de l'application" required>
-            </span>
           </div>
           <div class="form-control">
             <label for="nameApp"><strong>Nom Application * : </strong></label>
-            <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameApplication'" placeholder="NOM APPLICATION" pInputText
-                     (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)" type="search"
-                     id="nameApp" [(ngModel)]="editedApplication.nameApplication" name="nameApp"
-                     title="Champ pour le nom de l'application" required>
-            </span>
+              <input placeholder="NOM APPLICATION" type="search" id="nameApp" name="nameApp"
+                     [(ngModel)]="editedApplication.nameApplication" title="Champ pour le nom de l'application" required>
           </div>
           <div class="form-control">
             <label for="nameClient"><strong>Nom Client * : </strong></label>
@@ -71,7 +63,7 @@
              title="Annuler les modifications sur l'application {{editedApplication.nameApplication}}">Annuler</a>
           <a *ngIf="editedApplication.idApplication" role="button" (click)="onDelete()"
              title="Supprimer l'application {{editedApplication.nameApplication}}">Supprimer</a>
-          <a role="button" (click)="onSave()"
+          <a role="button" (click)="onSave(logForm)"
              title="Sauvegarder l'application {{editedApplication.nameApplication}}">Sauvegarder</a>
         </div>
 

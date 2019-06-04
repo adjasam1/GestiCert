@@ -19,6 +19,7 @@ import {RootDataService} from '../../../service/root-data.service';
 import {ServerDataService} from '../../../service/server-data.service';
 import {CertificateDataService} from '../../../service/certificate-data.service';
 import {ApplicationDataService} from '../../../service/application-data.service';
+import {Title} from '@angular/platform-browser';
 
 @Component ({
   selector: 'app-management',
@@ -58,10 +59,12 @@ export class ManagementComponent implements OnInit {
               private serverDataService: ServerDataService,
               private certificateDataService: CertificateDataService,
               private applicationDataService: ApplicationDataService,
+              private title: Title,
               private route: ActivatedRoute,
               private router: Router) { }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Administration');
 
     this.usersList = this.userDataService.availableUsers$;
 

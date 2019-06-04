@@ -3,6 +3,8 @@ import {BehaviorSubject} from 'rxjs';
 import {ActivatedRoute, Router} from '@angular/router';
 import {PlateformDataService} from '../../../service/plateform-data.service';
 import {Plateform} from '../../../model/plateform';
+import {NgForm} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-management-plateform',
@@ -21,9 +23,11 @@ export class ManagementPlateformComponent implements OnInit {
 
   constructor(private plateformDataService: PlateformDataService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Administration Plateforme');
 
     this.plateformsList = this.plateformDataService.availablePlateforms$;
     this.idPlateform = +this.route.snapshot.params.id;
@@ -38,14 +42,25 @@ export class ManagementPlateformComponent implements OnInit {
     ];
   }
 
-  onSave() {
+  onSave(logForm: NgForm) {
     if (!this.idPlateform) {
       if (confirm('Êtes-vous certain de vouloir ajouter une nouvelle plateforme ?')) {
-        this.plateformDataService.createPlateform(this.editedPlateform);
+        this.plateformDataService.createPlateform(this.editedPlateform).subscribe(createPlateform => {
+            this.onRefresh();
+            logForm.reset();
+            this.router.navigate(['/gestion/pla']);
+            this.onRefresh();
+          this.router.navigate(['/gestion/pla']);
+          });
       }
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier cette plateforme ?')) {
-        this.plateformDataService.updatePlateform(this.editedPlateform);
+        this.plateformDataService.updatePlateform(this.editedPlateform).subscribe( updatePlateform => {
+          this.onRefresh();
+          this.router.navigate(['/gestion/pla']);
+          this.onRefresh();
+          this.router.navigate(['/gestion/pla']);
+        });
       }
     }
     this.router.navigate(['/gestion/pla']);
@@ -53,9 +68,15 @@ export class ManagementPlateformComponent implements OnInit {
 
   onDelete() {
     if (confirm('Êtes-vous certain de vouloir supprimer cette plateforme ?')) {
-      this.plateformDataService.deletePlateform(this.editedPlateform);
+      this.plateformDataService.deletePlateform(this.editedPlateform).subscribe( deletePlateform => {
+        this.onRefresh();
+      });
     }
     this.router.navigate(['/gestion/pla']);
+  }
+
+  onRefresh() {
+    this.plateformDataService.getPlateformPrimeNg().then(plateforms => this.plateforms = plateforms);
   }
 }
 

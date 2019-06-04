@@ -7,7 +7,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import gestiCert.model.AddressAlternative;
+import gestiCert.model.AppUser;
 import gestiCert.model.Application;
+import gestiCert.model.Certificate;
 import gestiCert.repository.ApplicationRepository;
 
 /**
@@ -156,6 +159,16 @@ public class ApplicationServiceImpl implements ApplicationService
 		return ResponseEntity.status(HttpStatus.OK).body(listApplications);
 	}
 	
+//	@Override
+//	public List<Application> getApplicationByUser(Integer idRHUser) {
+//		return this.applicationRepo.findByIdRHUser(idRHUser);
+//	}
+	
+//	@Override
+//	public List<Application> getApplicationByOneUser(AppUser user) {
+//		return this.applicationRepo.findByUser(user);
+//	}
+//	
 	/**
 	 * methode qui ajoute une application
 	 * 

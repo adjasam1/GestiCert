@@ -40,7 +40,7 @@ export class CertificateComponent implements OnInit {
   passwordDecode: string;
 
   /* TEST PRIMENG */
-  certificates: Certificate;
+  certificates: Certificate[];
   cols: any;
 //  selectedCertificate: Certificate;
 
@@ -53,7 +53,7 @@ export class CertificateComponent implements OnInit {
               private title: Title) { }
 
   ngOnInit() {
-    this.title.setTitle('Certificat');
+    this.title.setTitle('GestiCert - Certificat');
 
     const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
     this.idRH = decodedToken.sub;

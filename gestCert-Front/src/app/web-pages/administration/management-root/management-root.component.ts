@@ -3,6 +3,7 @@ import {Root} from '../../../model/root';
 import {ActivatedRoute, Router} from '@angular/router';
 import {RootDataService} from '../../../service/root-data.service';
 import {NgForm} from '@angular/forms';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-management-root',
@@ -22,9 +23,12 @@ export class ManagementRootComponent implements OnInit {
 
   constructor(private rootDataService: RootDataService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Administration Racine');
+
     this.rootDataService.publishRoot();
     this.rootDataService.availableRoots$.subscribe(roots => this.roots = roots);
 

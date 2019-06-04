@@ -31,9 +31,9 @@ public class MailServiceImpl implements MailService
     SimpleDateFormat formDate = new SimpleDateFormat("dd/MM/yyyy");
     htmlMsg.append("<head>" + 
     				"	<style type=\"text/css\">" + 
-    				"		h1{text-align: center;}" +
+    				"		h1 {text-align: center;}" +
     				"		h1, table, tr {border: 1px solid black; border-collapse: collapse;}" +
-    				"		table, h2{width: 700px; font-size: 20px;}" +
+    				"		h1, h2, tr {width: 700px; font-size: 20px;}" +
     				"		h2 {border: 1px solid black; background-color: black; color: white; text-align: left; padding: 3px 10px;}" +
     				"		tr {height: 30px;}" + 
     				"		.td1 {text-align: right; min-width: 300px;}" + 
@@ -56,7 +56,7 @@ public class MailServiceImpl implements MailService
     				"			<td class=\"td2\">"+certificate.getUser().getNameUser()+"</td>" + 
     				"		</tr>" + 
     				"		<tr>" + 
-    				"			<td class=\"td1\"><strong>Prénom du demandeur : </strong></td>" + 
+    				"			<td class=\"td1\"><strong>Prenom du demandeur : </strong></td>" + 
     				"			<td class=\"td2\">"+certificate.getUser().getFirstNameUser()+"</td>" + 
     				"		</tr>" + 
     				"		<tr>" + 
@@ -64,7 +64,7 @@ public class MailServiceImpl implements MailService
     				"			<td class=\"td2\">"+certificate.getUser().getProfile().getTypeProfile()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
-    				"           <td class=\"td1\"><strong>Téléphone du demandeur : </strong></td>" + 
+    				"           <td class=\"td1\"><strong>Telephone du demandeur : </strong></td>" + 
     				"           <td class=\"td2\">"+certificate.getUser().getPhoneUser()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
@@ -80,7 +80,7 @@ public class MailServiceImpl implements MailService
     				"           <td class=\"td2\">"+certificate.getApplication().getNameClient()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
-    				"           <td class=\"td1\"><strong>Prénom du client : </strong></td>" + 
+    				"           <td class=\"td1\"><strong>Prenom du client : </strong></td>" + 
     				"           <td class=\"td2\">"+certificate.getApplication().getFirstNameClient()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
@@ -88,7 +88,7 @@ public class MailServiceImpl implements MailService
     				"           <td class=\"td2\">"+certificate.getApplication().getManagementClient()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
-    				"           <td class=\"td1\"><strong>Téléphone du client : </strong></td>" + 
+    				"           <td class=\"td1\"><strong>Telephone du client : </strong></td>" + 
     				"           <td class=\"td2\">"+certificate.getApplication().getPhoneClient()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
@@ -104,7 +104,7 @@ public class MailServiceImpl implements MailService
     				"           <td class=\"td2\">"+formDate.format(certificate.getDateTransmission())+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
-    				"           <td class=\"td1\"><strong>Date de réalisation souhaitée : </strong></td>" + 
+    				"           <td class=\"td1\"><strong>Date de realisation souhaitee : </strong></td>" + 
     				"           <td class=\"td2\">"+formDate.format(certificate.getDateCreationDesired())+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 

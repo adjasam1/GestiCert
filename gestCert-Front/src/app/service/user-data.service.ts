@@ -87,7 +87,7 @@ export class UserDataService {
 
   public updateUser(user: AppUser) {
     return this.httpClient.put<AppUser>(`http://localhost:8080/api/utilisateur/modifid=${user.idUser}`, user);
-      /*.subscribe(
+    /*.subscribe(
       updateUser => {
         this.availableUsers$.next(this.availableUsers);
       }

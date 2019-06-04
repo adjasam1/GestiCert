@@ -5,6 +5,7 @@ import {AppUser} from '../../model/appUser';
 import {UserDataService} from '../../service/user-data.service';
 import {Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-login',
@@ -31,9 +32,12 @@ export class LoginComponent implements OnInit {
   constructor(private userDataService: UserDataService,
               private router: Router,
               private fb: FormBuilder,
-              private loginService: LoginService) { }
+              private loginService: LoginService,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Authentification');
+
     this.usersList = this.userDataService.availableUsers$;
     this.getUser();
   }

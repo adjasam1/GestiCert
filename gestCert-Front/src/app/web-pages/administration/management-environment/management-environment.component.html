@@ -1,6 +1,5 @@
 <div class="titre" title="Administration des environnements">
   <h1>Administration des Environnements</h1>
-</div>
 
 
 
@@ -28,16 +27,12 @@
       </ng-template>
       <div class="cadre2">
         <h3>* Champs obligatoires</h3>
-        <form>
+        <form #logForm="ngForm">
           <div>
             <div class="form-control">
               <label for="name"><strong>Nom * : </strong></label>
-              <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameEnvironment'" placeholder="NOM"
-                     pInputText
-                     type="search" id="name" [(ngModel)]="editedEnvironment.nameEnvironment" name="name"
+              <input placeholder="NOM" type="search" id="name" name="name" [(ngModel)]="editedEnvironment.nameEnvironment"
                      title="Champ pour le nom de l'environnement" required>
-            </span>
             </div>
             <br>
           </div>
@@ -45,7 +40,7 @@
         <div id="modification">
           <a *ngIf="editedEnvironment.idEnvironment" class="choix" role="button" routerLink="/gestion/env" title="Annuler les modifications sur l'environnement {{ editedEnvironment.nameEnvironment }}">Annuler</a>
           <a *ngIf="editedEnvironment.idEnvironment" class="choix" role="button" (click)="onDelete()" title="Supprimer l'environnement {{ editedEnvironment.nameEnvironment }}">Supprimer</a>
-          <a class="choix" role="button" (click)="onSave()" title="Sauvegarder l'environnement {{ editedEnvironment.nameEnvironment }}">Sauvegarder</a>
+          <a class="choix" role="button" (click)="onSave(logForm)" title="Sauvegarder l'environnement {{ editedEnvironment.nameEnvironment }}">Sauvegarder</a>
         </div>
       </div>
     </div>
@@ -77,5 +72,7 @@
       </div>
     </div>
   </div>
+
+</div>
 
 </div>

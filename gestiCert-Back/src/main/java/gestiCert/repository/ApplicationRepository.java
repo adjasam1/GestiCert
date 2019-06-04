@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import gestiCert.model.AppUser;
 import gestiCert.model.Application;
 
 /**
@@ -37,5 +38,9 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 	 */
 	
 	public List<Application> findByNameApplication(String nameApplication);
+	
+//	public List<Application> findByIdRHUser(Integer idRHUser);
+	
+//	public List<Application> findByUser(AppUser user);
 
 }

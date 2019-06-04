@@ -57,30 +57,33 @@ export class PlateformDataService {
   }
 
   public createPlateform(newPlateform: Plateform) {
-    this.httpClient.post<Plateform>('http://localhost:8080/api/plateforme/ajout', newPlateform).subscribe(
+    return this.httpClient.post<Plateform>('http://localhost:8080/api/plateforme/ajout', newPlateform);
+    /*.subscribe(
       createPlateform => {
         this.availablePlateforms.push(createPlateform);
         this.availablePlateforms$.next(this.availablePlateforms);
       }
-    );
+    );*/
   }
 
   public updatePlateform(plateform: Plateform) {
-    this.httpClient.put<Plateform>(`http://localhost:8080/api/plateforme/modifid=${plateform.idPlateform}`, plateform).subscribe(
+    return this.httpClient.put<Plateform>(`http://localhost:8080/api/plateforme/modifid=${plateform.idPlateform}`, plateform);
+    /*.subscribe(
       updatePlateform => {
         this.availablePlateforms$.next(this.availablePlateforms);
       }
-    );
+    );*/
   }
 
   public deletePlateform(plateform: Plateform) {
-    this.httpClient.delete<Plateform>(`http://localhost:8080/api/plateforme/supprid=${plateform.idPlateform}`).subscribe(
+    return this.httpClient.delete<Plateform>(`http://localhost:8080/api/plateforme/supprid=${plateform.idPlateform}`);
+    /*.subscribe(
       deletePlateform => {
         const index1 = this.availablePlateforms.indexOf(plateform);
         this.availablePlateforms.splice(index1, 1);
         this.availablePlateforms$.next(this.availablePlateforms);
       }
-    );
+    );*/
   }
 
   /* TEST PRIMENG */

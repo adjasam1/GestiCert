@@ -5,6 +5,7 @@ import {AppUser} from '../../../model/appUser';
 import {BehaviorSubject} from 'rxjs';
 import {ApplicationDataService} from '../../../service/application-data.service';
 import {Application} from '../../../model/application';
+import {Title} from '@angular/platform-browser';
 
 @Component({
   selector: 'app-management-habilitation',
@@ -26,9 +27,12 @@ export class ManagementHabilitationComponent implements OnInit {
   constructor(private userDataService: UserDataService,
               private applicationDataService: ApplicationDataService,
               private route: ActivatedRoute,
-              private router: Router) { }
+              private router: Router,
+              private title: Title) { }
 
   ngOnInit() {
+    this.title.setTitle('GestiCert - Administration Habilitation');
+
     this.applicationsList = this.applicationDataService.availableApplications$;
     this.idApplication = +this.route.snapshot.params.id;
     this.applicationDataService.findApplication(this.idApplication).subscribe( application => {
@@ -53,8 +57,9 @@ export class ManagementHabilitationComponent implements OnInit {
   onSave() {
     if (confirm('Êtes-vous certain de vouloir modifier les habilitations de l\'application '
                 + this.editedApplication.nameApplication + ' ?')) {
-      this.applicationDataService.updateApplication(this.editedApplication);
+      this.applicationDataService.updateApplication(this.editedApplication).subscribe( application => {
+        this.router.navigate(['/gestion/hab']);
+      });
     }
-    this.router.navigate(['/gestion/hab']);
   }
 }

@@ -11,9 +11,9 @@ import org.springframework.mail.javamail.JavaMailSenderImpl;
 @Configuration
 public class MailConfig {
 	
-    public static final String MY_EMAIL = "samuel.sabot.lp2@gmail.com";
-    public static final String MY_PASSWORD = "s1plon4mail";
-    public static final String OTHER_EMAIL = "sodabi-samsam@hotmail.fr";
+    public static final String MY_EMAIL = "4samuel.sabot@gmail.com";
+    public static final String MY_PASSWORD = "samuL4mail";
+    public static final String OTHER_EMAIL = "samuel.sabot@laposte.fr";
 
 	  @Bean
 	  public JavaMailSender getJavaMailSender() {
@@ -34,5 +34,4 @@ public class MailConfig {
 	 
 	        return mailSender;
 	    }
-
 }

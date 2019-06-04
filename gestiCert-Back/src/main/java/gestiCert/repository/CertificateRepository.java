@@ -54,5 +54,26 @@ public interface CertificateRepository extends JpaRepository<Certificate, Intege
 	public List<Certificate> findByDateIssueCertificate(Date dateIssue);
 	
 	public List<Certificate> findByApplication(Application application);
+	
+//	@Query(value = "FROM AppUser user "
+//			+ "JOIN utilisateur_application ua ON user.idUser = ua.idUser "
+//			+ "JOIN Application application ON application.idApplication = ua.idApplication "
+//			+ "JOIN Certificate certificate ON certificate.idApplication = application.idApplication "
+//			+ "WHERE user.idRHUser = ?1", nativeQuery = true)
+//	public List<Certificate> findByIdRHUser(String idRHUser);
+	
+//	@Query(value = "FROM app_utilisateur u "
+//			+ "JOIN utilisateur_application ua ON u.id_utilisateur = ua.id_utilisateur "
+//			+ "JOIN application a ON a.id_application = ua.id_application "
+//			+ "JOIN certificate c ON c.id_application = a.id_application "
+//			+ "WHERE u.idrh = ?1", nativeQuery = true)
+//	public List<Certificate> findByIdRHUser(String idRHUser);
+	
+	@Query(value = "SELECT * FROM certificat c " + 
+			"JOIN application a ON c.id_application = a.id_application " + 
+			"JOIN utilisateur_application ua ON a.id_application = ua.id_application " + 
+			"JOIN app_utilisateur u ON u.id_utilisateur = ua.id_utilisateur " + 
+			"WHERE u.idrh = ?", nativeQuery = true)
+	public List<Certificate> findByIdRHUser(String idRHUser);
 
 }

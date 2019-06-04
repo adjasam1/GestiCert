@@ -25,7 +25,7 @@ img
   //  margin-left: 17.5%;
 }
 
-#table2
+.table2
 {
   //  margin-left: 24%;
 }
@@ -33,6 +33,10 @@ img
 #table3
 {
   //  margin-left: 3.5%;
+}
+
+#th1 {
+  font-size: 12px;
 }
 
 .td1
@@ -81,39 +85,24 @@ a[role="button"]:hover {
   text-decoration: none;
 }
 
-
-
 a button {
+  background-color: #9CC6DA;
+  border: 1px solid #003DA5;
+  font-family: Montserrat, sans-serif;
+  font-size: 12px;
   text-decoration: none;
   border-radius: 4px;
   margin-top: 1%;
   text-align: right;
+  padding: 2px 5px;
+  color: black;
+  outline: none;
 }
 
 a button:hover {
   color: #FFCB05;
   background-color: #003DA5;
   text-decoration: none;
-}
-
-a button {
-  padding: 2px 5px;
-  color: black;
-  font-size: 12px;
-  border-radius: 4px;
-  outline: none;
-}
-
-a button
-{
-  background-color: #9CC6DA;
-  border: 1px solid #003DA5;
-}
-
-a button:hover
-{
-  color: #FFCB05;
-  background-color: #003DA5;
 }
 
 .modification a[role="button"]
@@ -132,6 +121,22 @@ a button:hover
 .modification
 {
   text-align: right;
+}
+
+.attente {
+  margin-left: 15px;
+}
+
+.buton1 button, .buton2 button, .attente {
+  font-size: 10px;
+}
+
+.buton1 button {
+  padding: 2px 6px;
+}
+
+.buton2 button {
+  padding: 2px 5px;
 }
 
 #formulaire
@@ -153,7 +158,14 @@ form
 input, select
 {
   font-family: Montserrat, sans-serif;
-  width: 50%;
+}
+
+input {
+  width: 40%;
+}
+
+select {
+  width: 30%;
 }
 
 .form1
@@ -243,6 +255,50 @@ textarea
 #cadreForm
 {
   margin: 0 0 0 5%;
+}
+
+:host /deep/ .ui-button {
+  color: black !important;
+  font-size: 12px !important;
+  width: 20px !important;
+  height: 20px !important;
+  background-color: #9CC6DA !important;
+  border: 1px solid #003DA5 !important;
+}
+
+:host /deep/ .ui-button:hover {
+  background-color: #003DA5 !important;
+  color: #FFCB05 !important;
+}
+
+
+
+:host /deep/ .ui-picklist .ui-picklist-list li {
+  padding: 2px 10px !important;
+}
+
+:host /deep/ .ui-picklist .ui-picklist-list li {
+  padding: 0 5px !important;
+  margin: 0 !important;
+}
+
+:host /deep/ .ui-widget {
+  font-family: Montserrat, sans-serif !important;
+}
+
+:host /deep/  .ui-picklist .ui-picklist-caption {
+  padding: 0 !important;
+  font-size: 10px !important;
+}
+
+:host /deep/  .ui-picklist .ui-picklist-buttons {
+  padding: 20px 1em 0 1em !important;
+  vertical-align: top !important;
+  height: 0 !important;
+}
+
+:host /deep/  .ui-picklist .ui-picklist-droppoint {
+  height: 2px !important;
 }
 
 @media (max-width: 900px) {

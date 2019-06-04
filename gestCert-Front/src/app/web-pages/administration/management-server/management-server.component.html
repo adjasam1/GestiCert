@@ -1,6 +1,5 @@
 <div class="titre" title="Administration des serveurs">
   <h1>Administration des Serveurs</h1>
-</div>
 
 
 
@@ -27,21 +26,17 @@
       </ng-template>
       <div class="cadre2">
         <h3>* Champs obligatoires</h3>
-        <form>
+        <form #logForm="ngForm">
           <div class="form-control">
             <label for="name">Nom * : </label>
-            <span *ngFor="let col of cols" [ngSwitch]="col.field">
-              <input *ngSwitchCase="'nameServer'" placeholder="Entrez le nom"
-                     pInputText (input)="dt.filter($event.target.value, col.field, col.filterMatchMode)"
-                     type="search" id="name" [(ngModel)]="editedServer.nameServer" name="name"
+              <input placeholder="Entrez le nom" type="search" id="name" name="name" [(ngModel)]="editedServer.nameServer"
                      title="Champ pour le nom du serveur" required>
-            </span>
           </div>
         </form>
         <div id="modification">
           <a *ngIf="editedServer.idServer" class="choix" role="button" routerLink="/gestion/sur" title="Annuler les modifications sur le serveur {{ editedServer.nameServer }}">Annuler</a>
           <a *ngIf="editedServer.idServer" class="choix" role="button" (click)="onDelete()" title="Supprimer le serveur {{ editedServer.nameServer }}">Supprimer</a>
-          <a class="choix" role="button" (click)="onSave()" title="Sauvegarder le profil {{ editedServer.nameServer }}">Sauvegarder</a>
+          <a class="choix" role="button" (click)="onSave(logForm)" title="Sauvegarder le profil {{ editedServer.nameServer }}">Sauvegarder</a>
         </div>
       </div>
     </div>
@@ -72,5 +67,7 @@
       </div>
     </div>
   </div>
+
+</div>
 
 </div>

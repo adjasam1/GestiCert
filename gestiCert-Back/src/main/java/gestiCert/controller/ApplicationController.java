@@ -1,5 +1,7 @@
 package gestiCert.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -11,7 +13,9 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import gestiCert.model.AppUser;
 import gestiCert.model.Application;
+import gestiCert.model.Certificate;
 import gestiCert.service.ApplicationService;
 
 /**
@@ -90,6 +94,22 @@ public class ApplicationController
 	{
 		return applicationServ.getApplicationByName(nameApplication);
 	}
+	
+//	@GetMapping("/utilisateur={user}")
+//	public ResponseEntity<?> getApplicationByUser(@PathVariable AppUser user)
+//	{
+//		return applicationServ.getApplicationsByUser(user);
+//	}
+	
+//	@GetMapping("/utilisateur={idRHUser}")
+//	public List<Application> getApplicationByUser(@PathVariable Integer idRHUser) {
+//	return this.applicationServ.getApplicationByUser(idRHUser);
+//	}
+	
+//	@GetMapping("/utilisateur={user}")
+//	public List<Application> getApplicationByUser(@PathVariable AppUser user) {
+//	return this.applicationServ.getApplicationByOneUser(user);
+//	}
 
 	@PostMapping("/ajout")
 //	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
