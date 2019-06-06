@@ -1,6 +1,5 @@
 package gestiCert.mail;
 
-
 import java.util.Properties;
 
 import org.springframework.context.annotation.Bean;
@@ -8,6 +7,12 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
+/**
+ * Configuration Gmail pour envoi mail
+ * 
+ * @author Samuel Sabot
+ * @version 0.0
+ */
 @Configuration
 public class MailConfig {
 	
@@ -18,6 +23,7 @@ public class MailConfig {
 	  @Bean
 	  public JavaMailSender getJavaMailSender() {
 	        JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
+	        // serveur smtp et port pour gmail
 	        mailSender.setHost("smtp.gmail.com");
 	        mailSender.setPort(587);
 	 
@@ -35,3 +41,6 @@ public class MailConfig {
 	        return mailSender;
 	    }
 }
+
+
+
