@@ -149,5 +149,4 @@ public class MailServiceImpl implements MailService
     this.emailSender.send(message);
 	return htmlMsg;
     }
-
 }

@@ -9,3 +9,6 @@ public interface MailService {
 	Object sendHtmlEmail(Certificate certificate) throws MessagingException;
 
 }
+
+
+
