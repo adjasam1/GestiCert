@@ -40,7 +40,7 @@ h2
 
 #espace
 {
-  margin-top: 15.4%;
+  margin-top: 8%;
 }
 
 h3
@@ -127,6 +127,10 @@ label
   font-size: 10px;
 }
 
+#champ {
+  margin: 2% 0 2% 0;
+}
+
 a
 {
   color: black;
@@ -135,7 +139,7 @@ a
 }
 
 #butServ {
-  margin-left: 40px;
+  margin-left: 10%;
 }
 
 a button, a[role="button"] {
@@ -191,8 +195,6 @@ strong
   background-color: #003DA5 !important;
   color: #FFCB05 !important;
 }
-
-
 
 :host /deep/ .ui-picklist .ui-picklist-list li {
   padding: 2px 10px !important;

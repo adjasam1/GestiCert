@@ -14,7 +14,7 @@
       <h2>Ajout d'un certificat<br></h2>
     </ng-template>
     <div class="cadre2">
-      <h3>* Champs obligatoires</h3>
+      <h3 id="champ">* Champs obligatoires</h3>
       <form #logForm="ngForm">
         <div>
           <div class="form-control">
@@ -124,14 +124,14 @@
                   </div>
                 </div>-->
           <br>
-   <div class="form-control">
-     <!--  *ngFor="let address of addressesAlternativesList | async"
-           <div *ngIf="editedCertificate.idCertificate === address.certificate.idCertificate">-->
+ <!--  <div class="form-control">
+     <!-  *ngFor="let address of addressesAlternativesList | async"
+           <div *ngIf="editedCertificate.idCertificate === address.certificate.idCertificate">->
               <label class="label1" for="linkAlt2"><span><strong>Adresse(s) Alternative(s) :</strong></span></label>
               <input class="input1" type="search" id="linkAlt2" [(ngModel)]="editedAdressAlternative.linkAddressAlternative" name="linkAlt"
                      placeholder="ADRESSE(S) ALTERNATIVE(S)"
                      required title="Champ pour le ou les liens des adresses alternantives">
-            </div>
+            </div>-->
           </div>
    <!--     </div>-->
       </form>
@@ -150,7 +150,7 @@
         </p-pickList>
       </div>
       <ng-template #elseBlock2>
-        <label><strong>Serveur(s) :</strong></label>
+      <!--  <label><strong>Serveur(s) :</strong></label>-->
         <p-pickList [source]="listServers" [target]="servers" sourceHeader="Serveur(s) :"
                     targetHeader="Selectionné(s) :" [responsive]="true" dragdrop="true"
                     [sourceStyle]="{'height':'100px'}" [targetStyle]="{'height':'100px'}">
@@ -163,7 +163,7 @@
           </ng-template>
         </p-pickList>
       </ng-template>
-      <a role="button" id="butServ" routerLink="/gestion/sur">Créer nouveau serveur</a>
+      <a role="button" id="butServ" class="choix" routerLink="/gestion/sur">Créer nouveau serveur</a>
     <br>
     <div id="modification">
       <a *ngIf="editedCertificate.idCertificate" class="choix" role="button" routerLink="/gestion/cer" title="Annuler les modifications sur le certificat {{ editedCertificate.nameCertificate }}">Annuler</a>
@@ -173,6 +173,7 @@
   </div>
 
   </div>
+
   <div id="liste" title="Liste des applications">
 
     <h2>Recherche</h2>
@@ -195,7 +196,7 @@
 
     <div id="table">
       <div id="autour">
-        <p-table #dt [columns]="cols" [value]="listCertificates" [paginator]="true" [rows]="8" dataKey="nameCertificate" [reorderableColumns]="true"
+        <p-table #dt [columns]="cols" [value]="listCertificates" [paginator]="true" [rows]="10" dataKey="nameCertificate" [reorderableColumns]="true"
                  selectionMode="single" [(selection)]="selectedCertificate" stateStorage="session" stateKey="statedemo-session">
           <ng-template pTemplate="header" let-columns>
             <tr>
