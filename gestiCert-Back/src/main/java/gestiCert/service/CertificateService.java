@@ -36,11 +36,4 @@ public interface CertificateService {
 	ResponseEntity<?> getCertificateByApplication(Application application);
 
 	List<Certificate> getCertificateByUser(String idRHUser);
-
-//	ResponseEntity<?> getCertificateByIdUser(Integer idUser);
-
-//	ResponseEntity<?> getCertifByIdUser(Integer idUser);
-
-//	ResponseEntity<?> getCertificateByIdUser(Integer idUser);
-
 }
