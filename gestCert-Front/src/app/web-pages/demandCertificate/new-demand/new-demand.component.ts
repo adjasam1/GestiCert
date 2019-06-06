@@ -80,6 +80,7 @@ export class NewDemandComponent implements OnInit {
   idEnvironment: number;
 
   cols: any[];
+  cols2: any[];
 
   constructor(private userDataService: UserDataService,
               private departmentDataService: DepartmentDataService,
@@ -137,8 +138,12 @@ export class NewDemandComponent implements OnInit {
     this.dateAlert();
     this.cols = [
       { field: 'nameCertificate', header: 'Nom Certificat', width: '30%' },
-      { field: 'environmentName', header: 'Nom Environnement', width: '30%' },
+      { field: 'environmentName', header: 'Nom Environnement', width: '25%' },
       { field: 'dateEndValidity', header: 'Validité', width: '100px' }
+    ];
+
+    this.cols2 = [
+      { field: 'nameCertificate', header: 'Nom Certificat', width: '50%' }
     ];
 
     this.departmentsList = this.departmentDataService.availableDepartments$;
@@ -176,15 +181,7 @@ export class NewDemandComponent implements OnInit {
 
   onSave(logForm: NgForm) {
     if (confirm('Êtes-vous certain de vouloir enregistrer cette demande ?')) {
-      if (this.editedCertificate.environment.idEnvironment === 1) {
-        this.editedCertificate.nameCertificate = '' + this.editedApplication.codeCCX + '-YYYYMMDD-dev';
-      } else if (this.editedCertificate.environment.idEnvironment === 2) {
-        this.editedCertificate.nameCertificate = '' + this.editedApplication.codeCCX + '-YYYYMMDD-int';
-      } else if (this.editedCertificate.environment.idEnvironment === 3) {
-        this.editedCertificate.nameCertificate = '' + this.editedApplication.codeCCX + '-YYYYMMDD-rec';
-      } else {
-        this.editedCertificate.nameCertificate = '' + this.editedApplication.codeCCX + '-YYYYMMDD-prod';
-      }
+      this.editedCertificate.nameCertificate = '' + this.editedApplication.codeCCX + '-YYYYMMDD-ENV';
       this.editedCertificate.dateDemand = this.dateNow;
       this.editedCertificate.user = this.listUsers.find(user => {
         return user.idUser === +this.editedUser.idUser;
@@ -209,7 +206,7 @@ export class NewDemandComponent implements OnInit {
       });
       this.onSend();
     }
-    this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/application/' + this.editedApplication.idApplication]);
+  //  this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/application/' + this.editedApplication.idApplication]);
  //   this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
  //   + this.editedCertificate.idCertificate + '/demande']);
   }

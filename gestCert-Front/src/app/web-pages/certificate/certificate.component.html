@@ -4,8 +4,8 @@
     <div id="name">
       <p>
         <img src="assets/icons/certificate.svg" alt="Logo certificat">&nbsp;
-        Certificat <strong>{{ editedCertificate.environment.nameEnvironment }}</strong>
-        de l'application <strong>{{ editedCertificate.application.nameApplication }}</strong>
+        Certificat <strong>{{ editedCertificate.environment.nameEnvironment }}</strong><br>
+        <span>de l'application <strong>{{ editedCertificate.application.nameApplication }}</strong></span>
       </p>
     </div>
   </div>
@@ -32,13 +32,13 @@
         <p-table [value]="certificates">
           <ng-template pTemplate="header">
             <tr>
-              <th id="th1">Nom<br>
+              <th class="th1">Nom<br>
                 <span>(CCX-YYYMMDD-environnement)</span>
               </th>
               <th class="th2">Type</th>
               <th class="th2">Plateforme</th>
-              <th id="th2">Serveur(s)</th>
-              <th id="th3"><img src="assets/icons/download.png" alt="Logo téléchargement"></th>
+              <th class="th2">Serveur(s)</th>
+              <th class="th3"><img src="assets/icons/download.png" alt="Logo téléchargement"></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-certificate>
@@ -49,7 +49,7 @@
               <td><span *ngFor="let server of listServers">{{server.nameServer}}<br *ngIf="listServers.length > 0"></span></td>
               <td>
                 <a type="button" href="assets/cer/fichierZip.7z">
-                  <img src="assets/icons/certificate.svg" alt="Téléchargement du certificat {{ editedCertificate.nameCertificate }}">
+                  <img class="cert" src="assets/icons/certificate.svg" alt="Téléchargement du certificat {{ editedCertificate.nameCertificate }}">
                 </a>
               </td>
             </tr>
@@ -61,8 +61,8 @@
         <p-table [value]="certificates">
           <ng-template pTemplate="header">
             <tr>
-              <th id="th4">Adresse Principale</th>
-              <th id="th5">Adresse(s) Alternative(s)</th>
+              <th class="th4">Adresse Principale</th>
+              <th class="th5">Adresse(s) Alternative(s)</th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-certificate>
@@ -82,27 +82,6 @@
           </ng-template>
         </p-table>
       </div>
-
-      <!--   <div class="space">-->
-      <!--*ngIf="editedCertificate.addressAlternative.length !== 0"-->
-      <!--    <p-table [value]="certificates">
-            <ng-template pTemplate="header">
-              <tr>
-                <th id="th5">Adresse(s) Alternative(s)</th>
-              </tr>
-            </ng-template>
-            <ng-template pTemplate="body" let-certificate>
-              <tr *ngFor="let addressAlternative of listAddressAlternative">
-                <td *ngIf="certificate.idCertificate === editedCertificate.idCertificate">
-              <span>
-              <a role="link" href="https://{{ addressAlternative.linkAddressAlternative }}" target="_blank">
-                {{ addressAlternative.linkAddressAlternative }}<br>
-              </a>
-            </span></td>
-              </tr>
-            </ng-template>
-          </p-table>
-        </div>-->
 
       <div class="space">
         <!--*ngIf="editedCertificate.addressAlternative.length !== 0"-->
@@ -177,136 +156,176 @@
 
     </div>
 
+    <div id="cadre3">
+
+      <div>
+        <p-table [value]="certificates">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="th1">Nom<br>
+                <span>(CCX-YYYMMDD-environnement)</span>
+              </th>
+              <th class="th2">Type</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-certificate>
+            <tr *ngIf="certificate.idCertificate === editedCertificate.idCertificate">
+              <td>{{ editedCertificate.nameCertificate }}</td>
+              <td>{{ editedCertificate.root.nameRoot }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+      <div class="space">
+        <p-table [value]="certificates">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="th2">Plateforme</th>
+              <th class="th2">Serveur(s)</th>
+              <th class="th3"><img src="assets/icons/download.png" alt="Logo téléchargement"></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-certificate>
+            <tr *ngIf="certificate.idCertificate === editedCertificate.idCertificate">
+              <td>{{ editedCertificate.plateform.namePlateform }}</td>
+              <td><span *ngFor="let server of listServers">{{server.nameServer}}<br *ngIf="listServers.length > 0"></span></td>
+              <td>
+                <a type="button" href="assets/cer/fichierZip.7z">
+                  <img class="cert" src="assets/icons/certificate.svg" alt="Téléchargement du certificat {{ editedCertificate.nameCertificate }}">
+                </a>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+      <div class="space">
+        <p-table [value]="certificates">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="th4">Adresse Principale</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-certificate>
+            <tr *ngIf="certificate.idCertificate === editedCertificate.idCertificate">
+              <td>
+                <a role="link" href="https://{{ editedCertificate.linkAddressPrincipal }}" target="_blank">
+                  {{ editedCertificate.linkAddressPrincipal }}
+                </a>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+      <div class="space">
+        <p-table [value]="certificates">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="th5">Adresse(s) Alternative(s)</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-certificate>
+            <tr *ngIf="certificate.idCertificate === editedCertificate.idCertificate">
+              <td *ngIf="certificate.idCertificate === editedCertificate.idCertificate">
+            <span *ngFor="let addressAlternative of listAddressAlternative">
+            <a role="link" href="https://{{ addressAlternative.linkAddressAlternative }}" target="_blank">
+              {{ addressAlternative.linkAddressAlternative }}<br>
+            </a>
+          </span></td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+      <div class="space">
+        <!--*ngIf="editedCertificate.addressAlternative.length !== 0"-->
+        <p-table [value]="certificates">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="th6">Mot de Passe</th>
+              <th class="th6">Date Emission</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-certificate>
+            <tr *ngIf="certificate.idCertificate === editedCertificate.idCertificate">
+              <td>
+                <p-dialog [(visible)]="display" [contentStyle]="{'background-color': '#D9EAF4'}">
+                  <p-header>Mot de Passe du certificat {{ editedCertificate.nameCertificate }} :</p-header>
+                  {{ passwordDecode }}
+                </p-dialog>
+                <a role="button" (click)="onShowDialog()">Afficher</a>
+              </td>
+              <td>{{ editedCertificate.dateIssue | date: 'dd/MM/yyyy' }}</td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+      <div class="space">
+        <!--*ngIf="editedCertificate.addressAlternative.length !== 0"-->
+        <p-table [value]="certificates">
+          <ng-template pTemplate="header">
+            <tr>
+              <th class="th6">Fin Validité</th>
+              <th></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-certificate>
+            <tr *ngIf="certificate.idCertificate === editedCertificate.idCertificate">
+              <td>{{ editedCertificate.dateEndValidity | date: 'dd/MM/yyyy' }}</td>
+              <td>
+                <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') > (alertDate | date: 'yyyy-MM-dd'))">
+                  <img src="assets/icons/ok.svg" alt="Certificat valide"
+                       title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} valide">
+                  <a *ngIf="editedUser.profile.idProfile === 3">
+                    <button routerLink="/gestion/hab/app/{{ editedCertificate.application.idApplication }}">
+                      Habiliter
+                    </button>
+                  </a>
+                </div>
+                <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
+                  <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
+                       title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} non valide">
+                  <a *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3; else elseBlock1" role="button" class="buton1" (click)="onNewDemand()"
+                     title="Demander le certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }}">
+                    Demander
+                  </a>
+                  <ng-template #elseBlock1>
+                    <span class="attente">
+                      (En cours)
+                <a *ngIf="editedUser.profile.idProfile === 3">
+                  <button routerLink="/gestion/hab/app/{{ editedCertificate.application.idApplication }}">
+                    Habiliter
+                  </button>
+                </a>
+                    </span>
+                  </ng-template>
+                </div>
+                <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
+                     ((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
+                  <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
+                       title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} en fin de validité">
+                  <a *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3; else elseBlock2" role="button" class="buton2" (click)="onNewDemand()"
+                     title="Renouveler le certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} en fin de validité">
+                    Renouveler
+                  </a>
+                  <ng-template #elseBlock2><span class="attente">(En cours)</span></ng-template>
+                  <a *ngIf="editedUser.profile.idProfile === 3">
+                    <button routerLink="/gestion/hab/app/{{ editedCertificate.application.idApplication }}">
+                      Habiliter
+                    </button>
+                  </a>
+                </div>
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </div>
+
+    </div>
+
   </div>
 
 </section>
-<!--  <div>
-    <table id="table1">
-      <thead>
-      <tr>
-        <th id="th1">Nom<br>
-          <small>(CCX-YYYMMDD-environnement)</small>
-        </th>
-        <th class="th2">Type</th>
-        <th class="th2">Plateforme</th>
-        <th id="th2">Serveur(s)</th>
-        <th id="th3"><img src="assets/icons/download.svg" alt="Logo téléchargement"></th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr>
-        <td>{{ editedCertificate.nameCertificate }}</td>
-        <td>{{ editedCertificate.root.nameRoot }}</td>
-        <td>{{ editedCertificate.plateform.namePlateform }}</td>
-        <td><span *ngFor="let server of listServers">{{server.nameServer}}<br *ngIf="listServers.length > 0"></span></td>
-        <td>
-          <a type="button" href="assets/cer/fichierZip.7z">
-            <img src="assets/icons/certificate.svg" alt="Téléchargement du certificat {{ editedCertificate.nameCertificate }}">
-          </a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-  </div>-->
-
-<!--   <div class="cadre2">
-     <table class="table2">
-       <thead>
-       <tr>
-         <th id="th4">Adresse Principale</th>
-       </tr>
-       </thead>
-
-       <tbody>
-       <tr>
-         <td>
-           <a role="link" href="https://{{ editedCertificate.linkAddressPrincipal }}" target="_blank">
-             {{ editedCertificate.linkAddressPrincipal }}
-           </a>
-         </td>
-       </tr>
-       </tbody>
-     </table>
-   </div>-->
-
-<!--   <div class="cadre2">
-     <table class="table2">
-       <thead>
-       <tr>
-         <th id="th5">Adresse(s) Alternative(s)</th>
-       </tr>
-       </thead>
-
-       <tbody>
-       <tr>
-         <td>
-           <span *ngFor="let addressAlternative of listAddressAlternative">
-           <a role="link" href="https://{{ addressAlternative.linkAddressAlternative }}" target="_blank">
-             {{ addressAlternative.linkAddressAlternative }}<br>
-           </a>
-         </span></td>
-       </tr>
-       </tbody>
-     </table>
-   </div>-->
-
-<!--  <div id="cadre3">
-    <table id="table3">
-      <thead>
-      <tr>
-        <th class="th6">Mot de Passe</th>
-        <th class="th6">Date Emission</th>
-        <th id="th7">Fin Validité</th>
-        <th></th>
-      </tr>
-      </thead>
-
-      <tbody>
-      <tr>
-        <td>
-          <p-dialog [(visible)]="display" [contentStyle]="{'background-color': '#D9EAF4'}">
-            <p-header>Mot de Passe du certificat {{ editedCertificate.nameCertificate }} :</p-header>
-            {{ passwordDecode }}
-          </p-dialog>
-          <a role="button" (click)="onShowDialog()">Afficher</a>
-        </td>
-        <td>{{ editedCertificate.dateIssue | date: 'dd/MM/yyyy' }}</td>
-        <td>{{ editedCertificate.dateEndValidity | date: 'dd/MM/yyyy' }}</td>
-        <td>
-          <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') > (alertDate | date: 'yyyy-MM-dd'))">
-            <img src="assets/icons/ok.svg" alt="Certificat valide"
-                 title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} valide">
-          </div>
-          <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
-            <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
-                 title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} non valide">
-            <a *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3; else elseBlock1" role="button" class="buton1" (click)="onNewDemand()"
-               title="Demander le certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }}">
-              Demander
-            </a>
-            <ng-template #elseBlock1><span class="attente">(En cours)</span></ng-template>
-          </div>
-          <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
-                   ((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
-            <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
-                 title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} en fin de validité">
-            <a *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3; else elseBlock2" role="button" class="buton2" (click)="onNewDemand()"
-               title="Renouveler le certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} en fin de validité">
-              Renouveler
-            </a>
-            <ng-template #elseBlock2><span class="attente">(En cours)</span></ng-template>
-          </div>
-          <a *ngIf="editedUser.profile.idProfile === 3">
-            <button routerLink="/gestion/hab/app/{{ editedCertificate.application.idApplication }}">
-              Gérer habilitation
-            </button>
-          </a>
-        </td>
-      </tr>
-      </tbody>
-    </table>
-
-  </div>-->
-
-

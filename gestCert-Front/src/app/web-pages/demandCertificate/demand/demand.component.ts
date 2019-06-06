@@ -1,30 +1,30 @@
 import { Component, OnInit } from '@angular/core';
-import {CertificateDataService} from '../../service/certificate-data.service';
 import {ActivatedRoute, Router} from '@angular/router';
 import {BehaviorSubject} from 'rxjs';
-import {Certificate} from '../../model/certificate';
-import {AppUser} from '../../model/appUser';
-import {UserDataService} from '../../service/user-data.service';
-import {Profile} from '../../model/profile';
-import {Department} from '../../model/department';
-import {DepartmentDataService} from '../../service/department-data.service';
-import {ProfileDataService} from '../../service/profile-data.service';
 import {FormBuilder} from '@angular/forms';
-import {TypeDemandDataService} from '../../service/type-demand-data.service';
-import {TypeDemand} from '../../model/typeDemand';
-import {AddressAlternativeDataService} from '../../service/address-alternative-data.service';
-import {AddressAlternative} from '../../model/addressAlternative';
-import {PlateformDataService} from '../../service/plateform-data.service';
-import {ServerDataService} from '../../service/server-data.service';
-import {Plateform} from '../../model/plateform';
-import {Server} from '../../model/server';
-import {ApplicationDataService} from '../../service/application-data.service';
-import {Application} from '../../model/application';
-import {StatusDemandDataService} from '../../service/status-demand-data.service';
-import {StatusDemand} from '../../model/statusDemand';
 import {Title} from '@angular/platform-browser';
+import {AppUser} from '../../../model/appUser';
+import {Certificate} from '../../../model/certificate';
+import {Department} from '../../../model/department';
+import {Profile} from '../../../model/profile';
+import {AddressAlternative} from '../../../model/addressAlternative';
+import {Application} from '../../../model/application';
+import {StatusDemand} from '../../../model/statusDemand';
+import {TypeDemand} from '../../../model/typeDemand';
+import {Plateform} from '../../../model/plateform';
+import {Server} from '../../../model/server';
+import {UserDataService} from '../../../service/user-data.service';
+import {DepartmentDataService} from '../../../service/department-data.service';
+import {ProfileDataService} from '../../../service/profile-data.service';
+import {ApplicationDataService} from '../../../service/application-data.service';
+import {CertificateDataService} from '../../../service/certificate-data.service';
+import {PlateformDataService} from '../../../service/plateform-data.service';
+import {ServerDataService} from '../../../service/server-data.service';
+import {StatusDemandDataService} from '../../../service/status-demand-data.service';
+import {TypeDemandDataService} from '../../../service/type-demand-data.service';
+import {AddressAlternativeDataService} from '../../../service/address-alternative-data.service';
 
-@Component({
+@Component ({
   selector: 'app-demand',
   templateUrl: './demand.component.html',
   styleUrls: ['./demand.component.scss']

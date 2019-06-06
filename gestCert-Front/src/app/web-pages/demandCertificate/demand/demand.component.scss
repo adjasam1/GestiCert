@@ -20,19 +20,9 @@ img
   margin: 10px 20px 5px 0;
 }
 
-.table1
+table
 {
-//  margin-left: 17.5%;
-}
-
-#table2
-{
-//  margin-left: 24%;
-}
-
-#table3
-{
-//  margin-left: 3.5%;
+  margin: 0 auto;
 }
 
 .td1
@@ -123,20 +113,15 @@ input, select
 
 #form1
 {
-  margin-left: 17.5%;
+  text-align: center;
 }
 
-#form2
+.form2
 {
-  margin-left: 12%;
+  text-align: center;
 }
 
-#form3
-{
-  margin-left: 21%;
-}
-
-#form2 input, #form3 input
+.form2 input
 {
   width: 130px;
 }
@@ -154,11 +139,12 @@ h1
 
 h2 {
   font-size: 16px;
+  margin-left: 5%;
 }
 
 h3 {
   font-size: 14px;
-  margin-left: 10%;
+  margin-left: 15%;
 }
 
 h3 span
@@ -196,18 +182,22 @@ h4
 
 textarea
 {
-  margin-left: 20%;
-  width: 60%;
+  margin-left: 10%;
+  width: 80%;
 }
 
 #context
 {
-  margin-left: 20%;
+  margin-left: 10%;
 }
 
 #cadreForm
 {
   margin: 0 0 0 5%;
+}
+
+#referent input {
+  min-width: 200px;
 }
 
 @media (max-width: 900px) {

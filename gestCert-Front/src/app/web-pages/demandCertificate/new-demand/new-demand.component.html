@@ -21,6 +21,25 @@
   <h1>Demande du certificat SSL</h1>
   <div id="cadreForm">
     <h2>1. Identification de la demande :</h2>
+
+    <section *ngIf="editedApplication.idApplication !== idApplication">
+      <h3>Recherche de l'application :</h3>
+      <form>
+        <label for="application"><strong>Application * : </strong></label>
+        <select
+          name="application"
+          id="application"
+          class="form-control"
+          [(ngModel)]="editedApplication.idApplication" title="Champ pour le nom de l'application">
+          <option *ngFor="let application of applicationsList | async"
+                  [value]="application.idApplication">{{ application.nameApplication }}</option>
+        </select>
+        <br id="appli">
+        <a><button (click)="onValid()">Valider</button></a>
+        <a><button routerLink="/gestion/app">Créer nouvelle application</button></a>
+      </form>
+    </section>
+
     <section id="demandeur" *ngIf="idDemand === editedApplication.idApplication">
       <h3>
         Information sur le demandeur :
@@ -66,23 +85,6 @@
                  name="emailRef" placeholder="E-MAIL REFERENT"
                  required title="Champ pour l'e-mail du postier référent si le demandeur est un prestataire">
         </div>
-      </form>
-    </section>
-
-    <section *ngIf="editedApplication.idApplication !== idApplication">
-      <h3>Recherche de l'application :</h3>
-      <form>
-        <label for="application"><strong>Application * : </strong></label>
-        <select
-          name="application"
-          id="application"
-          class="form-control"
-          [(ngModel)]="editedApplication.idApplication" title="Champ pour le nom de l'application">
-          <option *ngFor="let application of applicationsList | async"
-                  [value]="application.idApplication">{{ application.nameApplication }}</option>
-        </select>
-        <a><button (click)="onValid()">Valider</button></a>
-        <a><button routerLink="/gestion/app">Créer nouvelle application</button></a>
       </form>
     </section>
 
@@ -147,13 +149,70 @@
             </button>
           </a>
         </h3>
-        <div id="table">
-          <div id="autour">
-            <p-table #dt [columns]="cols" [value]="listCertificates" dataKey="nameCertificate" [reorderableColumns]="true"
+        <div>
+          <div>
+
+            <p-table id="cols1" [columns]="cols" [value]="listCertificates" dataKey="nameCertificate" [reorderableColumns]="true"
+                               selectionMode="single" stateStorage="session" stateKey="statedemo-session">
+            <ng-template pTemplate="header" let-columns>
+              <tr>
+                <th class="th1" *ngFor="let col of cols" [pSortableColumn]="col.field" class="{{col.field}}" colspan="col.colspan" [ngStyle]="{'width': col.width}" pReorderableColumn>
+                  {{col.header}}
+                  <p-sortIcon [field]="col.field"></p-sortIcon>
+                </th>
+                <th></th>
+              </tr>
+            </ng-template>
+            <ng-template pTemplate="body" let-certificate let-columns="columns">
+              <tr [pSelectableRow]="certificate">
+                <td>{{ certificate.nameCertificate}}</td>
+                <td>{{ certificate.environmentName}}</td>
+                <td>{{ certificate.dateEndValidity | date: 'dd/MM/yyyy'}}</td>
+                <td>
+                  <!--     <div *ngIf="certificate.dateEndValidity === null; else elseDateEnd">
+                          <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
+                               title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} non valide">
+                          <span class="attente">(En cours)</span>
+                        </div>
+                        <ng-template #elseDateEnd>-->
+                  <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') > (alertDate | date: 'yyyy-MM-dd'))">
+                    <img src="assets/icons/ok.svg" alt="Certificat valide"
+                         title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} valide">
+                  </div>
+                  <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')) || certificate.dateEndValidity === null">
+                    <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
+                         title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} non valide">
+                    <a *ngIf="certificate.statusDemand.idStatusDemand !== 3; else elseBlock1a" class="buton1">
+                      <button routerLink="/accueil/{{editedUser.idRHUser}}/certificat/{{certificate.idCertificate}}"
+                              title="Demander le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }}">
+                        Demander
+                      </button>
+                    </a>
+                    <ng-template #elseBlock1a><span class="attente">(En cours)</span></ng-template>
+                  </div>
+                  <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') >= (dateNow | date: 'yyyy-MM-dd')) &&
+                     ((certificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
+                    <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
+                         title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
+                    <a *ngIf="certificate.statusDemand.idStatusDemand !== 3; else elseBlock1b" class="buton2">
+                      <button routerLink="/accueil/{{editedUser.idRHUser}}/certificat/{{certificate.idCertificate}}"
+                              title="Renouveler le certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} en fin de validité">
+                        Renouveler
+                      </button>
+                    </a>
+                    <ng-template #elseBlock1b><span class="attente">(En cours)</span></ng-template>
+                  </div>
+                  <!--     </ng-template>-->
+                </td>
+              </tr>
+            </ng-template>
+          </p-table>
+
+            <p-table id="cols2" [columns]="cols2" [value]="listCertificates" dataKey="nameCertificate" [reorderableColumns]="true"
                      selectionMode="single" stateStorage="session" stateKey="statedemo-session">
               <ng-template pTemplate="header" let-columns>
                 <tr>
-                  <th id="th1" *ngFor="let col of cols" [pSortableColumn]="col.field" class="{{col.field}}" colspan="col.colspan" [ngStyle]="{'width': col.width}" pReorderableColumn>
+                  <th class="th1" *ngFor="let col of cols2" [pSortableColumn]="col.field" class="{{col.field}}" colspan="col.colspan" [ngStyle]="{'width': col.width}" pReorderableColumn>
                     {{col.header}}
                     <p-sortIcon [field]="col.field"></p-sortIcon>
                   </th>
@@ -163,15 +222,13 @@
               <ng-template pTemplate="body" let-certificate let-columns="columns">
                 <tr [pSelectableRow]="certificate">
                   <td>{{ certificate.nameCertificate}}</td>
-                  <td>{{ certificate.environmentName}}</td>
-                  <td>{{ certificate.dateEndValidity | date: 'dd/MM/yyyy'}}</td>
                   <td>
-              <!--     <div *ngIf="certificate.dateEndValidity === null; else elseDateEnd">
-                      <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
-                           title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} non valide">
-                      <span class="attente">(En cours)</span>
-                    </div>
-                    <ng-template #elseDateEnd>-->
+                    <!--     <div *ngIf="certificate.dateEndValidity === null; else elseDateEnd">
+                            <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
+                                 title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} non valide">
+                            <span class="attente">(En cours)</span>
+                          </div>
+                          <ng-template #elseDateEnd>-->
                     <div *ngIf="((certificate.dateEndValidity | date: 'yyyy-MM-dd') > (alertDate | date: 'yyyy-MM-dd'))">
                       <img src="assets/icons/ok.svg" alt="Certificat valide"
                            title="Certificat {{ certificate.environmentName }} de l'application {{ certificate.applicationName }} valide">
@@ -199,18 +256,19 @@
                       </a>
                       <ng-template #elseBlock1b><span class="attente">(En cours)</span></ng-template>
                     </div>
-               <!--     </ng-template>-->
+                    <!--     </ng-template>-->
                   </td>
                 </tr>
               </ng-template>
             </p-table>
+
           </div>
         </div>
       </ng-template>
     </section>
 
     <section *ngIf="idDemand === editedApplication.idApplication">
-      <h3>Information complémentaire : <span>* Champs obligatoires</span></h3>
+      <h3>Information complémentaire : <span><br id="asterix">* Champs obligatoires</span></h3>
       <form>
         <div class="form-control" id="form2">
           <label for="desirDate">
@@ -227,8 +285,8 @@
                  name="transmissionDate" required title="Champ pour la date de réalisation souhaitée">
         </div>
         <div id="contexte" class="form-control">
-          <label for="contxt">
-            <strong id="context">Description du contexte : </strong>
+          <label for="contxt" id="context">
+            <strong>Description du contexte : </strong>
           </label>
           <br>
           <textarea id="contxt" [(ngModel)]="editedCertificate.descriptionContext"
@@ -241,7 +299,7 @@
 
     <section *ngIf="idDemand === editedApplication.idApplication">
       <h2>2. Information sur la demande :</h2>
-      <form #logForm="ngForm">
+      <form #logForm="ngForm" id="info">
                <div class="form-control">
                  <label for="typeDem"><strong>Type Demande * : </strong></label>
                  <select
@@ -265,20 +323,22 @@
           </select>
         </div>
                <div class="form-control">
-                 <label class="label1" for="linkPrin"><span><strong>Adresse Principale * :</strong></span></label>
+                 <label class="label1" for="linkPrin"><span><strong>Adresse Principale * : </strong></span></label>
                  <input class="input1" type="search" id="linkPrin" [(ngModel)]="editedCertificate.linkAddressPrincipal" name="linkPrin"
                         placeholder="ADRESSE PRINCIPALE"
                         required title="Champ pour le lien de l'adresse principale du certificat">
                </div>
+  <!--      <br>
                <div class="form-control">
-                 <!--  *ngFor="let address of addressesAlternativesList | async"
-                       <div *ngIf="editedCertificate.idCertificate === address.certificate.idCertificate">-->
-                 <label class="label1" for="linkAlt2"><span><strong>Adresse(s) Alternative(s) :</strong></span></label>
+                 <!-  *ngFor="let address of addressesAlternativesList | async"
+                       <div *ngIf="editedCertificate.idCertificate === address.certificate.idCertificate">->
+                 <label class="label1" for="linkAlt2"><span><strong>Adresse(s) Alternative(s) : </strong></span></label>
                  <input class="input1" type="search" id="linkAlt2" name="linkAlt"
                         placeholder="ADRESSE(S) ALTERNATIVE(S)"
                         required title="Champ pour le ou les liens des adresses alternantives">
-                 <!-- [(ngModel)]="editedAdressAlternative.linkAddressAlternative" -->
-               </div>
+                 <!- [(ngModel)]="editedAdressAlternative.linkAddressAlternative" ->
+               </div>-->
+        <br>
                <div class="form-control">
                  <label for="plateform"><strong>Plateforme * : </strong></label>
                  <select
@@ -303,7 +363,7 @@
               </div>
             </ng-template>
           </p-pickList>
-          <a role="button" id="butServ" routerLink="/gestion/sur">Créer nouveau serveur</a>
+          <a id="butServ"><button routerLink="/gestion/sur">Créer nouveau serveur</button></a>
         </div>
       </form>
     </section>

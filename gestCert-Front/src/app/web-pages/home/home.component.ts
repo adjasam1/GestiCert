@@ -20,6 +20,8 @@ import {PlateformDataService} from '../../service/plateform-data.service';
 import {ServerDataService} from '../../service/server-data.service';
 import {StatusDemandDataService} from '../../service/status-demand-data.service';
 import {TypeDemandDataService} from '../../service/type-demand-data.service';
+import {environment} from '../../../environments/environment';
+import * as jwt_decode from 'jwt-decode';
 
 @Component({
   selector: 'app-accueil',
@@ -85,27 +87,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle('GestiCert - Accueil');
 
-    this.addressAlternativeDataService.publishAddressAlternative();
-    this.applicationDataService.publishApplication();
-    this.certificateDataService.publishCertificate();
-    this.departmentDataService.publishDepartment();
-    this.environmentDataService.publishEnvironment();
-    this.plateformDataService.publishPlateform();
-    this.profileDataService.publishProfile();
-    this.rootDataService.publishRoot();
-    this.serverDataService.publishServer();
-    this.statusDemandDataService.publishStatusDemand();
-    this.typeDemandDataService.publishTypeDemand();
-    this.userDataService.publishUser();
-
     this.usersList = this.userDataService.availableUsers$;
-
-    this.idRH = this.route.snapshot.params.id1;
- //   console.log('idUser : ' + this.idRH);
-
+    const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
+    this.idRH = decodedToken.sub;
+//   this.idRH = this.route.snapshot.params.id1;
     this.userDataService.findUserByIdRH(this.idRH).subscribe(user => {
       this.editedUser = user;
-  //    console.log('j\'ai trouvé le user !!!');
     });
 
     this.certificateDataService.availableCertificates$.subscribe(certificates => this.listCertificates = certificates);
@@ -133,31 +120,14 @@ export class HomeComponent implements OnInit {
     );
     this.listServers = this.editedCertificate.servers;*/
 
- //   this.certificatesList = this.certificateDataService.availableCertificates$;
- //   this.getCertificate();
+    this.certificatesList = this.certificateDataService.availableCertificates$;
+    this.getCertificate();
 
     this.applicationsList = this.applicationDataService.availableApplications$;
     this.applicationsList.subscribe(
       applications => this.listApplications = applications
     );
     this.listApplications = this.editedUser.applications;
-    console.log('appli user : ', this.listApplications);
- /*   this.applicationDataService.getApplicationPrimeNg().then( applications => {
-      this.listApplications = applications;
-      console.log('liste appli : ', applications);
-      this.listApplications.forEach( application =>
-        application.certificates.forEach(certificate =>
-          certificate.applicationCCX = certificate.application.codeCCX));
-      this.listApplications.forEach( application =>
-        application.certificates.forEach(certificate =>
-          certificate.applicationName = certificate.application.nameApplication));
-      this.listApplications.forEach( application =>
-        application.certificates.forEach(certificate =>
-          certificate.environmentName = certificate.environment.nameEnvironment));
-      this.listApplications.forEach( application =>
-        application.certificates.forEach(certificate =>
-          certificate.rootName = certificate.root.nameRoot));
-    })*/
     this.getApplication();
 
     this.environmentsList = this.environmentDataService.availableEnvironments$;
@@ -190,14 +160,14 @@ export class HomeComponent implements OnInit {
     ];
   }
 
-  reset(logForm: NgForm): void {
+  onReset(logForm: NgForm): void {
     logForm.reset();
     this.router.navigate(['/accueil/' + this.editedUser.idRHUser]);
   }
 
- /* getCertificate(): void {
+  getCertificate(): void {
     this.certificateDataService.getCertificate().subscribe(certificates => this.editedCertificate = certificates);
-  }*/
+  }
 
   getApplication(): void {
     this.applicationDataService.getApplication().subscribe(applications => this.editedApplication = applications);
@@ -217,7 +187,7 @@ export class HomeComponent implements OnInit {
     this.alertDate.setUTCMonth(thisMonth + oneMonth);
   }
 
-  deconnect(): void {
+  onDeconnect(): void {
     if (confirm('Êtes-vous certain de vouloir vous déconnecter ?')) {
       sessionStorage.clear();
       this.router.navigate(['']);

@@ -137,6 +137,10 @@ th span {
   background-color: #9CC6DA;
 }
 
+#cadre3 {
+  display: none;
+}
+
 th, td {
   font-family: Montserrat, sans-serif;
 }
@@ -182,7 +186,7 @@ thead
   color: #fff;
 }
 
-#th1
+.th1
 {
   width: 30%;
 }
@@ -192,9 +196,9 @@ thead
   width: 20%;
 }
 
-#th3
+.th3
 {
-  width: 10%;
+  width: 60px;
 }
 
 .th6
@@ -203,12 +207,12 @@ thead
 }
 
 /*
-#th4
+.th4
 {
   width: 62%;
 }
 
-#th5
+.th5
 {
   width: 50%;
 }
@@ -226,14 +230,13 @@ thead
 
 th, td {
   border: 1px solid black;
-  padding: 5px;
+  padding: 5px 10%;
   color: black;
 }
 
 td
 {
   background-color: white;
-  padding: 10px;
 }
 
 td a[role="button"]
@@ -263,4 +266,52 @@ img
 
 .attente {
   margin-left: 15px;
+}
+
+p br {
+  display: none;
+}
+
+@media (max-width: 800px) {
+  #cadre1 {
+    width: 98%;
+  }
+}
+
+@media (max-width: 550px) {
+  p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  #cadre2 {
+    display: none;
+  }
+
+  #cadre3 {
+    display: inline-block;
+    border: 1px solid black;
+    padding: 1%;
+    border-radius: 5px;
+    background-color: #9CC6DA;
+  }
+
+  .th6 {
+    width: 100px;
+  }
+}
+
+@media (max-width: 450px) {
+  p img {
+    display: none;
+  }
+
+  p br {
+    display: flex;
+  }
+
+  p span {
+    margin-left: 20px;
+  }
 }

@@ -19,19 +19,25 @@
 </section>
 
 <section id="formulaire">
-    <h1 *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseBlock1">
-      Demande du certificat SSL
-    </h1>
-    <ng-template #elseBlock1><h1>Renouvellement du certificat SSL</h1></ng-template>
+
+  <h1 *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseBlock1">
+    Demande du certificat SSL
+  </h1>
+  <ng-template #elseBlock1><h1>Renouvellement du certificat SSL</h1></ng-template>
+
   <div id="cadreForm">
+
     <form>
+
       <h2>1. Identification de la demande :</h2>
+
       <section id="demandeur">
+
         <h3>
           Information sur le demandeur :
           <a role="button" routerLink="/accueil/{{editedUser.idRHUser}}/profil/">Modifier</a>
         </h3>
-        <table class="table1">
+        <table>
           <tbody>
           <tr>
             <td class="td1"><strong>Service du demandeur :</strong></td>
@@ -59,24 +65,28 @@
           </tr>
           </tbody>
         </table>
+
       </section>
-      <br>
+
       <section id="referent">
         <h4>Si le demandeur est un prestataire, le postier référent recevra les notifications d'expirations</h4>
         <div class="form-control" id="form1">
           <label for="emailRef">
             <strong>E-mail du postier référent : </strong>
-            <span *ngIf="(editedCertificate.statusDemand.idStatusDemand === 3)">{{editedCertificate.eMailReferent}}</span>
+            <span *ngIf="(editedCertificate.statusDemand.idStatusDemand === 3)">
+              <span *ngIf="editedCertificate.eMailReferent === null; else elseMail">Pas de référent</span>
+              <ng-template #elseMail>{{editedCertificate.eMailReferent}}</ng-template>
+            </span>
           </label>
           <input type="search" id="emailRef" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" [(ngModel)]="editedCertificate.eMailReferent"
                  name="emailRef" placeholder="Entrez l'e-mail du référent"
                  required title="Champ pour l'e-mail du postier référent si le demandeur est un prestataire">
         </div>
       </section>
-      <br>
+
       <section>
         <h3>Information sur le client :</h3>
-        <table id="table2">
+        <table>
           <tbody>
           <tr>
             <td class="td1"><strong>Nom du client :</strong></td>
@@ -101,10 +111,10 @@
           </tbody>
         </table>
       </section>
-      <br>
+
       <section>
         <h3>Information complémentaire : <span>* Champs obligatoires</span></h3>
-        <div class="form-control" id="form2">
+        <div class="form-control" class="form2">
           <label for="desirDate">
             <strong>Date de réalisation souhaitée * : </strong>
             <span *ngIf="(editedCertificate.statusDemand.idStatusDemand === 3)">{{editedCertificate.dateCreationDesired | date: 'dd/MM/yyyy'}}</span>
@@ -113,7 +123,7 @@
                  name="desirDate" required title="Champ pour la date de réalisation souhaitée">
         </div>
         <br>
-        <div class="form-control" id="form3">
+        <div class="form-control" class="form2">
           <label for="transmissionDate">
             <strong>Date de transmission * : </strong>
             <span *ngIf="(editedCertificate.statusDemand.idStatusDemand === 3)">{{editedCertificate.dateTransmission | date: 'dd/MM/yyyy'}}</span>
@@ -132,11 +142,11 @@
                     name="contxt" rows="2" cols="48" placeholder="Entrez la description du contexte de la demande"
                     required title="Champ pour la description du contexte"></textarea>
         </div>
-        <br>
       </section>
+
       <section>
         <h2>2. Information sur la demande :</h2>
-        <table id="table3">
+        <table>
           <tbody>
           <tr>
             <td class="td1"><strong>Type de la demande :</strong></td>
@@ -158,9 +168,9 @@
               <strong>Adresse(s) alternative(s) :</strong>
             </td>
             <td class="td2">
-       <!--       <span *ngIf="editedCertificate.idCertificate === addrAlt.certificate.idCertificate">-->
-                {{addrAlt.linkAddressAlternative}}
-        <!--      </span>-->
+              <!--       <span *ngIf="editedCertificate.idCertificate === addrAlt.certificate.idCertificate">-->
+              {{addrAlt.linkAddressAlternative}}
+              <!--      </span>-->
             </td>
           </tr>
           <tr>
@@ -170,17 +180,20 @@
           <tr *ngFor="let server of listServers">
             <td class="td1"><strong>Serveur(s) :</strong></td>
             <td class="td2">{{server.nameServer}}</td>
-   <!--         <td class="td2">{{editedCertificate.server.nameServer}}</td>-->
+            <!--         <td class="td2">{{editedCertificate.server.nameServer}}</td>-->
           </tr>
           </tbody>
         </table>
       </section>
+
     </form>
-    <br>
+
     <div class="modification">
       <a role="button" (click)="onBack()" title="annuler la demande">Annuler</a>
       <a role="button" *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3" (click)="onSave()" title="Valider la demande">Valider</a>
       <a role="button" *ngIf="editedCertificate.statusDemand.idStatusDemand === 3" (click)="onSend()" title="Envoyer la demande">Transmettre</a>
     </div>
+
   </div>
+
 </section>

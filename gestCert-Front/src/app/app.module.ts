@@ -33,7 +33,6 @@ import {JwtInterceptor} from './jwt-security/http-interceptor/jwt.interceptor';
 import {HomeComponent} from './web-pages/home/home.component';
 import {ProfileComponent} from './web-pages/profile/profile.component';
 import {DialogModule} from 'primeng/dialog';
-import { DemandComponent } from './web-pages/demand/demand.component';
 import {ManagementComponent} from './web-pages/administration/management/management.component';
 import {ManagementProfileComponent} from './web-pages/administration/management-profile/management-profile.component';
 import {ManagementDepartmentComponent} from './web-pages/administration/management-department/management-department.component';
@@ -48,6 +47,7 @@ import { ManagementRootComponent } from './web-pages/administration/management-r
 import { ManagementServerComponent } from './web-pages/administration/management-server/management-server.component';
 import {ManagementHabilitationComponent} from './web-pages/administration/management-habilitation/management-habilitation.component';
 import { NewDemandComponent } from './web-pages/demandCertificate/new-demand/new-demand.component';
+import {DemandComponent} from './web-pages/demandCertificate/demand/demand.component';
 
 @NgModule({
   declarations: [

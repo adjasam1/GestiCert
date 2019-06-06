@@ -33,7 +33,7 @@ public class MailServiceImpl implements MailService
     				"	<style type=\"text/css\">" + 
     				"		h1 {text-align: center;}" +
     				"		h1, table, tr {border: 1px solid black; border-collapse: collapse;}" +
-    				"		h1, h2, tr {width: 700px; font-size: 20px;}" +
+    				"		h1, h2, table {width: 700px; font-size: 20px;}" +
     				"		h2 {border: 1px solid black; background-color: black; color: white; text-align: left; padding: 3px 10px;}" +
     				"		tr {height: 30px;}" + 
     				"		.td1 {text-align: right; min-width: 300px;}" + 
@@ -126,11 +126,11 @@ public class MailServiceImpl implements MailService
     				"			<td class=\"td1\"><strong>Nom commun </strong><br><em>\"URL Principale du site\"</em> : </td>" + 
     				"			<td class=\"td2\">"+certificate.getLinkAddressPrincipal()+"</td>" + 
     				"		</tr>" + 
-    				"		<tr>" + 
-    				"			<td class=\"td1\"><strong>Adresse(s) alternative(s) </strong><br>" +
-    				"				<em>\"URL(s) supplémentaire(s)</em> : </td>" + 
-    				"			<td class=\"td2\">"+certificate.getAddressAlternatives()+"</td>" + 
-    				"       </tr>" + 
+//    				"		<tr>" + 
+//    				"			<td class=\"td1\"><strong>Adresse(s) alternative(s) </strong><br>" +
+//    				"				<em>\"URL(s) supplémentaire(s)</em> : </td>" + 
+//    				"			<td class=\"td2\">"+certificate.getAddressAlternatives()+"</td>" + 
+//    				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Plateforme : </strong></td>" + 
     				"           <td class=\"td2\">"+certificate.getPlateform().getNamePlateform()+"</td>" + 

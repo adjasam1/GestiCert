@@ -1,0 +1,62 @@
+/* CADRES */
+#cadre1 {
+  border: 2px solid #003DA5;
+  border-radius: 5px;
+  margin: 20px auto 80px auto;
+  padding: 0 0 3% 0;
+  background-color: #D9EAF4;
+  width: 80%;
+}
+
+.cadre2 {
+  border: 1px solid #003DA5;
+  border-radius: 5px;
+  margin: 1% auto;
+  padding: 4%;
+  width: 80%;
+}
+
+/* FORMULAIRE */
+input, textarea {
+  font-family: Montserrat, sans-serif;
+  width: 90%;
+}
+
+.field {
+  margin-bottom: 2%;
+  margin-left: 5%;
+}
+
+/* TITRE */
+h1
+{
+  text-align: center;
+  font-size: 16px;
+}
+
+h2 {
+  text-align: left;
+  font-size: 14px;
+}
+
+a {
+  color: black;
+  font-weight: bold;
+}
+
+a:hover
+{
+  color: #003DA5;
+  text-decoration: underline;
+}
+
+/* ADAPTABILITE */
+@media (max-width: 600px) {
+  #cadre1 {
+    width: 98%;
+  }
+
+  #cadre2 {
+    width: 98%;
+  }
+}

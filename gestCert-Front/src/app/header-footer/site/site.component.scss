@@ -1,0 +1,85 @@
+/* CADRES */
+#cadre1 {
+  border: 2px solid #003DA5;
+  border-radius: 5px;
+  margin: 20px auto 80px auto;
+  padding: 0 0 3% 0;
+  background-color: #D9EAF4;
+  width: 80%;
+}
+
+#cadre2 {
+  border: 1px solid #003DA5;
+  border-radius: 5px;
+  margin: 1% auto;
+  padding: 4%;
+  width: 80%;
+}
+
+/* TITRE */
+h1
+{
+  text-align: center;
+  font-size: 16px;
+}
+
+h2 {
+  text-align: left;
+  font-size: 14px;
+}
+
+/* PLAN SITE */
+p {
+  margin-left: 5%;
+}
+
+strong {
+  font-size: 20px;
+}
+
+.first {
+  margin-left: 30px;
+}
+
+.second, .third {
+  margin-left: 50px;
+}
+
+/* ADAPTABILITE */
+@media (max-width: 900px) {
+  #cadre1 {
+    width: 98%;
+  }
+
+  #cadre2 {
+    width: 98%;
+  }
+}
+
+@media (max-width: 550px) {
+  strong {
+    font-size: 15px;
+  }
+
+  .first {
+    margin-left: 10px;
+  }
+
+  .second, .third {
+    margin-left: 20px;
+  }
+
+  #plan {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 370px) {
+  #plan {
+    font-size: 10px;
+  }
+
+  #cadre1 {
+    margin-bottom: 100px;
+  }
+}
