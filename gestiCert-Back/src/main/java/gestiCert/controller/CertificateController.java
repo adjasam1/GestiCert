@@ -122,7 +122,13 @@ public class CertificateController
 	@GetMapping("/utilisateur={idRHUser}")
 	public ResponseEntity<?> getCertificateByUser(@PathVariable String idRHUser)
 	{
-		return certificateServ.getCertificateByUser(idRHUser);
+		Iterable<Certificate> certificate = null;
+		try {
+			certificate = certificateServ.getCertificateByUser(idRHUser);
+		} catch (Exception e) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
+		}
+		return ResponseEntity.status(HttpStatus.OK).body(certificate);
 	}
 	
 	@PostMapping("/ajout")

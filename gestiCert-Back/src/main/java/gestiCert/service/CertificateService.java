@@ -1,6 +1,7 @@
 package gestiCert.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.http.ResponseEntity;
 
@@ -34,7 +35,7 @@ public interface CertificateService {
 
 	ResponseEntity<?> getCertificateByApplication(Application application);
 
-	ResponseEntity<?> getCertificateByUser(String idRHUser);
+	List<Certificate> getCertificateByUser(String idRHUser);
 
 //	ResponseEntity<?> getCertificateByIdUser(Integer idUser);
 

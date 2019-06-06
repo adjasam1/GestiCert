@@ -234,15 +234,9 @@ public class CertificateServiceImpl implements CertificateService
 	}
 	
 	@Override
-	public ResponseEntity<?> getCertificateByUser(String idRHUser)
+	public List<Certificate> getCertificateByUser(String idRHUser)
 	{
-		Iterable<Certificate> certificate = null;
-		try {
-			certificate = certificateRepo.findByIdRHUser(idRHUser);
-		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-		}
-		return ResponseEntity.status(HttpStatus.OK).body(certificate);
+		return certificateRepo.findByIdRHUser(idRHUser);
 	}
 	
 	/**
