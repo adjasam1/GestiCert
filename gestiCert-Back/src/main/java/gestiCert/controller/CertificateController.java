@@ -165,5 +165,4 @@ public class CertificateController
 	 {
 		 return mailServ.sendHtmlEmail(certificate);
 	 }
-
 }
