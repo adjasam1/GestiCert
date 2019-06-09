@@ -34,7 +34,6 @@ import gestiCert.service.MailService;
 
 @RestController
 @RequestMapping("/api/certificat")
-//@CrossOrigin("http://localhost:4200")
 public class CertificateController
 {
 	

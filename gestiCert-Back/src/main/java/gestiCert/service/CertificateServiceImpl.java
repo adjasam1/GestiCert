@@ -93,6 +93,12 @@ public class CertificateServiceImpl implements CertificateService
 		
 		return ResponseEntity.status(HttpStatus.OK).body(listCertificates);
 	}
+	
+	@Override
+	public List<Certificate> getCertificateByUser(String idRHUser)
+	{
+		return certificateRepo.findByIdRHUser(idRHUser);
+	}
 
 	/**
 	 * methode qui cherche un certificat par son identifiant
@@ -122,48 +128,6 @@ public class CertificateServiceImpl implements CertificateService
 		
 		return ResponseEntity.status(HttpStatus.OK).body(listCertificates);
 	}
-	
-//	@Override
-//	public ResponseEntity<?> getCertificateByIdUser(Integer idUser)
-//	{
-//		List<Certificate> listCertificates = null;
-//		
-//		try
-//		{
-//			listCertificates = certificateRepo.findCertifByIdUser(idUser);
-//		} catch (Exception e)
-//		{
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-//		}
-//		
-//		if (listCertificates == null)
-//		{
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//		}
-//		
-//		return ResponseEntity.status(HttpStatus.OK).body(listCertificates);
-//	}
-	
-//	@Override
-//	public ResponseEntity<?> getCertifByIdUser(Integer idUser)
-//	{
-//		List<Certificate> listCertificates = null;
-//		
-//		try
-//		{
-//			listCertificates = certificateRepo.findCertifByIdUser(idUser);
-//		} catch (Exception e)
-//		{
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-//		}
-//		
-//		if (listCertificates == null)
-//		{
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//		}
-//		
-//		return ResponseEntity.status(HttpStatus.OK).body(listCertificates);
-//	}
 	
 	/**
 	 * methode qui cherche un certificat par son nom ou partie de nom
@@ -231,12 +195,6 @@ public class CertificateServiceImpl implements CertificateService
 			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(certificate);
-	}
-	
-	@Override
-	public List<Certificate> getCertificateByUser(String idRHUser)
-	{
-		return certificateRepo.findByIdRHUser(idRHUser);
 	}
 	
 	/**

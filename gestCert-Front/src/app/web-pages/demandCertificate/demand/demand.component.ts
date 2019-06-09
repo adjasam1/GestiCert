@@ -149,6 +149,8 @@ export class DemandComponent implements OnInit {
       this.certificateDataService.updateCertificate(this.editedCertificate).subscribe( updateCertificate => {
         this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
         + this.editedCertificate.idCertificate + '/demande']);
+
+        this.onScroll();
       });
   /*    this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
       + this.editedCertificate.idCertificate + '/demande']);*/
@@ -163,7 +165,12 @@ export class DemandComponent implements OnInit {
     if (confirm('Êtes-vous certain de vouloir envoyer cette demande ?')) {
       this.certificateDataService.sendMail(this.editedCertificate);
       this.router.navigate(['/accueil/' + this.editedUser.idRHUser]);
+      this.onScroll();
     }
+  }
+
+  onScroll() {
+    window.scrollTo(0, 0);
   }
 
 }

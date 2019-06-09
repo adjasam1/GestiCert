@@ -21,20 +21,20 @@
 
   <div id="menu2">
     <mat-menu #utilisateur="matMenu">
-      <a class="select" role="button" routerLink="/gestion/uti" title="Administration des utilisateurs">Utilisateur</a>
-      <a class="select" role="button" routerLink="/gestion/pro" title="Administration des profils">Profil</a>
-      <a class="select" role="button" routerLink="/gestion/sce" title="Administration des services">Service</a>
+      <a class="select" role="button" (click)="onScroll()" routerLink="/gestion/uti" title="Administration des utilisateurs">Utilisateur</a>
+      <a class="select" role="button" (click)="onScroll()" routerLink="/gestion/pro" title="Administration des profils">Profil</a>
+      <a class="select" role="button" (click)="onScroll()" routerLink="/gestion/sce" title="Administration des services">Service</a>
     </mat-menu>
     <mat-menu #application="matMenu">
-      <a class="select" role="button" routerLink="/gestion/app" title="Administration des applications">Application</a>
-      <a class="select" role="button" routerLink="/gestion/hab" title="Administration des services">Habilitation</a>
+      <a class="select" role="button" (click)="onScroll()" routerLink="/gestion/app" title="Administration des applications">Application</a>
+      <a class="select" role="button" (click)="onScroll()" routerLink="/gestion/hab" title="Administration des services">Habilitation</a>
     </mat-menu>
     <mat-menu #certificat="matMenu">
-      <a class="select" role="button" routerLink="/gestion/cer" title="Administration des certificats">Certificat</a>
-      <a class="select" role="button" routerLink="/gestion/env" title="Administration des environnements">Environnement</a>
-      <a class="select" role="button" routerLink="/gestion/pla" title="Administration des plateformes">Plateforme</a>
-      <a class="select" role="button" routerLink="/gestion/rac" title="Administration des racines">Racine</a>
-      <a class="select" role="button" routerLink="/gestion/sur" title="Administration des serveurs">Serveur</a>
+      <a class="select" role="button" (click)="onScroll()" routerLink="/gestion/cer" title="Administration des certificats">Certificat</a>
+      <a class="select" role="button" (click)="onScroll()" routerLink="/gestion/env" title="Administration des environnements">Environnement</a>
+      <a class="select" role="button" (click)="onScroll()" routerLink="/gestion/pla" title="Administration des plateformes">Plateforme</a>
+      <a class="select" role="button" (click)="onScroll()" routerLink="/gestion/rac" title="Administration des racines">Racine</a>
+      <a class="select" role="button" (click)="onScroll()" routerLink="/gestion/sur" title="Administration des serveurs">Serveur</a>
     </mat-menu>
   </div>
 </section>

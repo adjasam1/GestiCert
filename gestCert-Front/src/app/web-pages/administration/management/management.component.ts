@@ -113,6 +113,10 @@ export class ManagementComponent implements OnInit {
     }
   }
 
+  onScroll() {
+    window.scrollTo(0, 0);
+  }
+
 /*  comeBack(): void {
     this.router.navigate([history.go(-1)]);
   }*/

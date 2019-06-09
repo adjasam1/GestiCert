@@ -114,6 +114,11 @@ export class CertificateDataService {
     });
   }
 
+  /**
+   * Fonction qui permet de trouver les certificat d'un utilisateur grace a son idRH
+   *
+   * @ param idRHUser
+   */
   public getCertificateByUserPrimeNg(idRHUser: string) {
     return this.httpClient.get<any>(`http://localhost:8080/api/certificat/utilisateur=${idRHUser}`)
       .toPromise()

@@ -10,4 +10,8 @@ export class FooterComponent {
   constructor() {
   }
 
+  onScroll() {
+    window.scrollTo(0, 0);
+  }
+
 }

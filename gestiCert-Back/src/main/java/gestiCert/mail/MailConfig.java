@@ -18,7 +18,7 @@ public class MailConfig {
 	
     public static final String MY_EMAIL = "4samuel.sabot@gmail.com";
     public static final String MY_PASSWORD = "samuL4mail";
-    public static final String OTHER_EMAIL = "samuel.sabot@laposte.fr";
+    public static final String OTHER_EMAIL = "sodabi-samsam@hotmail.fr";
 
 	  @Bean
 	  public JavaMailSender getJavaMailSender() {

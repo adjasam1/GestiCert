@@ -88,9 +88,9 @@ export class HomeComponent implements OnInit {
     this.title.setTitle('GestiCert - Accueil');
 
     this.usersList = this.userDataService.availableUsers$;
+
     const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
     this.idRH = decodedToken.sub;
-//   this.idRH = this.route.snapshot.params.id1;
     this.userDataService.findUserByIdRH(this.idRH).subscribe(user => {
       this.editedUser = user;
     });
@@ -106,12 +106,17 @@ export class HomeComponent implements OnInit {
 
 
  //   this.certificateDataService.availableCertificates$.subscribe(certificates => this.certificates = certificates);
-    this.certificateDataService.getCertificateByUserPrimeNg(this.idRH).then( certificates => {
+    this.certificateDataService.getCertificateByUserPrimeNg(this.idRH)
+      .then( certificates => {
       this.certificates = certificates;
-      this.certificates.forEach(certificate => certificate.applicationCCX = certificate.application.codeCCX);
-      this.certificates.forEach(certificate => certificate.applicationName = certificate.application.nameApplication);
-      this.certificates.forEach(certificate => certificate.environmentName = certificate.environment.nameEnvironment);
-      this.certificates.forEach(certificate => certificate.rootName = certificate.root.nameRoot);
+      this.certificates.forEach(certificate =>
+        certificate.applicationCCX = certificate.application.codeCCX);
+      this.certificates.forEach(certificate =>
+        certificate.applicationName = certificate.application.nameApplication);
+      this.certificates.forEach(certificate =>
+        certificate.environmentName = certificate.environment.nameEnvironment);
+      this.certificates.forEach(certificate =>
+        certificate.rootName = certificate.root.nameRoot);
       });
 
 /*   this.serversList = this.serverDataService.availableServers$;
