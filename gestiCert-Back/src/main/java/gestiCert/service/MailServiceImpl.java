@@ -11,7 +11,6 @@ import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
 
 import gestiCert.mail.MailConfig;
-import gestiCert.model.AddressAlternative;
 import gestiCert.model.Certificate;
 
 @Service

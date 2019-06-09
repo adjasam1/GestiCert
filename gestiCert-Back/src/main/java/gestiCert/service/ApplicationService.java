@@ -1,10 +1,7 @@
 package gestiCert.service;
 
-import java.util.List;
-
 import org.springframework.http.ResponseEntity;
 
-import gestiCert.model.AppUser;
 import gestiCert.model.Application;
 
 public interface ApplicationService
