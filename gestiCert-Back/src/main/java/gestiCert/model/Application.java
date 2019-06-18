@@ -85,7 +85,7 @@ public class Application implements Serializable
 	 */
 
 //	@JsonIgnore
-	@ManyToMany//(mappedBy = "applications")
+	@ManyToMany
 	@JoinTable(name = "utilisateur_application", joinColumns = @JoinColumn(name = "id_application"),
 	inverseJoinColumns = @JoinColumn(name = "id_utilisateur"),
 	foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
@@ -95,7 +95,6 @@ public class Application implements Serializable
 	@JsonIgnore
 	@OneToMany(mappedBy = "application", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
 	private List<Certificate> certificates;
-	// fetch = FetchType.EAGER
 	
 	/**
 	 * constructeurs de la classe dont un vide par defaut

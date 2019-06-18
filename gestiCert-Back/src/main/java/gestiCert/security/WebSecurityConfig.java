@@ -39,7 +39,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	}
 
 	/**
-	 * Method that configures HTTP security.
+	 * Methode configure HTTP security.
 	 * 
 	 * @param http the HttpSecurity object to configure.
 	 * @throws Exception
@@ -59,13 +59,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
 		// Entry points
-		http.authorizeRequests()//
-				.antMatchers("/**").permitAll()//
-				.antMatchers("/api/user/sign-in").permitAll()//
-				.antMatchers("/api/user/sign-up").permitAll()//
-				// Disallow everything else...
-				//.anyRequest().authenticated();
-				.anyRequest().permitAll();
+		http.authorizeRequests()
+				.antMatchers("/**").permitAll()
+				.antMatchers("/api/user/sign-in").permitAll()
+				.antMatchers("/api/user/sign-up").permitAll()
+				.anyRequest().authenticated();
 
 		// Apply JWT
 		http.addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
@@ -80,8 +78,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	 */
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-//		web.ignoring().antMatchers("/h2-console/**/**"); inutile car permet d'ouvrir l'acces à la base de donnees
-		// permet d'avoir acces au fichiers de resources 
 		web.ignoring().antMatchers("/resources/**");// .anyRequest();
 	}
 

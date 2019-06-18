@@ -45,7 +45,8 @@ public interface CertificateRepository extends JpaRepository<Certificate, Intege
 	public List<Certificate> findByApplication(Application application);
 	
 	/**
-	 * Requete SQL pour trouver les certificats d'un utilisateur en utilisant son idRH comme parametre
+	 * Requete SQL pour trouver les certificats d'un utilisateur
+	 * en utilisant son idRH comme parametre
 	 * 
 	 * @param idRHUser
 	 * @return liste des certificats d'un utilisateur
@@ -57,3 +58,27 @@ public interface CertificateRepository extends JpaRepository<Certificate, Intege
 			"WHERE u.idrh = ?", nativeQuery = true)
 	public List<Certificate> findByIdRHUser(String idRHUser);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -10,10 +10,11 @@ import {ProfileComponent} from './web-pages/profile/profile.component';
 import {ManagementComponent} from './web-pages/administration/management/management.component';
 import {NewDemandComponent} from './web-pages/demandCertificate/new-demand/new-demand.component';
 import {DemandComponent} from './web-pages/demandCertificate/demand/demand.component';
+import {AdminGuard} from './jwt-security/guards/admin.guard';
+import {DevGuard} from './jwt-security/guards/dev.guard';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
-//  { path: 'authe', component: AuthenticationComponent },
   { path: 'accueil/:id1', component: HomeComponent },
   { path: 'gestion', component: ManagementComponent },
   { path: 'gestion/uti', component: ManagementComponent },

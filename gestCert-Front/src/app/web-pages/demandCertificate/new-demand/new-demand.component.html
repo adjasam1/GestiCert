@@ -20,7 +20,7 @@
 <section id="formulaire">
   <h1>Demande du certificat SSL</h1>
   <div id="cadreForm">
-    <h2>1. Identification de la demande :</h2>
+    <h2>Identification de la demande :</h2>
 
     <section *ngIf="editedApplication.idApplication !== idApplication">
       <h3>Recherche de l'application :</h3>
@@ -298,7 +298,7 @@
 
 
     <section *ngIf="idDemand === editedApplication.idApplication">
-      <h2>2. Information sur la demande :</h2>
+      <h2>Information sur la demande :</h2>
       <form #logForm="ngForm" id="info">
                <div class="form-control">
                  <label for="typeDem"><strong>Type Demande * : </strong></label>
@@ -370,7 +370,8 @@
 
     <div class="modification">
       <a role="button" routerLink="/accueil/{{editedUser.idRHUser}}" title="annuler la demande">Annuler</a>
-      <a role="button" *ngIf="idDemand === editedApplication.idApplication" (click)="onSave(logForm)" title="Valider la demande">Transmettre</a>
+      <a role="button" *ngIf="idDemand === editedApplication.idApplication"
+         (click)="onSave(logForm)" title="Valider la demande">Transmettre</a>
     </div>
   </div>
 </section>

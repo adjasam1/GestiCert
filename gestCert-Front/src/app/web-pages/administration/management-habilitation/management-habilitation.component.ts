@@ -33,6 +33,8 @@ export class ManagementHabilitationComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle('GestiCert - Administration Habilitation');
 
+    this.applicationDataService.publishApplication();
+
     this.applicationsList = this.applicationDataService.availableApplications$;
     this.idApplication = +this.route.snapshot.params.id;
     this.applicationDataService.findApplication(this.idApplication).subscribe( application => {

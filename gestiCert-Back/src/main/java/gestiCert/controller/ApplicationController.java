@@ -2,6 +2,7 @@ package gestiCert.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,6 @@ import gestiCert.service.ApplicationService;
 
 @RestController
 @RequestMapping("/api/application")
-//@CrossOrigin("http://localhost:4200")
 public class ApplicationController
 {
 	
@@ -64,65 +64,49 @@ public class ApplicationController
 	 */
 	
 	@GetMapping()
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getAllApplications()
 	{
 		return applicationServ.getAllApplications();
 	}
 
 	@GetMapping("/id={idApplication}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getApplicationById(@PathVariable Integer idApplication)
 	{
 		return applicationServ.getApplicationById(idApplication);
 	}
 
 	@GetMapping("/ccx={codeCCX}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getApplicationByCCX(@PathVariable String codeCCX)
 	{
 		return applicationServ.getApplicationByCCX(codeCCX);
 	}
 
 	@GetMapping("/nom={nameApplication}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getApplicationByName(@PathVariable String nameApplication)
 	{
 		return applicationServ.getApplicationByName(nameApplication);
 	}
-	
-//	@GetMapping("/utilisateur={user}")
-//	public ResponseEntity<?> getApplicationByUser(@PathVariable AppUser user)
-//	{
-//		return applicationServ.getApplicationsByUser(user);
-//	}
-	
-//	@GetMapping("/utilisateur={idRHUser}")
-//	public List<Application> getApplicationByUser(@PathVariable Integer idRHUser) {
-//	return this.applicationServ.getApplicationByUser(idRHUser);
-//	}
-	
-//	@GetMapping("/utilisateur={user}")
-//	public List<Application> getApplicationByUser(@PathVariable AppUser user) {
-//	return this.applicationServ.getApplicationByOneUser(user);
-//	}
 
 	@PostMapping("/ajout")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> postApplication(@RequestBody Application application)
 	{
 		return applicationServ.createApplication(application);
 	}
 
 	@PutMapping("/modifid={idApplication}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> putApplication(@RequestBody Application application, @PathVariable Integer idApplication)
 	{
 		return applicationServ.updateApplication(application, idApplication);
 	}
 
 	@DeleteMapping("/supprid={idApplication}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> deleteApplication(@PathVariable Integer idApplication)
 	{
 		return applicationServ.deleteApplication(idApplication);

@@ -21,15 +21,6 @@ import gestiCert.model.Environment;
 public interface EnvironmentRepository extends JpaRepository<Environment, Integer>
 {
 	
-//	/**
-//	 * utilise la methode findById du CrudRepository en utilisant le nom de l'environnement comme parametre
-//	 * 
-//	 * @param nameEnvironment
-//	 * @return une liste d'environnements
-//	 */
-//	
-//	public List<Environment> findByNameEnvironment(String nameEnvironment);
-	
 	/**
 	 * utilise la methode findById du CrudRepository en utilisant le nom ou une partie du nom de l'environnement comme parametre
 	 * 

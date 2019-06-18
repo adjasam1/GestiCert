@@ -106,34 +106,28 @@ public class Certificate implements Serializable
 	 * @see addresseAlternative
 	 */
 	
-//	@JsonIgnore
-//	@JsonIgnoreProperties("users")
-	@ManyToOne//(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne
 	@JoinColumn(name = "id_application")
 	private Application application;
 	
-	//@JsonIgnore
-	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne
 	@JoinColumn(name = "id_environnement")
 	private Environment environment;
 	
-	//@JsonIgnore
-	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne
 	@JoinColumn(name = "id_plateforme")
 	private Plateform plateform;
 	
-	//@JsonIgnore
+//	@JsonIgnore
 	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	@JoinColumn(name = "id_racine")
 	private Root root;
 	
-//	@JsonIgnore
 	@JsonIgnoreProperties("certificate")
-	@ManyToMany//(fetch = FetchType.LAZY, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+	@ManyToMany
 	@JoinTable(name ="certificat_serveur", joinColumns = @JoinColumn(name = "id_certificat"), inverseJoinColumns = @JoinColumn(name = "id_serveur"))
 	private List<Server> servers;
 	
-//	@JsonIgnore
 	@JsonIgnore
 	@OnDelete(action = OnDeleteAction.CASCADE)
 	@OneToMany(mappedBy = "certificate", cascade = CascadeType.ALL)
@@ -143,13 +137,11 @@ public class Certificate implements Serializable
 	@JoinColumn(name = "id_utilisateur_demandeur", referencedColumnName = "id_utilisateur")
 	private AppUser user;
 	
-	//@JsonIgnore
-	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne
 	@JoinColumn(name = "id_statut_demande")
 	private StatusDemand statusDemand;
-		
-	//@JsonIgnore
-	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	
+	@ManyToOne
 	@JoinColumn(name = "id_type_demande")
 	private TypeDemand typeDemand;
 	

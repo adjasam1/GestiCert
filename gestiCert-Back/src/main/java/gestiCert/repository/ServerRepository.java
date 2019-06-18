@@ -30,7 +30,5 @@ public interface ServerRepository extends JpaRepository<Server, Integer>
 	
 	@Query("FROM Server server WHERE server.nameServer LIKE %?1%")
 	public List<Server> findByNameServer(String nameServer);
-	
-//	public List<Server> findByCertificate(Certificate certificate);
 
 }

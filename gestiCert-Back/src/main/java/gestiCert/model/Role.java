@@ -3,7 +3,7 @@ package gestiCert.model;
 import org.springframework.security.core.GrantedAuthority;
 
 /**
- * User possible roles.
+ * Roles possibles pour les utilisateurs
  */
 public enum Role implements GrantedAuthority {
 

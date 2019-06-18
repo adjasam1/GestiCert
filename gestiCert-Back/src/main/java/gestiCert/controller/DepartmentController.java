@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,7 +30,6 @@ import gestiCert.service.DepartmentService;
 
 @RestController
 @RequestMapping("/api/service")
-//@CrossOrigin("http://localhost:4200")
 public class DepartmentController
 {
 
@@ -65,7 +65,7 @@ public class DepartmentController
 	 */
 	
 	@GetMapping()
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<List<Department>> getAllDepartments()
 	{
 		List<Department> listDepartments = null;
@@ -87,7 +87,7 @@ public class DepartmentController
 	}
 	
 	@GetMapping("/id={idDepartment}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getDepartmentById(@PathVariable Integer idDepartment)
 	{
 		Department department = null;
@@ -113,7 +113,7 @@ public class DepartmentController
 	}
 	
 	@GetMapping("/nom={nameDepartment}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getDepartmentByName(@PathVariable String nameDepartment)
 	{
 		Department department = null;
@@ -135,7 +135,7 @@ public class DepartmentController
 	}
 	
 	@PostMapping("/ajout")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> postDepartment(@RequestBody Department department)
 	{
 		Department newDepartment = null;
@@ -158,7 +158,7 @@ public class DepartmentController
 	}
 	
 	@PutMapping("/modifid={idDepartment}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> putDepartment(@RequestBody Department department, @PathVariable Integer idDepartment)
 	{
 		Department modifyDepartment = null;
@@ -182,7 +182,7 @@ public class DepartmentController
 	}
 	
 	@DeleteMapping("/supprid={idDepartment}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteDepartment(@PathVariable Integer idDepartment)
 	{
 		try

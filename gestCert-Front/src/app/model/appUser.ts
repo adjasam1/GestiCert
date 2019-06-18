@@ -15,15 +15,9 @@ export interface AppUser {
   department?: Department;
   applications?: Application[];
   roleList?: string[];
-
 }
 
 export class AppUser {
-
-/*  constructor(public id?: number,
-              public username?: string,
-              public password?: string,
-              public roleList?: string[]) {}*/
 
   public idUser?: number;
   public nameUser?: string;

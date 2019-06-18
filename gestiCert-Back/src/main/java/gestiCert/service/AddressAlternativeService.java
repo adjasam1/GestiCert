@@ -30,6 +30,4 @@ public interface AddressAlternativeService {
 
 	ResponseEntity<?> getAddressAlternativeByCertificate(Certificate certificate);
 
-//	ResponseEntity<?> getAddressAlternativeByIdCertificate(Integer idCertificate);
-
 }

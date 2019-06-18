@@ -21,14 +21,4 @@ public interface ApplicationService
 
 	ResponseEntity<String> deleteApplication(Integer idApplication);
 
-//	List<Application> getApplicationByUser(Integer idRHUser);
-
-//	List<Application> getApplicationByUser(AppUser users);
-
-//	List<Application> getApplicationByUser(List<AppUser> users);
-
-//	List<Application> getApplicationByOneUser(AppUser user);
-
-//	ResponseEntity<?> getApplicationsByUser(AppUser user);
-
 }

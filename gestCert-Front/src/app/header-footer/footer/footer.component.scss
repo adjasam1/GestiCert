@@ -1,10 +1,8 @@
-footer
-{
+footer {
   border-top: 2px solid #003DA5;
 }
 
-#container
-{
+#container {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -15,15 +13,13 @@ footer
   padding: 1px 20px;
 }
 
-a
-{
+a {
   color: black;
   margin: 15px;
   text-decoration: none;
 }
 
-a:hover
-{
+a:hover {
   color: #003DA5;
   text-decoration: underline;
 }
@@ -32,41 +28,32 @@ p{
   font-size: 12px;
 }
 
-#gestion2
-{
+#gestion2 {
   display: none;
 }
 
-@media (max-width: 600px)
-{
-  a
-  {
+@media (max-width: 600px) {
+  a {
     margin: 5px;
   }
 
-  #gestion1
-  {
+  #gestion1 {
     display: none;
   }
 
-  #gestion2
-  {
+  #gestion2 {
     display: flex;
   }
 }
 
-@media (max-width: 450px)
-{
-  #gestion2
-  {
+@media (max-width: 450px) {
+  #gestion2 {
     display: none;
   }
 }
 
-@media (max-width: 350px)
-{
-  a
-  {
+@media (max-width: 350px) {
+  a {
     display: block;
   }
 

@@ -73,8 +73,6 @@ public class TypeDemand implements Serializable
 		this.typeTypeDemand = typeTypeDemand;
 		this.certificates = certificates;
 	}
-	
-	
 
 	public TypeDemand(@Size(max = 50) @NotNull String typeTypeDemand) {
 		super();

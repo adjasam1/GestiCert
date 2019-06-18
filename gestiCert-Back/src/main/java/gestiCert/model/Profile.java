@@ -66,33 +66,21 @@ public class Profile implements Serializable
 		
 	}
 	
-
-	
-	
 	public Profile(Integer idProfile) {
 		super();
 		this.idProfile = idProfile;
 	}
-
-
-
 
 	public Profile(@Size(max = 50) @NotNull String typeProfile) {
 		super();
 		this.typeProfile = typeProfile;
 	}
 
-
-
-
 	public Profile(Integer idProfile, @Size(max = 50) @NotNull String typeProfile) {
 		super();
 		this.idProfile = idProfile;
 		this.typeProfile = typeProfile;
 	}
-
-
-
 
 	public Profile(Integer idProfile, @Size(max = 50) @NotNull String typeProfile, List<AppUser> users) {
 		super();
@@ -107,65 +95,34 @@ public class Profile implements Serializable
 	 * @return valeur correspondant au get ou set
 	 */
 
-
-
 	public Integer getIdProfile() {
 		return idProfile;
 	}
-
-
-
 
 	public void setIdProfile(Integer idProfile) {
 		this.idProfile = idProfile;
 	}
 
-
-
-
 	public String getTypeProfile() {
 		return typeProfile;
 	}
-
-
-
 
 	public void setTypeProfile(String typeProfile) {
 		this.typeProfile = typeProfile;
 	}
 
-
-
-
 	public List<AppUser> getUsers() {
 		return users;
 	}
 
-
-
-
 	public void setUsers(List<AppUser> users) {
 		this.users = users;
 	}
-
-
-
 
 	@Override
 	public String toString() {
 		return " " + typeProfile;
 	}
 
-
-
-	
-
-	
-
-	
-
-
-	
-	
 
 }

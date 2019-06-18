@@ -78,6 +78,8 @@ export class DemandComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle('GestiCert - Demande Certificat');
 
+    this.applicationDataService.publishApplication();
+
     this.usersList = this.userDataService.availableUsers$;
     this.idUser = this.route.snapshot.params.id1;
     this.userDataService.findUserByIdRH(this.idUser).subscribe(user => this.editedUser = user);

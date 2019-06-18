@@ -2,6 +2,7 @@ package gestiCert.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,6 @@ import gestiCert.service.RootService;
 
 @RestController
 @RequestMapping("/api/racine")
-//@CrossOrigin("http://localhost:4200")
 public class RootController
 {
 	
@@ -62,42 +62,42 @@ public class RootController
 	 */
 	
 	@GetMapping()
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getAllRoots()
 	{
 		return rootServ.getAllRoots();
 	}
 	
 	@GetMapping("/id={idRoot}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getRootById(@PathVariable Integer idRoot)
 	{
 		return rootServ.getRootById(idRoot);
 	}
 	
 	@GetMapping("/nom={word}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getRootByName(@PathVariable String word)
 	{
 		return rootServ.getRootByName(word);
 	}
 	
 	@PostMapping("/ajout")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> postRoot(@RequestBody Root root)
 	{
 		return rootServ.createRoot(root);
 	}
 	
 	@PutMapping("/modifid={idRoot}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> putEnvironment(@RequestBody Root root, @PathVariable Integer idRoot)
 	{
 		return rootServ.updateRoot(root, idRoot);
 	}
 	
 	@DeleteMapping("/supprid={idRoot}")
-//	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_SERVICE') or hasRole('ROLE_DEV')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<String> deleteEnvironment(@PathVariable Integer idRoot)
 	{
 		return rootServ.deleteRoot(idRoot);

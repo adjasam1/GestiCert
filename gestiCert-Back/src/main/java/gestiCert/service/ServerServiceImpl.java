@@ -129,12 +129,6 @@ public class ServerServiceImpl implements ServerService
 		return ResponseEntity.status(HttpStatus.OK).body(listServers);
 	}
 	
-//	@Override
-//	public List<Server> getServerByCertificate(Certificate certificate)
-//	{
-//		return serverRepo.findByCertificate(certificate);
-//	}
-	
 	/**
 	 * methode qui ajoute un serveur
 	 * 

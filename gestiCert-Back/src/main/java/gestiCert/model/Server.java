@@ -54,9 +54,7 @@ public class Server implements Serializable
 	 */
 	
 	@JsonIgnore
-//	@OnDelete(action = OnDeleteAction.CASCADE)
 	@ManyToMany(mappedBy = "servers")
-	// , fetch = FetchType.LAZY
 	private List<Certificate> certificates;
 	
 	/**
@@ -67,14 +65,10 @@ public class Server implements Serializable
 	{
 	}
 	
-	
-	
 	public Server(@Size(max = 50) @NotNull String nameServer) {
 		super();
 		this.nameServer = nameServer;
 	}
-
-
 
 	public Server(Integer idServer, @Size(max = 50) @NotNull String nameServer, List<Certificate> certificates)
 	{
@@ -120,13 +114,8 @@ public class Server implements Serializable
 		this.certificates = certificates;
 	}
 
-
-
 	@Override
 	public String toString() {
 		return " " + nameServer;
 	}
-	
-	
-
 }

@@ -71,7 +71,7 @@ public class MailServiceImpl implements MailService
     				"           <td class=\"td2\">"+certificate.getUser().geteMailUser()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
-    				"           <td class=\"td1\"><strong>E-mail du postier référent : </strong></td>" + 
+    				"           <td class=\"td1\"><strong>E-mail du postier referent : </strong></td>" + 
     				"           <td class=\"td2\">"+certificate.geteMailReferent()+"</td>" + 
     				"       </tr>" + 
     				"       <tr>" + 
@@ -125,11 +125,6 @@ public class MailServiceImpl implements MailService
     				"			<td class=\"td1\"><strong>Nom commun </strong><br><em>\"URL Principale du site\"</em> : </td>" + 
     				"			<td class=\"td2\">"+certificate.getLinkAddressPrincipal()+"</td>" + 
     				"		</tr>" + 
-//    				"		<tr>" + 
-//    				"			<td class=\"td1\"><strong>Adresse(s) alternative(s) </strong><br>" +
-//    				"				<em>\"URL(s) supplémentaire(s)</em> : </td>" + 
-//    				"			<td class=\"td2\">"+certificate.getAddressAlternatives()+"</td>" + 
-//    				"       </tr>" + 
     				"       <tr>" + 
     				"           <td class=\"td1\"><strong>Plateforme : </strong></td>" + 
     				"           <td class=\"td2\">"+certificate.getPlateform().getNamePlateform()+"</td>" + 

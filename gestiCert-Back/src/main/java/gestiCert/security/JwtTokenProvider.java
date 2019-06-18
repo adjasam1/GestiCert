@@ -59,29 +59,6 @@ public class JwtTokenProvider {
                 .compact();
     }
 	
-    /**
-     * Method that creates a token with username as "sub" field, user roles as "auth" field, "iat" as now date,
-     * "exp" as now date + validity time.
-     * @param username the user username.
-     * @param roles the user roles.
-     * @return the created JWT as String.
-     */
-//    public String createToken(String idRHUser, List<Role> roles) {
-//
-//        Claims claims = Jwts.claims().setSubject(idRHUser);
-//        claims.put("auth", roles.stream().map(s -> new SimpleGrantedAuthority(s.getAuthority())).filter(Objects::nonNull).collect(Collectors.toList()));
-//
-//        Date now = new Date();
-//        Date validity = new Date(now.getTime() + validityInMilliseconds);
-//
-//        return Jwts.builder()//
-//                .setClaims(claims)//
-//                .setIssuedAt(now)//
-//                .setExpiration(validity)//
-//                .signWith(SignatureAlgorithm.HS256, secretKey)//
-//                .compact();
-//    }
-	
 	public Authentication getAuthentication(String token) {
         UserDetails userDetails = userDetailsServ.loadUserByUsername(getUsername(token));
         return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());

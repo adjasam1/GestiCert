@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<class-diagram version="1.2.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
+  associations="true" dependencies="false" nesting-relationships="true" router="FAN">  
+  <class id="1" language="java" name="gestiCert.model.AppUser" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/AppUser.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="230" width="218" x="131" y="24"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="2" language="java" name="gestiCert.model.Profile" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/Profile.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="123" width="168" x="44" y="378"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="3" language="java" name="gestiCert.model.Department" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/Department.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="123" width="178" x="258" y="377"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="4" language="java" name="gestiCert.model.Application" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/Application.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="230" width="215" x="622" y="48"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="5" language="java" name="gestiCert.model.Certificate" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/Certificate.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="446" width="301" x="590" y="392"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="6" language="java" name="gestiCert.model.StatusDemand" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/StatusDemand.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="123" width="198" x="218" y="570"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="7" language="java" name="gestiCert.model.TypeDemand" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/TypeDemand.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="123" width="183" x="230" y="715"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="8" language="java" name="gestiCert.model.Environment" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/Environment.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="122" width="177" x="1100" y="173"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="9" language="java" name="gestiCert.model.Root" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/Root.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="122" width="164" x="1111" y="328"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="10" language="java" name="gestiCert.model.Plateform" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/Plateform.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="122" width="166" x="1112" y="498"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="11" language="java" name="gestiCert.model.Server" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/Server.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="122" width="160" x="1120" y="655"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <class id="12" language="java" name="gestiCert.model.AddressAlternative" project="gestiCert-Back" 
+    file="/gestiCert-Back/src/main/java/gestiCert/model/AddressAlternative.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="121" width="206" x="1071" y="793"/>    
+    <display autosize="false" stereotype="true" package="true" initial-value="false" signature="true" 
+      sort-features="false" accessors="true" visibility="true">      
+      <attributes public="true" package="true" protected="true" private="true" static="true"/>      
+      <operations public="true" package="true" protected="true" private="true" static="true"/>    
+    </display>  
+  </class>  
+  <association id="13">    
+    <bendpoint x="377" y="339"/>    
+    <end type="SOURCE" refId="3" navigable="false">      
+      <attribute id="14" name="users"/>      
+      <multiplicity id="15" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="340" y="267"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="16">    
+    <bendpoint x="1015" y="757"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="17" name="servers">        
+        <position height="20" width="49" x="1045" y="718"/>      
+      </attribute>      
+      <multiplicity id="18" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="19">    
+    <bendpoint x="534" y="729"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="20" name="typeDemand">        
+        <position height="20" width="81" x="419" y="716"/>      
+      </attribute>      
+      <multiplicity id="21" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="22">    
+    <bendpoint x="1003" y="557"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="23" name="plateform"/>      
+      <multiplicity id="24" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="25">    
+    <bendpoint x="970" y="901"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="26" name="certificate">        
+        <position height="20" width="64" x="857" y="840"/>      
+      </attribute>      
+      <multiplicity id="27" minimum="0" maximum="1">        
+        <position height="18" width="27" x="908" y="803"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="28">    
+    <bendpoint x="90" y="342"/>    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="29" name="users">        
+        <position height="20" width="40" x="90" y="267"/>      
+      </attribute>      
+      <multiplicity id="30" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="144" y="269"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="31">    
+    <bendpoint x="528" y="830"/>    
+    <end type="SOURCE" refId="7" navigable="false">      
+      <attribute id="32" name="certificates">        
+        <position height="20" width="71" x="503" y="761"/>      
+      </attribute>      
+      <multiplicity id="33" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="561" y="793"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="34">    
+    <bendpoint x="666" y="348"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="35" name="certificates"/>      
+      <multiplicity id="36" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="37">    
+    <bendpoint x="1039" y="300"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="38" name="certificates">        
+        <position height="20" width="71" x="933" y="408"/>      
+      </attribute>      
+      <multiplicity id="39" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="895" y="409"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="40">    
+    <bendpoint x="1049" y="411"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="41" name="certificates">        
+        <position height="20" width="71" x="910" y="496"/>      
+      </attribute>      
+      <multiplicity id="42" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="897" y="477"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="43">    
+    <bendpoint x="999" y="250"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="44" name="environment"/>      
+      <multiplicity id="45" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="46">    
+    <bendpoint x="800" y="349"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="47" name="application"/>      
+      <multiplicity id="48" minimum="0" maximum="1">        
+        <position height="18" width="27" x="791" y="292"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="49">    
+    <bendpoint x="488" y="97"/>    
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="50" name="users">        
+        <position height="20" width="40" x="353" y="93"/>      
+      </attribute>      
+      <multiplicity id="51" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="52">    
+    <bendpoint x="505" y="308"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="53" name="user"/>      
+      <multiplicity id="54" minimum="0" maximum="1">        
+        <position height="18" width="27" x="359" y="233"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="1" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="55">    
+    <bendpoint x="975" y="822"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="56" name="addressAlternatives">        
+        <position height="20" width="121" x="949" y="842"/>      
+      </attribute>      
+      <multiplicity id="57" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="1035" y="810"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="58">    
+    <bendpoint x="1007" y="616"/>    
+    <end type="SOURCE" refId="10" navigable="false">      
+      <attribute id="59" name="certificates"/>      
+      <multiplicity id="60" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="61">    
+    <bendpoint x="178" y="310"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="62" name="profile">        
+        <position height="20" width="42" x="115" y="347"/>      
+      </attribute>      
+      <multiplicity id="63" minimum="0" maximum="1">        
+        <position height="18" width="27" x="167" y="350"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="2" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="64">    
+    <bendpoint x="484" y="197"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="65" name="applications"/>      
+      <multiplicity id="66" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="4" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="67">    
+    <bendpoint x="528" y="668"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="68" name="statusDemand"/>      
+      <multiplicity id="69" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="6" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <bendpoint x="242" y="310"/>    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="71" name="department">        
+        <position height="20" width="73" x="208" y="350"/>      
+      </attribute>      
+      <multiplicity id="72" minimum="0" maximum="1">        
+        <position height="18" width="27" x="292" y="350"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="3" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <bendpoint x="1009" y="694"/>    
+    <end type="SOURCE" refId="11" navigable="false">      
+      <attribute id="74" name="certificates">        
+        <position height="20" width="71" x="921" y="652"/>      
+      </attribute>      
+      <multiplicity id="75" minimum="0" maximum="2147483647">        
+        <position height="18" width="25" x="903" y="674"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <bendpoint x="469" y="583"/>    
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="77" name="certificates">        
+        <position height="20" width="71" x="509" y="566"/>      
+      </attribute>      
+      <multiplicity id="78" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <bendpoint x="1016" y="508"/>    
+    <end type="SOURCE" refId="5" navigable="false">      
+      <attribute id="80" name="root"/>      
+      <multiplicity id="81" minimum="0" maximum="1">        
+        <position height="18" width="27" x="1085" y="463"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
+    sort-features="false" accessors="true" visibility="true">    
+    <attributes public="true" package="true" protected="true" private="true" static="true"/>    
+    <operations public="true" package="true" protected="true" private="true" static="true"/>  
+  </classifier-display>  
+  <association-display labels="true" multiplicity="true"/>
+</class-diagram>

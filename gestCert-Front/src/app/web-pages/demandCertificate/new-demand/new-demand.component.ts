@@ -101,6 +101,8 @@ export class NewDemandComponent implements OnInit {
   ngOnInit() {
     this.title.setTitle('GestiCert - Demande Certificat');
 
+    this.applicationDataService.publishApplication();
+
     this.editedCertificate = {
       idCertificate: 0,
       typeDemand: {idTypeDemand: 1},
@@ -180,7 +182,7 @@ export class NewDemandComponent implements OnInit {
   }
 
   onSave(logForm: NgForm) {
-    if (confirm('Êtes-vous certain de vouloir enregistrer cette demande ?')) {
+    if (confirm('Êtes-vous certain de vouloir transmettre cette demande ?')) {
       this.editedCertificate.nameCertificate = '' + this.editedApplication.codeCCX + '-YYYYMMDD-ENV';
       this.editedCertificate.dateDemand = this.dateNow;
       this.editedCertificate.user = this.listUsers.find(user => {
@@ -212,10 +214,10 @@ export class NewDemandComponent implements OnInit {
   }
 
   onSend() {
-    if (confirm('Êtes-vous certain de vouloir envoyer cette demande ?')) {
+ //   if (confirm('Êtes-vous certain de vouloir envoyer cette demande ?')) {
       this.certificateDataService.sendMail(this.editedCertificate);
       this.router.navigate(['/accueil/' + this.editedUser.idRHUser]);
-    }
+ //   }
   }
 
   onValid() {

@@ -11,7 +11,6 @@ export class ContactComponent implements OnInit {
   constructor(private userDataService: UserDataService) { }
 
   ngOnInit() {
-
   }
 
 }

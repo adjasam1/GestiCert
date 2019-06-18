@@ -17,7 +17,7 @@ export class ManagementApplicationComponent implements OnInit {
   idApplication: number;
   editedApplication: Application = new Application(0, '', '', '', '', '', '', '', null, null);
 
-  /* TEST PRIMENG */
+  /* PRIMENG */
   applications: Application;
   cols: any[];
   selectedApplication: Application;
@@ -51,11 +51,12 @@ export class ManagementApplicationComponent implements OnInit {
         this.applicationDataService.createApplication(this.editedApplication).subscribe( application => {
           this.onRefresh();
           logForm.reset();
-  //        this.router.navigate([history.go(-1)]);
+          this.onRefresh();
           this.router.navigate(['/gestion/app']);
           this.onRefresh();
         });
       }
+      this.onRefresh();
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier cette application ?')) {
         this.applicationDataService.updateApplication(this.editedApplication).subscribe( updateApplication => {
@@ -64,6 +65,7 @@ export class ManagementApplicationComponent implements OnInit {
           this.onRefresh();
         });
       }
+      this.onRefresh();
     }
   }
 

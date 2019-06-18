@@ -119,6 +119,7 @@ export class CertificateDataService {
    *
    * @ param idRHUser
    */
+
   public getCertificateByUserPrimeNg(idRHUser: string) {
     return this.httpClient.get<any>(`http://localhost:8080/api/certificat/utilisateur=${idRHUser}`)
       .toPromise()

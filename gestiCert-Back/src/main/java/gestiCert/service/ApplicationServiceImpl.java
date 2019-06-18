@@ -155,17 +155,7 @@ public class ApplicationServiceImpl implements ApplicationService
 		
 		return ResponseEntity.status(HttpStatus.OK).body(listApplications);
 	}
-	
-//	@Override
-//	public List<Application> getApplicationByUser(Integer idRHUser) {
-//		return this.applicationRepo.findByIdRHUser(idRHUser);
-//	}
-	
-//	@Override
-//	public List<Application> getApplicationByOneUser(AppUser user) {
-//		return this.applicationRepo.findByUser(user);
-//	}
-//	
+		
 	/**
 	 * methode qui ajoute une application
 	 * 

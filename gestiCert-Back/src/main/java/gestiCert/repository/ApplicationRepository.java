@@ -37,9 +37,5 @@ public interface ApplicationRepository extends JpaRepository<Application, Intege
 	 */
 	
 	public List<Application> findByNameApplication(String nameApplication);
-	
-//	public List<Application> findByIdRHUser(Integer idRHUser);
-	
-//	public List<Application> findByUser(AppUser user);
 
 }

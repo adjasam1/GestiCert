@@ -160,8 +160,8 @@ public class AddressAlternativeServiceImpl implements AddressAlternativeService
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le lien de l'adresse alternative doit être renseigné");
 		}
 		
-		Integer id_certificat = addressAlternative.getCertificate().getIdCertificate();
-		if ((id_certificat == null) || (id_certificat == 0))
+		Integer idCertificat = addressAlternative.getCertificate().getIdCertificate();
+		if ((idCertificat == null) || (idCertificat == 0))
 		{
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'identifiant du certificat de l'adresse alternative doit être renseigné");
 		}
@@ -196,8 +196,8 @@ public class AddressAlternativeServiceImpl implements AddressAlternativeService
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le lien de l'adresse alternative doit être renseigné");
 		}
 		
-		Integer id_certificat = addressAlternative.getCertificate().getIdCertificate();
-		if ((id_certificat == null) || (id_certificat == 0))
+		Integer idCertificat = addressAlternative.getCertificate().getIdCertificate();
+		if ((idCertificat == null) || (idCertificat == 0))
 		{
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'identifiant du certificat de l'adresse alternative doit être renseigné");
 		}
@@ -234,27 +234,5 @@ public class AddressAlternativeServiceImpl implements AddressAlternativeService
 		
 		return ResponseEntity.status(HttpStatus.OK).body("Suppression OK");
 	}
-	
-//	@Override
-//	public ResponseEntity<?> getAddressAlternativeByIdCertificate(Integer idCertificate)
-//	{
-//
-//		List<AddressAlternative> listAddressAlternatives = null;
-//		
-//		try
-//		{
-//			listAddressAlternatives = addressAlternativeRepo.findByIdCertificate(idCertificate);
-//		} catch (Exception e)
-//		{
-//			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
-//		}
-//		
-//		if (listAddressAlternatives == null)
-//		{
-//			return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
-//		}
-//		
-//		return ResponseEntity.status(HttpStatus.OK).body(listAddressAlternatives);
-//	}
 
 }

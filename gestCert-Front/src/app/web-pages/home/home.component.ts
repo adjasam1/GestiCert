@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit {
 
   /* TEST PRIMENG */
   certificate: Certificate;
-//  certificate: Certificate = new PrimeCertificate();
   listCertificates: Certificate[];
 
   cols1: any[];
@@ -62,7 +61,6 @@ export class HomeComponent implements OnInit {
     applicationCCX: [null, Validators.compose([Validators.minLength(3), Validators.maxLength(3)])],
     applicationName: [null, Validators.compose([])],
     environmentName: [null, Validators.compose([])],
- //   applicationCCX: [null, Validators.compose([Validators.minLength(3), Validators.maxLength(3)])],
   });
 
 
@@ -96,34 +94,14 @@ export class HomeComponent implements OnInit {
     });
 
     this.certificateDataService.availableCertificates$.subscribe(certificates => this.listCertificates = certificates);
- /*   this.certificateDataService.getCertificatePrimeNg().then(certificates => {
-      this.listCertificates = certificates;
-      this.listCertificates.forEach(certificate => certificate.applicationCCX = certificate.application.codeCCX);
-      this.listCertificates.forEach(certificate => certificate.applicationName = certificate.application.nameApplication);
-      this.listCertificates.forEach(certificate => certificate.environmentName = certificate.environment.nameEnvironment);
-      this.listCertificates.forEach(certificate => certificate.rootName = certificate.root.nameRoot);
-    });*/
 
-
- //   this.certificateDataService.availableCertificates$.subscribe(certificates => this.certificates = certificates);
-    this.certificateDataService.getCertificateByUserPrimeNg(this.idRH)
-      .then( certificates => {
-      this.certificates = certificates;
-      this.certificates.forEach(certificate =>
-        certificate.applicationCCX = certificate.application.codeCCX);
-      this.certificates.forEach(certificate =>
-        certificate.applicationName = certificate.application.nameApplication);
-      this.certificates.forEach(certificate =>
-        certificate.environmentName = certificate.environment.nameEnvironment);
-      this.certificates.forEach(certificate =>
-        certificate.rootName = certificate.root.nameRoot);
+    this.certificateDataService.getCertificateByUserPrimeNg(this.idRH).then( certificates => {
+        this.certificates = certificates;
+        this.certificates.forEach(certificate => certificate.applicationCCX = certificate.application.codeCCX);
+        this.certificates.forEach(certificate => certificate.applicationName = certificate.application.nameApplication);
+        this.certificates.forEach(certificate => certificate.environmentName = certificate.environment.nameEnvironment);
+        this.certificates.forEach(certificate => certificate.rootName = certificate.root.nameRoot);
       });
-
-/*   this.serversList = this.serverDataService.availableServers$;
-    this.serversList.subscribe(
-      servers => this.listServers = servers
-    );
-    this.listServers = this.editedCertificate.servers;*/
 
     this.certificatesList = this.certificateDataService.availableCertificates$;
     this.getCertificate();

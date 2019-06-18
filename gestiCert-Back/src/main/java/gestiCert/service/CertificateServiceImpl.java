@@ -31,37 +31,18 @@ public class CertificateServiceImpl implements CertificateService
 	 * 
 	 * @see CertificateRepository
 	 */
-
 	private CertificateRepository certificateRepo;
 	
-//	private BCryptPasswordEncoder passwordEncoder;
-
 	/**
 	 * constructeur
 	 * 
 	 * @param certificateRepo
 	 */
-	
-	
-	
 	public CertificateServiceImpl(CertificateRepository certificateRepo)
 	{
 		super();
 		this.certificateRepo = certificateRepo;
 	}
-
-
-
-//	public CertificateServiceImpl() {
-//	}
-
-
-
-//	public CertificateServiceImpl(CertificateRepository certificateRepo, BCryptPasswordEncoder passwordEncoder) {
-//		super();
-//		this.certificateRepo = certificateRepo;
-//		this.passwordEncoder = passwordEncoder;
-//	}
 
 
 
@@ -93,6 +74,7 @@ public class CertificateServiceImpl implements CertificateService
 		return ResponseEntity.status(HttpStatus.OK).body(listCertificates);
 	}
 	
+	// service qui appelle la requete du repository
 	@Override
 	public List<Certificate> getCertificateByUser(String idRHUser)
 	{
@@ -209,33 +191,6 @@ public class CertificateServiceImpl implements CertificateService
 		return certificateRepo.saveAndFlush(certificate);
 		
 	}
-	
-//	@Override
-//	public Certificate createCertificate(Certificate certificate) {
-//		return certificateRepo.saveAndFlush(newCertificate);
-//	}
-	
-//	 @Override
-//	    public String signup(AppUser user) throws ExistingIdRHUserException {
-//	        if (!appUserRepo.existsByIdRHUser(user.getIdRHUser())) {
-//	            AppUser userToSave = new AppUser(user.getIdRHUser(), passwordEncoder.encode(user.getPasswordUser()), user.getNameUser(), user.getFirstNameUser(), user.geteMailUser(), user.getPhoneUser(), user.getDepartment(), user.getFunction(), user.getRoleList());
-//	            appUserRepo.save(userToSave);
-//	            return jwtTokenProvider.createToken(user.getIdRHUser(), user.getRoleList());
-//	        } else {
-//	            throw new ExistingIdRHUserException();
-//	        }
-//	    }
-	
-//	this.nameCertificate = nameCertificate;
-//	this.linkAddressPrincipal = linkAddressPrincipal;
-//	this.linkInstallation = linkInstallation;
-//	this.passwordCertificate = passwordCertificate;
-//	this.dateIssue = dateIssue;
-//	this.dateEndValidity = dateEndValidity;
-//	this.application = application;
-//	this.environment = environment;
-//	this.plateform = plateform;
-//	this.root = root;
 	
 	/**
 	 * methode qui modifie un certificat

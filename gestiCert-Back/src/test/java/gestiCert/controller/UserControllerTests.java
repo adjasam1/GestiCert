@@ -28,7 +28,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import gestiCert.model.AppUser;
 import gestiCert.model.Department;
 import gestiCert.model.Profile;
-//import gestiCert.model.User;
 import gestiCert.security.JwtTokenProvider;
 import gestiCert.service.AddressAlternativeService;
 import gestiCert.service.AppUserService;
@@ -41,7 +40,6 @@ import gestiCert.service.RootService;
 import gestiCert.service.ServerService;
 import gestiCert.service.StatusDemandService;
 import gestiCert.service.TypeDemandService;
-//import gestiCert.service.UserService;
 
 import org.springframework.test.context.TestExecutionListeners.MergeMode;
 import org.springframework.security.test.context.support.WithSecurityContextTestExecutionListener;

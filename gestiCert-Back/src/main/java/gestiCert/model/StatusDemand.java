@@ -74,8 +74,6 @@ public class StatusDemand implements Serializable
 		this.certificates = certificates;
 	}
 	
-	
-	
 	public StatusDemand(@Size(max = 50) @NotNull String nameStatusDemand) {
 		super();
 		this.nameStatusDemand = nameStatusDemand;

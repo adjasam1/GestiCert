@@ -59,8 +59,6 @@ public class Department implements Serializable
 	@OneToMany(mappedBy = "department", cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
 	private List<AppUser> users = new ArrayList<>();
 	
-	// @OneToMany(mappedBy = "department", fetch = FetchType.EAGER , cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH}, orphanRemoval = true)
-
 	/**
 	 * constructeurs de la classe dont un vide par defaut
 	 */

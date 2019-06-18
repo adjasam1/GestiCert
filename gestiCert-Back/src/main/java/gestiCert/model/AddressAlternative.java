@@ -52,7 +52,7 @@ public class AddressAlternative implements Serializable
 	 */
 	
 	@JsonIgnore
-	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne
 	@JoinColumn(name = "id_certificat")
 	private Certificate certificate;
 	

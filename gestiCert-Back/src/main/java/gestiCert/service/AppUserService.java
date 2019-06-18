@@ -63,7 +63,7 @@ public interface AppUserService {
 
 	public void deleteUser(Integer idUser) throws BusinessResourceException;
 
-	int findUserByIdRH(String idRHUser);
+//	int findUserByIdRH(String idRHUser);
 
 
 }

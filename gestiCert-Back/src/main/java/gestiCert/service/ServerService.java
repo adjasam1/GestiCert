@@ -26,6 +26,4 @@ public interface ServerService {
 
 	ResponseEntity<String> deleteServer(Integer idServer);
 
-//	List<Server> getServerByCertificate(Certificate certificate);
-
 }

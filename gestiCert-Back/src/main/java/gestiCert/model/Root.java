@@ -64,23 +64,17 @@ public class Root implements Serializable
 	public Root() {
 		
 	}
-	
-	
 
 	public Root(@Size(max = 50) @NotNull String nameRoot) {
 		super();
 		this.nameRoot = nameRoot;
 	}
 
-
-
 	public Root(Integer idRoot, @Size(max = 50) @NotNull String nameRoot) {
 		super();
 		this.idRoot = idRoot;
 		this.nameRoot = nameRoot;
 	}
-
-
 
 	public Root(Integer idRoot, @Size(max = 50) @NotNull String nameRoot, List<Certificate> certificates)
 	{

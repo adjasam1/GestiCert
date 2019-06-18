@@ -43,38 +43,28 @@ public class AppUser implements Serializable {
     
 	@Column(name = "nom")
 	@Size(max = 50)
-//	@NotNull
 	private String nameUser;
 	
 	@Column(name = "prénom")
 	@Size(max = 50)
-//	@NotNull
 	private String firstNameUser;
 	
 	@Column(name = "email", unique = true)
-//	@NotNull
 	private String eMailUser;
 	
 	@Column(name = "téléphone")
 	@Size(min = 10, max = 10)
 	private String phoneUser;
 
-	//@JsonIgnore
-	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne
 	@JoinColumn(name = "id_service")
 	private Department department;
 	
-	//@JsonIgnore
-	@ManyToOne//(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+	@ManyToOne
 	@JoinColumn(name = "id_profile")
 	private Profile profile;
 	
-//	@JsonIgnore
-	@ManyToMany(mappedBy = "users")//(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.REFRESH, CascadeType.PERSIST})
-//	@JoinTable(name = "utilisateur_application", joinColumns = @JoinColumn(name = "id_utilisateur"),
-//		inverseJoinColumns = @JoinColumn(name = "id_application"),
-//		foreignKey = @ForeignKey(ConstraintMode.CONSTRAINT),
-//        inverseForeignKey = @ForeignKey(ConstraintMode.CONSTRAINT))
+	@ManyToMany(mappedBy = "users")
 	private List<Application> applications;
 
 	@ElementCollection(fetch = FetchType.EAGER)
@@ -248,10 +238,5 @@ public class AppUser implements Serializable {
 	public void setRoleList(List<Role> roleList) {
 		this.roleList = roleList;
 	}
-
-	
-	
-	
-	
 
 }

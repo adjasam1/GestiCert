@@ -2,6 +2,7 @@ package gestiCert.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -26,7 +27,6 @@ import gestiCert.service.ProfileService;
 
 @RestController
 @RequestMapping("/api/profil")
-//@CrossOrigin("http://localhost:4200")
 public class ProfileController
 {
 	
@@ -61,6 +61,7 @@ public class ProfileController
 	 */
 	
 	@GetMapping()
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getAllProfiles()
 	{
 		return profileServ.getAllProfiles();
@@ -69,30 +70,35 @@ public class ProfileController
 
 
 	@GetMapping("/id={idProfile}")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getProfileById(@PathVariable Integer idProfile)
 	{
 		return profileServ.getProfileById(idProfile);
 	}
 	
 	@GetMapping("/type={typeProfile}")
+	@PreAuthorize("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 	public ResponseEntity<?> getProfileByType(@PathVariable String typeProfile)
 	{
 		return profileServ.getProfileByType(typeProfile);
 	}
 	
 	@PostMapping("/ajout")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> postProfile(@RequestBody Profile profile)
 	{
 		return profileServ.createProfile(profile);
 	}
 	
 	@PutMapping("/modifid={idProfile}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> putProfile(@RequestBody Profile profile, @PathVariable Integer idProfile)
 	{
 		return profileServ.updateProfile(profile, idProfile);
 	}
 	
 	@DeleteMapping("/supprid={idProfile}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteProfile(@PathVariable Integer idProfile)
 	{
 		return profileServ.deleteProfile(idProfile);

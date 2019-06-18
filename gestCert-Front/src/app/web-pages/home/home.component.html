@@ -79,9 +79,9 @@
                      id="date" name="date" title="Champ pour rechercher par date d'émission">
             </span>
           </div>
-          <div class="reset">
+    <!--      <div class="reset">
             <a role="button" (click)="onReset(logForm)">Reset</a>
-          </div>
+          </div>-->
         </form>
       </div>
 
@@ -200,9 +200,6 @@
                      (input)="dt2.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="NOM">
             </span>
           </div>
-          <div class="reset">
-            <a role="button" (click)="reset(logForm)">Reset</a>
-          </div>
         </form>
       </div>
 
@@ -308,9 +305,6 @@
               <input *ngSwitchCase="'environmentName'" pInputText type="search"
                      (input)="dt3.filter($event.target.value, col.field, col.filterMatchMode)" placeholder="NOM">
             </span>
-          </div>
-          <div class="reset">
-            <a role="button" (click)="reset(logForm)">Reset</a>
           </div>
         </form>
       </div>

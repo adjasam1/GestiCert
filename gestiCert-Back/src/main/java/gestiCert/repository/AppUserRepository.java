@@ -53,7 +53,7 @@ public interface AppUserRepository extends JpaRepository<AppUser, Integer>{
 	@Query("FROM AppUser user WHERE user.nameUser = ?1 AND user.firstNameUser = ?2")
 	public Optional<AppUser> findByNameUserAndFirstNameUser(String nameUser, String firstNameUser);
 	
-	//authentification procedure stockee
-	@Query(value = "SELECT id_utilisateur FROM app_utilisateur WHERE idRH LIKE 'paaa001'", nativeQuery = true)
-	Integer findUserByIdRH(String idRHUser);
+//	//authentification procedure stockee
+//	@Query(value = "SELECT id_utilisateur FROM app_utilisateur WHERE idRH LIKE 'paaa001'", nativeQuery = true)
+//	Integer findUserByIdRH(String idRHUser);
 }

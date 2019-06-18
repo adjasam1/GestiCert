@@ -47,11 +47,17 @@
               <td>{{ editedCertificate.root.nameRoot }}</td>
               <td>{{ editedCertificate.plateform.namePlateform }}</td>
               <td><span *ngFor="let server of listServers">{{server.nameServer}}<br *ngIf="listServers.length > 0"></span></td>
-              <td>
-                <a type="button" href="assets/cer/fichierZip.7z">
-                  <img class="cert" src="assets/icons/certificate.svg" alt="Téléchargement du certificat {{ editedCertificate.nameCertificate }}">
-                </a>
+              <td *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseZip">
+                <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
+                     title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} non valide">
               </td>
+                <ng-template #elseZip>
+                  <td>
+                    <a type="button" href="assets/cer/fichierZip.7z">
+                      <img class="cert" src="assets/icons/certificate.svg" alt="Téléchargement du certificat {{ editedCertificate.nameCertificate }}">
+                    </a>
+                  </td>
+                </ng-template>
             </tr>
           </ng-template>
         </p-table>
@@ -84,7 +90,6 @@
       </div>
 
       <div class="space">
-        <!--*ngIf="editedCertificate.addressAlternative.length !== 0"-->
         <p-table [value]="certificates">
           <ng-template pTemplate="header">
             <tr>
@@ -96,13 +101,19 @@
           </ng-template>
           <ng-template pTemplate="body" let-certificate>
             <tr *ngIf="certificate.idCertificate === editedCertificate.idCertificate">
-              <td>
-                <p-dialog [(visible)]="display" [contentStyle]="{'background-color': '#D9EAF4'}">
-                  <p-header>Mot de Passe du certificat {{ editedCertificate.nameCertificate }} :</p-header>
-                  {{ passwordDecode }}
-                </p-dialog>
-                <a role="button" (click)="onShowDialog()">Afficher</a>
+              <td *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd')); else elseMDP">
+                <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
+                     title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} non valide">
               </td>
+              <ng-template #elseMDP>
+                <td>
+                  <p-dialog [(visible)]="display" [contentStyle]="{'background-color': '#D9EAF4'}">
+                    <p-header>Mot de Passe du certificat {{ editedCertificate.nameCertificate }} :</p-header>
+                    {{ passwordDecode }}
+                  </p-dialog>
+                  <a role="button" (click)="onShowDialog()">Afficher</a>
+                </td>
+              </ng-template>
               <td>{{ editedCertificate.dateIssue | date: 'dd/MM/yyyy' }}</td>
               <td>{{ editedCertificate.dateEndValidity | date: 'dd/MM/yyyy' }}</td>
               <td>
@@ -118,9 +129,10 @@
                 <div *ngIf="((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') < (dateNow | date: 'yyyy-MM-dd'))">
                   <img src="assets/icons/not_ok.svg" alt="Certificat non valide"
                        title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} non valide">
-                  <a *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3; else elseBlock1" role="button" class="buton1" (click)="onNewDemand()"
+                  <a *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3; else elseBlock1">
+                    <button class="buton1" (click)="onNewDemand()"
                      title="Demander le certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }}">
-                    Demander
+                      Demander</button>
                   </a>
                   <ng-template #elseBlock1>
                     <span class="attente">
@@ -137,9 +149,10 @@
                      ((editedCertificate.dateEndValidity | date: 'yyyy-MM-dd') <= (alertDate | date: 'yyyy-MM-dd'))">
                   <img src="assets/icons/warning.svg" alt="Certificat en fin de validité"
                        title="Certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} en fin de validité">
-                  <a *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3; else elseBlock2" role="button" class="buton2" (click)="onNewDemand()"
+                  <a *ngIf="editedCertificate.statusDemand.idStatusDemand !== 3; else elseBlock2">
+                    <button class="buton2" (click)="onNewDemand()"
                      title="Renouveler le certificat {{ editedCertificate.environmentName }} de l'application {{ editedCertificate.applicationName }} en fin de validité">
-                    Renouveler
+                      Renouveler</button>
                   </a>
                   <ng-template #elseBlock2><span class="attente">(En cours)</span></ng-template>
                   <a *ngIf="editedUser.profile.idProfile === 3">
