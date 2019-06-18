@@ -1,8 +1,5 @@
 package gestiCert;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -10,17 +7,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
-import gestiCert.model.AppUser;
-import gestiCert.model.Application;
-import gestiCert.model.Department;
-import gestiCert.model.Environment;
-import gestiCert.model.Plateform;
-import gestiCert.model.Profile;
-import gestiCert.model.Role;
-import gestiCert.model.Root;
-import gestiCert.model.Server;
-import gestiCert.model.StatusDemand;
-import gestiCert.model.TypeDemand;
 import gestiCert.service.AppUserService;
 import gestiCert.service.ApplicationService;
 import gestiCert.service.CertificateService;
