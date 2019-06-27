@@ -95,12 +95,17 @@ export class HomeComponent implements OnInit {
 
     this.certificateDataService.availableCertificates$.subscribe(certificates => this.listCertificates = certificates);
 
-    this.certificateDataService.getCertificateByUserPrimeNg(this.idRH).then( certificates => {
+    this.certificateDataService.getCertificateByUserPrimeNg(this.idRH)
+      .then( certificates => {
         this.certificates = certificates;
-        this.certificates.forEach(certificate => certificate.applicationCCX = certificate.application.codeCCX);
-        this.certificates.forEach(certificate => certificate.applicationName = certificate.application.nameApplication);
-        this.certificates.forEach(certificate => certificate.environmentName = certificate.environment.nameEnvironment);
-        this.certificates.forEach(certificate => certificate.rootName = certificate.root.nameRoot);
+        this.certificates.forEach(certificate =>
+          certificate.applicationCCX = certificate.application.codeCCX);
+        this.certificates.forEach(certificate =>
+          certificate.applicationName = certificate.application.nameApplication);
+        this.certificates.forEach(certificate =>
+          certificate.environmentName = certificate.environment.nameEnvironment);
+        this.certificates.forEach(certificate =>
+          certificate.rootName = certificate.root.nameRoot);
       });
 
     this.certificatesList = this.certificateDataService.availableCertificates$;

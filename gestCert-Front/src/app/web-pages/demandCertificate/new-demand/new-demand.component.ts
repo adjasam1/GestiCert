@@ -107,13 +107,8 @@ export class NewDemandComponent implements OnInit {
       idCertificate: 0,
       typeDemand: {idTypeDemand: 1},
       environment: {idEnvironment: 1},
-      plateform: {idPlateform: 2},
- //     root: {idRoot: 1},
- //     statusDemand: {idStatusDemand: 1}
+      plateform: {idPlateform: 2}
     };
- /*   this.editedAdressAlternative = {
-      idAddressAlternative: 0
-    };*/
 
     this.usersList = this.userDataService.availableUsers$;
     this.idRHUser = this.route.snapshot.params.id1;
@@ -133,9 +128,6 @@ export class NewDemandComponent implements OnInit {
     });
 
     this.idDemand = +this.route.snapshot.params.id3;
-
-  //  this.idCertificate = +this.route.snapshot.params.id3;
-  //  this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificate => this.editedCertificate = certificate);
 
     this.dateAlert();
     this.cols = [
@@ -208,16 +200,11 @@ export class NewDemandComponent implements OnInit {
       });
       this.onSend();
     }
-  //  this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/application/' + this.editedApplication.idApplication]);
- //   this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
- //   + this.editedCertificate.idCertificate + '/demande']);
   }
 
   onSend() {
- //   if (confirm('Êtes-vous certain de vouloir envoyer cette demande ?')) {
       this.certificateDataService.sendMail(this.editedCertificate);
       this.router.navigate(['/accueil/' + this.editedUser.idRHUser]);
- //   }
   }
 
   onValid() {

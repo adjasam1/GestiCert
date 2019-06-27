@@ -16,16 +16,19 @@ export class LoginComponent implements OnInit {
 
   hide = true;
 
-/*  userIdUrl: number;
-  userIdRHUrl: string;
-  userPassword: boolean = false;*/
-
   usersList: BehaviorSubject<AppUser[]>;
   editedUser: AppUser[];
 
   loginForm = this.fb.group({
-    idRHUser: [null, Validators.compose([Validators.required, Validators.minLength(7), Validators.maxLength(7)])],
-    passwordUser: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])
+    idRHUser: [null, Validators.compose([
+      Validators.required,
+      Validators.minLength(7),
+      Validators.maxLength(7),
+      Validators.pattern('[a-zA-Z]{4}[0-9]{3}')])],
+    passwordUser: [null, Validators.compose([
+      Validators.required,
+      Validators.minLength(3),
+      Validators.maxLength(255)])
     ]
   });
 
@@ -47,40 +50,6 @@ export class LoginComponent implements OnInit {
     appUser.idRHUser = this.loginForm.value.idRHUser;
     appUser.passwordUser = this.loginForm.value.passwordUser;
     this.loginService.signIn(appUser);
-  //  console.log('a : ' + appUser.idRHUser);
- //   console.log('b : ' + appUser.passwordUser);
- /*   for (const user of this.editedUser) {
-      console.log('aa : ' + user.idRHUser);
-      console.log('bb : ' + user.passwordUser);*/
- /*     let ccc = jwt_decode(sessionStorage.getItem(user.passwordUser));
-      console.log('cc : ' + ccc); */
-    /*  if ((appUser.idRHUser === user.idRHUser)) {
-        this.userIdRHUrl = user.idRHUser;
-        if (appUser.passwordUser === user.passwordUser) {
-          this.userIdUrl = user.idUser;
-          this.userPassword = true;
-        }
-      }*/
-  //  }
-    /*if (appUser.idRHUser === null && appUser.passwordUser === null) {
-      alert('Identifiant RH et Mot de passe manquants');
-    } else if (appUser.idRHUser === null) {
-      alert('Identifiant RH manquant');
-      logForm.reset();
-    } else if ((appUser.idRHUser === this.userIdRHUrl && appUser.passwordUser === null) ||
-      (appUser.idRHUser !== this.userIdRHUrl && appUser.passwordUser === null)) {
-      alert('Mot de passe manquant');
-   // } else if ((appUser.idRHUser !== this.userIdRHUrl) || (appUser.idRHUser === this.userIdRHUrl && this.userPassword === false)) {
-   //   alert('Identifiant RH et/ou Mot de passe incorrecte(s)');
-    //  logForm.reset();
-    } else {
-      this.userDataService.getUserByIdUser(this.userIdRHUrl).subscribe(
-        (res: number) => { console.log('res : ' + res);
-        this.userDataService.getRoleUser(res).subscribe(
-          (autre) => { console.log('autre : ' + autre[0]); }
-        ); }
-      );
-    } */
   }
 
   getUser(): void {

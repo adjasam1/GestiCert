@@ -104,10 +104,37 @@ h3
   margin: 0 2.5% 2.5% 0;
 }
 
+/* FORMULAIRE */
 form
 {
   text-align: right;
   margin: 2.5% 5% 0 2.5%;
+}
+
+label
+{
+  font-size: 10px;
+}
+
+input, select
+{
+  width: 65%;
+  font-family: Montserrat, sans-serif;
+}
+
+/* MODIFICATION PICKLIST PRIMENG */
+:host /deep/ .ui-button {
+  color: black !important;
+  font-size: 12px !important;
+  width: 20px !important;
+  height: 20px !important;
+  background-color: #9CC6DA !important;
+  border: 1px solid #003DA5 !important;
+}
+
+:host /deep/ .ui-button:hover {
+  background-color: #003DA5 !important;
+  color: #FFCB05 !important;
 }
 
 #liste
@@ -120,11 +147,6 @@ form
 {
   width: 100%;
   padding: 0 10px;
-}
-
-label
-{
-  font-size: 10px;
 }
 
 #champ {
@@ -153,12 +175,6 @@ a button:hover, a[role="button"]:hover {
   color: #FFCB05;
   background-color: #003DA5;
   text-decoration: none;
-}
-
-input, select
-{
-  width: 65%;
-  font-family: Montserrat, sans-serif;
 }
 
 .label1

@@ -79,9 +79,9 @@
                      id="date" name="date" title="Champ pour rechercher par date d'émission">
             </span>
           </div>
-    <!--      <div class="reset">
-            <a role="button" (click)="onReset(logForm)">Reset</a>
-          </div>-->
+          <!--      <div class="reset">
+                  <a role="button" (click)="onReset(logForm)">Reset</a>
+                </div>-->
         </form>
       </div>
 
@@ -162,8 +162,8 @@
             </p-table>
           </div>
           <div class="abut">
-              <a *ngIf="editedUser.profile.idProfile === 3"><button (click)="onScroll()" routerLink="/gestion/hab">Gérer habilitation application</button></a>
-              <a *ngIf="editedUser.profile.idProfile === 3"><button (click)="onScroll()" routerLink="application">Demander nouveau certificat</button></a>
+            <a *ngIf="editedUser.profile.idProfile === 3"><button (click)="onScroll()" routerLink="/gestion/hab">Gérer habilitation application</button></a>
+            <a *ngIf="editedUser.profile.idProfile === 3"><button (click)="onScroll()" routerLink="application">Demander nouveau certificat</button></a>
           </div>
         </div>
       </div>

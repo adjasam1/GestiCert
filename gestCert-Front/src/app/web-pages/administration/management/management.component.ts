@@ -69,11 +69,9 @@ export class ManagementComponent implements OnInit {
     this.usersList = this.userDataService.availableUsers$;
 
     this.idRH = this.route.snapshot.params.id1;
-    //   console.log('idUser : ' + this.idRH);
 
     this.userDataService.findUserByIdRH(this.idRH).subscribe(user => {
       this.editedUser = user;
-      //    console.log('j\'ai trouvé le user !!!');
     });
 
     this.usersList = this.userDataService.availableUsers$;
@@ -86,24 +84,6 @@ export class ManagementComponent implements OnInit {
     this.rootsList = this.rootDataService.availableRoots$;
     this.serversList = this.serverDataService.availableServers$;
 
-
-
-  /*  this.idDepartment = +this.route.snapshot.params.id;
-    this.departmentDataService.findDepartment(this.idDepartment).subscribe(department => {
-      this.editedDepartment = department;
-    });*/
-
-
- /*   this.getCertificate();
-
-    this.applicationsList = this.applicationDataService.availableApplications$;
-    this.getApplication();
-
-
-    this.getEnvironment();
-
-
-    this.getRoot();*/
   }
 
   deconnexion(): void {
@@ -116,44 +96,5 @@ export class ManagementComponent implements OnInit {
   onScroll() {
     window.scrollTo(0, 0);
   }
-
-/*  comeBack(): void {
-    this.router.navigate([history.go(-1)]);
-  }*/
-
- /* onSave() {
-    if (!this.idDepartment) {
-      if (confirm('Êtes-vous certain de vouloir ajouter un nouvel service ?')) {
-        this.departmentDataService.createDepartment(this.editedDepartment);
-      }
-    } else {
-      if (confirm('Êtes-vous certain de vouloir modifier ce service ?')) {
-        this.departmentDataService.updateDepartment(this.editedDepartment);
-      }
-    }
-    this.router.navigate(['/gestion/sce']);
-  }*/
-
-
-/*
-
-  getCertificate(): void {
-    this.certificateDataService.getCertificate().subscribe(certificates => this.editedCertificate = certificates);
-  }
-
-  getApplication(): void {
-    this.applicationDataService.getApplication().subscribe(applications => this.editedApplication = applications);
-  }
-
-  getEnvironment(): void {
-    this.environmentDataService.getEnvironment().subscribe(environments => this.editedEnvironment = environments);
-  }
-
-  getRoot(): void {
-    this.rootDataService.getRoot().subscribe(roots => this.editedRoot = roots);
-  }
-*/
-
-
 
 }

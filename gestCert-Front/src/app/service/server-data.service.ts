@@ -60,22 +60,11 @@ export class ServerDataService {
     this.availableServers.push(newServer);
     this.availableServers$.next(this.availableServers);
     return this.httpClient.post<Server>('http://localhost:8080/api/serveur/ajout', newServer);
-    /*.subscribe(
-      createServer => {
-        this.availableServers.push(createServer);
-        this.availableServers$.next(this.availableServers);
-      }
-    );*/
   }
 
   public updateServer(server: Server) {
     this.availableServers$.next(this.availableServers);
     return this.httpClient.put<Server>(`http://localhost:8080/api/serveur/modifid=${server.idServer}`, server);
-    /*.subscribe(
-      updateRoot => {
-        this.availableServers$.next(this.availableServers);
-      }
-    );*/
   }
 
   public deleteServer(server: Server) {
@@ -83,13 +72,6 @@ export class ServerDataService {
     this.availableServers.splice(index1, 1);
     this.availableServers$.next(this.availableServers);
     return this.httpClient.delete<Server>(`http://localhost:8080/api/serveur/supprid=${server.idServer}`);
-    /*.subscribe(
-      deleteServer => {
-        const index1 = this.availableServers.indexOf(server);
-        this.availableServers.splice(index1, 1);
-        this.availableServers$.next(this.availableServers);
-      }
-    );*/
   }
 
   /* TEST PRIMENG */

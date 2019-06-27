@@ -42,7 +42,6 @@ export class CertificateComponent implements OnInit {
   /* TEST PRIMENG */
   certificates: Certificate[];
   cols: any;
-//  selectedCertificate: Certificate;
 
   constructor(private userDataService: UserDataService,
               private certificateDataService: CertificateDataService,
@@ -65,11 +64,7 @@ export class CertificateComponent implements OnInit {
 
     this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificate => this.editedCertificate = certificate);
 
- //   console.log('certificatesList : ' + this.certificatesList);
- //   console.log('editedCertificate : ' + this.editedCertificate);
-
     this.addressAlternativesList = this.addressAlternativeDataService.availableAddressAlternatives$;
-    // console.log('aaa' + this.editedCertificate.linkAddressPrincipal);
     this.addressAlternativeDataService.findAddressAlternativeByCertificate(this.idCertificate).subscribe(addressAlternatives =>
       this.listAddressAlternative = addressAlternatives);
 
@@ -83,14 +78,6 @@ export class CertificateComponent implements OnInit {
 
     this.dateAlert();
 
- /*   this.cols = [
-      { field: 'nameCertificate', header: 'Nom', width: '50%' },
-      { field: 'idCertificate', header: 'Type', width: '50%' }*/
-      /*,
-      { field: 'plateform.namePlateform', header: 'Name', width: '20%' },
-      { field: 'server.nameServer', header: 'Name', width: '20%' },
-      { field: 'assets/icons/certificate.svg', header: 'assets/icons/download.svg', width: '10%' }*/
- /*   ]; */
   }
 
   onNewDemand() {
@@ -118,9 +105,3 @@ export class CertificateComponent implements OnInit {
   }
 
 }
-/*const decodedToken = jwt_decode(sessionStorage.getItem(environment.accessToken));
-const authorities: Array<any> = decodedToken.auth;
-this.userRoles.next(authorities.map(authority => authority.authority));
-//     console.log('token : ' , decodedToken);
-const idRH = decodedToken.sub;
-this.router.navigate(['/accueil/' + idRH]);*/

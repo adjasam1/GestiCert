@@ -77,33 +77,14 @@ export class UserDataService {
     this.availableUsers.push(newUser);
     this.availableUsers$.next(this.availableUsers);
     return this.httpClient.post<AppUser>(`http://localhost:8080/api/utilisateur/ajout`, newUser);
-      /*.subscribe(
-      createUser => {
-        this.availableUsers.push(createUser);
-        this.availableUsers$.next(this.availableUsers);
-      }
-    );*/
   }
 
   public updateUser(user: AppUser) {
     return this.httpClient.put<AppUser>(`http://localhost:8080/api/utilisateur/modifid=${user.idUser}`, user);
-    /*.subscribe(
-      updateUser => {
-        this.availableUsers$.next(this.availableUsers);
-      }
-    );*/
   }
 
   public deleteUser(user: AppUser) {
     return this.httpClient.delete<AppUser>(`http://localhost:8080/api/utilisateur/supprid=${user.idUser}`);
-      /*.subscribe(
-      deleteUser => {
-        const index1 = this.availableUsers.indexOf(user);
-        this.availableUsers.splice(index1, 1);
-        this.availableUsers$.next(this.availableUsers);
-        this.publishUser();
-      }
-    );*/
   }
 
   /* TEST PRIMENG */

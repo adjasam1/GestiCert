@@ -94,14 +94,17 @@ public class UserControllerTests {
 	@WithMockUser(roles = { "ADMIN" })
 	public void getAllUsers() throws Exception {
 		when(this.userServ.getAllUsers()).thenReturn(new ArrayList<>());
-		this.mockMvc.perform(get("/api/utilisateur")).andExpect(status().isOk()).andDo(print());
+		this.mockMvc.perform(get("/api/utilisateur"))
+		.andExpect(status().isOk())
+		.andDo(print());
 	}
 
 	@Test
 	@WithMockUser(roles = { "ADMIN" })
 	public void getUserById() throws Exception {
 		when(this.userServ.getUserById(2)).thenReturn(Optional.of(new AppUser(2, "pbbb002", "bbb", "Yemen", "Béatrice", "beatrice.yemen@laposte.fr", "0659527564", new Department(3, "Appli"), new Profile(1, "Développeur(se)"))));
-		this.mockMvc.perform(get("/api/utilisateur/id=2")).andExpect(status().isOk())
+		this.mockMvc.perform(get("/api/utilisateur/id=2"))
+		.andExpect(status().isOk())
 		.andExpect(jsonPath("idUser").value(2))
 		.andExpect(jsonPath("nameUser").value("Yemen"))
 		.andExpect(jsonPath("firstNameUser").value("Béatrice"))
@@ -119,8 +122,14 @@ public class UserControllerTests {
 	@Test
 	@WithMockUser(roles = { "ADMIN" })
 	public void getUserByName() throws Exception {
-		when(this.userServ.getUserByName("men")).thenReturn(Optional.of(new AppUser(2, "pbbb002", "bbb", "Yemen", "Béatrice", "beatrice.yemen@laposte.fr", "0659527564", new Department(3, "Appli"), new Profile(1, "Développeur(se)"))));
-		this.mockMvc.perform(get("/api/utilisateur/nom=men")).andExpect(status().isOk())
+		when(this.userServ.getUserByName("men"))
+		.thenReturn(Optional
+				.of(new AppUser(2, "pbbb002", "bbb", "Yemen", "Béatrice", 
+						"beatrice.yemen@laposte.fr", "0659527564", 
+						new Department(3, "Appli"), 
+						new Profile(1, "Développeur(se)"))));
+		this.mockMvc.perform(get("/api/utilisateur/nom=men"))
+		.andExpect(status().isOk())
 		.andExpect(jsonPath("idUser").value(2))
 		.andExpect(jsonPath("nameUser").value("Yemen"))
 		.andExpect(jsonPath("firstNameUser").value("Béatrice"))
@@ -218,7 +227,9 @@ public class UserControllerTests {
 	@Test
 	@WithMockUser(roles = { "ADMIN" })
 	public void deleteUser() throws Exception {
-		this.mockMvc.perform(delete("/api/utilisateur/supprid=2")).andExpect(status().isOk()).andDo(print());
+		this.mockMvc.perform(delete("/api/utilisateur/supprid=2"))
+		.andExpect(status().isOk())
+		.andDo(print());
 	}
 
 }

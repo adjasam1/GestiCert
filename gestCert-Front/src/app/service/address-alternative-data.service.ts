@@ -44,19 +44,6 @@ export class AddressAlternativeDataService {
       });
   }
 
-/*  public findAddressAlternative(addressAlternativeId: number): Observable<AddressAlternative> {
-    if (addressAlternativeId) {
-      if (!this.availableAddressAlternatives) {
-        return this.getAddressAlternative().pipe(map(addressAlternatives => addressAlternatives.find(addressAlternative =>
-          addressAlternative.idAddressAlternative === addressAlternativeId)));
-      }
-      return of(this.availableAddressAlternatives.find(addressAlternative =>
-        addressAlternative.idAddressAlternative === addressAlternativeId));
-    } else {
-      return of(new AddressAlternative(0, '', null));
-    }
-  }*/
-
   public findAddressAlternativeByCertificate(certificateId: number) {
     return this.httpClient.get<AddressAlternative>(`http://localhost:8080/api/adressealternative/certificat=${certificateId}`);
   }
@@ -77,23 +64,4 @@ export class AddressAlternativeDataService {
       }
     );
   }
-/*
-
-
-  public deleteApplication(application: Application) {
-    this.httpClient.delete<Application>(`http://localhost:8080/api/application/supprid=${application.idApplication}`).subscribe(
-      deleteApplication => {
-        const index1 = this.availableApplications.indexOf(application);
-        this.availableApplications.splice(index1, 1);
-        this.availableApplications$.next(this.availableApplications);
-      }
-    );
-  }
-
-  /* TEST PRIMENG /
-  public getApplicationPrimeNg() {
-    return this.httpClient.get<any>('http://localhost:8080/api/application').toPromise().then(data => {
-      return data;
-    });
-  }*/
 }

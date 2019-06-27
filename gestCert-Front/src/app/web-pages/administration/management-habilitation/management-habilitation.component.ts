@@ -42,7 +42,6 @@ export class ManagementHabilitationComponent implements OnInit {
     });
 
     this.usersList = this.userDataService.availableUsers$;
- //   this.usersList.subscribe( users => this.listUsers = users );
     this.userDataService.getUserPrimeNg().then( users => this.listUsers = users);
     this.users = [];
   }

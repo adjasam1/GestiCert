@@ -60,32 +60,14 @@ export class RootDataService {
     this.availableRoots.push(newRoot);
     this.availableRoots$.next(this.availableRoots);
     return this.httpClient.post<Root>('http://localhost:8080/api/racine/ajout', newRoot);
-    /*.subscribe(
-      createRoot => {
-        this.availableRoots.push(createRoot);
-        this.availableRoots$.next(this.availableRoots);
-      }
-    );*/
   }
 
   public updateRoot(root: Root) {
     return this.httpClient.put<Root>(`http://localhost:8080/api/racine/modifid=${root.idRoot}`, root);
-    /*.subscribe(
-      updateRoot => {
-        this.availableRoots$.next(this.availableRoots);
-      }
-    );*/
   }
 
   public deleteRoot(root: Root) {
     return this.httpClient.delete<Root>(`http://localhost:8080/api/racine/supprid=${root.idRoot}`);
-    /*.subscribe(
-      deleteRoot => {
-        const index1 = this.availableRoots.indexOf(root);
-        this.availableRoots.splice(index1, 1);
-        this.availableRoots$.next(this.availableRoots);
-      }
-    );*/
   }
 
   /* TEST PRIMENG */

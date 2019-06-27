@@ -58,43 +58,14 @@ export class EnvironmentDataService {
 
   public createEnvironment(newEnvironment: Environment) {
     return this.httpClient.post<Environment>('http://localhost:8080/api/environnement/ajout', newEnvironment);
-    /*.subscribe(
-      createEnvironment => {
-        this.availableEnvironments.push(createEnvironment);
-        this.availableEnvironments$.next(this.availableEnvironments);
-      }
-    );*/
   }
 
   public updateEnvironment(environment: Environment) {
     return this.httpClient.put<Environment>(`http://localhost:8080/api/environnement/modifid=${environment.idEnvironment}`, environment);
-    /*.subscribe(
-      updateEnvironment => {
-        this.availableEnvironments$.next(this.availableEnvironments);
-      }
-    );*/
   }
 
   public deleteEnvironment(environment: Environment) {
     return this.httpClient.delete<Environment>(`http://localhost:8080/api/environnement/supprid=${environment.idEnvironment}`);
-    /*.subscribe(
-      deleteEnvironment => {
-        const index1 = this.availableEnvironments.indexOf(environment);
-        this.availableEnvironments.splice(index1, 1);
-        this.availableEnvironments$.next(this.availableEnvironments);
-      }
-    );*/
-    /*  this.httpClient.delete<Environment>(`http://localhost:8080/api/environnement/supprid=${environment.idEnvironment}`).pipe(
-      tap(_=> this.messageService.add('OK', tr))
-      deleteEnvironment => {
-        const index1 = this.availableEnvironments.indexOf(environment);
-        this.availableEnvironments.splice(index1, 1);
-        this.availableEnvironments$.next(this.availableEnvironments);
-        alert('oooo');
-        this.messageService.add('Succes', true);
-        this.messageService.add('Erreur', false);
-      }
-    );*/
   }
 
   /* TEST PRIMENG */

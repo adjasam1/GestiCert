@@ -154,8 +154,6 @@ export class DemandComponent implements OnInit {
 
         this.onScroll();
       });
-  /*    this.router.navigate(['/accueil/' + this.editedUser.idRHUser + '/certificat/'
-      + this.editedCertificate.idCertificate + '/demande']);*/
     }
   }
 

@@ -3,6 +3,7 @@ package gestiCert.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -21,9 +22,16 @@ import gestiCert.security.JwtTokenProvider;
 @Service
 public class AppUserServiceImpl implements AppUserService {
 	
+	@Autowired
     private AppUserRepository appUserRepo;
+    
+	@Autowired
     private BCryptPasswordEncoder passwordEncoder;
+	
+	@Autowired
     private JwtTokenProvider jwtTokenProvider;
+	
+	@Autowired
     private AuthenticationManager authenticationManager;
 
     public AppUserServiceImpl(AppUserRepository appUserRepo, BCryptPasswordEncoder passwordEncoder,
@@ -72,8 +80,7 @@ public class AppUserServiceImpl implements AppUserService {
 	 */
 
 	@Override
-	public List<AppUser> getAllUsers()
-	{
+	public List<AppUser> getAllUsers() {
 		return appUserRepo.findAll();
 	}
     
@@ -158,8 +165,7 @@ public class AppUserServiceImpl implements AppUserService {
 	 */
 
 	@Override
-	public AppUser createUser(AppUser user)
-	{
+	public AppUser createUser(AppUser user) {
 		return appUserRepo.saveAndFlush(user);
 	}
     

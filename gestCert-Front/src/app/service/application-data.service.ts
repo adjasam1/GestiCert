@@ -58,32 +58,14 @@ export class ApplicationDataService {
 
   public createApplication(newApplication: Application) {
     return this.httpClient.post<Application>(`http://localhost:8080/api/application/ajout`, newApplication);
-    /*.subscribe(
-      createApplication => {
-        this.availableApplications.push(createApplication);
-        this.availableApplications$.next(this.availableApplications);
-      }
-    );*/
   }
 
   public updateApplication(application: Application) {
     return this.httpClient.put<Application>(`http://localhost:8080/api/application/modifid=${application.idApplication}`, application);
-    /*.subscribe(
-      updateApplication => {
-        this.availableApplications$.next(this.availableApplications);
-      }
-    );*/
   }
 
   public deleteApplication(application: Application) {
     return this.httpClient.delete<Application>(`http://localhost:8080/api/application/supprid=${application.idApplication}`);
-    /*.subscribe(
-      deleteApplication => {
-        const index1 = this.availableApplications.indexOf(application);
-        this.availableApplications.splice(index1, 1);
-        this.availableApplications$.next(this.availableApplications);
-      }
-    );*/
   }
 
   /* TEST PRIMENG */

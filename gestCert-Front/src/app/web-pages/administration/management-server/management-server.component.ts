@@ -61,7 +61,6 @@ export class ManagementServerComponent implements OnInit {
         });
       }
     }
- //   this.router.navigate(['/gestion/sur']);
   }
 
   onDelete() {
@@ -71,7 +70,6 @@ export class ManagementServerComponent implements OnInit {
         this.router.navigate(['/gestion/sur']);
       });
     }
- //   this.router.navigate(['/gestion/sur']);
   }
 
   onRefresh() {

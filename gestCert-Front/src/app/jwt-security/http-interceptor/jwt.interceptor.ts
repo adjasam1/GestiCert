@@ -7,7 +7,6 @@ import {environment} from '../../../environments/environment';
 export class JwtInterceptor implements HttpInterceptor {
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
 
-    // add authorization header with jwt token if available
     const accessToken = sessionStorage.getItem(environment.accessToken);
 
     if (accessToken) {

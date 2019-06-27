@@ -45,6 +45,7 @@ public class Profile implements Serializable
 	
 	@Column(name = "type", unique = true)
 	@Size(max = 50)
+	@NotNull
 	private String typeProfile;
 	
 	/**

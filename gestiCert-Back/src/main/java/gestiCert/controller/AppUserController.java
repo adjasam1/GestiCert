@@ -37,6 +37,7 @@ import gestiCert.service.AppUserService;
 @RequestMapping("/api/utilisateur")
 public class AppUserController {
 
+	@Autowired
 	private AppUserService appUserServ;
 	
 	@Autowired
@@ -120,11 +121,13 @@ public class AppUserController {
 		try {
 			listUsers = appUserServ.getUserById(idUser);
 		} catch (Exception e) {
-			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+					.body(e.getMessage());
 		}
 
 		if (listUsers == null) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Pas d'utilisateur pour cet identifiant");
+			return ResponseEntity.status(HttpStatus.NOT_FOUND)
+					.body("Pas d'utilisateur pour cet identifiant");
 		}
 		return ResponseEntity.status(HttpStatus.OK).body(listUsers);
 
@@ -198,32 +201,37 @@ public class AppUserController {
 
 		String nameUser = user.getNameUser();
 		if ((nameUser == null) || (nameUser.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le nom de l'utilisateur doit être renseigné");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("Le nom de l'utilisateur doit être renseigné");
 		}
 
 		String firstNameUser = user.getFirstNameUser();
 		if ((firstNameUser == null) || (firstNameUser.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le prénom de l'utilisateur doit être renseigné");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("Le prénom de l'utilisateur doit être renseigné");
 		}
 
 		String eMailUser = user.geteMailUser();
 		if ((eMailUser == null) || (eMailUser.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'eMail de l'utilisateur doit être renseigné");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("L'eMail de l'utilisateur doit être renseigné");
 		}
 
 		String idRHUser = user.getIdRHUser();
 		if ((idRHUser == null) || (idRHUser.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("L'idRH de l'utilisateur doit être renseigné");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("L'idRH de l'utilisateur doit être renseigné");
 		}
 
 		String passwordUser = user.getPasswordUser();
 		if ((passwordUser == null) || (passwordUser.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le mot de passe de l'utilisateur doit être renseigné");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+					.body("Le mot de passe de l'utilisateur doit être renseigné");
 		}
 
 		try {
 			newUser = null;
-			 user.setPasswordUser(bCryptPasswordEncoder.encode(user.getPasswordUser()));
+			user.setPasswordUser(bCryptPasswordEncoder.encode(user.getPasswordUser()));
 			newUser = appUserServ.createUser(user);
 		} catch (Exception e) {
 			return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
@@ -259,8 +267,7 @@ public class AppUserController {
 
 		String passwordUser = user.getPasswordUser();
 		if ((passwordUser == null) || (passwordUser.isEmpty())) {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST)
-					.body("Le mot de passe de l'utilisateur doit être renseigné");
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Le mot de passe de l'utilisateur doit être renseigné");
 		}
 
 		try {

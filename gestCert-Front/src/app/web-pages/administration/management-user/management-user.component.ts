@@ -20,9 +20,7 @@ import {Title} from '@angular/platform-browser';
 export class ManagementUserComponent implements OnInit {
 
   usersList: BehaviorSubject<AppUser[]>;
- // idRH: string;
   idUser: number;
-//  editedUser1: AppUser;
   editedUser: AppUser = new AppUser(0, '', '', '', '', '', '', new Profile(), new Department());
 
   /* TEST PRIMENG */
@@ -36,12 +34,6 @@ export class ManagementUserComponent implements OnInit {
   listProfiles: Profile[];
   role: string;
 
-/*  loginForm = this.fb.group({
-    idRHUser: [null, Validators.compose([Validators.required, Validators.minLength(7), Validators.maxLength(7)])],
-    passwordUser: [null, Validators.compose([Validators.required, Validators.minLength(3), Validators.maxLength(255)])
-    ]
-  });*/
-
   constructor(private userDataService: UserDataService,
               private profileDataService: ProfileDataService,
               private departmentDataService: DepartmentDataService,
@@ -53,11 +45,6 @@ export class ManagementUserComponent implements OnInit {
     this.title.setTitle('GestiCert - Administration Utilisateur');
 
     this.usersList = this.userDataService.availableUsers$;
-
-  /*  this.idRH = this.route.snapshot.params.id1;
-    this.userDataService.findUserByIdRH(this.idRH).subscribe(user => {
-      this.editedUser1 = user;
-    });*/
 
     this.idUser = +this.route.snapshot.params.id;
     if (this.idUser) {
@@ -107,11 +94,6 @@ export class ManagementUserComponent implements OnInit {
         this.editedUser.profile = this.listProfiles.find(profile => {
           return profile.idProfile === +this.editedUser.profile.idProfile;
         });
- /*       if (this.role === 'Administrateur') {
-          this.editedUser.roleList = ['AdminGuard'];
-        } else {
-          this.editedUser.roleList = ['DevGuard'];
-        }*/
       }
       this.userDataService.createUser(this.editedUser).subscribe(user => {
         this.onRefresh();

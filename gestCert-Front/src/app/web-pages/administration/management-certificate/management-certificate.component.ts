@@ -29,10 +29,11 @@ export class ManagementCertificateComponent implements OnInit {
 
   certificatesList: BehaviorSubject<Certificate[]>;
   idCertificate: number;
-  editedCertificate: Certificate = new Certificate(0, '', '', '', '',
-    null, null, null, null, null, '', '',
-    '', null, null, null, null, null, null, null,
-    null, null);
+  editedCertificate: Certificate = new Certificate(0, '', '',
+    '', '', null, null, null,
+    null, null, '', '', '',
+    null, null, null, null, null, null,
+    null, null, null);
 
   applicationsList: BehaviorSubject<Application[]>;
   editedApplication: Application[];
@@ -54,8 +55,6 @@ export class ManagementCertificateComponent implements OnInit {
   listStatus: StatusDemand[];
 
   /* TEST PRIMENG */
-//  certificates: Certificate;
-//  certificate: Certificate = new PrimeCertificate();
   listCertificates: Certificate[];
   cols: any[];
   selectedCertificate: Certificate;
@@ -102,21 +101,6 @@ export class ManagementCertificateComponent implements OnInit {
       };
     }
 
- /*   this.certificateDataService.findCertificate(this.idCertificate).subscribe(certificate => {
-      this.editedCertificate = certificate;
-    });*/
-
-  //  this.applicationDataService.publishApplication();
- //   this.applicationDataService.availableApplications$.subscribe(application => this.listApplications = application);
- //   this.certificateDataService.getCertificatePrimeNg().then(certificates => {
- //     this.listCertificates = certificates;
- //     console.log('listCertificat : ' + this.listCertificates);
- //     this.listCertificates.forEach(certificate => certificate.applicationName = certificate.application.nameApplication);
- //     console.log('applicationName : ' + this.listCertificates.forEach(
- //        certificate => certificate.applicationName = certificate.application.nameApplication));
- //   });
-
- //   this.certificateDataService.publishCertificate();
     this.certificateDataService.availableCertificates$.subscribe(certificate => this.listCertificates = certificate);
     this.certificateDataService.getCertificatePrimeNg().then(certificates => {
       this.listCertificates = certificates;
@@ -124,9 +108,6 @@ export class ManagementCertificateComponent implements OnInit {
     });
 
     this.applicationsList = this.applicationDataService.availableApplications$;
- //   this.applicationDataService.getApplicationPrimeNg().then(applications => {
- //     this.applications = applications;
- //   });
 
     this.environmentsList = this.environmentDataService.availableEnvironments$;
     this.plateformsList = this.plateformDataService.availablePlateforms$;
@@ -174,22 +155,9 @@ export class ManagementCertificateComponent implements OnInit {
     this.servers = [];
   }
 
-/*  if (confirm('Êtes-vous certain de vouloir ajouter un nouvel utilisateur ?')) {
-  console.log('create : ', this.editedUser);
-  this.editedUser.department = this.listDepartments.find(department => {
-    return department.idDepartment === +this.editedUser.department.idDepartment;
-  });
-   this.editedUser.profile = this.listProfiles.find(profile => {
-    return profile.idProfile === +this.editedUser.profile.idProfile;
-  });
-  this.userDataService.createUser(this.editedUser);
-  console.log('create : ', this.editedUser);
-}*/
-
   onSave(logForm: NgForm) {
     if (!this.idCertificate) {
       if (confirm('Êtes-vous certain de vouloir ajouter un nouveau certificat ?')) {
-        console.log('create : ', this.editedCertificate);
         this.passwordEncode = btoa(this.editedCertificate.passwordCertificate);
         this.editedCertificate.passwordCertificate = this.passwordEncode;
         this.editedCertificate.application = this.listApplications.find(application => {
@@ -215,10 +183,7 @@ export class ManagementCertificateComponent implements OnInit {
           this.router.navigate(['/gestion/cer']);
           this.onRefresh();
         });
-
       }
-  //    this.editedAdressAlternative.certificate = this.editedCertificate;
-  //    this.addressAlternativeDataService.createAddressAlternative(this.editedAdressAlternative);
     } else {
       if (confirm('Êtes-vous certain de vouloir modifier ce certificat ?')) {
         this.passwordEncode = btoa(this.editedCertificate.passwordCertificate);
@@ -228,10 +193,6 @@ export class ManagementCertificateComponent implements OnInit {
           this.router.navigate(['/gestion/cer']);
           this.onRefresh();
         });
-   //     this.addressAlternativeDataService.updateAddressAlternative(this.editedAdressAlternative);
- /*       this.editedAdressAlternative.certificate = this.editedCertificate;
-        alert(this.editedAdressAlternative.certificate);
-        this.addressAlternativeDataService.createAddressAlternative(this.editedAdressAlternative);*/
       }
     }
     this.router.navigate(['/gestion/cer']);
@@ -254,17 +215,4 @@ export class ManagementCertificateComponent implements OnInit {
   }
 
 }
-
-/*
-class PrimeCertificate implements Certificate {
-  constructor(public idCertificate?, public nameCertificate?, public application?) {
-  }
-}*/
-
-
-/*class PrimePret implements Pret {
-  137   constructor(public id?, public debut?, public finPrevue?, public finReelle?, public materiel?, public utilisateur?) {
-    138     this.utilisateur = new Utilisateur(null, '', '', '', new Profil(0, ''));
-    139   }
-  140 }*/
 

@@ -71,32 +71,14 @@ export class CertificateDataService {
 
   public createCertificate(newCertificate: Certificate) {
     return this.httpClient.post<Certificate>('http://localhost:8080/api/certificat/ajout', newCertificate);
-    /*.subscribe(
-      createCertificate => {
-        this.availableCertificates.push(createCertificate);
-        this.availableCertificates$.next(this.availableCertificates);
-      }
-    );*/
   }
 
   public updateCertificate(certificate: Certificate) {
     return this.httpClient.put<Certificate>(`http://localhost:8080/api/certificat/modifid=${certificate.idCertificate}`, certificate);
-    /*.subscribe(
-      updateCertificate => {
-        this.availableCertificates$.next(this.availableCertificates);
-      }
-    );*/
   }
 
   public deleteCertificate(certificate: Certificate) {
     return this.httpClient.delete<Certificate>(`http://localhost:8080/api/certificat/supprid=${certificate.idCertificate}`);
-    /*.subscribe(
-      deleteCertificate => {
-        const index1 = this.availableCertificates.indexOf(certificate);
-        this.availableCertificates.splice(index1, 1);
-        this.availableCertificates$.next(this.availableCertificates);
-      }
-    );*/
   }
 
   /* TEST PRIMENG */

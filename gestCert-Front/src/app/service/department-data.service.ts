@@ -63,32 +63,14 @@ export class DepartmentDataService {
 
   public createDepartment(newDepartment: Department) {
     return this.httpClient.post<Department>('http://localhost:8080/api/service/ajout', newDepartment);
-    /*.subscribe(
-      createDepartment => {
-        this.availableDepartments.push(createDepartment);
-        this.availableDepartments$.next(this.availableDepartments);
-      }
-    );*/
   }
 
   public updateDepartment(department: Department) {
     return this.httpClient.put<Department>(`http://localhost:8080/api/service/modifid=${department.idDepartment}`, department);
-    /*.subscribe(
-      updateDepartment => {
-        this.availableDepartments$.next(this.availableDepartments);
-      }
-    );*/
   }
 
   public deleteDepartment(department: Department) {
     return this.httpClient.delete<Department>(`http://localhost:8080/api/service/supprid=${department.idDepartment}`);
-    /*.subscribe(
-      deleteDepartment => {
-        const index1 = this.availableDepartments.indexOf(department);
-        this.availableDepartments.splice(index1, 1);
-        this.availableDepartments$.next(this.availableDepartments);
-      }
-    );*/
   }
 
   /* TEST PRIMENG */

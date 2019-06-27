@@ -9,7 +9,8 @@
 
     <div>
       <mat-form-field>
-        <input matInput title="Champ pour l'identifiant RH" placeholder="Identifiant RH *" formControlName="idRHUser">
+        <input matInput title="Champ pour l'identifiant RH"
+               placeholder="Identifiant RH *" formControlName="idRHUser">
         <mat-error *ngIf="loginForm.controls['idRHUser'].hasError('required')">
           L'identifiant RH est <strong>obligatoire</strong>
         </mat-error>
